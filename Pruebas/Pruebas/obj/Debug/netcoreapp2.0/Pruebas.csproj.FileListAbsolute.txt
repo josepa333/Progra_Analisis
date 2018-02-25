@@ -1,0 +1,11 @@
+C:\Users\jose pablo\Desktop\Progra_Analisis\Pruebas\Pruebas\bin\Debug\netcoreapp2.0\Pruebas.deps.json
+C:\Users\jose pablo\Desktop\Progra_Analisis\Pruebas\Pruebas\bin\Debug\netcoreapp2.0\Pruebas.runtimeconfig.json
+C:\Users\jose pablo\Desktop\Progra_Analisis\Pruebas\Pruebas\bin\Debug\netcoreapp2.0\Pruebas.runtimeconfig.dev.json
+C:\Users\jose pablo\Desktop\Progra_Analisis\Pruebas\Pruebas\bin\Debug\netcoreapp2.0\Pruebas.dll
+C:\Users\jose pablo\Desktop\Progra_Analisis\Pruebas\Pruebas\bin\Debug\netcoreapp2.0\Pruebas.pdb
+C:\Users\jose pablo\Desktop\Progra_Analisis\Pruebas\Pruebas\obj\Debug\netcoreapp2.0\Pruebas.csprojResolveAssemblyReference.cache
+C:\Users\jose pablo\Desktop\Progra_Analisis\Pruebas\Pruebas\obj\Debug\netcoreapp2.0\Pruebas.csproj.CoreCompileInputs.cache
+C:\Users\jose pablo\Desktop\Progra_Analisis\Pruebas\Pruebas\obj\Debug\netcoreapp2.0\Pruebas.AssemblyInfoInputs.cache
+C:\Users\jose pablo\Desktop\Progra_Analisis\Pruebas\Pruebas\obj\Debug\netcoreapp2.0\Pruebas.AssemblyInfo.cs
+C:\Users\jose pablo\Desktop\Progra_Analisis\Pruebas\Pruebas\obj\Debug\netcoreapp2.0\Pruebas.dll
+C:\Users\jose pablo\Desktop\Progra_Analisis\Pruebas\Pruebas\obj\Debug\netcoreapp2.0\Pruebas.pdb
