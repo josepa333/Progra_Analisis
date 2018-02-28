@@ -20,19 +20,19 @@ namespace Prueba
             string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\Progra_Analisis\ima.JPG";
             Bitmap ima = new Bitmap(path,true);
 
-            Random rnd = new Random();
             for (int i = 0; i < ima.Width; i++)
+            {
+                for (int x = 0; x < ima.Height; x++)
                 {
-                for (int j = 0; j < ima.Height; j++)
-                {
-                    int rojo = rnd.Next(0, 254);
-                    int verde = rnd.Next(0, 254);
-                    int azul = rnd.Next(0, 254);
-
-                    Color newco = Color.FromArgb(rojo, verde, azul);
-                    ima.SetPixel(i, j, newco);
+                    Color oc = ima.GetPixel(i, x);
+                    int grayScale = (int)((oc.R * 0.3) + (oc.G * 0.59) + (oc.B * 0.11));
+                    Color nc = Color.FromArgb(oc.A, grayScale, grayScale, grayScale);
+                    ima.SetPixel(i, x, nc);
                 }
             }
+
+
+
             ima.Save(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\Progra_Analisis\newima.JPG");
             Console.ReadKey();
         }
