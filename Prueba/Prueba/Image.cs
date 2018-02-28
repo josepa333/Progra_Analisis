@@ -12,10 +12,10 @@ namespace Prueba
 {
     class Image
     {
-        static Bitmap finalImage;
-        static int mutability;
+        public static Bitmap finalImage;
+        public static int mutability;
 
-
+        private Adaptability adaptability;
         private Bitmap bitmap;
         private ArrayList redHistogram = new ArrayList();
         private ArrayList greenHistogram = new ArrayList();
@@ -32,6 +32,7 @@ namespace Prueba
             }
             bitmap = generateBitmap();
             fillHistograms();
+            adaptability = new Adaptability(redHistogram, greenHistogram, blueHistogram);
         }
 
         private Image(Bitmap p_kid)
@@ -118,6 +119,11 @@ namespace Prueba
         public Bitmap getBitmap()
         {
             return bitmap;
+        }
+
+        public int getAdaptability(int adaptabilityOperation)
+        {
+            return adaptability.getAdaptability(adaptabilityOperation);
         }
 
     }
