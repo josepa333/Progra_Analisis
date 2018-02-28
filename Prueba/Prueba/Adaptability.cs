@@ -34,7 +34,7 @@ namespace Prueba
             distanceAverage = (distanceRHistogram + distanceGHistogram + distanceBHistogram) / 3;
         }
 
-        public Adaptability(ArrayList redHistogram, ArrayList greenHistogram, ArrayList blueHistogram)
+        public Adaptability(ArrayList p_Histogram)
         {
             setDistanceRHistogram();
             setDistanceGHistogram();

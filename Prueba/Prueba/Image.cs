@@ -9,35 +9,22 @@ namespace Prueba
         public static Bitmap finalImage;
         public static int mutability;
 
+        private ArrayList histogramRGB = new ArrayList();
         private Adaptability adaptability;
         private Bitmap bitmap;
-        private ArrayList redHistogram = new ArrayList();
-        private ArrayList greenHistogram = new ArrayList();
-        private ArrayList blueHistogram = new ArrayList();
+
 
 
         public Image()
         {
-            for (int i = 0; i < 256; i++)
-            {
-                redHistogram.Add(0);
-                greenHistogram.Add(0);
-                blueHistogram.Add(0);
-            }
             bitmap = generateBitmap();
             fillHistograms();
-            adaptability = new Adaptability(redHistogram, greenHistogram, blueHistogram);
+            adaptability = new Adaptability(histogramRGB);
         }
 
         private Image(Bitmap p_kid)
         {
             bitmap = p_kid;
-            for (int i = 0; i < 256; i++)
-            {
-                redHistogram.Add(0);
-                greenHistogram.Add(0);
-                blueHistogram.Add(0);
-            }
             fillHistograms();
         }
 
@@ -63,6 +50,17 @@ namespace Prueba
 
         private void fillHistograms()//Fills the histograms with the total appearances of each tone of the color
         {
+            ArrayList redHistogram = new ArrayList();
+            ArrayList greenHistogram = new ArrayList();
+            ArrayList blueHistogram = new ArrayList();
+
+            for (int i = 0; i < 256; i++)
+            {
+                redHistogram.Add(0);
+                greenHistogram.Add(0);
+                blueHistogram.Add(0);
+            }
+
             for (int i = 0; i < bitmap.Width; i++)
             {
                 for (int j = 0; j < bitmap.Height; j++)
@@ -72,6 +70,19 @@ namespace Prueba
                     greenHistogram[clr.G] = (int)greenHistogram[clr.G] + 1;
                     blueHistogram[clr.B] = (int)blueHistogram[clr.B] + 1;
                 }
+            }
+
+            for (int i = 0; i < 256; i++)
+            {
+                histogramRGB.Add(redHistogram[i]);
+            }
+            for (int i = 0; i < 256; i++)
+            {
+                histogramRGB.Add(greenHistogram[i]);
+            }
+            for (int i = 0; i < 256; i++)
+            {
+                histogramRGB.Add(blueHistogram[i]);
             }
         }
 
