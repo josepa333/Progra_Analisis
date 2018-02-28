@@ -9,7 +9,120 @@ using System.Windows.Forms;
 using System.Collections;
 
 namespace Prueba
+
+
 {
+    class Image
+    {
+        static Bitmap finalImage;
+        static int mutability;
+
+
+        private Bitmap bitmap;
+        private ArrayList redHistogram = new ArrayList();
+        private ArrayList greenHistogram = new ArrayList();
+        private ArrayList blueHistogram = new ArrayList();
+
+
+        public Image()
+        {
+            for(int i =0; i<256; i++)
+            {
+                redHistogram.Add(0);
+                greenHistogram.Add(0);
+                blueHistogram.Add(0);
+            }
+            bitmap = generateBitmap();
+            fillHistograms();
+        }
+
+        private Image(Bitmap p_kid)
+        {
+            bitmap = p_kid;
+            for (int i = 0; i < 256; i++)
+            {
+                redHistogram.Add(0);
+                greenHistogram.Add(0);
+                blueHistogram.Add(0);
+            }
+            fillHistograms();
+        }
+
+        private Bitmap generateBitmap()
+        {
+            Bitmap newImage = new Bitmap(finalImage.Width, finalImage.Height);
+            Random rnd = new Random();
+
+            for (int i = 0; i < newImage.Width; i++)
+            {
+                for (int j = 0; j < newImage.Height; j++)
+                {
+                    int rojo = rnd.Next(0, 256);
+                    int verde = rnd.Next(0, 256);
+                    int azul = rnd.Next(0, 256);
+
+                    Color newco = Color.FromArgb(rojo, verde, azul);
+                    newImage.SetPixel(i, j, newco);
+                }
+            }
+            return newImage;
+        }
+
+        private void fillHistograms()//Fills the histograms with the total appearances of each tone of the color
+        {
+            for (int i = 0; i < bitmap.Width; i++)
+            {
+                for (int j = 0; j < bitmap.Height; j++)
+                {
+                    Color clr = bitmap.GetPixel(i, j);
+                    redHistogram[clr.R] = (int)redHistogram[clr.R] + 1;
+                    greenHistogram[clr.G] = (int)greenHistogram[clr.G] + 1;
+                    blueHistogram[clr.B] = (int)blueHistogram[clr.B] + 1;
+                }
+            }
+        }
+
+        public Image crossOver(Image soulmate)
+        {
+            Bitmap bitmap_kid = new Bitmap(bitmap.Width, bitmap.Height);
+            Random rnd = new Random();
+            for (int i = 0; i < bitmap.Width; i++)
+            {
+                for (int j = 0; j < bitmap.Height; j++)
+                {
+                    int selector = rnd.Next(0, 100);
+
+                    if (selector < mutability)
+                    {
+                        int rojo = rnd.Next(0, 256);
+                        int verde = rnd.Next(0, 256);
+                        int azul = rnd.Next(0, 256);
+
+                        Color newco = Color.FromArgb(rojo, verde, azul);
+                        bitmap_kid.SetPixel(i, j, newco);
+                    }
+                    else
+                    {
+                        if(rnd.Next(0,1) == 2)
+                        {
+                            bitmap_kid.SetPixel(i, j, bitmap.GetPixel(i,j));
+                        }
+                        else
+                        {
+                            bitmap_kid.SetPixel(i, j, soulmate.getBitmap().GetPixel(i, j));
+                        }
+                    }
+                }
+            }
+            return new Image(bitmap_kid);
+        }
+
+        public Bitmap getBitmap()
+        {
+            return bitmap;
+        }
+
+    }
     class Program
     {
         static void Main(string[] args)
@@ -17,23 +130,20 @@ namespace Prueba
             string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\Progra_Analisis\ima.JPG";
             Bitmap ima = new Bitmap(path,true);
 
-
-                for (int i = 0; i < ima.Width; i++)
+            Random rnd = new Random();
+            for (int i = 0; i < ima.Width; i++)
                 {
-                    for (int j = 0; j < ima.Height; j++)
-                    {
-                        Random rnd = new Random();
+                for (int j = 0; j < ima.Height; j++)
+                {
+                    int rojo = rnd.Next(0, 254);
+                    int verde = rnd.Next(0, 254);
+                    int azul = rnd.Next(0, 254);
 
-                        int rojo = rnd.Next(0, 254);
-                        int verde = rnd.Next(0, 254);
-                        int azul = rnd.Next(0, 254);
-
-                        Color newco = Color.FromArgb(rojo, verde, azul);
-                        ima.SetPixel(i, j, newco);
-                    }
+                    Color newco = Color.FromArgb(rojo, verde, azul);
+                    ima.SetPixel(i, j, newco);
                 }
-                ima.Save(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\Progra_Analisis\newima.JPG");
-
+            }
+            ima.Save(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\Progra_Analisis\newima.JPG");
             Console.ReadKey();
         }
     }
