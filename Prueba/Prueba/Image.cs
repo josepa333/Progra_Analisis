@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Drawing;
-using System.IO;
-using System.Windows.Forms;
 using System.Collections;
 
 namespace Prueba
@@ -84,6 +78,28 @@ namespace Prueba
         {
             Bitmap bitmap_kid = new Bitmap(bitmap.Width, bitmap.Height);
             Random rnd = new Random();
+            for (int i = 0; i < bitmap.Width; i++)
+            {
+                for (int j = 0; j < bitmap.Height; j++)
+                {
+                    if (rnd.Next(0, 1) == 2)
+                    {
+                        bitmap_kid.SetPixel(i, j, bitmap.GetPixel(i, j));
+                    }
+                    else
+                    {
+                        bitmap_kid.SetPixel(i, j, soulmate.getBitmap().GetPixel(i, j));
+                    }
+                }
+            }
+            return new Image(bitmap_kid);
+        }
+
+        public Image mutation(Image soulmate)
+        {
+            Bitmap bitmap_kid = new Bitmap(bitmap.Width, bitmap.Height);
+            Random rnd = new Random();
+
             for (int i = 0; i < bitmap.Width; i++)
             {
                 for (int j = 0; j < bitmap.Height; j++)
