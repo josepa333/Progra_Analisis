@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Adaptability.cs" />
+    <Compile Include="naturalSelection.cs" />
     <Compile Include="Sort.cs" />
     <Compile Include="Image.cs" />
     <Compile Include="Program.cs" />

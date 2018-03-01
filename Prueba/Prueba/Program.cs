@@ -23,11 +23,10 @@ namespace Prueba
 
             for (int zone = 0; zone < 4 ; zone++)
             {
-                 
                 for(int y = (ima.Height / 4) * (zone) ; y < (ima.Height/4) * (zone + 1) ; y++)
                 {
                     int x = 0;
-                    while (x < (ima.Width / 4) * (zone + 1))
+                    while (x < (ima.Width ))
                     {
                         nc = Color.FromArgb(10 + ( x/250 * 30 ) , 10 +(30 * zone), 100 + (50 * zone));
                         ima.SetPixel(x, y, nc);
@@ -37,8 +36,6 @@ namespace Prueba
                 }
                 Console.WriteLine("Zona");
             }
-
-          
 
             Console.WriteLine("Listo");
             ima.Save(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\Progra_Analisis\newima.JPG");
