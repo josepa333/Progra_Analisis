@@ -20,7 +20,7 @@ namespace Prueba
             {
                 if(indexLeftImages < leftImages.Count && indexRightImages < rightImages.Count)
                 {
-                    if(leftImages[indexLeftImages].getAdaptability(1) <= rightImages[indexRightImages].getAdaptability(1))
+                    if(leftImages[indexLeftImages].getAdaptability(1) <= rightImages[indexRightImages].getAdaptability(1)) //Comparison Ascendent or Descendent
                     {
                         result[indexResult] = leftImages[indexLeftImages];
                         indexLeftImages++;
@@ -70,11 +70,11 @@ namespace Prueba
 
             while(true)
             {
-                while (images[++leftPointer].getAdaptability(1) < pivot.getAdaptability(1)) ;
+                while (images[++leftPointer].getAdaptability(1) < pivot.getAdaptability(1)) ; //Comparison Ascendent or Descendent
 
-                while (rightPointer > 0 && images[--rightPointer].getAdaptability(1) > pivot.getAdaptability(1)) ;
+                while (rightPointer > 0 && images[--rightPointer].getAdaptability(1) > pivot.getAdaptability(1)) ; //Comparison Ascendent or Descendent
 
-                if(leftPointer >= rightPointer)
+                if (leftPointer >= rightPointer)
                 {
                     break;
                 }
@@ -109,7 +109,7 @@ namespace Prueba
         {
             if(images.Count <= 1)
             {
-                return images;
+                return images; //Base Case
             }
 
             int center = images.Count / 2;

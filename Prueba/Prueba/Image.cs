@@ -7,9 +7,9 @@ namespace Prueba
     class Image
     {
         public static Image finalImage;
-        public static int mutability;
-
-        private ArrayList histogramRGB = new ArrayList();
+        private int geneticMutability = 20; //Mutability in the genes of each Image, if there is a mutation
+        private ArrayList histogramGradient;
+        private ArrayList histogramRGB;
         private Adaptability adaptability;
         private Bitmap bitmap;
 
@@ -17,15 +17,20 @@ namespace Prueba
 
         public Image()
         {
+            histogramRGB = new ArrayList();
+            histogramGradient = new ArrayList();
             bitmap = generateBitmap();
             fillHistograms();
-            adaptability = new Adaptability(histogramRGB);
+            adaptability = new Adaptability(histogramRGB, histogramGradient);
         }
 
         public Image(Bitmap p_kid)
         {
+            histogramRGB = new ArrayList();
+            histogramGradient = new ArrayList();
             bitmap = p_kid;
             fillHistograms();
+            adaptability = new Adaptability(histogramRGB, histogramGradient);
         }
 
         private Bitmap generateBitmap()
@@ -118,7 +123,7 @@ namespace Prueba
                 {
                     int selector = rnd.Next(0, 100);
 
-                    if (selector < mutability)
+                    if (selector < geneticMutability)
                     {
                         int rojo = rnd.Next(0, 256);
                         int verde = rnd.Next(0, 256);
