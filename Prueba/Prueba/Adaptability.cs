@@ -54,5 +54,16 @@ namespace Prueba
                     return 0;
             }
         }
+
+        public int manhattan(Image objective, Image individual)
+        {
+            int distanceValue = 0;
+
+            for(int i = 0; i < objective.getHistogramRGB().Count ; i++)
+            {
+                distanceValue += Math.Abs( (int)objective.getHistogramRGB()[i] - (int)individual.getHistogramRGB()[i] );
+            }
+            return distanceValue;
+        }
     }
 }

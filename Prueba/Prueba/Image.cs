@@ -148,6 +148,11 @@ namespace Prueba
             return bitmap;
         }
 
+        public ArrayList getHistogramRGB()
+        {
+            return histogramRGB;
+        }
+
         public int getAdaptability(int adaptabilityOperation)
         {
             return adaptability.getAdaptability(adaptabilityOperation);
