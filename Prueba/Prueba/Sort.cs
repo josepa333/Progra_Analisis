@@ -8,6 +8,54 @@ namespace Prueba
 {
     class Sort
     {
+        //Private Methods for Merge Sort
+        private static List<Image> merge(List<Image> leftImages, List<Image> rightImages)
+        {
+            List<Image> result = new List<Image>(leftImages.Count + rightImages.Count);
+            int indexLeftImages = 0;
+            int indexRightImages = 0;
+            int indexResult = 0;
+
+            while(indexLeftImages < leftImages.Count || indexRightImages < rightImages.Count)
+            {
+                if(indexLeftImages < leftImages.Count && indexRightImages < rightImages.Count)
+                {
+                    if(leftImages[indexLeftImages].getAdaptability(1) <= rightImages[indexRightImages].getAdaptability(1))
+                    {
+                        result[indexResult] = leftImages[indexLeftImages];
+                        indexLeftImages++;
+                        indexResult++;
+                    }
+                    else
+                    {
+                        result[indexResult] = rightImages[indexRightImages];
+                        indexRightImages++;
+                        indexResult++;
+                    }
+                }
+                else
+                {
+                    if(indexLeftImages < leftImages.Count)
+                    {
+                        result[indexResult] = leftImages[indexLeftImages];
+                        indexLeftImages++;
+                        indexResult++;
+                    }
+                    else
+                    {
+                        if(indexRightImages < rightImages.Count)
+                        {
+                            result[indexResult] = rightImages[indexRightImages];
+                            indexRightImages++;
+                            indexResult++;
+                        }
+                    }
+                }
+            }
+            return result;
+        }
+
+        //Private Methods for Quick Sort
         private static void swapValues(List<Image> images, int indexA, int indexB)
         {
             Image temp = images[indexA];
@@ -36,7 +84,7 @@ namespace Prueba
                 }
             }
 
-            swapValues(images, leftPointer, rightPointer);
+            swapValues(images, leftPointer, right);
             return leftPointer;
         }
 
@@ -77,12 +125,29 @@ namespace Prueba
                 rightImages = new List<Image>(center + 1);
             }
 
-            List<Image> result = new List<Image>();
+            List<Image> result = new List<Image>(images.Count);
 
             for(int i = 0; i < center; i++)
             {
                 leftImages[i] = images[i];
             }
+
+            int c = 0;
+            for(int j = center; j < images.Count; j++)
+            {
+                if( c != images.Count)
+                {
+                    rightImages[c] = images[j];
+                    c++;
+                }
+            }
+
+            leftImages = mergeSort(leftImages);
+            rightImages = mergeSort(rightImages);
+
+            result = merge(leftImages, rightImages);
+
+            return result;
         }
     }
 }
