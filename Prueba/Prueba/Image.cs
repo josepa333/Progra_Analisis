@@ -6,7 +6,7 @@ namespace Prueba
 {
     class Image
     {
-        public static Bitmap finalImage;
+        public static Image finalImage;
         public static int mutability;
 
         private ArrayList histogramRGB = new ArrayList();
@@ -22,7 +22,7 @@ namespace Prueba
             adaptability = new Adaptability(histogramRGB);
         }
 
-        private Image(Bitmap p_kid)
+        public Image(Bitmap p_kid)
         {
             bitmap = p_kid;
             fillHistograms();
@@ -30,7 +30,7 @@ namespace Prueba
 
         private Bitmap generateBitmap()
         {
-            Bitmap newImage = new Bitmap(finalImage.Width, finalImage.Height);
+            Bitmap newImage = new Bitmap(finalImage.getBitmap().Width, finalImage.getBitmap().Height);
             Random rnd = new Random();
 
             for (int i = 0; i < newImage.Width; i++)

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Drawing;
 
 namespace Prueba
 {
@@ -10,10 +11,12 @@ namespace Prueba
     {
         List<Image> images;
 
-        public naturalSelection(Image desireImage,int p_mutation, int quantityGenerations, int quantityImages, int population)
+        public naturalSelection(Bitmap desireImage,int p_mutation, int quantityGenerations, int quantityImages, int population)
         {
             images = new List<Image>();
             createImages(quantityImages);
+            Image.finalImage = new Image(desireImage);
+            Image.mutability = p_mutation;
 
             images = Sort.mergeSort(images);   
             
