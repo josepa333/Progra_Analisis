@@ -4,9 +4,9 @@ using System.Collections;
 
 namespace Progra_analisis
 {
-    class Image
+    class Individual
     {
-        public static Image finalImage;
+        public static Individual finalImage;
         public static int mutations = 0;
 
 
@@ -17,7 +17,7 @@ namespace Progra_analisis
         private Bitmap bitmap;
 
 
-        public Image()
+        public Individual()
         {
             histogramRGB = new ArrayList();
             histogramGradient = new ArrayList();
@@ -26,7 +26,7 @@ namespace Progra_analisis
             adaptability = new Adaptability(histogramRGB, histogramGradient);
         }
 
-        public Image(Bitmap p_kid)
+        public Individual(Bitmap p_kid)
         {
             histogramRGB = new ArrayList();
             histogramGradient = new ArrayList();
@@ -94,7 +94,7 @@ namespace Progra_analisis
             }
         }
 
-        public Image crossOver(Image soulmate)
+        public Individual crossOver(Individual soulmate)
         {
             Bitmap bitmap_kid = new Bitmap(bitmap.Width, bitmap.Height);
             Random rnd = new Random();
@@ -112,10 +112,10 @@ namespace Progra_analisis
                     }
                 }
             }
-            return new Image(bitmap_kid);
+            return new Individual(bitmap_kid);
         }
 
-        public Image mutation(Image soulmate)
+        public Individual mutation(Individual soulmate)
         {
             mutations++;
             Bitmap bitmap_kid = new Bitmap(bitmap.Width, bitmap.Height);
@@ -149,7 +149,7 @@ namespace Progra_analisis
                     }
                 }
             }
-            return new Image(bitmap_kid);
+            return new Individual(bitmap_kid);
         }
 
         public Bitmap getBitmap()

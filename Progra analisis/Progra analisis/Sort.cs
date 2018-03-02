@@ -9,9 +9,9 @@ namespace Progra_analisis
     class Sort
     {
         //Private Methods for Merge Sort
-        private static List<Image> merge(List<Image> leftImages, List<Image> rightImages)
+        private static List<Individual> merge(List<Individual> leftImages, List<Individual> rightImages)
         {
-            List<Image> result = new List<Image>(leftImages.Count + rightImages.Count);
+            List<Individual> result = new List<Individual>(leftImages.Count + rightImages.Count);
             int indexLeftImages = 0;
             int indexRightImages = 0;
             int indexResult = 0;
@@ -56,14 +56,14 @@ namespace Progra_analisis
         }
 
         //Private Methods for Quick Sort
-        private static void swapValues(List<Image> images, int indexA, int indexB)
+        private static void swapValues(List<Individual> images, int indexA, int indexB)
         {
-            Image temp = images[indexA];
+            Individual temp = images[indexA];
             images[indexA] = images[indexB];
             images[indexB] = temp;
         }
 
-        private static int partitionList(List<Image> images, int left, int right, Image pivot)
+        private static int partitionList(List<Individual> images, int left, int right, Individual pivot)
         {
             int leftPointer = left - 1;
             int rightPointer = right;
@@ -88,7 +88,7 @@ namespace Progra_analisis
             return leftPointer;
         }
 
-        public static void quickSort(List<Image> images, int left, int right)
+        public static void quickSort(List<Individual> images, int left, int right)
         {
             if (right - left <= 0)
             {
@@ -96,7 +96,7 @@ namespace Progra_analisis
             }
             else
             {
-                Image pivot = images[right];
+                Individual pivot = images[right];
                 int pivotLocation = partitionList(images, left, right, pivot);
 
                 quickSort(images, left, pivotLocation - 1);
@@ -105,7 +105,7 @@ namespace Progra_analisis
             }
         }
 
-        public static List<Image> mergeSort(List<Image> images)
+        public static List<Individual> mergeSort(List<Individual> images)
         {
             if (images.Count <= 1)
             {
@@ -113,19 +113,19 @@ namespace Progra_analisis
             }
 
             int center = images.Count / 2;
-            List<Image> leftImages = new List<Image>(center);
-            List<Image> rightImages;
+            List<Individual> leftImages = new List<Individual>(center);
+            List<Individual> rightImages;
 
             if (images.Count % 2 == 0)
             {
-                rightImages = new List<Image>(center);
+                rightImages = new List<Individual>(center);
             }
             else
             {
-                rightImages = new List<Image>(center + 1);
+                rightImages = new List<Individual>(center + 1);
             }
 
-            List<Image> result = new List<Image>(images.Count);
+            List<Individual> result = new List<Individual>(images.Count);
 
             for (int i = 0; i < center; i++)
             {
