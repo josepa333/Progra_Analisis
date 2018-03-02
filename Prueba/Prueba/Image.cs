@@ -8,7 +8,6 @@ namespace Prueba
     {
         public static Image finalImage;
         public static int mutations = 0;
-        public static int mutationProbability = 0;//from 0 to a 100 real quick
 
 
         private int geneticMutability = 20; //Mutability in the genes of each Image, if there is a mutation
