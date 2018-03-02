@@ -10,14 +10,16 @@ namespace Prueba
     class NaturalSelection
     {
         private List<Image> images;
-        private int adaptableImagesPercentage = 0; //Defines the percentage of each population that will be defined as the most adaptables.
-        private int cross_A_A_percentage = 0; //Cross percentage of childs from two parents with high adaptability.
-        private int cross_NA_NA_percentage = 0; //Cross percentage of childs from two parents with low adaptability.
-        private int cross_A_NA_percentage = 0; //Cross percentage of chlds from a high adaptability parent with a lowone.
-        private int childMutationPercentage = 0; //Percentage of the total of childs that will have a mutation.
-        private int childsPerGeneration = 0;
-        private int generations = 0;
-        private int population = 0;
+        private int adaptableImagesPercentage; //Defines the percentage of each population that will be defined as the most adaptables.
+        private int cross_A_A_percentage; //Cross percentage of childs from two parents with high adaptability.
+        private int cross_NA_NA_percentage; //Cross percentage of childs from two parents with low adaptability.
+        private int cross_A_NA_percentage; //Cross percentage of chlds from a high adaptability parent with a lowone.
+        private int mutationPercentage; //Percentage of mutation when there is a cross.
+        private int finalMutationPercentage; //The percentage of mutations per generation.
+        private int mutationProbability;//from 0 to a 100 real quick
+        private int childsPerGeneration;
+        private int generations;
+        private int population;
 
         private void createImages(int quantityImages)
         {
@@ -67,50 +69,103 @@ namespace Prueba
                 images[i] = childs[childsIndex];
                 childsIndex++;
             }
+            Sort.mergeSort(images);
         }
 
-        public NaturalSelection(Bitmap desireImage, int pGenerations, int pPopulation, int pChildsPerGeneration, double pChildMutationPercentage, double pCross_A_NA_percentage,
+        //Returns the new childs.
+        private List<Image> crossOver(List<Image> adaptables, List<Image> notAdaptables)
+        {
+            int childs = childsPerGeneration;
+            int cross_A_A = cross_A_A_percentage;
+            int cross_A_NA = cross_A_NA_percentage;
+            int cross_NA_NA = cross_NA_NA_percentage;
+            int rand_A_index;
+            int rand_NA_index;
+            int rand_mutation;
+            Random rnd = new Random();
+
+            while (childs != 0)
+            {
+                while(cross_A_A != 0)
+                {
+                    rand_A_index = rnd.Next(0, adaptables.Count);
+                    Image adaptable1 = images[rand_A_index];
+                    while ()
+                    {
+
+                    }
+                    rand_A_index = rnd.Next(0, adaptables.Count);
+
+                    cross_A_A--;
+                }
+                while(cross_A_NA != 0)
+                {
+
+                    cross_A_NA--;
+                }
+                while(cross_NA_NA != 0)
+                {
+
+                    cross_NA_NA--;
+                }
+
+                childs--;
+            }
+        }
+
+        private void mutation(int m, )
+        {
+
+        }
+
+        public NaturalSelection(Bitmap desireImage, int pGenerations, int pPopulation, int pChildsPerGeneration, double pMutabilityPercentage, double pCross_A_NA_percentage,
             double pCross_NA_NA_percentage, double pCross_A_A_percentage, double pAdaptableImagesPercentage)
         {
             Image.finalImage = new Image(desireImage);
             childsPerGeneration = pChildsPerGeneration;
             generations = pGenerations;
             population = pPopulation;
+            Image.mutations = 0;
             adaptableImagesPercentage = (int)pAdaptableImagesPercentage * population;
             cross_A_A_percentage = (int)pCross_A_A_percentage * childsPerGeneration;
             cross_NA_NA_percentage = (int)pCross_NA_NA_percentage * childsPerGeneration;
             cross_A_NA_percentage = (int)pCross_A_NA_percentage * childsPerGeneration;
-            childMutationPercentage = (int)pChildMutationPercentage * childsPerGeneration;
-
+            mutationPercentage = (int)pMutabilityPercentage * 100;
+            mutationProbability = mutationPercentage;
             images = new List<Image>(population);
             createImages(population);
             images = Sort.mergeSort(images);   
             
         }
 
-        public double getAdaptableImagesPercentage()
+        public int getAdaptableImagesPercentage()
         {
             return adaptableImagesPercentage;
         }
 
-        public double getCross_A_A_percentage()
+        public int getCross_A_A_percentage()
         {
             return cross_A_A_percentage;
         }
 
-        public double getCross_NA_NA_percentage()
+        public int getCross_NA_NA_percentage()
         {
             return cross_NA_NA_percentage;
         }
 
-        public double getCross_A_NA_percentage()
+        public int getCross_A_NA_percentage()
         {
             return cross_A_NA_percentage;
         }
 
-        public double getChildMutationPercentage()
+        public int getMutationPercentage()
         {
-            return childMutationPercentage;
+            return mutationPercentage;
+        }
+
+        public int getFinalMutationPercentage()
+        {
+            return Image.mutations / generations;
         }
 
         public int getChildsPerGeneration()
