@@ -75,47 +75,76 @@ namespace Prueba
         //Returns the new childs.
         private List<Image> crossOver(List<Image> adaptables, List<Image> notAdaptables)
         {
-            int childs = childsPerGeneration;
+            int childAmount = childsPerGeneration;
             int cross_A_A = cross_A_A_percentage;
             int cross_A_NA = cross_A_NA_percentage;
             int cross_NA_NA = cross_NA_NA_percentage;
             int rand_A_index;
             int rand_NA_index;
+            int childsIndex = 0;
+            int index = 0;
             int rand_mutation;
             Random rnd = new Random();
+            List<Image> childs = new List<Image>(childAmount);
 
-            while (childs != 0)
+            while (childAmount != 0)
             {
                 while(cross_A_A != 0)
                 {
-                    rand_A_index = rnd.Next(0, adaptables.Count);
-                    Image adaptable1 = images[rand_A_index];
-                    while ()
+                    if (adaptables.Count >= 2)
                     {
-
+                        rand_A_index = rnd.Next(0, adaptables.Count);
+                        Image parent1 = images[rand_A_index];
+                        index = rand_A_index;
+                        rand_A_index = rnd.Next(0, adaptables.Count);
+                        while (rand_A_index != index)
+                        {
+                            rand_A_index = rnd.Next(0, adaptables.Count);
+                        }
+                        Image parent2 = images[rand_A_index];
+                        Image child = parent1.crossOver(parent2);
+                        childs[childsIndex] = child;
+                        childsIndex++;
                     }
-                    rand_A_index = rnd.Next(0, adaptables.Count);
 
                     cross_A_A--;
                 }
                 while(cross_A_NA != 0)
                 {
-
+                    if (adaptables.Count >= 1 && notAdaptables.Count >= 1)
+                    {
+                        rand_A_index = rnd.Next(0, adaptables.Count);
+                        rand_NA_index = rnd.Next(0, notAdaptables.Count);
+                        Image parent1 = images[rand_A_index];
+                        Image parent2 = images[rand_NA_index];
+                        Image child = parent1.crossOver(parent2);
+                        childs[childsIndex] = child;
+                        childsIndex++;
+                    }
                     cross_A_NA--;
                 }
                 while(cross_NA_NA != 0)
                 {
-
+                    if(notAdaptables.Count >= 2)
+                    {
+                        rand_NA_index = rnd.Next(0, notAdaptables.Count);
+                        Image parent1 = images[rand_NA_index];
+                        index = rand_NA_index;
+                        rand_NA_index = rnd.Next(0, notAdaptables.Count);
+                        while (rand_NA_index != index)
+                        {
+                            rand_NA_index = rnd.Next(0, notAdaptables.Count);
+                        }
+                        Image parent2 = images[rand_NA_index];
+                        Image child = parent1.crossOver(parent2);
+                        childs[childsIndex] = child;
+                        childsIndex++;
+                    }
                     cross_NA_NA--;
                 }
 
-                childs--;
+                childAmount--;
             }
-        }
-
-        private void mutation(int m, )
-        {
-
         }
 
         public NaturalSelection(Bitmap desireImage, int pGenerations, int pPopulation, int pChildsPerGeneration, double pMutabilityPercentage, double pCross_A_NA_percentage,
