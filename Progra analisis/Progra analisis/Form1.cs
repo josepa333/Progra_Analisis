@@ -50,6 +50,9 @@ namespace Progra_analisis
                 Decimal.ToDouble(this.pNAwNa.Value),
                 Decimal.ToDouble(this.pAwA.Value),
                 Decimal.ToDouble(this.pAdaptableImages.Value));
+
+            naturalSelection.genericAlgorithm();
+
         }
     }
 }

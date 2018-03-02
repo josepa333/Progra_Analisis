@@ -19,7 +19,29 @@ namespace Progra_analisis
         private int mutationProbability;//from 0 to a 100 real quick
         private int childsPerGeneration;
         private int generations;
-        private int population;
+        private int population; 
+        
+
+
+        public NaturalSelection(Bitmap desireImage, int pGenerations, int pPopulation, int pChildsPerGeneration, double pMutabilityPercentage, double pCross_A_NA_percentage,
+            double pCross_NA_NA_percentage, double pCross_A_A_percentage, double pAdaptableImagesPercentage)
+        {
+            Individual.finalImage = new Individual(desireImage);
+            childsPerGeneration = pChildsPerGeneration;
+            generations = pGenerations;
+            population = pPopulation;
+            Individual.mutations = 0;
+            adaptableImagesPercentage = (int)pAdaptableImagesPercentage * population;
+            cross_A_A_percentage = (int)pCross_A_A_percentage * childsPerGeneration;
+            cross_NA_NA_percentage = (int)pCross_NA_NA_percentage * childsPerGeneration;
+            cross_A_NA_percentage = (int)pCross_A_NA_percentage * childsPerGeneration;
+            mutationPercentage = (int)pMutabilityPercentage * 100;
+            mutationProbability = mutationPercentage;
+            images = new List<Individual>(population);
+            createImages(population);
+            images = Sort.mergeSort(images);
+
+        }
 
         private void createImages(int quantityImages)
         {
@@ -196,25 +218,6 @@ namespace Progra_analisis
             return childs;
         }
 
-        public NaturalSelection(Bitmap desireImage, int pGenerations, int pPopulation, int pChildsPerGeneration, double pMutabilityPercentage, double pCross_A_NA_percentage,
-            double pCross_NA_NA_percentage, double pCross_A_A_percentage, double pAdaptableImagesPercentage)
-        {
-            Individual.finalImage = new Individual(desireImage);
-            childsPerGeneration = pChildsPerGeneration;
-            generations = pGenerations;
-            population = pPopulation;
-            Individual.mutations = 0;
-            adaptableImagesPercentage = (int)pAdaptableImagesPercentage * population;
-            cross_A_A_percentage = (int)pCross_A_A_percentage * childsPerGeneration;
-            cross_NA_NA_percentage = (int)pCross_NA_NA_percentage * childsPerGeneration;
-            cross_A_NA_percentage = (int)pCross_A_NA_percentage * childsPerGeneration;
-            mutationPercentage = (int)pMutabilityPercentage * 100;
-            mutationProbability = mutationPercentage;
-            images = new List<Individual>(population);
-            createImages(population);
-            images = Sort.mergeSort(images);
-
-        }
 
         public int getAdaptableImagesPercentage()
         {
@@ -264,6 +267,9 @@ namespace Progra_analisis
         public List<Individual> genericAlgorithm()
         {
             int generation = 0;
+            int generationPercentage = (int)(0.10) * (generations);
+            List<Individual> finalResult = new List<Individual>();
+
             while (generation != generations)
             {
                 //Selection
@@ -273,9 +279,19 @@ namespace Progra_analisis
                 List<Individual> newChilds = crossOver(adaptables, notAdaptables);
                 //Evolution
                 replace_NA(newChilds);
+
+                if(generation % 10 == 0)
+                {
+                    //seteo de la imagen
+                }
+
+                if(generation % generationPercentage == 0)
+                {
+                    finalResult.Add(images[0]);
+                }
                 generation++;
             }
-            return images;
+            return finalResult;
         }
     }
 }

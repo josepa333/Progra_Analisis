@@ -8,5 +8,6 @@ namespace Progra_analisis
 {
     class Statistics
     {
+
     }
 }
