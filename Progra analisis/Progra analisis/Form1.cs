@@ -17,6 +17,28 @@ namespace Progra_analisis
         public Form1()
         {
             InitializeComponent();
+
+            this.output1.SizeMode = PictureBoxSizeMode.StretchImage;
+            this.output2.SizeMode = PictureBoxSizeMode.StretchImage;
+            this.output3.SizeMode = PictureBoxSizeMode.StretchImage;
+            this.output4.SizeMode = PictureBoxSizeMode.StretchImage;
+            this.output5.SizeMode = PictureBoxSizeMode.StretchImage;
+            this.output6.SizeMode = PictureBoxSizeMode.StretchImage;
+            this.output7.SizeMode = PictureBoxSizeMode.StretchImage;
+            this.output8.SizeMode = PictureBoxSizeMode.StretchImage;
+            this.output9.SizeMode = PictureBoxSizeMode.StretchImage;
+            this.output10.SizeMode = PictureBoxSizeMode.StretchImage;
+
+            this.output1.Visible = false;
+            this.output2.Visible = false;
+            this.output3.Visible = false;
+            this.output4.Visible = false;
+            this.output5.Visible = false;
+            this.output6.Visible = false;
+            this.output7.Visible = false;
+            this.output8.Visible = false;
+            this.output9.Visible = false;
+            this.output10.Visible = false;
         }
 
         private void BT_selectImage_Click(object sender, EventArgs e)
@@ -40,7 +62,7 @@ namespace Progra_analisis
 
         private void button1_Click(object sender, EventArgs e)
         {
-            decimal generations = Decimal.ToInt32(this.Q_generations.Value);
+
             NaturalSelection naturalSelection = new NaturalSelection(bitImage,
                 Decimal.ToInt32(this.Q_generations.Value),
                 Decimal.ToInt32(this.Q_population.Value),
@@ -51,7 +73,59 @@ namespace Progra_analisis
                 Decimal.ToDouble(this.pAwA.Value),
                 Decimal.ToDouble(this.pAdaptableImages.Value));
 
-            naturalSelection.genericAlgorithm();
+            List<Individual> imagesToDisplay = naturalSelection.genericAlgorithm();
+
+            this.Q_generations.Hide();
+            this.Q_population.Hide();
+            this.childsPerGeneration.Hide();
+            this.mutabilityPercentage.Hide();
+            this.pAwNa.Hide();
+            this.pNAwNa.Hide();
+            this.pAwA.Hide();
+            this.pAdaptableImages.Hide();
+            this.label2.Hide();
+            this.label3.Hide();
+            this.label4.Hide();
+            this.label5.Hide();
+            this.label6.Hide();
+            this.label7.Hide();
+            this.label8.Hide();
+            this.label9.Hide();
+            this.selected_picture.Hide();
+            this.BT_selectImage.Hide();
+            this.button1.Hide();
+
+            this.output1.Visible = true;
+            this.output2.Visible = true;
+            this.output3.Visible = true;
+            this.output4.Visible = true;
+            this.output5.Visible = true;
+            this.output6.Visible = true;
+            this.output7.Visible = true;
+            this.output8.Visible = true;
+            this.output9.Visible = true;
+            this.output10.Visible = true;
+
+            this.output1.Image = imagesToDisplay[0].getBitmap();
+            this.output2.Image = imagesToDisplay[1].getBitmap();
+            this.output3.Image = imagesToDisplay[2].getBitmap();
+            this.output4.Image = imagesToDisplay[3].getBitmap();
+            this.output5.Image = imagesToDisplay[4].getBitmap();
+            this.output6.Image = imagesToDisplay[5].getBitmap();
+            this.output7.Image = imagesToDisplay[6].getBitmap();
+            this.output8.Image = imagesToDisplay[7].getBitmap();
+            this.output9.Image = imagesToDisplay[8].getBitmap();
+            this.output10.Image = imagesToDisplay[9].getBitmap();
+
+        }
+
+        private void selected_picture_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
 
         }
     }

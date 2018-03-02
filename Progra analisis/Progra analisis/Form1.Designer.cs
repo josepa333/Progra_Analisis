@@ -48,6 +48,16 @@
             this.pNAwNa = new System.Windows.Forms.NumericUpDown();
             this.pAwA = new System.Windows.Forms.NumericUpDown();
             this.pAdaptableImages = new System.Windows.Forms.NumericUpDown();
+            this.output1 = new System.Windows.Forms.PictureBox();
+            this.output2 = new System.Windows.Forms.PictureBox();
+            this.output3 = new System.Windows.Forms.PictureBox();
+            this.output4 = new System.Windows.Forms.PictureBox();
+            this.output5 = new System.Windows.Forms.PictureBox();
+            this.output6 = new System.Windows.Forms.PictureBox();
+            this.output7 = new System.Windows.Forms.PictureBox();
+            this.output8 = new System.Windows.Forms.PictureBox();
+            this.output9 = new System.Windows.Forms.PictureBox();
+            this.output10 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.selected_picture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Q_generations)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Q_population)).BeginInit();
@@ -57,11 +67,21 @@
             ((System.ComponentModel.ISupportInitialize)(this.pNAwNa)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pAwA)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pAdaptableImages)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.output1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.output2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.output3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.output4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.output5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.output6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.output7)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.output8)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.output9)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.output10)).BeginInit();
             this.SuspendLayout();
             // 
             // BT_selectImage
             // 
-            this.BT_selectImage.Location = new System.Drawing.Point(637, 458);
+            this.BT_selectImage.Location = new System.Drawing.Point(791, 462);
             this.BT_selectImage.Name = "BT_selectImage";
             this.BT_selectImage.Size = new System.Drawing.Size(150, 23);
             this.BT_selectImage.TabIndex = 0;
@@ -72,19 +92,23 @@
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.label1.Font = new System.Drawing.Font("Consolas", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label1.Location = new System.Drawing.Point(12, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(95, 13);
+            this.label1.Size = new System.Drawing.Size(379, 43);
             this.label1.TabIndex = 1;
             this.label1.Text = "Genetic Algorithms";
             // 
             // selected_picture
             // 
-            this.selected_picture.Location = new System.Drawing.Point(468, 22);
+            this.selected_picture.Location = new System.Drawing.Point(622, 12);
             this.selected_picture.Name = "selected_picture";
             this.selected_picture.Size = new System.Drawing.Size(400, 400);
             this.selected_picture.TabIndex = 3;
             this.selected_picture.TabStop = false;
+            this.selected_picture.Click += new System.EventHandler(this.selected_picture_Click);
             // 
             // Q_generations
             // 
@@ -104,7 +128,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(793, 458);
+            this.button1.Location = new System.Drawing.Point(947, 462);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 6;
@@ -224,11 +248,101 @@
             this.pAdaptableImages.Size = new System.Drawing.Size(68, 20);
             this.pAdaptableImages.TabIndex = 20;
             // 
+            // output1
+            // 
+            this.output1.Location = new System.Drawing.Point(39, 73);
+            this.output1.Name = "output1";
+            this.output1.Size = new System.Drawing.Size(200, 120);
+            this.output1.TabIndex = 21;
+            this.output1.TabStop = false;
+            // 
+            // output2
+            // 
+            this.output2.Location = new System.Drawing.Point(270, 73);
+            this.output2.Name = "output2";
+            this.output2.Size = new System.Drawing.Size(200, 120);
+            this.output2.TabIndex = 22;
+            this.output2.TabStop = false;
+            // 
+            // output3
+            // 
+            this.output3.Location = new System.Drawing.Point(520, 73);
+            this.output3.Name = "output3";
+            this.output3.Size = new System.Drawing.Size(200, 120);
+            this.output3.TabIndex = 23;
+            this.output3.TabStop = false;
+            // 
+            // output4
+            // 
+            this.output4.Location = new System.Drawing.Point(771, 73);
+            this.output4.Name = "output4";
+            this.output4.Size = new System.Drawing.Size(200, 120);
+            this.output4.TabIndex = 24;
+            this.output4.TabStop = false;
+            // 
+            // output5
+            // 
+            this.output5.Location = new System.Drawing.Point(39, 214);
+            this.output5.Name = "output5";
+            this.output5.Size = new System.Drawing.Size(200, 120);
+            this.output5.TabIndex = 25;
+            this.output5.TabStop = false;
+            // 
+            // output6
+            // 
+            this.output6.Location = new System.Drawing.Point(270, 214);
+            this.output6.Name = "output6";
+            this.output6.Size = new System.Drawing.Size(200, 120);
+            this.output6.TabIndex = 26;
+            this.output6.TabStop = false;
+            // 
+            // output7
+            // 
+            this.output7.Location = new System.Drawing.Point(520, 214);
+            this.output7.Name = "output7";
+            this.output7.Size = new System.Drawing.Size(200, 120);
+            this.output7.TabIndex = 27;
+            this.output7.TabStop = false;
+            // 
+            // output8
+            // 
+            this.output8.Location = new System.Drawing.Point(771, 214);
+            this.output8.Name = "output8";
+            this.output8.Size = new System.Drawing.Size(200, 120);
+            this.output8.TabIndex = 28;
+            this.output8.TabStop = false;
+            // 
+            // output9
+            // 
+            this.output9.Location = new System.Drawing.Point(270, 359);
+            this.output9.Name = "output9";
+            this.output9.Size = new System.Drawing.Size(200, 120);
+            this.output9.TabIndex = 29;
+            this.output9.TabStop = false;
+            // 
+            // output10
+            // 
+            this.output10.Location = new System.Drawing.Point(520, 365);
+            this.output10.Name = "output10";
+            this.output10.Size = new System.Drawing.Size(200, 120);
+            this.output10.TabIndex = 30;
+            this.output10.TabStop = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(880, 493);
+            this.ClientSize = new System.Drawing.Size(1034, 497);
+            this.Controls.Add(this.output10);
+            this.Controls.Add(this.output9);
+            this.Controls.Add(this.output8);
+            this.Controls.Add(this.output7);
+            this.Controls.Add(this.output6);
+            this.Controls.Add(this.output5);
+            this.Controls.Add(this.output4);
+            this.Controls.Add(this.output3);
+            this.Controls.Add(this.output2);
+            this.Controls.Add(this.output1);
             this.Controls.Add(this.pAdaptableImages);
             this.Controls.Add(this.pAwA);
             this.Controls.Add(this.pNAwNa);
@@ -251,6 +365,7 @@
             this.Controls.Add(this.BT_selectImage);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.selected_picture)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Q_generations)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Q_population)).EndInit();
@@ -260,6 +375,16 @@
             ((System.ComponentModel.ISupportInitialize)(this.pNAwNa)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pAwA)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pAdaptableImages)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.output1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.output2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.output3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.output4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.output5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.output6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.output7)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.output8)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.output9)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.output10)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -287,6 +412,16 @@
         private System.Windows.Forms.NumericUpDown pNAwNa;
         private System.Windows.Forms.NumericUpDown pAwA;
         private System.Windows.Forms.NumericUpDown pAdaptableImages;
+        private System.Windows.Forms.PictureBox output1;
+        private System.Windows.Forms.PictureBox output2;
+        private System.Windows.Forms.PictureBox output3;
+        private System.Windows.Forms.PictureBox output4;
+        private System.Windows.Forms.PictureBox output5;
+        private System.Windows.Forms.PictureBox output6;
+        private System.Windows.Forms.PictureBox output7;
+        private System.Windows.Forms.PictureBox output8;
+        private System.Windows.Forms.PictureBox output9;
+        private System.Windows.Forms.PictureBox output10;
     }
 }
 
