@@ -7,12 +7,15 @@ namespace Prueba
     class Image
     {
         public static Image finalImage;
+        public static int mutations = 0;
+        public static int mutationProbability = 0;//from 0 to a 100 real quick
+
+
         private int geneticMutability = 20; //Mutability in the genes of each Image, if there is a mutation
         private ArrayList histogramGradient;
         private ArrayList histogramRGB;
         private Adaptability adaptability;
         private Bitmap bitmap;
-
 
 
         public Image()
@@ -42,11 +45,12 @@ namespace Prueba
             {
                 for (int j = 0; j < newImage.Height; j++)
                 {
+                    int a = rnd.Next(0, 256);
                     int rojo = rnd.Next(0, 256);
                     int verde = rnd.Next(0, 256);
                     int azul = rnd.Next(0, 256);
 
-                    Color newco = Color.FromArgb(rojo, verde, azul);
+                    Color newco = Color.FromArgb(a, rojo, verde, azul);
                     newImage.SetPixel(i, j, newco);
                 }
             }
@@ -114,6 +118,7 @@ namespace Prueba
 
         public Image mutation(Image soulmate)
         {
+            mutations++;
             Bitmap bitmap_kid = new Bitmap(bitmap.Width, bitmap.Height);
             Random rnd = new Random();
 

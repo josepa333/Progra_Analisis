@@ -45,14 +45,31 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Adaptability.cs" />
+    <Compile Include="mainWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="mainWindow.Designer.cs">
+      <DependentUpon>mainWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="NaturalSelection.cs" />
     <Compile Include="Sort.cs" />
     <Compile Include="Image.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ventanaPrincipal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ventanaPrincipal.Designer.cs">
+      <DependentUpon>ventanaPrincipal.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ventanaPrincipal.resx">
+      <DependentUpon>ventanaPrincipal.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -12,13 +12,17 @@ namespace Prueba
 
 
 {
-
     class Program
     {
+        
         static void Main(string[] args)
         {
-
+            MessageBox.Show("Hello");
+            mainWindow mainW = new mainWindow();
+            mainW.Show();
+            Console.ReadKey();
         }
+        
     }
 }
 
