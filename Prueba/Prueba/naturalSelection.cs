@@ -59,7 +59,7 @@ namespace Prueba
             return notAdaptables;
         }
 
-        //Replace the least not adaptable individuals with the new childs
+        //Replace the least not adaptable individuals with the new childs and sorts the population
         private void replace_NA(List<Image> childs)
         {
             int childsIndex = 0;
@@ -72,6 +72,49 @@ namespace Prueba
             Sort.mergeSort(images);
         }
 
+        private List<Image> parentsToCross(List<Image> adaptables, List<Image> notAdaptables, int typeOfParents)
+        {
+            List<Image> parents = new List<Image>(2);
+            int rand_A_index;
+            int rand_NA_index;
+            int index = 0;
+            Random rnd = new Random();
+            switch (typeOfParents)
+            {
+                case 1:
+                    rand_A_index = rnd.Next(0, adaptables.Count);
+                    parents[0] = images[rand_A_index];
+                    index = rand_A_index;
+                    rand_A_index = rnd.Next(0, adaptables.Count);
+                    while (rand_A_index != index)
+                    {
+                        rand_A_index = rnd.Next(0, adaptables.Count);
+                    }
+                    parents[1] = images[rand_A_index];
+                    break;
+                case 2:
+                    rand_A_index = rnd.Next(0, adaptables.Count);
+                    rand_NA_index = rnd.Next(0, notAdaptables.Count);
+                    parents[0] = images[rand_A_index];
+                    parents[1] = images[rand_NA_index];
+                    break;
+                case 3:
+                    rand_NA_index = rnd.Next(0, notAdaptables.Count);
+                    parents[0] = images[rand_NA_index];
+                    index = rand_NA_index;
+                    rand_NA_index = rnd.Next(0, notAdaptables.Count);
+                    while (rand_NA_index != index)
+                    {
+                        rand_NA_index = rnd.Next(0, notAdaptables.Count);
+                    }
+                    parents[1] = images[rand_NA_index];
+                    break;
+                default:
+                    break;
+            }
+            return parents;
+        }
+
         //Returns the new childs.
         private List<Image> crossOver(List<Image> adaptables, List<Image> notAdaptables)
         {
@@ -79,12 +122,10 @@ namespace Prueba
             int cross_A_A = cross_A_A_percentage;
             int cross_A_NA = cross_A_NA_percentage;
             int cross_NA_NA = cross_NA_NA_percentage;
-            int rand_A_index;
-            int rand_NA_index;
             int childsIndex = 0;
-            int index = 0;
             int rand_mutation;
             Random rnd = new Random();
+            List<Image> parents = new List<Image>(2);
             List<Image> childs = new List<Image>(childAmount);
 
             while (childAmount != 0)
@@ -93,24 +134,16 @@ namespace Prueba
                 {
                     if (adaptables.Count >= 2)
                     {
-                        rand_A_index = rnd.Next(0, adaptables.Count);
-                        Image parent1 = images[rand_A_index];
-                        index = rand_A_index;
-                        rand_A_index = rnd.Next(0, adaptables.Count);
-                        while (rand_A_index != index)
-                        {
-                            rand_A_index = rnd.Next(0, adaptables.Count);
-                        }
-                        Image parent2 = images[rand_A_index];
+                        parents = parentsToCross(adaptables, notAdaptables, 1);
                         rand_mutation = rnd.Next(0, 101);
                         if (rand_mutation <= mutationProbability)
                         {
-                            Image child = parent1.mutation(parent2);
+                            Image child = parents[0].mutation(parents[1]);
                             childs[childsIndex] = child;
                         }
                         else
                         {
-                            Image child = parent1.crossOver(parent2);
+                            Image child = parents[0].crossOver(parents[1]);
                             childs[childsIndex] = child;
                         }
                         childsIndex++;
@@ -121,19 +154,16 @@ namespace Prueba
                 {
                     if (adaptables.Count >= 1 && notAdaptables.Count >= 1)
                     {
-                        rand_A_index = rnd.Next(0, adaptables.Count);
-                        rand_NA_index = rnd.Next(0, notAdaptables.Count);
-                        Image parent1 = images[rand_A_index];
-                        Image parent2 = images[rand_NA_index];
+                        parents = parentsToCross(adaptables, notAdaptables, 2);
                         rand_mutation = rnd.Next(0, 101);
                         if (rand_mutation <= mutationProbability)
                         {
-                            Image child = parent1.mutation(parent2);
+                            Image child = parents[0].mutation(parents[1]);
                             childs[childsIndex] = child;
                         }
                         else
                         {
-                            Image child = parent1.crossOver(parent2);
+                            Image child = parents[0].crossOver(parents[1]);
                             childs[childsIndex] = child;
                         }
                         childsIndex++;
@@ -144,24 +174,16 @@ namespace Prueba
                 {
                     if (notAdaptables.Count >= 2)
                     {
-                        rand_NA_index = rnd.Next(0, notAdaptables.Count);
-                        Image parent1 = images[rand_NA_index];
-                        index = rand_NA_index;
-                        rand_NA_index = rnd.Next(0, notAdaptables.Count);
-                        while (rand_NA_index != index)
-                        {
-                            rand_NA_index = rnd.Next(0, notAdaptables.Count);
-                        }
-                        Image parent2 = images[rand_NA_index];
+                        parents = parentsToCross(adaptables, notAdaptables, 3);
                         rand_mutation = rnd.Next(0, 101);
                         if (rand_mutation <= mutationProbability)
                         {
-                            Image child = parent1.mutation(parent2);
+                            Image child = parents[0].mutation(parents[1]);
                             childs[childsIndex] = child;
                         }
                         else
                         {
-                            Image child = parent1.crossOver(parent2);
+                            Image child = parents[0].crossOver(parents[1]);
                             childs[childsIndex] = child;
                         }
                         childsIndex++;
@@ -170,6 +192,7 @@ namespace Prueba
                 }
                 childAmount--;
             }
+            Sort.mergeSort(childs); //Se pueden hacer experimentos, porque el meter los hijos ya ordenados, puede que al utilizar x algoritmo de ordenamiento despues, sea más eficiente.
             return childs;
         }
 
@@ -240,6 +263,18 @@ namespace Prueba
 
         public List<Image> genericAlgorithm()
         {
+            int generation = 0;
+            while(generation != generations)
+            {
+                //Selection
+                List<Image> adaptables = selection_A();
+                List<Image> notAdaptables = selection_NA();
+                //Crossing
+                List<Image> newChilds = crossOver(adaptables, notAdaptables);
+                //Evolution
+                replace_NA(newChilds);
+                generation++;
+            }
             return images;
         }
     }
