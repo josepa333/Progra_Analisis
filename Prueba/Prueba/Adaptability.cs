@@ -9,36 +9,40 @@ namespace Prueba
 {
     class Adaptability
     {
-        private int distanceRHistogram;
-        private int distanceGHistogram;
-        private int distanceBHistogram;
+        private int distanceRGBHistogram;
+        private int distanceGradientHistogram;
         private int distanceAverage;
 
-        private void setDistanceRHistogram()
+        private int manhattan(ArrayList individual)
         {
-            
+            int distanceValue = 0;
+
+            for (int i = 0; i < Image.finalImage.getHistogramRGB().Count; i++)
+            {
+                distanceValue += Math.Abs((int)Image.finalImage.getHistogramRGB()[i] - (int)individual[i]);
+            }
+            return distanceValue;
         }
 
-        private void setDistanceGHistogram()
+        private void setDistanceRGBHistogram(ArrayList RGBHistogram)
         {
-
+            distanceRGBHistogram = manhattan(RGBHistogram);
         }
 
-        private void setDistanceBHistogram()
+        private void setDistanceGradientHistogram(ArrayList gradientHistogram)
         {
-
+            distanceGradientHistogram = 0; //Function for gradient distance
         }
 
         private void setDistanceAverage()
         {
-            distanceAverage = (distanceRHistogram + distanceGHistogram + distanceBHistogram) / 3;
+            distanceAverage = (distanceRGBHistogram + distanceGradientHistogram) / 2;
         }
 
-        public Adaptability(ArrayList p_Histogram)
+        public Adaptability(ArrayList RGBHistogram, ArrayList gradientHistogram)
         {
-            setDistanceRHistogram();
-            setDistanceGHistogram();
-            setDistanceBHistogram();
+            setDistanceRGBHistogram(RGBHistogram);
+            setDistanceGradientHistogram(gradientHistogram);
             setDistanceAverage();
         }
 
@@ -53,17 +57,6 @@ namespace Prueba
                 default:
                     return 0;
             }
-        }
-
-        public int manhattan(Image objective, Image individual)
-        {
-            int distanceValue = 0;
-
-            for(int i = 0; i < objective.getHistogramRGB().Count ; i++)
-            {
-                distanceValue += Math.Abs( (int)objective.getHistogramRGB()[i] - (int)individual.getHistogramRGB()[i] );
-            }
-            return distanceValue;
         }
     }
 }
