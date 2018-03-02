@@ -10,6 +10,8 @@ namespace Prueba
     class NaturalSelection
     {
         private List<Image> images;
+        private double adapatblesPercentageToCopy;
+        private double notAdaptablesPercentageToCopy;
         private int adaptableImagesPercentage; //Defines the percentage of each population that will be defined as the most adaptables.
         private int cross_A_A_percentage; //Cross percentage of childs from two parents with high adaptability.
         private int cross_NA_NA_percentage; //Cross percentage of childs from two parents with low adaptability.
@@ -18,6 +20,7 @@ namespace Prueba
         private int finalMutationPercentage; //The percentage of mutations per generation.
         private int mutationProbability;//from 0 to a 100 real quick
         private int childsPerGeneration;
+        private int childsPerCross;
         private int generations;
         private int population;
 
@@ -196,15 +199,18 @@ namespace Prueba
             return childs;
         }
 
-        public NaturalSelection(Bitmap desireImage, int pGenerations, int pPopulation, int pChildsPerGeneration, double pMutabilityPercentage, double pCross_A_NA_percentage,
-            double pCross_NA_NA_percentage, double pCross_A_A_percentage, double pAdaptableImagesPercentage)
+        public NaturalSelection(Bitmap desireImage, int pGenerations, int pPopulation, int pChildsPerGeneration, int pChildsPerCross, double pMutabilityPercentage, double pCross_A_NA_percentage,
+            double pCross_NA_NA_percentage, double pCross_A_A_percentage, double pAdaptableImagesPercentage, double pAdapatblesPercentageToCopy, double pNotAdaptablesPercentageToCopy)
         {
             Image.finalImage = new Image(desireImage);
             childsPerGeneration = pChildsPerGeneration;
+            childsPerCross = pChildsPerCross;
             generations = pGenerations;
             population = pPopulation;
             Image.mutations = 0;
             adaptableImagesPercentage = (int)pAdaptableImagesPercentage * population;
+            adapatblesPercentageToCopy = pAdapatblesPercentageToCopy;
+            notAdaptablesPercentageToCopy = pNotAdaptablesPercentageToCopy;
             cross_A_A_percentage = (int)pCross_A_A_percentage * childsPerGeneration;
             cross_NA_NA_percentage = (int)pCross_NA_NA_percentage * childsPerGeneration;
             cross_A_NA_percentage = (int)pCross_A_NA_percentage * childsPerGeneration;
