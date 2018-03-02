@@ -102,11 +102,19 @@ namespace Prueba
                             rand_A_index = rnd.Next(0, adaptables.Count);
                         }
                         Image parent2 = images[rand_A_index];
-                        Image child = parent1.crossOver(parent2);
-                        childs[childsIndex] = child;
+                        rand_mutation = rnd.Next(0, 101);
+                        if (rand_mutation <= mutationProbability)
+                        {
+                            Image child = parent1.mutation(parent2);
+                            childs[childsIndex] = child;
+                        }
+                        else
+                        {
+                            Image child = parent1.crossOver(parent2);
+                            childs[childsIndex] = child;
+                        }
                         childsIndex++;
                     }
-
                     cross_A_A--;
                 }
                 while(cross_A_NA != 0)
@@ -117,15 +125,24 @@ namespace Prueba
                         rand_NA_index = rnd.Next(0, notAdaptables.Count);
                         Image parent1 = images[rand_A_index];
                         Image parent2 = images[rand_NA_index];
-                        Image child = parent1.crossOver(parent2);
-                        childs[childsIndex] = child;
+                        rand_mutation = rnd.Next(0, 101);
+                        if (rand_mutation <= mutationProbability)
+                        {
+                            Image child = parent1.mutation(parent2);
+                            childs[childsIndex] = child;
+                        }
+                        else
+                        {
+                            Image child = parent1.crossOver(parent2);
+                            childs[childsIndex] = child;
+                        }
                         childsIndex++;
                     }
                     cross_A_NA--;
                 }
                 while(cross_NA_NA != 0)
                 {
-                    if(notAdaptables.Count >= 2)
+                    if (notAdaptables.Count >= 2)
                     {
                         rand_NA_index = rnd.Next(0, notAdaptables.Count);
                         Image parent1 = images[rand_NA_index];
@@ -136,15 +153,24 @@ namespace Prueba
                             rand_NA_index = rnd.Next(0, notAdaptables.Count);
                         }
                         Image parent2 = images[rand_NA_index];
-                        Image child = parent1.crossOver(parent2);
-                        childs[childsIndex] = child;
+                        rand_mutation = rnd.Next(0, 101);
+                        if (rand_mutation <= mutationProbability)
+                        {
+                            Image child = parent1.mutation(parent2);
+                            childs[childsIndex] = child;
+                        }
+                        else
+                        {
+                            Image child = parent1.crossOver(parent2);
+                            childs[childsIndex] = child;
+                        }
                         childsIndex++;
                     }
                     cross_NA_NA--;
                 }
-
                 childAmount--;
             }
+            return childs;
         }
 
         public NaturalSelection(Bitmap desireImage, int pGenerations, int pPopulation, int pChildsPerGeneration, double pMutabilityPercentage, double pCross_A_NA_percentage,
