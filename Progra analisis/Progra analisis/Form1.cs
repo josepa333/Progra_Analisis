@@ -34,6 +34,8 @@ namespace Progra_analisis
 
             this.selected_picture.SizeMode = PictureBoxSizeMode.StretchImage;
             this.selected_picture.Image = Image.FromFile(filename);
+
+
         }
     }
 }
