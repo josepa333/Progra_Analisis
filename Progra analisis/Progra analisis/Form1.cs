@@ -40,7 +40,7 @@ namespace Progra_analisis
 
         private void button1_Click(object sender, EventArgs e)
         {
-            decimal generations = Decimal.ToInt32(this.Q_generations.Value); 
+            decimal generations = Decimal.ToInt32(this.Q_generations.Value);
             NaturalSelection naturalSelection = new NaturalSelection(bitImage,
                 Decimal.ToInt32(this.Q_generations.Value),
                 Decimal.ToInt32(this.Q_population.Value),

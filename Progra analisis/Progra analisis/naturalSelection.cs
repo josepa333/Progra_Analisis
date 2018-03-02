@@ -5,11 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
 
-namespace Prueba
+namespace Progra_analisis
 {
     class NaturalSelection
     {
-        private List<Image> images;
+        private List<Individual> images;
         private int adaptableImagesPercentage; //Defines the percentage of each population that will be defined as the most adaptables.
         private int cross_A_A_percentage; //Cross percentage of childs from two parents with high adaptability.
         private int cross_NA_NA_percentage; //Cross percentage of childs from two parents with low adaptability.
@@ -25,14 +25,14 @@ namespace Prueba
         {
             for (int i = 0; i < quantityImages; i++)
             {
-                images.Add(new Image());
+                images.Add(new Individual());
             }
         }
 
         //Selects the adaptable individuals of the population
-        private List<Image> selection_A()
+        private List<Individual> selection_A()
         {
-            List<Image> adaptables = new List<Image>(adaptableImagesPercentage);
+            List<Individual> adaptables = new List<Individual>(adaptableImagesPercentage);
             if (adaptableImagesPercentage == images.Count)
             {
                 return images;
@@ -45,9 +45,9 @@ namespace Prueba
         }
 
         //Selects the not adaptable individuals of the population
-        private List<Image> selection_NA()
+        private List<Individual> selection_NA()
         {
-            List<Image> notAdaptables = new List<Image>(images.Count - adaptableImagesPercentage);
+            List<Individual> notAdaptables = new List<Individual>(images.Count - adaptableImagesPercentage);
             if (adaptableImagesPercentage == images.Count)
             {
                 return notAdaptables;
@@ -59,8 +59,8 @@ namespace Prueba
             return notAdaptables;
         }
 
-        //Replace the least not adaptable individuals with the new childs
-        private void replace_NA(List<Image> childs)
+        //Replace the least not adaptable individuals with the new childs and sorts the population
+        private void replace_NA(List<Individual> childs)
         {
             int childsIndex = 0;
             int imagesIndex = (images.Count - childs.Count) - 1;
@@ -72,20 +72,61 @@ namespace Prueba
             Sort.mergeSort(images);
         }
 
+        private List<Individual> parentsToCross(List<Individual> adaptables, List<Individual> notAdaptables, int typeOfParents)
+        {
+            List<Individual> parents = new List<Individual>(2);
+            int rand_A_index;
+            int rand_NA_index;
+            int index = 0;
+            Random rnd = new Random();
+            switch (typeOfParents)
+            {
+                case 1:
+                    rand_A_index = rnd.Next(0, adaptables.Count);
+                    parents[0] = images[rand_A_index];
+                    index = rand_A_index;
+                    rand_A_index = rnd.Next(0, adaptables.Count);
+                    while (rand_A_index != index)
+                    {
+                        rand_A_index = rnd.Next(0, adaptables.Count);
+                    }
+                    parents[1] = images[rand_A_index];
+                    break;
+                case 2:
+                    rand_A_index = rnd.Next(0, adaptables.Count);
+                    rand_NA_index = rnd.Next(0, notAdaptables.Count);
+                    parents[0] = images[rand_A_index];
+                    parents[1] = images[rand_NA_index];
+                    break;
+                case 3:
+                    rand_NA_index = rnd.Next(0, notAdaptables.Count);
+                    parents[0] = images[rand_NA_index];
+                    index = rand_NA_index;
+                    rand_NA_index = rnd.Next(0, notAdaptables.Count);
+                    while (rand_NA_index != index)
+                    {
+                        rand_NA_index = rnd.Next(0, notAdaptables.Count);
+                    }
+                    parents[1] = images[rand_NA_index];
+                    break;
+                default:
+                    break;
+            }
+            return parents;
+        }
+
         //Returns the new childs.
-        private List<Image> crossOver(List<Image> adaptables, List<Image> notAdaptables)
+        private List<Individual> crossOver(List<Individual> adaptables, List<Individual> notAdaptables)
         {
             int childAmount = childsPerGeneration;
             int cross_A_A = cross_A_A_percentage;
             int cross_A_NA = cross_A_NA_percentage;
             int cross_NA_NA = cross_NA_NA_percentage;
-            int rand_A_index;
-            int rand_NA_index;
             int childsIndex = 0;
-            int index = 0;
             int rand_mutation;
             Random rnd = new Random();
-            List<Image> childs = new List<Image>(childAmount);
+            List<Individual> parents = new List<Individual>(2);
+            List<Individual> childs = new List<Individual>(childAmount);
 
             while (childAmount != 0)
             {
@@ -93,24 +134,16 @@ namespace Prueba
                 {
                     if (adaptables.Count >= 2)
                     {
-                        rand_A_index = rnd.Next(0, adaptables.Count);
-                        Image parent1 = images[rand_A_index];
-                        index = rand_A_index;
-                        rand_A_index = rnd.Next(0, adaptables.Count);
-                        while (rand_A_index != index)
-                        {
-                            rand_A_index = rnd.Next(0, adaptables.Count);
-                        }
-                        Image parent2 = images[rand_A_index];
+                        parents = parentsToCross(adaptables, notAdaptables, 1);
                         rand_mutation = rnd.Next(0, 101);
                         if (rand_mutation <= mutationProbability)
                         {
-                            Image child = parent1.mutation(parent2);
+                            Individual child = parents[0].mutation(parents[1]);
                             childs[childsIndex] = child;
                         }
                         else
                         {
-                            Image child = parent1.crossOver(parent2);
+                            Individual child = parents[0].crossOver(parents[1]);
                             childs[childsIndex] = child;
                         }
                         childsIndex++;
@@ -121,19 +154,16 @@ namespace Prueba
                 {
                     if (adaptables.Count >= 1 && notAdaptables.Count >= 1)
                     {
-                        rand_A_index = rnd.Next(0, adaptables.Count);
-                        rand_NA_index = rnd.Next(0, notAdaptables.Count);
-                        Image parent1 = images[rand_A_index];
-                        Image parent2 = images[rand_NA_index];
+                        parents = parentsToCross(adaptables, notAdaptables, 2);
                         rand_mutation = rnd.Next(0, 101);
                         if (rand_mutation <= mutationProbability)
                         {
-                            Image child = parent1.mutation(parent2);
+                            Individual child = parents[0].mutation(parents[1]);
                             childs[childsIndex] = child;
                         }
                         else
                         {
-                            Image child = parent1.crossOver(parent2);
+                            Individual child = parents[0].crossOver(parents[1]);
                             childs[childsIndex] = child;
                         }
                         childsIndex++;
@@ -144,24 +174,16 @@ namespace Prueba
                 {
                     if (notAdaptables.Count >= 2)
                     {
-                        rand_NA_index = rnd.Next(0, notAdaptables.Count);
-                        Image parent1 = images[rand_NA_index];
-                        index = rand_NA_index;
-                        rand_NA_index = rnd.Next(0, notAdaptables.Count);
-                        while (rand_NA_index != index)
-                        {
-                            rand_NA_index = rnd.Next(0, notAdaptables.Count);
-                        }
-                        Image parent2 = images[rand_NA_index];
+                        parents = parentsToCross(adaptables, notAdaptables, 3);
                         rand_mutation = rnd.Next(0, 101);
                         if (rand_mutation <= mutationProbability)
                         {
-                            Image child = parent1.mutation(parent2);
+                            Individual child = parents[0].mutation(parents[1]);
                             childs[childsIndex] = child;
                         }
                         else
                         {
-                            Image child = parent1.crossOver(parent2);
+                            Individual child = parents[0].crossOver(parents[1]);
                             childs[childsIndex] = child;
                         }
                         childsIndex++;
@@ -170,24 +192,25 @@ namespace Prueba
                 }
                 childAmount--;
             }
+            Sort.mergeSort(childs); //Se pueden hacer experimentos, porque el meter los hijos ya ordenados, puede que al utilizar x algoritmo de ordenamiento despues, sea más eficiente.
             return childs;
         }
 
         public NaturalSelection(Bitmap desireImage, int pGenerations, int pPopulation, int pChildsPerGeneration, double pMutabilityPercentage, double pCross_A_NA_percentage,
             double pCross_NA_NA_percentage, double pCross_A_A_percentage, double pAdaptableImagesPercentage)
         {
-            Image.finalImage = new Image(desireImage);
+            Individual.finalImage = new Individual(desireImage);
             childsPerGeneration = pChildsPerGeneration;
             generations = pGenerations;
             population = pPopulation;
-            Image.mutations = 0;
+            Individual.mutations = 0;
             adaptableImagesPercentage = (int)pAdaptableImagesPercentage * population;
             cross_A_A_percentage = (int)pCross_A_A_percentage * childsPerGeneration;
             cross_NA_NA_percentage = (int)pCross_NA_NA_percentage * childsPerGeneration;
             cross_A_NA_percentage = (int)pCross_A_NA_percentage * childsPerGeneration;
             mutationPercentage = (int)pMutabilityPercentage * 100;
             mutationProbability = mutationPercentage;
-            images = new List<Image>(population);
+            images = new List<Individual>(population);
             createImages(population);
             images = Sort.mergeSort(images);
 
@@ -220,7 +243,7 @@ namespace Prueba
 
         public int getFinalMutationPercentage()
         {
-            return Image.mutations / generations;
+            return Individual.mutations / generations;
         }
 
         public int getChildsPerGeneration()
@@ -238,8 +261,20 @@ namespace Prueba
             return population;
         }
 
-        public List<Image> genericAlgorithm()
+        public List<Individual> genericAlgorithm()
         {
+            int generation = 0;
+            while (generation != generations)
+            {
+                //Selection
+                List<Individual> adaptables = selection_A();
+                List<Individual> notAdaptables = selection_NA();
+                //Crossing
+                List<Individual> newChilds = crossOver(adaptables, notAdaptables);
+                //Evolution
+                replace_NA(newChilds);
+                generation++;
+            }
             return images;
         }
     }

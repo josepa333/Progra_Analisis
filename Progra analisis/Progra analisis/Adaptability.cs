@@ -17,9 +17,9 @@ namespace Progra_analisis
         {
             int distanceValue = 0;
 
-            for (int i = 0; i < Image.finalImage.getHistogramRGB().Count; i++)
+            for (int i = 0; i < Individual.finalImage.getHistogramRGB().Count; i++)
             {
-                distanceValue += Math.Abs((int)Image.finalImage.getHistogramRGB()[i] - (int)individual[i]);
+                distanceValue += Math.Abs((int)Individual.finalImage.getHistogramRGB()[i] - (int)individual[i]);
             }
             return distanceValue;
         }
