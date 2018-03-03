@@ -4,12 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using System.Collections;
 
 namespace Progra_analisis
 {
     class NaturalSelection
     {
         private List<Individual> images;
+        private double adapatblesPercentageToCopy; //The adaptables that will continue next generation
+        private double notAdaptablesPercentageToCopy; //The not adaptables that will continue next generation
         private int adaptableImagesPercentage; //Defines the percentage of each population that will be defined as the most adaptables.
         private int cross_A_A_percentage; //Cross percentage of childs from two parents with high adaptability.
         private int cross_NA_NA_percentage; //Cross percentage of childs from two parents with low adaptability.
@@ -18,20 +21,24 @@ namespace Progra_analisis
         private int finalMutationPercentage; //The percentage of mutations per generation.
         private int mutationProbability;//from 0 to a 100 real quick
         private int childsPerGeneration;
+        private int childsPerCross; //The amount of childs in each cross
         private int generations;
         private int population; 
         
 
 
-        public NaturalSelection(Bitmap desireImage, int pGenerations, int pPopulation, int pChildsPerGeneration, double pMutabilityPercentage, double pCross_A_NA_percentage,
-            double pCross_NA_NA_percentage, double pCross_A_A_percentage, double pAdaptableImagesPercentage)
+        public NaturalSelection(Bitmap desireImage, int pGenerations, int pPopulation, int pChildsPerGeneration, int pChildsPerCross, double pMutabilityPercentage, double pCross_A_NA_percentage,
+            double pCross_NA_NA_percentage, double pCross_A_A_percentage, double pAdaptableImagesPercentage, double pAdapatblesPercentageToCopy, double pNotAdaptablesPercentageToCopy)
         {
             Individual.finalImage = new Individual(desireImage);
             childsPerGeneration = pChildsPerGeneration;
+            childsPerCross = pChildsPerCross;
             generations = pGenerations;
             population = pPopulation;
             Individual.mutations = 0;
             adaptableImagesPercentage = (int)pAdaptableImagesPercentage * population;
+            adapatblesPercentageToCopy = pAdapatblesPercentageToCopy;
+            notAdaptablesPercentageToCopy = pNotAdaptablesPercentageToCopy;
             cross_A_A_percentage = (int)pCross_A_A_percentage * childsPerGeneration;
             cross_NA_NA_percentage = (int)pCross_NA_NA_percentage * childsPerGeneration;
             cross_A_NA_percentage = (int)pCross_A_NA_percentage * childsPerGeneration;
@@ -81,17 +88,48 @@ namespace Progra_analisis
             return notAdaptables;
         }
 
-        //Replace the least not adaptable individuals with the new childs and sorts the population
-        private void replace_NA(List<Individual> childs)
+        //Replace the not chosen individuals with the new childs and sorts the population
+        private void evolution(List<Individual> childs)
         {
+            Random rnd = new Random();
+            List<Individual> adaptables = selection_A();
+            int adaptablesToCopy = (int)adapatblesPercentageToCopy * adaptables.Count;
+            List<Individual> notAdaptables = selection_NA();
+            int notAdaptablesToCopy = (int)notAdaptablesPercentageToCopy * notAdaptables.Count;
             int childsIndex = 0;
-            int imagesIndex = (images.Count - childs.Count) - 1;
-            for (int i = imagesIndex; i < images.Count; i++)
+            int adaptablesIndex = 0;
+            int notAdaptablesIndex = 0;
+            int imagesIndex = 0;
+            ArrayList notAdaptablesCopied = new ArrayList();
+
+            if (adaptablesToCopy + notAdaptablesToCopy + childs.Count == population) //There must be space for adding the new childs
             {
-                images[i] = childs[childsIndex];
-                childsIndex++;
+                while (adaptablesToCopy != 0)
+                {
+                    images[imagesIndex] = adaptables[adaptablesIndex];
+                    adaptablesIndex++;
+                    imagesIndex++;
+                    adaptablesToCopy--;
+                }
+                while (notAdaptablesToCopy != 0)
+                {
+                    notAdaptablesIndex = rnd.Next(0, notAdaptables.Count);
+                    while (notAdaptablesCopied.Contains(notAdaptablesIndex))
+                    {
+                        notAdaptablesIndex = rnd.Next(0, notAdaptables.Count);
+                    }
+                    notAdaptablesCopied.Add(notAdaptablesIndex);
+                    images[imagesIndex] = notAdaptables[notAdaptablesIndex];
+                    imagesIndex++;
+                    notAdaptablesToCopy--;
+                }
+                for (int i = imagesIndex; i < images.Count; i++)
+                {
+                    images[i] = childs[childsIndex];
+                    childsIndex++;
+                }
+                Sort.mergeSort(images);
             }
-            Sort.mergeSort(images);
         }
 
         private List<Individual> parentsToCross(List<Individual> adaptables, List<Individual> notAdaptables, int typeOfParents)
@@ -137,6 +175,33 @@ namespace Progra_analisis
             return parents;
         }
 
+        //Returns a list of childs when two parents cross
+        private List<Individual> crossParents(List<Individual> parents)
+        {
+            Random rnd = new Random();
+            List<Individual> childs = new List<Individual>(childsPerCross);
+            int rand_mutation = 0;
+            int childsIndex = 0;
+            int childsPerParents = 0;
+            while (childsPerParents < childsPerCross)
+            {
+                rand_mutation = rnd.Next(0, 101);
+                if (rand_mutation <= mutationProbability)
+                {
+                    Individual child = parents[0].mutation(parents[1]);
+                    childs[childsIndex] = child;
+                }
+                else
+                {
+                    Individual child = parents[0].crossOver(parents[1]);
+                    childs[childsIndex] = child;
+                }
+                childsIndex++;
+                childsPerParents++;
+            }
+            return childs;
+        }
+
         //Returns the new childs.
         private List<Individual> crossOver(List<Individual> adaptables, List<Individual> notAdaptables)
         {
@@ -144,9 +209,6 @@ namespace Progra_analisis
             int cross_A_A = cross_A_A_percentage;
             int cross_A_NA = cross_A_NA_percentage;
             int cross_NA_NA = cross_NA_NA_percentage;
-            int childsIndex = 0;
-            int rand_mutation;
-            Random rnd = new Random();
             List<Individual> parents = new List<Individual>(2);
             List<Individual> childs = new List<Individual>(childAmount);
 
@@ -157,18 +219,7 @@ namespace Progra_analisis
                     if (adaptables.Count >= 2)
                     {
                         parents = parentsToCross(adaptables, notAdaptables, 1);
-                        rand_mutation = rnd.Next(0, 101);
-                        if (rand_mutation <= mutationProbability)
-                        {
-                            Individual child = parents[0].mutation(parents[1]);
-                            childs[childsIndex] = child;
-                        }
-                        else
-                        {
-                            Individual child = parents[0].crossOver(parents[1]);
-                            childs[childsIndex] = child;
-                        }
-                        childsIndex++;
+                        childs.Concat(crossParents(parents));
                     }
                     cross_A_A--;
                 }
@@ -177,18 +228,7 @@ namespace Progra_analisis
                     if (adaptables.Count >= 1 && notAdaptables.Count >= 1)
                     {
                         parents = parentsToCross(adaptables, notAdaptables, 2);
-                        rand_mutation = rnd.Next(0, 101);
-                        if (rand_mutation <= mutationProbability)
-                        {
-                            Individual child = parents[0].mutation(parents[1]);
-                            childs[childsIndex] = child;
-                        }
-                        else
-                        {
-                            Individual child = parents[0].crossOver(parents[1]);
-                            childs[childsIndex] = child;
-                        }
-                        childsIndex++;
+                        childs.Concat(crossParents(parents));
                     }
                     cross_A_NA--;
                 }
@@ -197,18 +237,7 @@ namespace Progra_analisis
                     if (notAdaptables.Count >= 2)
                     {
                         parents = parentsToCross(adaptables, notAdaptables, 3);
-                        rand_mutation = rnd.Next(0, 101);
-                        if (rand_mutation <= mutationProbability)
-                        {
-                            Individual child = parents[0].mutation(parents[1]);
-                            childs[childsIndex] = child;
-                        }
-                        else
-                        {
-                            Individual child = parents[0].crossOver(parents[1]);
-                            childs[childsIndex] = child;
-                        }
-                        childsIndex++;
+                        childs.Concat(crossParents(parents));
                     }
                     cross_NA_NA--;
                 }
@@ -278,7 +307,7 @@ namespace Progra_analisis
                 //Crossing
                 List<Individual> newChilds = crossOver(adaptables, notAdaptables);
                 //Evolution
-                replace_NA(newChilds);
+                evolution(newChilds);
 
                 if(generation % 10 == 0)
                 {
