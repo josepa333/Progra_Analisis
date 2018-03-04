@@ -21,7 +21,7 @@ namespace Progra_analisis
         private int childsPerGeneration;
         private int childsPerCross; //The amount of childs in each cross
         private int generations;
-        private int population; 
+        private int population;
         
 
 
@@ -44,7 +44,7 @@ namespace Progra_analisis
             images = new List<Individual>(population);
             createImages(population);
             images = Sort.mergeSort(images);
-
+            bestAdaptability = 0;
         }
 
         private void createImages(int quantityImages)
@@ -296,6 +296,11 @@ namespace Progra_analisis
         public int getChildsPerCross()
         {
             return childsPerCross;
+        }
+
+        public int getHighestAdaptability()
+        {
+            return images[0].getAdaptability(1);   
         }
 
         public List<Individual> genericAlgorithm()

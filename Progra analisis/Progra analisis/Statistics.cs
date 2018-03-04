@@ -10,6 +10,7 @@ namespace Progra_analisis
     class Statistics
     {
         public static ArrayList statisticsRegister = new ArrayList();
+        public static ArrayList topStatisticsRegister = new ArrayList();
         private double adapatblesPercentageToCopy; //The adaptables that will continue next generation
         private double adaptableImagesPercentage; //Defines the percentage of each population that will be defined as the most adaptables.
         private double cross_A_A_percentage; //Cross percentage of childs from two parents with high adaptability.
@@ -21,6 +22,12 @@ namespace Progra_analisis
         private int childsPerCross; //The amount of childs in each cross
         private int generations;
         private int population;
+        private int highestAdaptabilityReached;
+
+        private void addToTopStatistics(Statistics statistic)
+        {
+            topStatisticsRegister.Insert(i, statistic);
+        }
 
         public Statistics (NaturalSelection naturalSelection)
         {
@@ -35,6 +42,14 @@ namespace Progra_analisis
             cross_NA_NA_percentage = (double)(naturalSelection.getCross_NA_NA_percentage() * 100) / childsPerGeneration;
             mutationProbability = (double)naturalSelection.getMutationProbability() / 100;
             finalMutationsPerGeneration = naturalSelection.getFinalMutationsPerGeneration();
+            highestAdaptabilityReached = naturalSelection.getHighestAdaptability();
         }
+
+        public void addStatistic(Statistics statistic)
+        {
+            statisticsRegister.Add(statistic);
+        }
+
+
     }
 }
