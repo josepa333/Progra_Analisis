@@ -12,23 +12,21 @@ namespace Progra_analisis
     {
         private List<Individual> images;
         private double adapatblesPercentageToCopy; //The adaptables that will continue next generation
-        private double notAdaptablesPercentageToCopy; //The not adaptables that will continue next generation
         private int adaptableImagesPercentage; //Defines the percentage of each population that will be defined as the most adaptables.
         private int cross_A_A_percentage; //Cross percentage of childs from two parents with high adaptability.
         private int cross_NA_NA_percentage; //Cross percentage of childs from two parents with low adaptability.
         private int cross_A_NA_percentage; //Cross percentage of chlds from a high adaptability parent with a lowone.
         private int mutationPercentage; //Percentage of mutation when there is a cross.
-        private int finalMutationPercentage; //The percentage of mutations per generation.
         private int mutationProbability;//from 0 to a 100 real quick
         private int childsPerGeneration;
         private int childsPerCross; //The amount of childs in each cross
         private int generations;
-        private int population; 
+        private int population;
         
 
 
         public NaturalSelection(Bitmap desireImage, int pGenerations, int pPopulation, int pChildsPerGeneration, int pChildsPerCross, double pMutabilityPercentage, double pCross_A_NA_percentage,
-            double pCross_NA_NA_percentage, double pCross_A_A_percentage, double pAdaptableImagesPercentage, double pAdapatblesPercentageToCopy, double pNotAdaptablesPercentageToCopy)
+            double pCross_NA_NA_percentage, double pCross_A_A_percentage, double pAdaptableImagesPercentage, double pAdapatblesPercentageToCopy)
         {
             Individual.finalImage = new Individual(desireImage);
             childsPerGeneration = pChildsPerGeneration;
@@ -38,7 +36,6 @@ namespace Progra_analisis
             Individual.mutations = 0;
             adaptableImagesPercentage = (int)pAdaptableImagesPercentage * population;
             adapatblesPercentageToCopy = pAdapatblesPercentageToCopy;
-            notAdaptablesPercentageToCopy = pNotAdaptablesPercentageToCopy;
             cross_A_A_percentage = (int)pCross_A_A_percentage * childsPerGeneration;
             cross_NA_NA_percentage = (int)pCross_NA_NA_percentage * childsPerGeneration;
             cross_A_NA_percentage = (int)pCross_A_NA_percentage * childsPerGeneration;
@@ -47,7 +44,7 @@ namespace Progra_analisis
             images = new List<Individual>(population);
             createImages(population);
             images = Sort.mergeSort(images);
-
+            bestAdaptability = 0;
         }
 
         private void createImages(int quantityImages)
@@ -95,14 +92,13 @@ namespace Progra_analisis
             List<Individual> adaptables = selection_A();
             int adaptablesToCopy = (int)adapatblesPercentageToCopy * adaptables.Count;
             List<Individual> notAdaptables = selection_NA();
-            int notAdaptablesToCopy = (int)notAdaptablesPercentageToCopy * notAdaptables.Count;
             int childsIndex = 0;
             int adaptablesIndex = 0;
             int notAdaptablesIndex = 0;
             int imagesIndex = 0;
             ArrayList notAdaptablesCopied = new ArrayList();
 
-            if (adaptablesToCopy + notAdaptablesToCopy + childs.Count == population) //There must be space for adding the new childs
+            if (adaptablesToCopy + childs.Count <= population) //There must be space for adding the new childs
             {
                 while (adaptablesToCopy != 0)
                 {
@@ -111,7 +107,13 @@ namespace Progra_analisis
                     imagesIndex++;
                     adaptablesToCopy--;
                 }
-                while (notAdaptablesToCopy != 0)
+                for (int i = imagesIndex; i < images.Count; i++)
+                {
+                    images[i] = childs[childsIndex];
+                    childsIndex++;
+                    imagesIndex++;
+                }
+                for (int i =  imagesIndex; i < images.Count; i++)
                 {
                     notAdaptablesIndex = rnd.Next(0, notAdaptables.Count);
                     while (notAdaptablesCopied.Contains(notAdaptablesIndex))
@@ -119,14 +121,7 @@ namespace Progra_analisis
                         notAdaptablesIndex = rnd.Next(0, notAdaptables.Count);
                     }
                     notAdaptablesCopied.Add(notAdaptablesIndex);
-                    images[imagesIndex] = notAdaptables[notAdaptablesIndex];
-                    imagesIndex++;
-                    notAdaptablesToCopy--;
-                }
-                for (int i = imagesIndex; i < images.Count; i++)
-                {
-                    images[i] = childs[childsIndex];
-                    childsIndex++;
+                    images[i] = notAdaptables[notAdaptablesIndex];
                 }
                 Sort.mergeSort(images);
             }
@@ -268,12 +263,12 @@ namespace Progra_analisis
             return cross_A_NA_percentage;
         }
 
-        public int getMutationPercentage()
+        public int getMutationProbability()
         {
-            return mutationPercentage;
+            return mutationProbability;
         }
 
-        public int getFinalMutationPercentage()
+        public int getFinalMutationsPerGeneration()
         {
             return Individual.mutations / generations;
         }
@@ -291,6 +286,21 @@ namespace Progra_analisis
         public int getPopulation()
         {
             return population;
+        }
+
+        public double getAdaptablesPercentageToCopy()
+        {
+            return adapatblesPercentageToCopy;
+        }
+
+        public int getChildsPerCross()
+        {
+            return childsPerCross;
+        }
+
+        public int getHighestAdaptability()
+        {
+            return images[0].getAdaptability(1);   
         }
 
         public List<Individual> genericAlgorithm()
