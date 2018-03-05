@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.Xml.Serialization;
+using CsvHelper;
 
 namespace Progra_analisis
 {
@@ -23,10 +27,66 @@ namespace Progra_analisis
         private int generations;
         private int population;
         private int highestAdaptabilityReached;
+        private string statisticsRegisterPath = Environment.CurrentDirectory + "\\statistics.txt";
+        private string topStatisticsRegisterPath = Environment.CurrentDirectory + "\\topStatistics.txt";
+
+        //private void writeToFile(string path, string text)
+        //{
+        //    System.IO.File.WriteAllText(path, text);
+        //}
+
+        //private string readFile(string path)
+        //{
+        //    String content = "";
+        //    try
+        //    {
+        //        using (StreamReader sr = new StreamReader(path))
+        //        {
+        //            content = sr.ReadToEnd();
+        //        }
+        //    }
+        //    catch (Exception)
+        //    {
+        //        Console.WriteLine("The file could not be read.");
+        //    }
+        //    return content;
+        //}
+
+        private void serializeList(ArrayList list, string path)
+        {
+            var serializer = new XmlSerializer(typeof(ArrayList));
+            using (var stream = File.OpenWrite(path))
+            {
+                serializer.Serialize(stream, list);
+            }
+        }
+
+        private void deserialize(ArrayList list, string path)
+        {
+            var serializer = new XmlSerializer(typeof(ArrayList));
+            using (var stream = File.OpenRead(path))
+            {
+                var other = (ArrayList)(serializer.Deserialize(stream));
+                list.Clear();
+                list.AddRange(other);
+            }
+        }
 
         private void addToTopStatistics(Statistics statistic)
         {
-            topStatisticsRegister.Insert(i, statistic);
+            for (int i = 0; i < topStatisticsRegister.Count; i++)
+            {
+                Statistics element = (Statistics)topStatisticsRegister[i];
+                if (element.getHighestAdaptabilityReached() < statistic.getHighestAdaptabilityReached())
+                {
+                    topStatisticsRegister.Insert(i, statistic);
+                    if (topStatisticsRegister.Count > 10)
+                    {
+                        topStatisticsRegister.RemoveAt(topStatisticsRegister.Count - 1);
+                    }
+                    break;
+                }
+            }
         }
 
         public Statistics (NaturalSelection naturalSelection)
@@ -43,11 +103,56 @@ namespace Progra_analisis
             mutationProbability = (double)naturalSelection.getMutationProbability() / 100;
             finalMutationsPerGeneration = naturalSelection.getFinalMutationsPerGeneration();
             highestAdaptabilityReached = naturalSelection.getHighestAdaptability();
+            try
+            {
+                deserialize(statisticsRegister, statisticsRegisterPath);
+                deserialize(topStatisticsRegister, topStatisticsRegisterPath);
+            }
+            catch(Exception)
+            {
+                Console.WriteLine("The file could not be read.");
+            }
         }
 
         public void addStatistic(Statistics statistic)
         {
             statisticsRegister.Add(statistic);
+            addToTopStatistics(statistic);
+        }
+
+        public void downloadStatisticsCSV(int typeOfStatistics) //1 for all, or 2 for top 10
+        {
+            using (SaveFileDialog sfd = new SaveFileDialog() { Filter = "CSV|*.csv", ValidateNames = true})
+            {
+                if(sfd.ShowDialog() == DialogResult.OK)
+                {
+                    using (var sw = new StreamWriter(sfd.FileName))
+                    {
+                        var writer = new CsvWriter(sw);
+                        writer.WriteHeader(typeof(Statistics));
+                        if (typeOfStatistics == 1)
+                        {
+                            foreach (Statistics s in statisticsRegister)
+                            {
+                                writer.WriteRecord(s);
+                            }
+                        }
+                        if(typeOfStatistics == 2)
+                        {
+                            foreach (Statistics s in topStatisticsRegister)
+                            {
+                                writer.WriteRecord(s);
+                            }
+                        }
+                    }
+                    MessageBox.Show("Se han descargado las estadísticas de los distintos procesos.", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+        }
+
+        public int getHighestAdaptabilityReached()
+        {
+            return highestAdaptabilityReached;
         }
 
 

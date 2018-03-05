@@ -44,7 +44,6 @@ namespace Progra_analisis
             images = new List<Individual>(population);
             createImages(population);
             images = Sort.mergeSort(images);
-            bestAdaptability = 0;
         }
 
         private void createImages(int quantityImages)
