@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace Progra_analisis
 {
@@ -11,16 +12,16 @@ namespace Progra_analisis
 
 
         private int geneticMutability = 20; //Mutability in the genes of each Image, if there is a mutation
-        private ArrayList histogramGradient;
-        private ArrayList histogramRGB;
+        private List<List<int>> histogramGradient;
+        private List<List<int>> histogramRGB;
         private Adaptability adaptability;
         private Bitmap bitmap;
 
 
         public Individual()
         {
-            histogramRGB = new ArrayList();
-            histogramGradient = new ArrayList();
+            histogramRGB = new List<List<int>>();
+            histogramGradient = new List<List<int>>();
             bitmap = generateBitmap();
             dissectImage();
             adaptability = new Adaptability(histogramRGB, histogramGradient);
@@ -28,8 +29,8 @@ namespace Progra_analisis
 
         public Individual(Bitmap p_kid)
         {
-            histogramRGB = new ArrayList();
-            histogramGradient = new ArrayList();
+            histogramRGB = new List<List<int>>();
+            histogramGradient = new List<List<int>>();
             bitmap = p_kid;
             dissectImage();
             adaptability = new Adaptability(histogramRGB, histogramGradient);
@@ -119,9 +120,14 @@ namespace Progra_analisis
             return bitmap;
         }
 
-        public ArrayList getHistogramRGB()
+        public List<List<int>> getHistogramRGB()
         {
             return histogramRGB;
+        }
+
+        public List<List<int>> getHistogramGradient()
+        {
+            return histogramGradient;
         }
 
         public int getAdaptability(int adaptabilityOperation)
@@ -175,7 +181,7 @@ namespace Progra_analisis
             ArrayList redHistogram = new ArrayList();
             ArrayList greenHistogram = new ArrayList();
             ArrayList blueHistogram = new ArrayList();
-            ArrayList sectionRGB = new ArrayList();
+            List<int> sectionRGB = new List<int>();
 
             for (int i = 0; i < 256; i++)
             {
@@ -194,17 +200,38 @@ namespace Progra_analisis
 
             for (int i = 0; i < 256; i++)
             {
-                sectionRGB.Add(redHistogram[i]);
+                sectionRGB.Add((int)redHistogram[i]);
             }
             for (int i = 0; i < 256; i++)
             {
-                sectionRGB.Add(greenHistogram[i]);
+                sectionRGB.Add((int)greenHistogram[i]);
             }
             for (int i = 0; i < 256; i++)
             {
-                sectionRGB.Add(blueHistogram[i]);
+                sectionRGB.Add((int)blueHistogram[i]);
             }
             histogramRGB.Add(sectionRGB);
+        }
+
+        public void fillDarknessHistogram(ArrayList pixelPerSection)
+        {
+            List<int> sectionBinary = new List<int>();
+            sectionBinary[0] = 0;
+            sectionBinary[1] = 0;
+
+            for (int i = 0; i < pixelPerSection.Count; i++)
+            {
+                int colorAverage = (((Color)pixelPerSection[i]).R + ((Color)pixelPerSection[i]).G + ((Color)pixelPerSection[i]).B) / 3;
+                if(colorAverage < 127)
+                {
+                    sectionBinary[0]++;
+                }
+                else
+                {
+                    sectionBinary[1]++;
+                }
+            }
+            histogramGradient.Add(sectionBinary);
         }
     }
 }
