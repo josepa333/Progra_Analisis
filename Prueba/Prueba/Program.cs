@@ -17,52 +17,9 @@ namespace Prueba
         
         static void Main(string[] args)
         {
-            string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\Progra_Analisis\ima.JPG";
-            Bitmap ima = new Bitmap(path, true);
-            Color nc;
 
-            int contadorX = 0;
-            int contadorY = 0;
-            int contador = 1;
-
-            while(contadorX != 3 && contadorY != 3)
-            {
-                for (int j = (ima.Height / 3) * contadorY; j < (ima.Height / 3) * (contadorY + 1); j++)
-                {
-                    for (int i = (ima.Width / 3) * contadorX; i < (ima.Width / 3) * (contadorX + 1); i++)
-                    {
-                        Color newco = Color.FromArgb( 5 * contador, 10 * contador, 20 * contador);
-                        ima.SetPixel(i,j, newco);
-                    }
-                }
-
-                contador++;
-
-                if (contadorX == 2 && contadorY == 2)
-                {
-                    break;
-                }
-                else
-                {
-                    if(contadorX == 2)
-                    {
-                        contadorX = 0;
-                        contadorY++;
-                    }
-                    else
-                    {
-                        contadorX++;
-                    }
-                }
-            }
             
-            Console.WriteLine("Listo");
-            ima.Save(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\Progra_Analisis\newima.JPG");
-            Console.ReadKey();
-
-
         }
-        
     }
 }
 

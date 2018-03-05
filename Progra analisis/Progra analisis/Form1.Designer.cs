@@ -58,6 +58,8 @@
             this.output8 = new System.Windows.Forms.PictureBox();
             this.output9 = new System.Windows.Forms.PictureBox();
             this.output10 = new System.Windows.Forms.PictureBox();
+            this.sectionsPerImage = new System.Windows.Forms.NumericUpDown();
+            this.label10 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.selected_picture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Q_generations)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Q_population)).BeginInit();
@@ -77,6 +79,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.output8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.output9)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.output10)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sectionsPerImage)).BeginInit();
             this.SuspendLayout();
             // 
             // BT_selectImage
@@ -328,11 +331,30 @@
             this.output10.TabIndex = 30;
             this.output10.TabStop = false;
             // 
+            // sectionsPerImage
+            // 
+            this.sectionsPerImage.Location = new System.Drawing.Point(39, 366);
+            this.sectionsPerImage.Name = "sectionsPerImage";
+            this.sectionsPerImage.Size = new System.Drawing.Size(68, 20);
+            this.sectionsPerImage.TabIndex = 31;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(113, 368);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(97, 13);
+            this.label10.TabIndex = 32;
+            this.label10.Text = "Sections per image";
+            this.label10.Click += new System.EventHandler(this.label10_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1034, 497);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.sectionsPerImage);
             this.Controls.Add(this.output10);
             this.Controls.Add(this.output9);
             this.Controls.Add(this.output8);
@@ -385,6 +407,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.output8)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.output9)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.output10)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sectionsPerImage)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -422,6 +445,8 @@
         private System.Windows.Forms.PictureBox output8;
         private System.Windows.Forms.PictureBox output9;
         private System.Windows.Forms.PictureBox output10;
+        private System.Windows.Forms.NumericUpDown sectionsPerImage;
+        private System.Windows.Forms.Label label10;
     }
 }
 

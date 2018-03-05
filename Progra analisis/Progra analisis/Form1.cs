@@ -91,6 +91,7 @@ namespace Progra_analisis
             this.label7.Hide();
             this.label8.Hide();
             this.label9.Hide();
+            this.label10.Hide();
             this.selected_picture.Hide();
             this.BT_selectImage.Hide();
             this.button1.Hide();
@@ -125,6 +126,11 @@ namespace Progra_analisis
         }
 
         private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label10_Click(object sender, EventArgs e)
         {
 
         }

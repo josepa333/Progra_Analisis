@@ -13,25 +13,30 @@ namespace Progra_analisis
         private int distanceGradientHistogram;
         private int distanceAverage;
 
-        private int manhattan(ArrayList individual)
+        private int manhattan(List<List<int>> individual)
         {
             int distanceValue = 0;
 
-            for (int i = 0; i < Individual.finalImage.getHistogramRGB().Count; i++)
+            List<List<int>> histogramFromFinalImage = Individual.finalImage.getHistogramRGB();
+
+            for (int section = 0; section < individual.Count; section++)
             {
-                distanceValue += Math.Abs((int)Individual.finalImage.getHistogramRGB()[i] - (int)individual[i]);
+                for (int i = 0; i < individual[section].Count; i++)
+                {
+                    distanceValue += Math.Abs( histogramFromFinalImage[section][i] - individual[section][i]);
+                }
             }
             return distanceValue;
         }
 
-        private void setDistanceRGBHistogram(ArrayList RGBHistogram)
+        private void setDistanceRGBHistogram(List<List<int>> RGBHistogram)
         {
             distanceRGBHistogram = manhattan(RGBHistogram);
         }
 
-        private void setDistanceGradientHistogram(ArrayList gradientHistogram)
+        private void setDistanceGradientHistogram(List<List<int>> gradientHistogram)
         {
-            distanceGradientHistogram = 0; //Function for gradient distance
+            distanceGradientHistogram = darknessDistance(gradientHistogram); //Function for gradient distance
         }
 
         private void setDistanceAverage()
@@ -39,7 +44,7 @@ namespace Progra_analisis
             distanceAverage = (distanceRGBHistogram + distanceGradientHistogram) / 2;
         }
 
-        public Adaptability(ArrayList RGBHistogram, ArrayList gradientHistogram)
+        public Adaptability(List<List<int>> RGBHistogram, List<List<int>> gradientHistogram)
         {
             setDistanceRGBHistogram(RGBHistogram);
             setDistanceGradientHistogram(gradientHistogram);
@@ -57,6 +62,20 @@ namespace Progra_analisis
                 default:
                     return 0;
             }
+        }
+
+        private int darknessDistance(List<List<int>> individual)
+        {
+            int distanceValue = 0;
+
+            List<List<int>> histogramFromFinalImage = Individual.finalImage.getHistogramGradient();
+
+            for (int section = 0; section < individual.Count; section++)
+            {
+                distanceValue += Math.Abs(histogramFromFinalImage[section][0] - individual[section][0]);
+                distanceValue += Math.Abs(histogramFromFinalImage[section][1] - individual[section][1]);
+            }
+            return distanceValue;
         }
     }
 }
