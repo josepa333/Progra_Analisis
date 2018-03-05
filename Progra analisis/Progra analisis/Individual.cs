@@ -9,13 +9,14 @@ namespace Progra_analisis
     {
         public static Individual finalImage;
         public static int mutations = 0;
-
+        public static int sectionsPerImage = 3;
 
         private int geneticMutability = 20; //Mutability in the genes of each Image, if there is a mutation
         private List<List<int>> histogramGradient;
         private List<List<int>> histogramRGB;
         private Adaptability adaptability;
         private Bitmap bitmap;
+
 
 
         public Individual()

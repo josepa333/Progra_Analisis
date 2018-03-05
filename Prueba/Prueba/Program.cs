@@ -17,55 +17,8 @@ namespace Prueba
         
         static void Main(string[] args)
         {
-            string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\Progra_Analisis\ima.JPG";
-            Bitmap ima = new Bitmap(path, true);
 
-            int contadorX = 0;
-            int contadorY = 0;
-            int fatherWidht = ima.Width / 3;
-            int fatherHight = ima.Height / 3;
-            int xNuevo = 0;
-            int yNuevo = 0;
-            Bitmap imaT = new Bitmap(fatherWidht, fatherHight);
-
-            while (contadorX != 3 && contadorY != 3)
-            {
-                imaT = new Bitmap(fatherWidht, fatherHight);
-                for (int j = (ima.Height / 3) * contadorY; j < (ima.Height / 3) * (contadorY + 1); j++)
-                {
-                    for (int i = (ima.Width / 3) * contadorX; i < (ima.Width / 3) * (contadorX + 1); i++)
-                    {
-                        imaT.SetPixel(xNuevo,yNuevo,ima.GetPixel(i, j));
-                        xNuevo++;
-                        if (xNuevo == fatherWidht - 1)
-                        {
-                            xNuevo = 0;
-                        }
-                    }
-                    yNuevo++;
-                }
-                xNuevo = yNuevo = 0;
-
-                if (contadorX == 1 && contadorY == 2)
-                {
-                    break;
-                }
-                else
-                {
-                    if (contadorX == 2)
-                    {
-                        contadorX = 0;
-                        contadorY++;
-                    }
-                    else
-                    {
-                        contadorX++;
-                    }
-                }
-            }
-            Console.WriteLine("Listo");
-            imaT.Save(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\Progra_Analisis\newima.JPG");
-            Console.ReadKey();
+            
         }
     }
 }

@@ -26,7 +26,7 @@ namespace Progra_analisis
 
 
         public NaturalSelection(Bitmap desireImage, int pGenerations, int pPopulation, int pChildsPerGeneration, int pChildsPerCross, double pMutabilityPercentage, double pCross_A_NA_percentage,
-            double pCross_NA_NA_percentage, double pCross_A_A_percentage, double pAdaptableImagesPercentage, double pAdapatblesPercentageToCopy)
+            double pCross_NA_NA_percentage, double pCross_A_A_percentage, double pAdaptableImagesPercentage, double pAdapatblesPercentageToCopy, int sectionsPerImage)
         {
             Individual.finalImage = new Individual(desireImage);
             childsPerGeneration = pChildsPerGeneration;
@@ -45,6 +45,7 @@ namespace Progra_analisis
             createImages(population);
             images = Sort.mergeSort(images);
             bestAdaptability = 0;
+            Individual.sectionsPerImage = sectionsPerImage;
         }
 
         private void createImages(int quantityImages)
