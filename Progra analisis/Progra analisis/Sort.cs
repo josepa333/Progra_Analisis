@@ -56,23 +56,23 @@ namespace Progra_analisis
         }
 
         //Private Methods for Quick Sort
-        private static void swapValues(List<Individual> images, int indexA, int indexB)
+        private static void swapValues(Individual[] list, int indexA, int indexB)
         {
-            Individual temp = images[indexA];
-            images[indexA] = images[indexB];
-            images[indexB] = temp;
+            Individual temp = list[indexA];
+            list[indexA] = list[indexB];
+            list[indexB] = temp;
         }
 
-        private static int partitionList(List<Individual> images, int left, int right, Individual pivot)
+        private static int partitionList(Individual[] list, int left, int right, Individual pivot)
         {
             int leftPointer = left - 1;
             int rightPointer = right;
 
             while (true)
             {
-                while (images[++leftPointer].getAdaptability(1) < pivot.getAdaptability(1)) ; //Comparison Ascendent or Descendent
+                while (list[++leftPointer].getAdaptability(1) < pivot.getAdaptability(1)) ; //Comparison Ascendent or Descendent
 
-                while (rightPointer > 0 && images[--rightPointer].getAdaptability(1) > pivot.getAdaptability(1)) ; //Comparison Ascendent or Descendent
+                while (rightPointer > 0 && list[--rightPointer].getAdaptability(1) > pivot.getAdaptability(1)) ; //Comparison Ascendent or Descendent
 
                 if (leftPointer >= rightPointer)
                 {
@@ -80,15 +80,15 @@ namespace Progra_analisis
                 }
                 else
                 {
-                    swapValues(images, leftPointer, rightPointer);
+                    swapValues(list, leftPointer, rightPointer);
                 }
             }
 
-            swapValues(images, leftPointer, right);
+            swapValues(list, leftPointer, right);
             return leftPointer;
         }
 
-        public static void quickSort(List<Individual> images, int left, int right)
+        public static void quickSort(Individual[] list, int left, int right)
         {
             if (right - left <= 0)
             {
@@ -96,12 +96,12 @@ namespace Progra_analisis
             }
             else
             {
-                Individual pivot = images[right];
-                int pivotLocation = partitionList(images, left, right, pivot);
+                Individual pivot = list[right];
+                int pivotLocation = partitionList(list, left, right, pivot);
 
-                quickSort(images, left, pivotLocation - 1);
+                quickSort(list, left, pivotLocation - 1);
 
-                quickSort(images, pivotLocation + 1, right);
+                quickSort(list, pivotLocation + 1, right);
             }
         }
 

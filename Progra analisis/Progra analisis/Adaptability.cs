@@ -10,7 +10,7 @@ namespace Progra_analisis
     class Adaptability
     {
         private int distanceRGBHistogram;
-        private int distanceGradientHistogram;
+        private int distanceDarknessHistogram;
         private int distanceAverage;
 
         private int manhattan(List<List<int>> individual)
@@ -29,25 +29,39 @@ namespace Progra_analisis
             return distanceValue;
         }
 
+        private int darknessDistance(List<List<int>> individual)
+        {
+            int distanceValue = 0;
+
+            List<List<int>> histogramFromFinalImage = Individual.finalImage.getHistogramDarkness();
+
+            for (int section = 0; section < individual.Count; section++)
+            {
+                distanceValue += Math.Abs(histogramFromFinalImage[section][0] - individual[section][0]);
+                distanceValue += Math.Abs(histogramFromFinalImage[section][1] - individual[section][1]);
+            }
+            return distanceValue;
+        }
+
         private void setDistanceRGBHistogram(List<List<int>> RGBHistogram)
         {
             distanceRGBHistogram = manhattan(RGBHistogram);
         }
 
-        private void setDistanceGradientHistogram(List<List<int>> gradientHistogram)
+        private void setDistanceDarknessHistogram(List<List<int>> gradientHistogram)
         {
-            distanceGradientHistogram = darknessDistance(gradientHistogram); //Function for gradient distance
+            distanceDarknessHistogram = darknessDistance(gradientHistogram); //Function for gradient distance
         }
 
         private void setDistanceAverage()
         {
-            distanceAverage = (distanceRGBHistogram + distanceGradientHistogram) / 2;
+            distanceAverage = (distanceRGBHistogram + distanceDarknessHistogram) / 2;
         }
 
         public Adaptability(List<List<int>> RGBHistogram, List<List<int>> gradientHistogram)
         {
             setDistanceRGBHistogram(RGBHistogram);
-            setDistanceGradientHistogram(gradientHistogram);
+            setDistanceDarknessHistogram(gradientHistogram);
             setDistanceAverage();
         }
 
@@ -62,20 +76,6 @@ namespace Progra_analisis
                 default:
                     return 0;
             }
-        }
-
-        private int darknessDistance(List<List<int>> individual)
-        {
-            int distanceValue = 0;
-
-            List<List<int>> histogramFromFinalImage = Individual.finalImage.getHistogramGradient();
-
-            for (int section = 0; section < individual.Count; section++)
-            {
-                distanceValue += Math.Abs(histogramFromFinalImage[section][0] - individual[section][0]);
-                distanceValue += Math.Abs(histogramFromFinalImage[section][1] - individual[section][1]);
-            }
-            return distanceValue;
         }
     }
 }

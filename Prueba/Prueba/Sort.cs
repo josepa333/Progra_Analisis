@@ -4,48 +4,48 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Prueba
+namespace Progra_analisis
 {
     class Sort
     {
         //Private Methods for Merge Sort
-        private static List<Image> merge(List<Image> leftImages, List<Image> rightImages)
+        private static List<int> merge(List<int> lefList, List<int> rightList)
         {
-            List<Image> result = new List<Image>(leftImages.Count + rightImages.Count);
+            List<int> result = new List<int>(lefList.Count + rightList.Count);
             int indexLeftImages = 0;
             int indexRightImages = 0;
             int indexResult = 0;
 
-            while(indexLeftImages < leftImages.Count || indexRightImages < rightImages.Count)
+            while (indexLeftImages < lefList.Count || indexRightImages < rightList.Count)
             {
-                if(indexLeftImages < leftImages.Count && indexRightImages < rightImages.Count)
+                if (indexLeftImages < lefList.Count && indexRightImages < rightList.Count)
                 {
-                    if(leftImages[indexLeftImages].getAdaptability(1) <= rightImages[indexRightImages].getAdaptability(1)) //Comparison Ascendent or Descendent
+                    if (lefList[indexLeftImages] <= rightList[indexRightImages]) //Comparison Ascendent or Descendent
                     {
-                        result[indexResult] = leftImages[indexLeftImages];
+                        result[indexResult] = lefList[indexLeftImages];
                         indexLeftImages++;
                         indexResult++;
                     }
                     else
                     {
-                        result[indexResult] = rightImages[indexRightImages];
+                        result[indexResult] = rightList[indexRightImages];
                         indexRightImages++;
                         indexResult++;
                     }
                 }
                 else
                 {
-                    if(indexLeftImages < leftImages.Count)
+                    if (indexLeftImages < lefList.Count)
                     {
-                        result[indexResult] = leftImages[indexLeftImages];
+                        result[indexResult] = lefList[indexLeftImages];
                         indexLeftImages++;
                         indexResult++;
                     }
                     else
                     {
-                        if(indexRightImages < rightImages.Count)
+                        if (indexRightImages < rightList.Count)
                         {
-                            result[indexResult] = rightImages[indexRightImages];
+                            result[indexResult] = rightList[indexRightImages];
                             indexRightImages++;
                             indexResult++;
                         }
@@ -56,23 +56,23 @@ namespace Prueba
         }
 
         //Private Methods for Quick Sort
-        private static void swapValues(List<Image> images, int indexA, int indexB)
+        private static void swapValues(List<int> list, int indexA, int indexB)
         {
-            Image temp = images[indexA];
-            images[indexA] = images[indexB];
-            images[indexB] = temp;
+            int temp = list[indexA];
+            list[indexA] = list[indexB];
+            list[indexB] = temp;
         }
 
-        private static int partitionList(List<Image> images, int left, int right, Image pivot)
+        private static int partitionList(List<int> list, int left, int right, int pivot)
         {
             int leftPointer = left - 1;
             int rightPointer = right;
 
-            while(true)
+            while (true)
             {
-                while (images[++leftPointer].getAdaptability(1) < pivot.getAdaptability(1)) ; //Comparison Ascendent or Descendent
+                while (list[++leftPointer] < pivot) ; //Comparison Ascendent or Descendent
 
-                while (rightPointer > 0 && images[--rightPointer].getAdaptability(1) > pivot.getAdaptability(1)) ; //Comparison Ascendent or Descendent
+                while (rightPointer > 0 && list[--rightPointer] > pivot) ; //Comparison Ascendent or Descendent
 
                 if (leftPointer >= rightPointer)
                 {
@@ -80,15 +80,15 @@ namespace Prueba
                 }
                 else
                 {
-                    swapValues(images, leftPointer, rightPointer);
+                    swapValues(list, leftPointer, rightPointer);
                 }
             }
 
-            swapValues(images, leftPointer, right);
+            swapValues(list, leftPointer, right);
             return leftPointer;
         }
 
-        public static void quickSort(List<Image> images, int left, int right)
+        public static void quickSort(List<int> list, int left, int right)
         {
             if (right - left <= 0)
             {
@@ -96,56 +96,56 @@ namespace Prueba
             }
             else
             {
-                Image pivot = images[right];
-                int pivotLocation = partitionList(images, left, right, pivot);
+                int pivot = list[right];
+                int pivotLocation = partitionList(list, left, right, pivot);
 
-                quickSort(images, left, pivotLocation - 1);
+                quickSort(list, left, pivotLocation - 1);
 
-                quickSort(images, pivotLocation + 1, right);
+                quickSort(list, pivotLocation + 1, right);
             }
         }
 
-        public static List<Image> mergeSort(List<Image> images)
+        public static List<int> mergeSort(List<int> images)
         {
-            if(images.Count <= 1)
+            if (images.Count <= 1)
             {
                 return images; //Base Case
             }
 
             int center = images.Count / 2;
-            List<Image> leftImages = new List<Image>(center);
-            List<Image> rightImages;
+            List<int> leftList = new List<int>(center);
+            List<int> rightList;
 
-            if(images.Count % 2 == 0)
+            if (images.Count % 2 == 0)
             {
-                rightImages = new List<Image>(center);
+                rightList = new List<int>(center);
             }
             else
             {
-                rightImages = new List<Image>(center + 1);
+                rightList = new List<int>(center + 1);
             }
 
-            List<Image> result = new List<Image>(images.Count);
+            List<int> result = new List<int>(images.Count);
 
-            for(int i = 0; i < center; i++)
+            for (int i = 0; i < center; i++)
             {
-                leftImages[i] = images[i];
+                leftList[i] = images[i];
             }
 
             int c = 0;
-            for(int j = center; j < images.Count; j++)
+            for (int j = center; j < images.Count; j++)
             {
-                if( c != images.Count)
+                if (c != images.Count)
                 {
-                    rightImages[c] = images[j];
+                    rightList[c] = images[j];
                     c++;
                 }
             }
 
-            leftImages = mergeSort(leftImages);
-            rightImages = mergeSort(rightImages);
+            leftList = mergeSort(leftList);
+            rightList = mergeSort(rightList);
 
-            result = merge(leftImages, rightImages);
+            result = merge(leftList, rightList);
 
             return result;
         }
