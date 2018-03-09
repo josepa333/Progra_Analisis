@@ -23,6 +23,7 @@ namespace Progra_analisis
         private int childsPerCross; //The amount of childs in each cross
         private int generations;
         private int population;
+        private int generationCounter;
         
 
 
@@ -58,6 +59,7 @@ namespace Progra_analisis
             MessageBox.Show("Imagenes creadas");
             Sort.quickSort(images, 0, images.Length - 1);
             MessageBox.Show("Listo");
+            generationCounter = 0;
         }
 
         private void createImages(int quantityImages)
@@ -318,6 +320,11 @@ namespace Progra_analisis
             return childsPerCross;
         }
 
+        public int getGenerationCounter()
+        {
+            return generationCounter;
+        }
+
         public int getHighestAdaptability()
         {
             return images[0].getAdaptability(1);   
@@ -351,11 +358,17 @@ namespace Progra_analisis
                     finalResult[finalResultIndex] = images[0];
                     finalResultIndex++;
                 }
+                generationCounter++;
                 generation++;
                 MessageBox.Show("Finaliza gen");
             }
             Sort.quickSort(finalResult, 0, finalResult.Length - 1);
             return finalResult;
+        }
+
+        public Bitmap getPositionCero()
+        {
+            return images[0].getBitmap();
         }
     }
 }

@@ -65,7 +65,6 @@ namespace Progra_analisis
         {
             this.Q_generations.Hide();
             this.Q_population.Hide();
-            this.childsPerGeneration.Hide();
             this.mutabilityPercentage.Hide();
             this.pAwNa.Hide();
             this.pNAwNa.Hide();
@@ -76,7 +75,6 @@ namespace Progra_analisis
 
             this.label2.Hide();
             this.label3.Hide();
-            this.label4.Hide();
             this.label5.Hide();
             this.label6.Hide();
             this.label7.Hide();
@@ -105,7 +103,7 @@ namespace Progra_analisis
             NaturalSelection naturalSelection = new NaturalSelection(bitImage,
                 Decimal.ToInt32(this.Q_generations.Value),
                 Decimal.ToInt32(this.Q_population.Value),
-                Decimal.ToInt32(this.childsPerGeneration.Value),
+                0,
                 Decimal.ToInt32(this.childsPerCross.Value),
                 Decimal.ToDouble(this.mutabilityPercentage.Value)/100,
                 Decimal.ToDouble(this.pAwNa.Value)/100,
@@ -114,6 +112,8 @@ namespace Progra_analisis
                 Decimal.ToDouble(this.pAdaptableImages.Value)/100,
                 Decimal.ToInt32(this.adapatblesPercentageToCopy.Value)/100,
                 Decimal.ToInt32(this.sectionsPerImage.Value));
+
+            threadLoading thread = new threadLoading(naturalSelection);
 
             Individual[] imagesToDisplay = naturalSelection.genericAlgorithm();
 
