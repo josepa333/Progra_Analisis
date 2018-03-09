@@ -63,7 +63,7 @@ namespace Progra_analisis
                 fillDarknessHistogram(pixelPerSection);
                 pixelPerSection = new ArrayList();
 
-                if (contadorX == 1 && contadorY == 2)
+                if (contadorX == 2 && contadorY == 2)
                 {
                     break;
                 }

@@ -58,7 +58,7 @@
             this.output10 = new System.Windows.Forms.PictureBox();
             this.sectionsPerImage = new System.Windows.Forms.NumericUpDown();
             this.label10 = new System.Windows.Forms.Label();
-            this.childsPerCross = new System.Windows.Forms.NumericUpDown();
+            this.childsPerGenerations = new System.Windows.Forms.NumericUpDown();
             this.label11 = new System.Windows.Forms.Label();
             this.adapatblesPercentageToCopy = new System.Windows.Forms.NumericUpDown();
             this.label12 = new System.Windows.Forms.Label();
@@ -81,7 +81,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.output9)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.output10)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sectionsPerImage)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.childsPerCross)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.childsPerGenerations)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.adapatblesPercentageToCopy)).BeginInit();
             this.SuspendLayout();
             // 
@@ -240,7 +240,7 @@
             // 
             // output1
             // 
-            this.output1.Location = new System.Drawing.Point(29, 73);
+            this.output1.Location = new System.Drawing.Point(134, 397);
             this.output1.Name = "output1";
             this.output1.Size = new System.Drawing.Size(200, 120);
             this.output1.TabIndex = 21;
@@ -335,21 +335,21 @@
             this.label10.Text = "Percentaje of adaptables to copy";
             this.label10.Click += new System.EventHandler(this.label10_Click);
             // 
-            // childsPerCross
+            // childsPerGenerations
             // 
-            this.childsPerCross.Location = new System.Drawing.Point(39, 189);
-            this.childsPerCross.Name = "childsPerCross";
-            this.childsPerCross.Size = new System.Drawing.Size(68, 20);
-            this.childsPerCross.TabIndex = 33;
+            this.childsPerGenerations.Location = new System.Drawing.Point(39, 151);
+            this.childsPerGenerations.Name = "childsPerGenerations";
+            this.childsPerGenerations.Size = new System.Drawing.Size(68, 20);
+            this.childsPerGenerations.TabIndex = 33;
             // 
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(113, 189);
+            this.label11.Location = new System.Drawing.Point(113, 153);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(81, 13);
+            this.label11.Size = new System.Drawing.Size(111, 13);
             this.label11.TabIndex = 34;
-            this.label11.Text = "Childs per cross";
+            this.label11.Text = "Childs per generations";
             // 
             // adapatblesPercentageToCopy
             // 
@@ -375,7 +375,7 @@
             this.Controls.Add(this.label12);
             this.Controls.Add(this.adapatblesPercentageToCopy);
             this.Controls.Add(this.label11);
-            this.Controls.Add(this.childsPerCross);
+            this.Controls.Add(this.childsPerGenerations);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.sectionsPerImage);
             this.Controls.Add(this.output10);
@@ -428,7 +428,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.output9)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.output10)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sectionsPerImage)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.childsPerCross)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.childsPerGenerations)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.adapatblesPercentageToCopy)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -467,7 +467,7 @@
         private System.Windows.Forms.PictureBox output10;
         private System.Windows.Forms.NumericUpDown sectionsPerImage;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.NumericUpDown childsPerCross;
+        private System.Windows.Forms.NumericUpDown childsPerGenerations;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.NumericUpDown adapatblesPercentageToCopy;
         private System.Windows.Forms.Label label12;
