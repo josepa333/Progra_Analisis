@@ -314,19 +314,11 @@ namespace Progra_analisis
             return adapatblesPercentageToCopy;
         }
 
-<<<<<<< HEAD
-        public int getChildsPerCross()
-        {
-            return childsPerCross;
-        }
-
         public int getGenerationCounter()
         {
             return generationCounter;
         }
 
-=======
->>>>>>> a1a95b871ed2b92fc1ae871b30b1f11565d638d6
         public int getHighestAdaptability()
         {
             return images[0].getAdaptability(1);   
