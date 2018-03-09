@@ -68,6 +68,39 @@ namespace Progra_analisis
 
         private void button1_Click(object sender, EventArgs e)
         {
+
+            //Borrar todo dentro de esto despues de probar
+            List<Bitmap> bitmapsTest = new List<Bitmap>(5);
+
+            Bitmap newImage = new Bitmap(bitImage.Width, bitImage.Height);
+            Random rnd = new Random();
+            int contador = 0;
+
+            while (contador < 5)
+            {
+                for (int i = 0; i < newImage.Width; i++)
+                {
+                    for (int j = 0; j < newImage.Height; j++)
+                    {
+                        int a = rnd.Next(0, 256);
+                        int rojo = rnd.Next(0, 256);
+                        int verde = rnd.Next(0, 256);
+                        int azul = rnd.Next(0, 256);
+
+                        Color newco = Color.FromArgb(a, rojo, verde, azul);
+                        newImage.SetPixel(i, j, newco);
+                    }
+                }
+                bitmapsTest.Add(newImage);
+                contador++;
+            }
+            bitmapsTest.Add(bitImage);
+
+            //Borrar
+
+            //Cambiar a natural selection
+            threadLoading thread = new threadLoading(bitmapsTest);
+            /*
             if (bitImage != null &&
                 this.Q_generations.Value > 1 &&
                 this.Q_population.Value > 1 &&
@@ -116,7 +149,7 @@ namespace Progra_analisis
                     this.output9.Visible = true;
                     this.output10.Visible = true;
 
-
+                    
                     NaturalSelection naturalSelection = new NaturalSelection(bitImage,
                         Decimal.ToInt32(this.Q_generations.Value),
                         Decimal.ToInt32(this.Q_population.Value),
@@ -128,15 +161,16 @@ namespace Progra_analisis
                         Decimal.ToDouble(this.pAdaptableImages.Value) / 100,
                         Decimal.ToInt32(this.adapatblesPercentageToCopy.Value) / 100,
                         Decimal.ToInt32(this.sectionsPerImage.Value));
+                        
 
-                    threadLoading thread = new threadLoading(naturalSelection);
-
+                    
                     Individual[] imagesToDisplay = naturalSelection.genericAlgorithm();
 
+                    
                     this.output1.Image = imagesToDisplay[0].getBitmap();
                     this.output2.Image = imagesToDisplay[1].getBitmap();
                     this.output3.Image = imagesToDisplay[2].getBitmap();
-                    /*
+                    
                     this.output4.Image = imagesToDisplay[3].getBitmap();
                     this.output5.Image = imagesToDisplay[4].getBitmap();
                     this.output6.Image = imagesToDisplay[5].getBitmap();
@@ -144,7 +178,7 @@ namespace Progra_analisis
                     this.output8.Image = imagesToDisplay[7].getBitmap();
                     this.output9.Image = imagesToDisplay[8].getBitmap();
                     this.output10.Image = imagesToDisplay[9].getBitmap();
-                    */
+                    
                 }
                 else
                 {
@@ -156,6 +190,7 @@ namespace Progra_analisis
             {
                 MessageBox.Show("Verify the given data");
             }
+            */
         }
 
         private void selected_picture_Click(object sender, EventArgs e)

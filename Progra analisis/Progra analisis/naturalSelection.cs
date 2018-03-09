@@ -216,6 +216,28 @@ namespace Progra_analisis
             return parents;
         }
 
+<<<<<<< HEAD
+=======
+        //Returns the child when two parents cross
+        private Individual crossParents(Individual[] parents)
+        {
+            Individual child;
+            Random rnd = new Random();
+            int rand_mutation = rnd.Next(0, 101);
+            if (rand_mutation <= mutationProbability)
+            {
+                //child = parents[0].mutation(parents[1]); RICHI cambie esto para poder correrlo pero lo deje por si usted lo queria
+                //manejar difernte
+                child = parents[0].crossOver(parents[1]);
+            }
+            else
+            {
+                child = parents[0].crossOver(parents[1]);
+            }
+            return child;
+        }
+
+>>>>>>> 63a4b43f62d71f56e4c150394ac56237f4967c5c
         //Returns the new sorted childs.
         private Individual[] crossOver(Individual[] adaptables, Individual[] notAdaptables)
         {

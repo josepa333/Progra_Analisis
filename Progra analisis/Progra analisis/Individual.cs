@@ -45,31 +45,31 @@ namespace Progra_analisis
         {
             int contadorX = 0;
             int contadorY = 0;
-            int fatherWidht = bitmap.Width / 3;
-            int fatherHight = bitmap.Height / 3;
+            int fatherWidht = bitmap.Width / sectionsPerImage;
+            int fatherHight = bitmap.Height / sectionsPerImage;
             ArrayList pixelPerSection = new ArrayList();
 
-            while (contadorX != 3 && contadorY != 3)
+            while (contadorX != sectionsPerImage && contadorY != sectionsPerImage)
             {
-                for (int j = (bitmap.Height / 3) * contadorY; j < (bitmap.Height / 3) * (contadorY + 1); j++)
+                for (int j = (bitmap.Height / sectionsPerImage) * contadorY; j < (bitmap.Height / sectionsPerImage) * (contadorY + 1); j++)
                 {
-                    for (int i = (bitmap.Width / 3) * contadorX; i < (bitmap.Width / 3) * (contadorX + 1); i++)
+                    for (int i = (bitmap.Width / sectionsPerImage) * contadorX; i < (bitmap.Width / sectionsPerImage) * (contadorX + 1); i++)
                     {
                         pixelPerSection.Add(bitmap.GetPixel(i, j));
                     }
                 }
 
                 fillRGBHistogram(pixelPerSection);
-                fillDarknessHistogram(pixelPerSection);
+                //fillDarknessHistogram(pixelPerSection); //implemented into the other fill histrogram
                 pixelPerSection = new ArrayList();
 
-                if (contadorX == 2 && contadorY == 2)
+                if (contadorX == sectionsPerImage-1 && contadorY == sectionsPerImage-1)
                 {
                     break;
                 }
                 else
                 {
-                    if (contadorX == 2)
+                    if (contadorX == sectionsPerImage-1)
                     {
                         contadorX = 0;
                         contadorY++;
@@ -87,8 +87,16 @@ namespace Progra_analisis
             ArrayList redHistogram = new ArrayList();
             ArrayList greenHistogram = new ArrayList();
             ArrayList blueHistogram = new ArrayList();
+
+            List<int> sectionBinary = new List<int>(2);
             List<int> sectionRGB = new List<int>(768);
 
+
+            //add to elements to binary section
+            sectionBinary.Add(0);
+            sectionBinary.Add(0);
+
+            //add the 255 elements to the RBG arrays
             for (int i = 0; i < 256; i++)
             {
                 redHistogram.Add(0);
@@ -102,6 +110,15 @@ namespace Progra_analisis
                 redHistogram[clr.R] = (int)redHistogram[clr.R] + 1;
                 greenHistogram[clr.G] = (int)greenHistogram[clr.G] + 1;
                 blueHistogram[clr.B] = (int)blueHistogram[clr.B] + 1;
+
+                if (clr.A < 127)
+                {
+                    sectionBinary[0]++;
+                }
+                else
+                {
+                    sectionBinary[1]++;
+                }
             }
 
             for (int i = 0; i < 256; i++)
@@ -116,12 +133,15 @@ namespace Progra_analisis
             {
                 sectionRGB.Add((int)blueHistogram[i]);
             }
+
             histogramRGB.Add(sectionRGB);
+            histogramDarkness.Add(sectionBinary);
         }
 
         private void fillDarknessHistogram(ArrayList pixelPerSection)
         {
-            List<int> sectionBinary = new List<int>(2);
+            List<int> sectionBinary = new List<int>(2);//
+
             sectionBinary.Add(0);
             sectionBinary.Add(0);
 
@@ -190,42 +210,25 @@ namespace Progra_analisis
             return new Individual(bitmap_kid);
         }
 
-        public Individual mutation(Individual soulmate)
+        public void mutation()
         {
             mutations++;
-            Bitmap bitmap_kid = new Bitmap(bitmap.Width, bitmap.Height);
             Random rnd = new Random();
-
-            for (int i = 0; i < bitmap.Width; i++)
+            int mutationsApplied = 0;
+            int dimentions = (bitmap.Height * bitmap.Width) / 4;
+            while (mutationsApplied < dimentions)
             {
-                for (int j = 0; j < bitmap.Height; j++)
-                {
-                    int selector = rnd.Next(0, 100);
+                int red = rnd.Next(0, 256);
+                int green = rnd.Next(0, 256);
+                int blue = rnd.Next(0, 256);
 
-                    if (selector < geneticMutability)
-                    {
-                        int rojo = rnd.Next(0, 256);
-                        int verde = rnd.Next(0, 256);
-                        int azul = rnd.Next(0, 256);
-                        //ALPHAAAA
+                int x = rnd.Next(0, bitmap.Width - 1);
+                int y = rnd.Next(0, bitmap.Height - 1);
 
-                        Color newco = Color.FromArgb(rojo, verde, azul);
-                        bitmap_kid.SetPixel(i, j, newco);
-                    }
-                    else
-                    {
-                        if (rnd.Next(0, 1) == 2)
-                        {
-                            bitmap_kid.SetPixel(i, j, bitmap.GetPixel(i, j));
-                        }
-                        else
-                        {
-                            bitmap_kid.SetPixel(i, j, soulmate.getBitmap().GetPixel(i, j));
-                        }
-                    }
-                }
+                Color newco = Color.FromArgb(red, green, blue);
+                bitmap.SetPixel(x , y , newco);
+                mutationsApplied++;
             }
-            return new Individual(bitmap_kid);
         }
 
         public Bitmap getBitmap()
