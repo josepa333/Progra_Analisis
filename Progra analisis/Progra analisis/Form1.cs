@@ -103,7 +103,6 @@ namespace Progra_analisis
             NaturalSelection naturalSelection = new NaturalSelection(bitImage,
                 Decimal.ToInt32(this.Q_generations.Value),
                 Decimal.ToInt32(this.Q_population.Value),
-                0,
                 Decimal.ToInt32(this.childsPerCross.Value),
                 Decimal.ToDouble(this.mutabilityPercentage.Value)/100,
                 Decimal.ToDouble(this.pAwNa.Value)/100,
