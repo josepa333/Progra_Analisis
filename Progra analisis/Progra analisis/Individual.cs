@@ -160,11 +160,13 @@ namespace Progra_analisis
 
         public Individual(Bitmap p_kid)
         {
-            histogramRGB = new List<List<int>>();
-            histogramDarkness = new List<List<int>>();
+            histogramRGB = new List<List<int>>(sectionsPerImage * sectionsPerImage);
+            histogramDarkness = new List<List<int>>(sectionsPerImage * sectionsPerImage);
             bitmap = p_kid;
             dissectImage();
             adaptability = new Adaptability(histogramRGB, histogramDarkness);
+            histogramRGB.Clear();
+            histogramDarkness.Clear();
         }
 
         public Individual crossOver(Individual soulmate)

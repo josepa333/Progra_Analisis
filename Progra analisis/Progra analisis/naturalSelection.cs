@@ -29,17 +29,26 @@ namespace Progra_analisis
         public NaturalSelection(Bitmap desireImage, int pGenerations, int pPopulation, int pChildsPerGeneration, int pChildsPerCross, double pMutabilityPercentage, double pCross_A_NA_percentage,
             double pCross_NA_NA_percentage, double pCross_A_A_percentage, double pAdaptableImagesPercentage, double pAdapatblesPercentageToCopy, int sectionsPerImage)
         {
+<<<<<<< HEAD
+            Individual.finalImage = new Individual(desireImage);
+            Individual.sectionsPerImage = sectionsPerImage;
+            Individual.mutations = 0;
+=======
             Individual.finalImage = new Individual(desireImage,0);
             Individual.finalImage.dataForFinalImage();
             MessageBox.Show("FinalImage");
             Individual.sectionsPerImage = sectionsPerImage;
 
+>>>>>>> 0d00b043121f3f656c60476ab2dd02065120fe16
             childsPerGeneration = pChildsPerGeneration;
             childsPerCross = pChildsPerCross;
             generations = pGenerations;
             population = pPopulation;
+<<<<<<< HEAD
+=======
 
             Individual.mutations = 0;
+>>>>>>> 0d00b043121f3f656c60476ab2dd02065120fe16
             adaptableImagesPercentage = Convert.ToInt32(pAdaptableImagesPercentage * population);
             adapatblesPercentageToCopy = pAdapatblesPercentageToCopy;
             cross_A_A_percentage = Convert.ToInt32(pCross_A_A_percentage * childsPerGeneration);
@@ -52,7 +61,10 @@ namespace Progra_analisis
             createImages(population);
             MessageBox.Show("Imagenes creadas");
             Sort.quickSort(images, 0, images.Length - 1);
+<<<<<<< HEAD
+=======
             MessageBox.Show("Listo");
+>>>>>>> 0d00b043121f3f656c60476ab2dd02065120fe16
         }
 
         private void createImages(int quantityImages)
