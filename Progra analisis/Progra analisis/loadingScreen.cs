@@ -16,5 +16,10 @@ namespace Progra_analisis
         {
             InitializeComponent();
         }
+
+        private void loadingScreen_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

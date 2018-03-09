@@ -205,6 +205,7 @@ namespace Progra_analisis
                         int rojo = rnd.Next(0, 256);
                         int verde = rnd.Next(0, 256);
                         int azul = rnd.Next(0, 256);
+                        //ALPHAAAA
 
                         Color newco = Color.FromArgb(rojo, verde, azul);
                         bitmap_kid.SetPixel(i, j, newco);
