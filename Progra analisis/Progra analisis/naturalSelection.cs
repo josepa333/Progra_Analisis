@@ -17,25 +17,19 @@ namespace Progra_analisis
         private int cross_A_A_percentage; //Cross percentage of childs from two parents with high adaptability.
         private int cross_NA_NA_percentage; //Cross percentage of childs from two parents with low adaptability.
         private int cross_A_NA_percentage; //Cross percentage of chlds from a high adaptability parent with a lowone.
-        private int mutationPercentage; //Percentage of mutation when there is a cross.
-        private int mutationProbability;//from 0 to a 100 real quick
         private int childsPerGeneration;
+        private int mutationsPerGeneration;
         private int generations;
         private int population;
         private int generationCounter;
         
 
 
-<<<<<<< HEAD
-        public NaturalSelection(Bitmap desireImage, int pGenerations, int pPopulation, int pChildsPerGeneration, double pMutabilityPercentage, double pCross_A_NA_percentage,
-            double pCross_NA_NA_percentage, double pCross_A_A_percentage, double pAdaptableImagesPercentage, double pAdapatblesPercentageToCopy, int sectionsPerImage)
-=======
         public NaturalSelection(
             Bitmap desireImage, 
             int pGenerations, /**/
             int pPopulation,/**/
             int pChildsPerGeneration,/*no mayor a population*/
-            double pMutabilityPercentage,/**/ 
             double pCross_A_NA_percentage,
             double pCross_NA_NA_percentage, 
             double pCross_A_A_percentage,
@@ -43,7 +37,6 @@ namespace Progra_analisis
             double pAdapatblesPercentageToCopy,/*menor o igual que adaptable image percentaje*/ 
             int sectionsPerImage
             )
->>>>>>> 7777659d193e3efd7cb33c079e7dfb0840cacc10
         {
 
             Individual.finalImage = new Individual(desireImage,0);
@@ -64,8 +57,6 @@ namespace Progra_analisis
             cross_A_A_percentage = Convert.ToInt32(pCross_A_A_percentage * childsPerGeneration);
             cross_NA_NA_percentage = Convert.ToInt32(pCross_NA_NA_percentage * childsPerGeneration);
             cross_A_NA_percentage = Convert.ToInt32(pCross_A_NA_percentage * childsPerGeneration);
-            mutationPercentage = Convert.ToInt32(pMutabilityPercentage * 100);
-            mutationProbability = mutationPercentage;
             images = new Individual[population];
             MessageBox.Show("Population");
             createImages(population);
@@ -119,11 +110,13 @@ namespace Progra_analisis
         private Individual[] getOtherIndividualsToCopy(int otherIndividualsToCopyAmount, int adaptablesCopied)
         {
             Random rnd = new Random();
+            int mutations = mutationsPerGeneration;
             int counter = 0;
             int notCopiedAdaptablesIndex = 0; //The random index of any individual that wasnt copied.
             int otherIndividualsToCopyIndex = 0;
             ArrayList OtherIndividualsIndex = new ArrayList();
             Individual[] otherIndividualsToCopy = new Individual[otherIndividualsToCopyAmount];
+            Individual individual;
             while (counter < otherIndividualsToCopyAmount)
             {
                 notCopiedAdaptablesIndex = rnd.Next(adaptablesCopied, images.Length);
@@ -132,7 +125,13 @@ namespace Progra_analisis
                     notCopiedAdaptablesIndex = rnd.Next(adaptablesCopied, images.Length);
                 }
                 OtherIndividualsIndex.Add(notCopiedAdaptablesIndex);
-                otherIndividualsToCopy[otherIndividualsToCopyIndex] = images[notCopiedAdaptablesIndex];
+                individual = images[notCopiedAdaptablesIndex];
+                if (mutations != 0)
+                {
+                    //mutation
+                    mutations--;
+                }
+                otherIndividualsToCopy[otherIndividualsToCopyIndex] = individual;
                 otherIndividualsToCopyIndex++;
                 counter++;
             }
@@ -217,23 +216,6 @@ namespace Progra_analisis
             return parents;
         }
 
-        //Returns the child when two parents cross
-        private Individual crossParents(Individual[] parents)
-        {
-            Individual child;
-            Random rnd = new Random();
-            int rand_mutation = rnd.Next(0, 101);
-            if (rand_mutation <= mutationProbability)
-            {
-                child = parents[0].mutation(parents[1]);
-            }
-            else
-            {
-                child = parents[0].crossOver(parents[1]);
-            }
-            return child;
-        }
-
         //Returns the new sorted childs.
         private Individual[] crossOver(Individual[] adaptables, Individual[] notAdaptables)
         {
@@ -255,7 +237,7 @@ namespace Progra_analisis
                 if (adaptables.Length >= 2)
                 {
                     parents = parentsToCross(adaptables, notAdaptables, 1);
-                    childs[childsIndex] = crossParents(parents);
+                    childs[childsIndex] = parents[0].crossOver(parents[1]);
                     childsIndex++;
                 }
                 cross_A_A--;
@@ -266,7 +248,7 @@ namespace Progra_analisis
                 if (adaptables.Length >= 1 && notAdaptables.Length >= 1)
                 {
                     parents = parentsToCross(adaptables, notAdaptables, 2);
-                    childs[childsIndex] = crossParents(parents);
+                    childs[childsIndex] = parents[0].crossOver(parents[1]);
                     childsIndex++;
                 }
                 cross_A_NA--;
@@ -277,7 +259,7 @@ namespace Progra_analisis
                 if (notAdaptables.Length >= 2)
                 {
                     parents = parentsToCross(adaptables, notAdaptables, 3);
-                    childs[childsIndex] = crossParents(parents);
+                    childs[childsIndex] = parents[0].crossOver(parents[1]);
                     childsIndex++;
                 }
                 cross_NA_NA--;
@@ -287,7 +269,7 @@ namespace Progra_analisis
             while (childAmount != 0)
             {
                 parents = parentsToCross(adaptables, notAdaptables, 3);
-                childs[childsIndex] = crossParents(parents);
+                childs[childsIndex] = parents[0].crossOver(parents[1]);
                 childsIndex++;
                 childAmount--;
             }
@@ -316,9 +298,9 @@ namespace Progra_analisis
             return cross_A_NA_percentage;
         }
 
-        public int getMutationProbability()
+        public int getMutationsPerGeneration()
         {
-            return mutationProbability;
+            return mutationsPerGeneration;
         }
 
         public int getFinalMutationsPerGeneration()
