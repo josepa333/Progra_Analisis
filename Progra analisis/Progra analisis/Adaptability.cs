@@ -59,13 +59,13 @@ namespace Progra_analisis
 
         private void setSurpriseRGBHistogram(List<List<int>> RGBHistogram)
         {
-            surpriseDistanceRGBHistogram = supriseRGB(RGBHistogram);
+            //surpriseDistanceRGBHistogram = supriseRGB(RGBHistogram);
             distance = surpriseDistanceRGBHistogram;
         }
 
         private void setSurpriseDarknessHistogram(List<List<int>> darknessHistogram)
         {
-            surpriseDistanceDarknessHistogram = surpriseDarkness(darknessHistogram);
+            //surpriseDistanceDarknessHistogram = surpriseDarkness(darknessHistogram);
             distance = surpriseDistanceDarknessHistogram;
         }
 

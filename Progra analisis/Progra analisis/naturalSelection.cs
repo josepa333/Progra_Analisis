@@ -41,7 +41,8 @@ namespace Progra_analisis
         {
 
             Individual.finalImage = new Individual(desireImage,0);
-            Individual.finalImage.dataForFinalImage();
+            //Individual.finalImage.dataForFinalImage();
+
             MessageBox.Show("FinalImage");
             Individual.sectionsPerImage = sectionsPerImage;
 
@@ -328,11 +329,12 @@ namespace Progra_analisis
             return generationCounter;
         }
 
+        /*
         public int getHighestAdaptability()
         {
             return images[0].getAdaptability(1);   
         }
-
+        */
         
         public string getTypeOfHistogram()
         {
