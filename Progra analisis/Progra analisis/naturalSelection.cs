@@ -330,7 +330,7 @@ namespace Progra_analisis
 
         public int getHighestAdaptability()
         {
-            return images[0].getAdaptability(1);   
+            return images[0].getDistance();   
         }
 
         
