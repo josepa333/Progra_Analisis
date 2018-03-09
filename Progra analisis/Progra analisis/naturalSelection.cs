@@ -26,8 +26,24 @@ namespace Progra_analisis
         
 
 
+<<<<<<< HEAD
         public NaturalSelection(Bitmap desireImage, int pGenerations, int pPopulation, int pChildsPerGeneration, double pMutabilityPercentage, double pCross_A_NA_percentage,
             double pCross_NA_NA_percentage, double pCross_A_A_percentage, double pAdaptableImagesPercentage, double pAdapatblesPercentageToCopy, int sectionsPerImage)
+=======
+        public NaturalSelection(
+            Bitmap desireImage, 
+            int pGenerations, /**/
+            int pPopulation,/**/
+            int pChildsPerGeneration,/*no mayor a population*/
+            double pMutabilityPercentage,/**/ 
+            double pCross_A_NA_percentage,
+            double pCross_NA_NA_percentage, 
+            double pCross_A_A_percentage,
+            double pAdaptableImagesPercentage,/*  */
+            double pAdapatblesPercentageToCopy,/*menor o igual que adaptable image percentaje*/ 
+            int sectionsPerImage
+            )
+>>>>>>> 7777659d193e3efd7cb33c079e7dfb0840cacc10
         {
 
             Individual.finalImage = new Individual(desireImage,0);

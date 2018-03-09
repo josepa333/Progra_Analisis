@@ -92,7 +92,6 @@ namespace Progra_analisis
         public Statistics (NaturalSelection naturalSelection)
         {
             childsPerGeneration = naturalSelection.getChildsPerGeneration();
-            childsPerCross = naturalSelection.getChildsPerCross();
             generations = naturalSelection.getGenerations();
             population = naturalSelection.getPopulation();
             adapatblesPercentageToCopy = naturalSelection.getAdaptablesPercentageToCopy();
