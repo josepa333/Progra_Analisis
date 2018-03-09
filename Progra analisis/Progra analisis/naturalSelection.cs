@@ -26,7 +26,7 @@ namespace Progra_analisis
         
 
 
-        public NaturalSelection(Bitmap desireImage, int pGenerations, int pPopulation, int pChildsPerGeneration, int pChildsPerCross, double pMutabilityPercentage, double pCross_A_NA_percentage,
+        public NaturalSelection(Bitmap desireImage, int pGenerations, int pPopulation, int pChildsPerGeneration, double pMutabilityPercentage, double pCross_A_NA_percentage,
             double pCross_NA_NA_percentage, double pCross_A_A_percentage, double pAdaptableImagesPercentage, double pAdapatblesPercentageToCopy, int sectionsPerImage)
         {
 
@@ -100,43 +100,59 @@ namespace Progra_analisis
             return notAdaptables;
         }
 
-        //Replace the not chosen individuals with the new childs and sorts the population
-        private void evolution(Individual[] childs)
+        private Individual[] getOtherIndividualsToCopy(int otherIndividualsToCopyAmount, int adaptablesCopied)
         {
             Random rnd = new Random();
-            Individual[] adaptables = selection_A();
-            int adaptablesToCopy = (int)adapatblesPercentageToCopy * adaptables.Length;
-            Individual[] notAdaptables = selection_NA();
-            int childsIndex = 0;
-            int adaptablesIndex = 0;
-            int notAdaptablesIndex = 0;
-            int imagesIndex = 0;
-            ArrayList notAdaptablesCopied = new ArrayList();
-
-            if (adaptablesToCopy + childs.Length <= population) //There must be space for adding the new childs
+            int counter = 0;
+            int notCopiedAdaptablesIndex = 0; //The random index of any individual that wasnt copied.
+            int otherIndividualsToCopyIndex = 0;
+            ArrayList OtherIndividualsIndex = new ArrayList();
+            Individual[] otherIndividualsToCopy = new Individual[otherIndividualsToCopyAmount];
+            while (counter < otherIndividualsToCopyAmount)
             {
-                while (adaptablesToCopy != 0)
+                notCopiedAdaptablesIndex = rnd.Next(adaptablesCopied, images.Length);
+                while (OtherIndividualsIndex.Contains(notCopiedAdaptablesIndex))
                 {
-                    images[imagesIndex] = adaptables[adaptablesIndex];
-                    adaptablesIndex++;
-                    imagesIndex++;
-                    adaptablesToCopy--;
+                    notCopiedAdaptablesIndex = rnd.Next(adaptablesCopied, images.Length);
                 }
-                for (int i = imagesIndex; i < images.Length; i++)
+                OtherIndividualsIndex.Add(notCopiedAdaptablesIndex);
+                otherIndividualsToCopy[otherIndividualsToCopyIndex] = images[notCopiedAdaptablesIndex];
+                otherIndividualsToCopyIndex++;
+                counter++;
+            }
+            return otherIndividualsToCopy;
+        }
+
+        //Replace the not chosen individuals with the new childs and sorts the population
+        private void evolution(Individual[] childs, Individual[] adaptables)
+        {
+            int adaptablesToCopy = (int)adapatblesPercentageToCopy * adaptables.Length;
+            int otherIndividualsToCopyAmount = images.Length - adaptablesToCopy - childs.Length;
+            int childsIndex = 0;
+            int copiedAdaptablesIndex = 0;
+            int imagesIndex = 0;
+            int otherIndividualToCopyIndex = 0;
+            Individual[] otherIndividualsToCopy = getOtherIndividualsToCopy(otherIndividualsToCopyAmount, adaptablesToCopy);
+
+            if (adaptablesToCopy <= population - childsPerGeneration) //There must be space for adding the new childs
+            {
+                while (copiedAdaptablesIndex < adaptablesToCopy)
                 {
-                    images[i] = childs[childsIndex];
+                    images[imagesIndex] = adaptables[copiedAdaptablesIndex];
+                    copiedAdaptablesIndex++;
+                    imagesIndex++;
+                }
+                while (childsIndex < childs.Length)
+                {
+                    images[imagesIndex] = childs[childsIndex];
                     childsIndex++;
                     imagesIndex++;
                 }
-                for (int i =  imagesIndex; i < images.Length; i++)
+                for (int i = imagesIndex; i < otherIndividualsToCopyAmount; i++)
                 {
-                    notAdaptablesIndex = rnd.Next(0, notAdaptables.Length);
-                    while (notAdaptablesCopied.Contains(notAdaptablesIndex))
-                    {
-                        notAdaptablesIndex = rnd.Next(0, notAdaptables.Length);
-                    }
-                    notAdaptablesCopied.Add(notAdaptablesIndex);
-                    images[i] = notAdaptables[notAdaptablesIndex];
+                    Individual element = otherIndividualsToCopy[otherIndividualToCopyIndex];
+                    images[i] = element;
+                    otherIndividualToCopyIndex++;
                 }
                 Sort.quickSort(images, 0, images.Length - 1);
             }
@@ -153,31 +169,31 @@ namespace Progra_analisis
             {
                 case 1:
                     rand_A_index = rnd.Next(0, adaptables.Length);
-                    parents[0] = images[rand_A_index];
+                    parents[0] = adaptables[rand_A_index];
                     index = rand_A_index;
                     rand_A_index = rnd.Next(0, adaptables.Length);
                     while (rand_A_index != index)
                     {
                         rand_A_index = rnd.Next(0, adaptables.Length);
                     }
-                    parents[1] = images[rand_A_index];
+                    parents[1] = adaptables[rand_A_index];
                     break;
                 case 2:
                     rand_A_index = rnd.Next(0, adaptables.Length);
                     rand_NA_index = rnd.Next(0, notAdaptables.Length);
-                    parents[0] = images[rand_A_index];
-                    parents[1] = images[rand_NA_index];
+                    parents[0] = adaptables[rand_A_index];
+                    parents[1] = notAdaptables[rand_NA_index];
                     break;
                 case 3:
                     rand_NA_index = rnd.Next(0, notAdaptables.Length);
-                    parents[0] = images[rand_NA_index];
+                    parents[0] = notAdaptables[rand_NA_index];
                     index = rand_NA_index;
                     rand_NA_index = rnd.Next(0, notAdaptables.Length);
                     while (rand_NA_index != index)
                     {
                         rand_NA_index = rnd.Next(0, notAdaptables.Length);
                     }
-                    parents[1] = images[rand_NA_index];
+                    parents[1] = notAdaptables[rand_NA_index];
                     break;
                 default:
                     break;
@@ -202,7 +218,7 @@ namespace Progra_analisis
             return child;
         }
 
-        //Returns the new childs.
+        //Returns the new sorted childs.
         private Individual[] crossOver(Individual[] adaptables, Individual[] notAdaptables)
         {
             int childAmount = childsPerGeneration;
@@ -314,19 +330,11 @@ namespace Progra_analisis
             return adapatblesPercentageToCopy;
         }
 
-<<<<<<< HEAD
-        public int getChildsPerCross()
-        {
-            return childsPerCross;
-        }
-
         public int getGenerationCounter()
         {
             return generationCounter;
         }
 
-=======
->>>>>>> a1a95b871ed2b92fc1ae871b30b1f11565d638d6
         public int getHighestAdaptability()
         {
             return images[0].getAdaptability(1);   
@@ -348,7 +356,7 @@ namespace Progra_analisis
                 //Crossing
                 Individual[] newChilds = crossOver(adaptables, notAdaptables);
                 //Evolution
-                evolution(newChilds);
+                evolution(newChilds, adaptables);
 
                 if(generation % 10 == 0)
                 {
