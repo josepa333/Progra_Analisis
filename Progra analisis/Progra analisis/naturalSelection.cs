@@ -333,6 +333,7 @@ namespace Progra_analisis
             return images[0].getAdaptability(1);   
         }
 
+        
         public string getTypeOfHistogram()
         {
             if (Individual.histrogramSelected == 0)
@@ -345,7 +346,7 @@ namespace Progra_analisis
             }
             return "";
         }
-
+        
         public Individual[] genericAlgorithm()
         {
             int finalResultIndex = 0;

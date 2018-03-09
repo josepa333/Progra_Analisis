@@ -12,6 +12,7 @@ namespace Progra_analisis
         public static Individual finalImage;
         public static int sectionsPerImage = 3;
         public static int histrogramSelected; //0 = RGB and 1 = darkness
+        public static int distanceSelected; // 0 = Manhattan and 1 = Surprise
 
         private int geneticMutability = 20; //Mutability in the genes of each Image, if there is a mutation
         private List<List<int>> histogramDarkness;
@@ -113,7 +114,7 @@ namespace Progra_analisis
                     greenHistogram[clr.G] = (int)greenHistogram[clr.G] + 1;
                     blueHistogram[clr.B] = (int)blueHistogram[clr.B] + 1;
                 }
-                if (histrogramSelected == 1)
+                else
                 {
                     if (clr.A < 127)
                     {
@@ -125,22 +126,26 @@ namespace Progra_analisis
                     }
                 }
             }
-
-            for (int i = 0; i < 256; i++)
+            if (histrogramSelected == 0)
             {
-                sectionRGB.Add((int)redHistogram[i]);
+                for (int i = 0; i < 256; i++)
+                {
+                    sectionRGB.Add((int)redHistogram[i]);
+                }
+                for (int i = 0; i < 256; i++)
+                {
+                    sectionRGB.Add((int)greenHistogram[i]);
+                }
+                for (int i = 0; i < 256; i++)
+                {
+                    sectionRGB.Add((int)blueHistogram[i]);
+                }
+                histogramRGB.Add(sectionRGB);
             }
-            for (int i = 0; i < 256; i++)
+            else
             {
-                sectionRGB.Add((int)greenHistogram[i]);
-            }
-            for (int i = 0; i < 256; i++)
-            {
-                sectionRGB.Add((int)blueHistogram[i]);
-            }
-
-            histogramRGB.Add(sectionRGB);
-            histogramDarkness.Add(sectionBinary);
+                histogramDarkness.Add(sectionBinary);
+            }   
         }
 
         public Individual()

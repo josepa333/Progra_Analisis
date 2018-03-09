@@ -153,7 +153,7 @@ namespace Progra_analisis
                     this.output9.Visible = true;
                     this.output10.Visible = true;
 
-                    
+
                     NaturalSelection naturalSelection = new NaturalSelection(bitImage,
                         Decimal.ToInt32(this.Q_generations.Value),
                         Decimal.ToInt32(this.Q_population.Value),
@@ -208,6 +208,24 @@ namespace Progra_analisis
         private void label10_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void RGBSelected_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.darknessSelected.Checked == true)
+            {
+                this.darknessSelected.Checked = false;
+                this.RGBSelected.Checked = true;
+            }
+        }
+
+        private void darknessSelected_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.RGBSelected.Checked == true)
+            {
+                this.RGBSelected.Checked = false;
+                this.darknessSelected.Checked = true;
+            }
         }
     }
 }
