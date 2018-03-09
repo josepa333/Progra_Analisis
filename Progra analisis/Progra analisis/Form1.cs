@@ -71,6 +71,9 @@ namespace Progra_analisis
             this.pNAwNa.Hide();
             this.pAwA.Hide();
             this.pAdaptableImages.Hide();
+            this.adapatblesPercentageToCopy.Hide();
+            this.childsPerCross.Hide();
+
             this.label2.Hide();
             this.label3.Hide();
             this.label4.Hide();
@@ -80,6 +83,9 @@ namespace Progra_analisis
             this.label8.Hide();
             this.label9.Hide();
             this.label10.Hide();
+            this.label11.Hide();
+            this.label12.Hide();
+
             this.selected_picture.Hide();
             this.BT_selectImage.Hide();
             this.button1.Hide();
@@ -100,13 +106,13 @@ namespace Progra_analisis
                 Decimal.ToInt32(this.Q_generations.Value),
                 Decimal.ToInt32(this.Q_population.Value),
                 Decimal.ToInt32(this.childsPerGeneration.Value),
-                20,
-                Decimal.ToDouble(this.mutabilityPercentage.Value),
-                Decimal.ToDouble(this.pAwNa.Value),
-                Decimal.ToDouble(this.pNAwNa.Value),
-                Decimal.ToDouble(this.pAwA.Value),
-                Decimal.ToDouble(this.pAdaptableImages.Value),
-                5,
+                Decimal.ToInt32(this.childsPerCross.Value),
+                Decimal.ToDouble(this.mutabilityPercentage.Value)/100,
+                Decimal.ToDouble(this.pAwNa.Value)/100,
+                Decimal.ToDouble(this.pNAwNa.Value)/100,
+                Decimal.ToDouble(this.pAwA.Value)/100,
+                Decimal.ToDouble(this.pAdaptableImages.Value)/100,
+                Decimal.ToInt32(this.adapatblesPercentageToCopy.Value)/100,
                 Decimal.ToInt32(this.sectionsPerImage.Value));
 
             Individual[] imagesToDisplay = naturalSelection.genericAlgorithm();

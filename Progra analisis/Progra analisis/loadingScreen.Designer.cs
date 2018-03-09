@@ -28,18 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.actualPicture = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.actualPicture)).BeginInit();
             this.SuspendLayout();
             // 
-            // pictureBox1
+            // actualPicture
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(98, 59);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(260, 219);
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
+            this.actualPicture.Location = new System.Drawing.Point(98, 59);
+            this.actualPicture.Name = "actualPicture";
+            this.actualPicture.Size = new System.Drawing.Size(260, 219);
+            this.actualPicture.TabIndex = 0;
+            this.actualPicture.TabStop = false;
             // 
             // label1
             // 
@@ -57,11 +57,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(454, 335);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.actualPicture);
             this.Name = "loadingScreen";
             this.Text = "loadingScreen";
             this.Load += new System.EventHandler(this.loadingScreen_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.actualPicture)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -69,7 +69,7 @@
 
         #endregion
 
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox actualPicture;
         private System.Windows.Forms.Label label1;
     }
 }
