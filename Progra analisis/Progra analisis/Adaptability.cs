@@ -9,11 +9,13 @@ namespace Progra_analisis
 {
     class Adaptability
     {
-        private int distanceRGBHistogram;
-        private int distanceDarknessHistogram;
-        private int distanceAverage;
+        private int manhattanDistanceRGBHistogram;
+        private int manhattanDistanceDarknessHistogram;
+        private int surpriseDistanceRGBHistogram;
+        private int surpriseDistanceDarknessHistogram;
+        private int distance;
 
-        private int manhattan(List<List<int>> individual)
+        private int manhattanRGB(List<List<int>> individual)
         {
             int distanceValue = 0;
 
@@ -43,26 +45,54 @@ namespace Progra_analisis
             return distanceValue;
         }
 
-        private void setDistanceRGBHistogram(List<List<int>> RGBHistogram)
+        private void setManhattanRGBHistogram(List<List<int>> RGBHistogram)
         {
-            distanceRGBHistogram = manhattan(RGBHistogram);
+            manhattanDistanceRGBHistogram = manhattanRGB(RGBHistogram);
+            distance = manhattanDistanceRGBHistogram;
         }
 
-        private void setDistanceDarknessHistogram(List<List<int>> gradientHistogram)
+        private void setManhattanDarknessHistogram(List<List<int>> darknessHistogram)
         {
-            distanceDarknessHistogram = manhattanDarkness(gradientHistogram); //Function for gradient distance
+            manhattanDistanceDarknessHistogram = manhattanDarkness(darknessHistogram); //Function for gradient distance
+            distance = manhattanDistanceDarknessHistogram;
         }
 
-        private void setDistanceAverage()
+        private void setSurpriseRGBHistogram(List<List<int>> RGBHistogram)
         {
-            distanceAverage = (distanceRGBHistogram + distanceDarknessHistogram) / 2;
+            surpriseDistanceRGBHistogram = supriseRGB(RGBHistogram);
+            distance = surpriseDistanceRGBHistogram;
         }
 
-        public Adaptability(List<List<int>> RGBHistogram, List<List<int>> gradientHistogram)
+        private void setSurpriseDarknessHistogram(List<List<int>> darknessHistogram)
         {
-            setDistanceRGBHistogram(RGBHistogram);
-            setDistanceDarknessHistogram(gradientHistogram);
-            setDistanceAverage();
+            surpriseDistanceDarknessHistogram = surpriseDarkness();
+            distance = surpriseDistanceDarknessHistogram;
+        }
+
+        public Adaptability(List<List<int>> histogram)
+        {
+            if (Individual.histrogramSelected == 0)
+            {
+                if (Individual.distanceSelected == 0)
+                {
+                    setManhattanRGBHistogram(histogram);
+                }
+                if (Individual.distanceSelected == 1)
+                {
+                    setSurpriseRGBHistogram(histogram);
+                }
+            }
+            if (Individual.histrogramSelected == 1)
+            {
+                if (Individual.distanceSelected == 0)
+                {
+                    setManhattanDarknessHistogram(histogram);
+                }
+                if (Individual.distanceSelected == 1)
+                {
+                    setSurpriseDarknessHistogram(histogram);
+                }
+            }
         }
 
         //adaptabilityOperation is how the adaptability is calculated.
@@ -72,7 +102,7 @@ namespace Progra_analisis
             switch (adaptabilityOperation)
             {
                 case 1:
-                    return distanceAverage;
+                    return distance;
                 default:
                     return 0;
             }

@@ -149,7 +149,14 @@ namespace Progra_analisis
             histogramDarkness = new List<List<int>>(sectionsPerImage * sectionsPerImage);
             bitmap = generateBitmap();
             dissectImage();
-            adaptability = new Adaptability(histogramRGB, histogramDarkness);
+            if (Individual.histrogramSelected == 0)
+            {
+                adaptability = new Adaptability(histogramRGB);
+            }
+            if (Individual.histrogramSelected == 1)
+            {
+                adaptability = new Adaptability(histogramDarkness);
+            }
             histogramRGB.Clear();
             histogramDarkness.Clear();
         }

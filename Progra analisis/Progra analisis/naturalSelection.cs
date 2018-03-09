@@ -335,7 +335,15 @@ namespace Progra_analisis
 
         public string getTypeOfHistogram()
         {
-
+            if (Individual.histrogramSelected == 0)
+            {
+                return "RGB Histogram";
+            }
+            if (Individual.histrogramSelected == 1)
+            {
+                return "Darkness Histogram";
+            }
+            return "";
         }
 
         public Individual[] genericAlgorithm()
