@@ -17,7 +17,7 @@ namespace Progra_analisis
         public Form1()
         {
             InitializeComponent();
-
+            
             this.output1.SizeMode = PictureBoxSizeMode.StretchImage;
             this.output2.SizeMode = PictureBoxSizeMode.StretchImage;
             this.output3.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -39,11 +39,12 @@ namespace Progra_analisis
             this.output8.Visible = false;
             this.output9.Visible = false;
             this.output10.Visible = false;
+            
         }
 
         private void BT_selectImage_Click(object sender, EventArgs e)
         {
-
+            
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
             string filename = "";
 
@@ -57,24 +58,11 @@ namespace Progra_analisis
 
             this.selected_picture.SizeMode = PictureBoxSizeMode.StretchImage;
             this.selected_picture.Image = Image.FromFile(filename);
-
+            
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-
-            NaturalSelection naturalSelection = new NaturalSelection(bitImage,
-                Decimal.ToInt32(this.Q_generations.Value),
-                Decimal.ToInt32(this.Q_population.Value),
-                Decimal.ToInt32(this.childsPerGeneration.Value),
-                Decimal.ToDouble(this.mutabilityPercentage.Value),
-                Decimal.ToDouble(this.pAwNa.Value),
-                Decimal.ToDouble(this.pNAwNa.Value),
-                Decimal.ToDouble(this.pAwA.Value),
-                Decimal.ToDouble(this.pAdaptableImages.Value));
-
-            List<Individual> imagesToDisplay = naturalSelection.genericAlgorithm();
-
             this.Q_generations.Hide();
             this.Q_population.Hide();
             this.childsPerGeneration.Hide();
@@ -107,9 +95,26 @@ namespace Progra_analisis
             this.output9.Visible = true;
             this.output10.Visible = true;
 
+
+            NaturalSelection naturalSelection = new NaturalSelection(bitImage,
+                Decimal.ToInt32(this.Q_generations.Value),
+                Decimal.ToInt32(this.Q_population.Value),
+                Decimal.ToInt32(this.childsPerGeneration.Value),
+                20,
+                Decimal.ToDouble(this.mutabilityPercentage.Value),
+                Decimal.ToDouble(this.pAwNa.Value),
+                Decimal.ToDouble(this.pNAwNa.Value),
+                Decimal.ToDouble(this.pAwA.Value),
+                Decimal.ToDouble(this.pAdaptableImages.Value),
+                5,
+                Decimal.ToInt32(this.sectionsPerImage.Value));
+
+            Individual[] imagesToDisplay = naturalSelection.genericAlgorithm();
+
             this.output1.Image = imagesToDisplay[0].getBitmap();
             this.output2.Image = imagesToDisplay[1].getBitmap();
             this.output3.Image = imagesToDisplay[2].getBitmap();
+            /*
             this.output4.Image = imagesToDisplay[3].getBitmap();
             this.output5.Image = imagesToDisplay[4].getBitmap();
             this.output6.Image = imagesToDisplay[5].getBitmap();
@@ -117,6 +122,7 @@ namespace Progra_analisis
             this.output8.Image = imagesToDisplay[7].getBitmap();
             this.output9.Image = imagesToDisplay[8].getBitmap();
             this.output10.Image = imagesToDisplay[9].getBitmap();
+            */
 
         }
 

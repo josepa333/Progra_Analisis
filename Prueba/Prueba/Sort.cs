@@ -4,48 +4,48 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Progra_analisis
+namespace Prueba
 {
     class Sort
     {
         //Private Methods for Merge Sort
-        private static List<int> merge(List<int> lefList, List<int> rightList)
+        private static List<Individual> merge(List<Individual> leftImages, List<Individual> rightImages)
         {
-            List<int> result = new List<int>(lefList.Count + rightList.Count);
+            List<Individual> result = new List<Individual>(leftImages.Count + rightImages.Count);
             int indexLeftImages = 0;
             int indexRightImages = 0;
             int indexResult = 0;
 
-            while (indexLeftImages < lefList.Count || indexRightImages < rightList.Count)
+            while (indexLeftImages < leftImages.Count || indexRightImages < rightImages.Count)
             {
-                if (indexLeftImages < lefList.Count && indexRightImages < rightList.Count)
+                if (indexLeftImages < leftImages.Count && indexRightImages < rightImages.Count)
                 {
-                    if (lefList[indexLeftImages] <= rightList[indexRightImages]) //Comparison Ascendent or Descendent
+                    if (leftImages[indexLeftImages].getAdaptability(1) <= rightImages[indexRightImages].getAdaptability(1)) //Comparison Ascendent or Descendent
                     {
-                        result[indexResult] = lefList[indexLeftImages];
+                        result[indexResult] = leftImages[indexLeftImages];
                         indexLeftImages++;
                         indexResult++;
                     }
                     else
                     {
-                        result[indexResult] = rightList[indexRightImages];
+                        result[indexResult] = rightImages[indexRightImages];
                         indexRightImages++;
                         indexResult++;
                     }
                 }
                 else
                 {
-                    if (indexLeftImages < lefList.Count)
+                    if (indexLeftImages < leftImages.Count)
                     {
-                        result[indexResult] = lefList[indexLeftImages];
+                        result[indexResult] = leftImages[indexLeftImages];
                         indexLeftImages++;
                         indexResult++;
                     }
                     else
                     {
-                        if (indexRightImages < rightList.Count)
+                        if (indexRightImages < rightImages.Count)
                         {
-                            result[indexResult] = rightList[indexRightImages];
+                            result[indexResult] = rightImages[indexRightImages];
                             indexRightImages++;
                             indexResult++;
                         }
@@ -56,23 +56,23 @@ namespace Progra_analisis
         }
 
         //Private Methods for Quick Sort
-        private static void swapValues(List<int> list, int indexA, int indexB)
+        private static void swapValues(Individual[] list, int indexA, int indexB)
         {
-            int temp = list[indexA];
+            Individual temp = list[indexA];
             list[indexA] = list[indexB];
             list[indexB] = temp;
         }
 
-        private static int partitionList(List<int> list, int left, int right, int pivot)
+        private static int partitionList(Individual[] list, int left, int right, Individual pivot)
         {
             int leftPointer = left - 1;
             int rightPointer = right;
 
             while (true)
             {
-                while (list[++leftPointer] < pivot) ; //Comparison Ascendent or Descendent
+                while (list[++leftPointer].getAdaptability(1) < pivot.getAdaptability(1)) ; //Comparison Ascendent or Descendent
 
-                while (rightPointer > 0 && list[--rightPointer] > pivot) ; //Comparison Ascendent or Descendent
+                while (rightPointer > 0 && list[--rightPointer].getAdaptability(1) > pivot.getAdaptability(1)) ; //Comparison Ascendent or Descendent
 
                 if (leftPointer >= rightPointer)
                 {
@@ -88,7 +88,7 @@ namespace Progra_analisis
             return leftPointer;
         }
 
-        public static void quickSort(List<int> list, int left, int right)
+        public static void quickSort(Individual[] list, int left, int right)
         {
             if (right - left <= 0)
             {
@@ -96,7 +96,7 @@ namespace Progra_analisis
             }
             else
             {
-                int pivot = list[right];
+                Individual pivot = list[right];
                 int pivotLocation = partitionList(list, left, right, pivot);
 
                 quickSort(list, left, pivotLocation - 1);
@@ -105,7 +105,7 @@ namespace Progra_analisis
             }
         }
 
-        public static List<int> mergeSort(List<int> images)
+        public static List<Individual> mergeSort(List<Individual> images)
         {
             if (images.Count <= 1)
             {
@@ -113,23 +113,23 @@ namespace Progra_analisis
             }
 
             int center = images.Count / 2;
-            List<int> leftList = new List<int>(center);
-            List<int> rightList;
+            List<Individual> leftImages = new List<Individual>(center);
+            List<Individual> rightImages;
 
             if (images.Count % 2 == 0)
             {
-                rightList = new List<int>(center);
+                rightImages = new List<Individual>(center);
             }
             else
             {
-                rightList = new List<int>(center + 1);
+                rightImages = new List<Individual>(center + 1);
             }
 
-            List<int> result = new List<int>(images.Count);
+            List<Individual> result = new List<Individual>(images.Count);
 
             for (int i = 0; i < center; i++)
             {
-                leftList[i] = images[i];
+                leftImages[i] = images[i];
             }
 
             int c = 0;
@@ -137,15 +137,15 @@ namespace Progra_analisis
             {
                 if (c != images.Count)
                 {
-                    rightList[c] = images[j];
+                    rightImages[c] = images[j];
                     c++;
                 }
             }
 
-            leftList = mergeSort(leftList);
-            rightList = mergeSort(rightList);
+            leftImages = mergeSort(leftImages);
+            rightImages = mergeSort(rightImages);
 
-            result = merge(leftList, rightList);
+            result = merge(leftImages, rightImages);
 
             return result;
         }

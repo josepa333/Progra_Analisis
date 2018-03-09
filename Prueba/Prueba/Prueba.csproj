@@ -53,7 +53,7 @@
     </Compile>
     <Compile Include="NaturalSelection.cs" />
     <Compile Include="Sort.cs" />
-    <Compile Include="Image.cs" />
+    <Compile Include="Individual.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -2,18 +2,18 @@
 using System.Drawing;
 using System.Collections;
 using System.Collections.Generic;
-using System.Windows.Forms;
 
-
-namespace Progra_analisis
+namespace Prueba
 {
     class Individual
     {
-        public static Individual finalImage;
+        public static Individual finalImage =  new Individual();
+        public static Bitmap finalBitMap = new Bitmap(10, 10); 
         public static int mutations = 0;
         public static int sectionsPerImage = 3;
 
         private int geneticMutability = 20; //Mutability in the genes of each Image, if there is a mutation
+
         private List<List<int>> histogramDarkness;
         private List<List<int>> histogramRGB;
         private Adaptability adaptability;
@@ -45,15 +45,15 @@ namespace Progra_analisis
         {
             int contadorX = 0;
             int contadorY = 0;
-            int fatherWidht = bitmap.Width / 3;
-            int fatherHight = bitmap.Height / 3;
+            int fatherWidht = finalBitMap.Width / 3;
+            int fatherHight = finalBitMap.Height / 3;
             ArrayList pixelPerSection = new ArrayList();
 
             while (contadorX != 3 && contadorY != 3)
             {
-                for (int j = (bitmap.Height / 3) * contadorY; j < (bitmap.Height / 3) * (contadorY + 1); j++)
+                for (int j = (finalBitMap.Height / 3) * contadorY; j < (finalBitMap.Height / 3) * (contadorY + 1); j++)
                 {
-                    for (int i = (bitmap.Width / 3) * contadorX; i < (bitmap.Width / 3) * (contadorX + 1); i++)
+                    for (int i = (finalBitMap.Width / 3) * contadorX; i < (finalBitMap.Width / 3) * (contadorX + 1); i++)
                     {
                         pixelPerSection.Add(bitmap.GetPixel(i, j));
                     }
@@ -151,22 +151,13 @@ namespace Progra_analisis
             histogramDarkness.Clear();
         }
 
-        public Individual(Bitmap p_kid, int cero)
-        {
-            histogramRGB = new List<List<int>>();
-            histogramDarkness = new List<List<int>>();
-            bitmap = p_kid;
-        }
-
         public Individual(Bitmap p_kid)
         {
-            histogramRGB = new List<List<int>>(sectionsPerImage * sectionsPerImage);
-            histogramDarkness = new List<List<int>>(sectionsPerImage * sectionsPerImage);
             bitmap = p_kid;
+            histogramRGB = new List<List<int>>();
+            histogramDarkness = new List<List<int>>();
             dissectImage();
             adaptability = new Adaptability(histogramRGB, histogramDarkness);
-            histogramRGB.Clear();
-            histogramDarkness.Clear();
         }
 
         public Individual crossOver(Individual soulmate)
@@ -242,15 +233,13 @@ namespace Progra_analisis
             return histogramDarkness;
         }
 
-        public void dataForFinalImage()
-        {
-            dissectImage();
-            adaptability = new Adaptability(histogramRGB, histogramDarkness);
-        }
-
         public int getAdaptability(int adaptabilityOperation)
         {
             return adaptability.getAdaptability(adaptabilityOperation);
         }
+
     }
 }
+
+
+//CONSTRUCTOR DE IMAGEN SIN ADAPTABILIDAD
