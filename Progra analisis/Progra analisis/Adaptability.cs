@@ -65,7 +65,7 @@ namespace Progra_analisis
 
         private void setSurpriseDarknessHistogram(List<List<int>> darknessHistogram)
         {
-            surpriseDistanceDarknessHistogram = surpriseDarkness();
+            surpriseDistanceDarknessHistogram = surpriseDarkness(darknessHistogram);
             distance = surpriseDistanceDarknessHistogram;
         }
 
@@ -95,17 +95,9 @@ namespace Progra_analisis
             }
         }
 
-        //adaptabilityOperation is how the adaptability is calculated.
-        //1 for the avarege between the different distances.
-        public int getAdaptability(int adaptabilityOperation)
+        public int getDistance()
         {
-            switch (adaptabilityOperation)
-            {
-                case 1:
-                    return distance;
-                default:
-                    return 0;
-            }
+            return distance;
         }
     }
 }

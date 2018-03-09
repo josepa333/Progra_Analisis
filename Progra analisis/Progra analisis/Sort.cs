@@ -20,7 +20,7 @@ namespace Progra_analisis
             {
                 if (indexLeftImages < leftImages.Count && indexRightImages < rightImages.Count)
                 {
-                    if (leftImages[indexLeftImages].getAdaptability(1) <= rightImages[indexRightImages].getAdaptability(1)) //Comparison Ascendent or Descendent
+                    if (leftImages[indexLeftImages].getDistance() <= rightImages[indexRightImages].getDistance()) //Comparison Ascendent or Descendent
                     {
                         result[indexResult] = leftImages[indexLeftImages];
                         indexLeftImages++;
@@ -70,9 +70,9 @@ namespace Progra_analisis
 
             while (true)
             {
-                while (list[++leftPointer].getAdaptability(1) < pivot.getAdaptability(1)) ; //Comparison Ascendent or Descendent
+                while (list[++leftPointer].getDistance() < pivot.getDistance()) ; //Comparison Ascendent or Descendent
 
-                while (rightPointer > 0 && list[--rightPointer].getAdaptability(1) > pivot.getAdaptability(1)) ; //Comparison Ascendent or Descendent
+                while (rightPointer > 0 && list[--rightPointer].getDistance() > pivot.getDistance()) ; //Comparison Ascendent or Descendent
 
                 if (leftPointer >= rightPointer)
                 {
