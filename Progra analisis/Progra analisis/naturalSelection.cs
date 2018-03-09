@@ -29,11 +29,12 @@ namespace Progra_analisis
             double pCross_NA_NA_percentage, double pCross_A_A_percentage, double pAdaptableImagesPercentage, double pAdapatblesPercentageToCopy, int sectionsPerImage)
         {
             Individual.finalImage = new Individual(desireImage);
+            Individual.sectionsPerImage = sectionsPerImage;
+            Individual.mutations = 0;
             childsPerGeneration = pChildsPerGeneration;
             childsPerCross = pChildsPerCross;
             generations = pGenerations;
             population = pPopulation;
-            Individual.mutations = 0;
             adaptableImagesPercentage = Convert.ToInt32(pAdaptableImagesPercentage * population);
             adapatblesPercentageToCopy = pAdapatblesPercentageToCopy;
             cross_A_A_percentage = Convert.ToInt32(pCross_A_A_percentage * childsPerGeneration);
@@ -44,7 +45,6 @@ namespace Progra_analisis
             images = new Individual[population];
             createImages(population);
             Sort.quickSort(images, 0, images.Length - 1);
-            Individual.sectionsPerImage = sectionsPerImage;
         }
 
         private void createImages(int quantityImages)
