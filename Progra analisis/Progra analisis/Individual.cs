@@ -10,7 +10,6 @@ namespace Progra_analisis
     class Individual
     {
         public static Individual finalImage;
-        public static int mutations = 0;
         public static int sectionsPerImage = 3;
 
         private int geneticMutability = 20; //Mutability in the genes of each Image, if there is a mutation
@@ -212,7 +211,6 @@ namespace Progra_analisis
 
         public void mutation()
         {
-            mutations++;
             Random rnd = new Random();
             int mutationsApplied = 0;
             int dimentions = (bitmap.Height * bitmap.Width) / 4;

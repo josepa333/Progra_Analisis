@@ -20,8 +20,8 @@ namespace Progra_analisis
         private double cross_A_A_percentage; //Cross percentage of childs from two parents with high adaptability.
         private double cross_NA_NA_percentage; //Cross percentage of childs from two parents with low adaptability.
         private double cross_A_NA_percentage; //Cross percentage of chlds from a high adaptability parent with a lowone.
-        private double mutationProbability;//from 0 to a 100 real quick
         private int finalMutationsPerGeneration; //The number of mutations per generation.
+        private int mutationsPerGeneration;
         private int childsPerGeneration;
         private int childsPerCross; //The amount of childs in each cross
         private int generations;
