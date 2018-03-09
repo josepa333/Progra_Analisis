@@ -25,6 +25,7 @@ namespace Progra_analisis
         private int generations;
         private int population;
         private int highestAdaptabilityReached;
+        private string typeOfHistogram;
         private string statisticsRegisterPath = Environment.CurrentDirectory + "\\statistics.txt";
         private string topStatisticsRegisterPath = Environment.CurrentDirectory + "\\topStatistics.txt";
 
@@ -99,6 +100,7 @@ namespace Progra_analisis
             cross_A_NA_percentage = Convert.ToDouble((naturalSelection.getCross_A_NA_percentage() * 100) / childsPerGeneration);
             cross_NA_NA_percentage = Convert.ToDouble((naturalSelection.getCross_NA_NA_percentage() * 100) / childsPerGeneration);
             highestAdaptabilityReached = naturalSelection.getHighestAdaptability();
+            typeOfHistogram = naturalSelection.getTypeOfHistogram();
             try
             {
                 deserialize(statisticsRegister, statisticsRegisterPath);
@@ -146,11 +148,59 @@ namespace Progra_analisis
             }
         }
 
+        public double getAdaptablesPercentageToCopy()
+        {
+            return adapatblesPercentageToCopy;
+        }
+
+        public double getAdaptableImagesPercentage()
+        {
+            return adaptableImagesPercentage;
+        }
+
+        public double getCross_A_A_percentage()
+        {
+            return cross_A_A_percentage;
+        }
+
+        public double getCross_A_NA_percentage()
+        {
+            return cross_A_NA_percentage;
+        }
+
+        public double getCross_NA_NA_percentage()
+        {
+            return cross_NA_NA_percentage;
+        }
+
+        public int getMutationsPerGeneration()
+        {
+            return mutationsPerGeneration;
+        }
+
+        public int getChildsPerGeneration()
+        {
+            return childsPerGeneration;
+        }
+
+        public int getGenerations()
+        {
+            return generations;
+        }
+
+        public int getPopulation()
+        {
+            return population;
+        }
+
         public int getHighestAdaptabilityReached()
         {
             return highestAdaptabilityReached;
         }
 
-
+        public string getTypeOfHistogram()
+        {
+            return typeOfHistogram;
+        }
     }
 }
