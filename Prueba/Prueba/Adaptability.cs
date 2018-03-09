@@ -10,39 +10,58 @@ namespace Prueba
     class Adaptability
     {
         private int distanceRGBHistogram;
-        private int distanceGradientHistogram;
+        private int distanceDarknessHistogram;
         private int distanceAverage;
 
-        private int manhattan(ArrayList individual)
+        private int manhattan(List<List<int>> individual)
         {
             int distanceValue = 0;
 
-            for (int i = 0; i < Image.finalImage.getHistogramRGB().Count; i++)
+            List<List<int>> histogramFromFinalImage = Individual.finalImage.getHistogramRGB();
+
+            for (int section = 0; section < individual.Count; section++)
             {
-                distanceValue += Math.Abs((int)Image.finalImage.getHistogramRGB()[i] - (int)individual[i]);
+                for (int i = 0; i < individual[section].Count; i++)
+                {
+                    distanceValue += Math.Abs(histogramFromFinalImage[section][i] - individual[section][i]);
+                }
             }
             return distanceValue;
         }
 
-        private void setDistanceRGBHistogram(ArrayList RGBHistogram)
+        private int darknessDistance(List<List<int>> individual)
+        {
+            int distanceValue = 0;
+
+            List<List<int>> histogramFromFinalImage = Individual.finalImage.getHistogramDarkness();
+
+            for (int section = 0; section < individual.Count; section++)
+            {
+                distanceValue += Math.Abs(histogramFromFinalImage[section][0] - individual[section][0]);
+                distanceValue += Math.Abs(histogramFromFinalImage[section][1] - individual[section][1]);
+            }
+            return distanceValue;
+        }
+
+        private void setDistanceRGBHistogram(List<List<int>> RGBHistogram)
         {
             distanceRGBHistogram = manhattan(RGBHistogram);
         }
 
-        private void setDistanceGradientHistogram(ArrayList gradientHistogram)
+        private void setDistanceDarknessHistogram(List<List<int>> gradientHistogram)
         {
-            distanceGradientHistogram = 0; //Function for gradient distance
+            distanceDarknessHistogram = darknessDistance(gradientHistogram); //Function for gradient distance
         }
 
         private void setDistanceAverage()
         {
-            distanceAverage = (distanceRGBHistogram + distanceGradientHistogram) / 2;
+            distanceAverage = (distanceRGBHistogram + distanceDarknessHistogram) / 2;
         }
 
-        public Adaptability(ArrayList RGBHistogram, ArrayList gradientHistogram)
+        public Adaptability(List<List<int>> RGBHistogram, List<List<int>> gradientHistogram)
         {
             setDistanceRGBHistogram(RGBHistogram);
-            setDistanceGradientHistogram(gradientHistogram);
+            setDistanceDarknessHistogram(gradientHistogram);
             setDistanceAverage();
         }
 
@@ -50,7 +69,7 @@ namespace Prueba
         //1 for the avarege between the different distances.
         public int getAdaptability(int adaptabilityOperation)
         {
-            switch(adaptabilityOperation)
+            switch (adaptabilityOperation)
             {
                 case 1:
                     return distanceAverage;

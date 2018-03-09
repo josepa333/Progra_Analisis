@@ -17,8 +17,23 @@ namespace Prueba
         
         static void Main(string[] args)
         {
+            string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\Progra_Analisis\ima.JPG";
+            Bitmap ima = new Bitmap(path, true);
+            Individual.finalBitMap = ima;
+            Individual.finalImage = new Individual(ima);
+            List<Individual> images = new List<Individual>(5);
 
-            
+            for (int i = 0; i < 5; i++)
+            {
+                images.Add(new Individual());
+
+            }
+
+            images[1].getBitmap().Save(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\Progra_Analisis\newima1.JPG");
+            Console.ReadKey();
+
+            images[2].getBitmap().Save(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\Progra_Analisis\newima.JPG");
+            Console.ReadKey();
         }
     }
 }
