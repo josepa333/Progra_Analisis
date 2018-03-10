@@ -204,7 +204,9 @@ namespace Progra_analisis
             int rand_mutation = rnd.Next(0, 101);
             if (rand_mutation <= mutationProbability)
             {
-                child = parents[0].mutation(parents[1]);
+                //child = parents[0].mutation(parents[1]); RICHI cambie esto para poder correrlo pero lo deje por si usted lo queria
+                //manejar difernte
+                child = parents[0].crossOver(parents[1]);
             }
             else
             {
