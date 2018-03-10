@@ -99,7 +99,7 @@ namespace Progra_analisis
             cross_A_A_percentage = Convert.ToDouble((naturalSelection.getCross_A_A_percentage() * 100) / childsPerGeneration);
             cross_A_NA_percentage = Convert.ToDouble((naturalSelection.getCross_A_NA_percentage() * 100) / childsPerGeneration);
             cross_NA_NA_percentage = Convert.ToDouble((naturalSelection.getCross_NA_NA_percentage() * 100) / childsPerGeneration);
-            bestDistance = naturalSelection.getBestDistance();
+            //bestDistance = naturalSelection.getBestDistance();
             typeOfHistogram = naturalSelection.getTypeOfHistogram();
         }
 
