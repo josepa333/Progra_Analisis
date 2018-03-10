@@ -68,6 +68,7 @@ namespace Progra_analisis
 
         private void button1_Click(object sender, EventArgs e)
         {
+
             /*
             //Borrar todo dentro de esto despues de probar
             List<Bitmap> bitmapsTest = new List<Bitmap>(5);
@@ -100,15 +101,18 @@ namespace Progra_analisis
             */
             //Cambiar a natural selection
             //threadLoading thread = new threadLoading(bitmapsTest);
-            
+
+            int numberOfAaptables = Convert.ToInt32(((this.pAdaptableImages.Value) / 100) * this.Q_population.Value);
+            int mutationValidation = Convert.ToInt32((this.Q_population.Value - this.childsPerGenerations.Value - ((this.adapatblesPercentageToCopy.Value / 100) * numberOfAaptables)));
+;
             if (bitImage != null &&
                 this.Q_generations.Value > 1 &&
                 this.Q_population.Value > 1 &&
                 this.childsPerGenerations.Value > 1 &&
                 ((this.pAwNa.Value + this.pNAwNa.Value + this.pAwA.Value) == 100) &&
                 this.childsPerGenerations.Value <= this.Q_population.Value &&
-                this.sectionsPerImage.Value > 2
-                )
+                this.sectionsPerImage.Value > 2 &&
+                this.mutationsPerGeneration.Value <= mutationValidation)
             {
                 if (this.pAdaptableImages.Value > 0 && this.adapatblesPercentageToCopy.Value <= this.childsPerGenerations.Value 
                     || pAdaptableImages.Value == 0)
@@ -154,19 +158,17 @@ namespace Progra_analisis
                         Decimal.ToInt32(this.Q_generations.Value),
                         Decimal.ToInt32(this.Q_population.Value),
                         Decimal.ToInt32(this.childsPerGenerations.Value),
-                        Decimal.ToDouble(this.mutabilityPercentage.Value) / 100,
+                        Decimal.ToInt32(this.mutationsPerGeneration.Value),
                         Decimal.ToDouble(this.pAwNa.Value) / 100,
                         Decimal.ToDouble(this.pNAwNa.Value) / 100,
                         Decimal.ToDouble(this.pAwA.Value) / 100,
                         Decimal.ToDouble(this.pAdaptableImages.Value) / 100,
                         Decimal.ToInt32(this.adapatblesPercentageToCopy.Value) / 100,
-                        Decimal.ToInt32(this.sectionsPerImage.Value)));
-                        
+                        Decimal.ToInt32(this.sectionsPerImage.Value));
 
-                    
+
                     Individual[] imagesToDisplay = naturalSelection.genericAlgorithm();
 
-                    
                     this.output1.Image = imagesToDisplay[0].getBitmap();
                     this.output2.Image = imagesToDisplay[1].getBitmap();
                     this.output3.Image = imagesToDisplay[2].getBitmap();
@@ -190,7 +192,7 @@ namespace Progra_analisis
             {
                 MessageBox.Show("Verify the given data");
             }
-            */
+            
         }
 
         private void selected_picture_Click(object sender, EventArgs e)
