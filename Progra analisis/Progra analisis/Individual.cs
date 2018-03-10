@@ -11,10 +11,9 @@ namespace Progra_analisis
     {
         public static Individual finalImage;
         public static int sectionsPerImage = 3;
-        public static int histrogramSelected; //0 = RGB and 1 = darkness
-        public static int distanceSelected; // 0 = Manhattan and 1 = Surprise
+        public static int histrogramSelected = 0; //0 = RGB and 1 = darkness
+        public static int distanceSelected = 0; // 0 = Manhattan and 1 = Surprise
 
-        private int geneticMutability = 20; //Mutability in the genes of each Image, if there is a mutation
         private List<List<int>> histogramDarkness;
         private List<List<int>> histogramRGB;
         private Adaptability adaptability;
@@ -154,7 +153,14 @@ namespace Progra_analisis
             histogramDarkness = new List<List<int>>(sectionsPerImage * sectionsPerImage);
             bitmap = generateBitmap();
             dissectImage();
-            adaptability = new Adaptability(histogramRGB, histogramDarkness);
+            if (Individual.histrogramSelected == 0)
+            {
+                adaptability = new Adaptability(histogramRGB);
+            }
+            if (Individual.histrogramSelected == 1)
+            {
+                adaptability = new Adaptability(histogramDarkness);
+            }
             histogramRGB.Clear();
             histogramDarkness.Clear();
         }
@@ -172,7 +178,14 @@ namespace Progra_analisis
             histogramDarkness = new List<List<int>>(sectionsPerImage * sectionsPerImage);
             bitmap = p_kid;
             dissectImage();
-            adaptability = new Adaptability(histogramRGB, histogramDarkness);
+            if (Individual.histrogramSelected == 0)
+            {
+                adaptability = new Adaptability(histogramRGB);
+            }
+            if (Individual.histrogramSelected == 1)
+            {
+                adaptability = new Adaptability(histogramDarkness);
+            }
             histogramRGB.Clear();
             histogramDarkness.Clear();
         }
@@ -233,15 +246,9 @@ namespace Progra_analisis
             return histogramDarkness;
         }
 
-        public void dataForFinalImage()
+        public int getDistance()
         {
-            dissectImage();
-            adaptability = new Adaptability(histogramRGB, histogramDarkness);
-        }
-
-        public int getAdaptability(int adaptabilityOperation)
-        {
-            return adaptability.getAdaptability(adaptabilityOperation);
+            return adaptability.getDistance();
         }
     }
 }
