@@ -64,6 +64,8 @@
             this.label12 = new System.Windows.Forms.Label();
             this.mutationsPerGeneration = new System.Windows.Forms.NumericUpDown();
             this.label4 = new System.Windows.Forms.Label();
+            this.RGBSelected = new System.Windows.Forms.RadioButton();
+            this.darknessSelected = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.selected_picture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Q_generations)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Q_population)).BeginInit();
@@ -386,11 +388,37 @@
             this.label4.TabIndex = 38;
             this.label4.Text = "Mutations per generation";
             // 
+            // RGBSelected
+            // 
+            this.RGBSelected.AutoSize = true;
+            this.RGBSelected.Location = new System.Drawing.Point(37, 444);
+            this.RGBSelected.Name = "RGBSelected";
+            this.RGBSelected.Size = new System.Drawing.Size(48, 17);
+            this.RGBSelected.TabIndex = 39;
+            this.RGBSelected.TabStop = true;
+            this.RGBSelected.Text = "RGB";
+            this.RGBSelected.UseVisualStyleBackColor = true;
+            this.RGBSelected.CheckedChanged += new System.EventHandler(this.RGBSelected_CheckedChanged);
+            // 
+            // darknessSelected
+            // 
+            this.darknessSelected.AutoSize = true;
+            this.darknessSelected.Location = new System.Drawing.Point(37, 467);
+            this.darknessSelected.Name = "darknessSelected";
+            this.darknessSelected.Size = new System.Drawing.Size(70, 17);
+            this.darknessSelected.TabIndex = 40;
+            this.darknessSelected.TabStop = true;
+            this.darknessSelected.Text = "Darkness";
+            this.darknessSelected.UseVisualStyleBackColor = true;
+            this.darknessSelected.CheckedChanged += new System.EventHandler(this.darknessSelected_CheckedChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1062, 496);
+            this.Controls.Add(this.darknessSelected);
+            this.Controls.Add(this.RGBSelected);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.mutationsPerGeneration);
             this.Controls.Add(this.label12);
@@ -495,6 +523,8 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.NumericUpDown mutationsPerGeneration;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.RadioButton RGBSelected;
+        private System.Windows.Forms.RadioButton darknessSelected;
     }
 }
 

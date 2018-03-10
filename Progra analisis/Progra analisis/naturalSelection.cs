@@ -333,11 +333,12 @@ namespace Progra_analisis
             return images[0].getAdaptability(1);   
         }
 
+        
         public string getTypeOfHistogram()
         {
 
         }
-
+        
         public Individual[] genericAlgorithm()
         {
             int finalResultIndex = 0;
