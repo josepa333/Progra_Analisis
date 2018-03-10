@@ -62,6 +62,8 @@
             this.label11 = new System.Windows.Forms.Label();
             this.adapatblesPercentageToCopy = new System.Windows.Forms.NumericUpDown();
             this.label12 = new System.Windows.Forms.Label();
+            this.mutationsPerGeneration = new System.Windows.Forms.NumericUpDown();
+            this.label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.selected_picture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Q_generations)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Q_population)).BeginInit();
@@ -83,6 +85,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.sectionsPerImage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.childsPerGenerations)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.adapatblesPercentageToCopy)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.mutationsPerGeneration)).BeginInit();
             this.SuspendLayout();
             // 
             // BT_selectImage
@@ -367,11 +370,29 @@
             this.label12.TabIndex = 36;
             this.label12.Text = "Sections per image";
             // 
+            // mutationsPerGeneration
+            // 
+            this.mutationsPerGeneration.Location = new System.Drawing.Point(39, 189);
+            this.mutationsPerGeneration.Name = "mutationsPerGeneration";
+            this.mutationsPerGeneration.Size = new System.Drawing.Size(68, 20);
+            this.mutationsPerGeneration.TabIndex = 37;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(113, 191);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(124, 13);
+            this.label4.TabIndex = 38;
+            this.label4.Text = "Mutations per generation";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1062, 496);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.mutationsPerGeneration);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.adapatblesPercentageToCopy);
             this.Controls.Add(this.label11);
@@ -430,6 +451,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.sectionsPerImage)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.childsPerGenerations)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.adapatblesPercentageToCopy)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.mutationsPerGeneration)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -471,6 +493,8 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.NumericUpDown adapatblesPercentageToCopy;
         private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.NumericUpDown mutationsPerGeneration;
+        private System.Windows.Forms.Label label4;
     }
 }
 

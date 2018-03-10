@@ -68,7 +68,7 @@ namespace Progra_analisis
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            /*
             //Borrar todo dentro de esto despues de probar
             List<Bitmap> bitmapsTest = new List<Bitmap>(5);
 
@@ -97,10 +97,10 @@ namespace Progra_analisis
             bitmapsTest.Add(bitImage);
 
             //Borrar
-
+            */
             //Cambiar a natural selection
-            threadLoading thread = new threadLoading(bitmapsTest);
-            /*
+            //threadLoading thread = new threadLoading(bitmapsTest);
+            
             if (bitImage != null &&
                 this.Q_generations.Value > 1 &&
                 this.Q_population.Value > 1 &&
@@ -160,7 +160,7 @@ namespace Progra_analisis
                         Decimal.ToDouble(this.pAwA.Value) / 100,
                         Decimal.ToDouble(this.pAdaptableImages.Value) / 100,
                         Decimal.ToInt32(this.adapatblesPercentageToCopy.Value) / 100,
-                        Decimal.ToInt32(this.sectionsPerImage.Value));
+                        Decimal.ToInt32(this.sectionsPerImage.Value)));
                         
 
                     
