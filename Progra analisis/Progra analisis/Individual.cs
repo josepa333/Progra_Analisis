@@ -246,6 +246,19 @@ namespace Progra_analisis
             return histogramDarkness;
         }
 
+        public void dataForFinalImage()
+        {
+            dissectImage();
+            if (histrogramSelected == 0)
+            {
+                adaptability = new Adaptability(histogramRGB);
+            }
+            else
+            {
+                adaptability = new Adaptability(histogramDarkness);
+            }
+        }
+
         public int getDistance()
         {
             return adaptability.getDistance();

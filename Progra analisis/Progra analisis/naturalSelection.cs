@@ -41,7 +41,7 @@ namespace Progra_analisis
         {
 
             Individual.finalImage = new Individual(desireImage,0);
-            //Individual.finalImage.dataForFinalImage();
+            Individual.finalImage.dataForFinalImage();
 
             MessageBox.Show("FinalImage");
             Individual.sectionsPerImage = sectionsPerImage;
@@ -329,12 +329,12 @@ namespace Progra_analisis
             return generationCounter;
         }
 
-        /*
+        
         public int getHighestAdaptability()
         {
-            return images[0].getDistance();   
+            return images[0].getDistance();
         }
-        */
+        
         
         public string getTypeOfHistogram()
         {
@@ -358,7 +358,7 @@ namespace Progra_analisis
 
             while (generation != generations)
             {
-                MessageBox.Show("Inicia generacion");
+                //MessageBox.Show("Inicia generacion");
                 //Selection
                 Individual[] adaptables = selection_A();
                 Individual[] notAdaptables = selection_NA();
@@ -379,7 +379,7 @@ namespace Progra_analisis
                 }
                 generationCounter++;
                 generation++;
-                MessageBox.Show("Finaliza gen");
+                //MessageBox.Show("Finaliza gen");
             }
             Sort.quickSort(finalResult, 0, finalResult.Length - 1);
             return finalResult;

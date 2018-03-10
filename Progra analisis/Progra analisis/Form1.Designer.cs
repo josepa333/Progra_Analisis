@@ -45,7 +45,7 @@
             this.pAwNa = new System.Windows.Forms.NumericUpDown();
             this.pNAwNa = new System.Windows.Forms.NumericUpDown();
             this.pAwA = new System.Windows.Forms.NumericUpDown();
-            this.pAdaptableImages = new System.Windows.Forms.NumericUpDown();
+            this.pAdaptableImagesPercentage = new System.Windows.Forms.NumericUpDown();
             this.output1 = new System.Windows.Forms.PictureBox();
             this.output2 = new System.Windows.Forms.PictureBox();
             this.output3 = new System.Windows.Forms.PictureBox();
@@ -75,7 +75,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pAwNa)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pNAwNa)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pAwA)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pAdaptableImages)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pAdaptableImagesPercentage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.output1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.output2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.output3)).BeginInit();
@@ -126,6 +126,11 @@
             // Q_generations
             // 
             this.Q_generations.Location = new System.Drawing.Point(39, 73);
+            this.Q_generations.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
             this.Q_generations.Name = "Q_generations";
             this.Q_generations.Size = new System.Drawing.Size(68, 20);
             this.Q_generations.TabIndex = 4;
@@ -152,6 +157,11 @@
             // Q_population
             // 
             this.Q_population.Location = new System.Drawing.Point(39, 108);
+            this.Q_population.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
             this.Q_population.Name = "Q_population";
             this.Q_population.Size = new System.Drawing.Size(68, 20);
             this.Q_population.TabIndex = 7;
@@ -213,6 +223,11 @@
             // mutabilityPercentage
             // 
             this.mutabilityPercentage.Location = new System.Drawing.Point(37, 225);
+            this.mutabilityPercentage.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
             this.mutabilityPercentage.Name = "mutabilityPercentage";
             this.mutabilityPercentage.Size = new System.Drawing.Size(68, 20);
             this.mutabilityPercentage.TabIndex = 16;
@@ -220,6 +235,11 @@
             // pAwNa
             // 
             this.pAwNa.Location = new System.Drawing.Point(37, 262);
+            this.pAwNa.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
             this.pAwNa.Name = "pAwNa";
             this.pAwNa.Size = new System.Drawing.Size(68, 20);
             this.pAwNa.TabIndex = 17;
@@ -238,16 +258,16 @@
             this.pAwA.Size = new System.Drawing.Size(68, 20);
             this.pAwA.TabIndex = 19;
             // 
-            // pAdaptableImages
+            // pAdaptableImagesPercentage
             // 
-            this.pAdaptableImages.Location = new System.Drawing.Point(37, 365);
-            this.pAdaptableImages.Name = "pAdaptableImages";
-            this.pAdaptableImages.Size = new System.Drawing.Size(68, 20);
-            this.pAdaptableImages.TabIndex = 20;
+            this.pAdaptableImagesPercentage.Location = new System.Drawing.Point(37, 365);
+            this.pAdaptableImagesPercentage.Name = "pAdaptableImagesPercentage";
+            this.pAdaptableImagesPercentage.Size = new System.Drawing.Size(68, 20);
+            this.pAdaptableImagesPercentage.TabIndex = 20;
             // 
             // output1
             // 
-            this.output1.Location = new System.Drawing.Point(134, 397);
+            this.output1.Location = new System.Drawing.Point(29, 75);
             this.output1.Name = "output1";
             this.output1.Size = new System.Drawing.Size(200, 120);
             this.output1.TabIndex = 21;
@@ -279,7 +299,7 @@
             // 
             // output5
             // 
-            this.output5.Location = new System.Drawing.Point(29, 215);
+            this.output5.Location = new System.Drawing.Point(29, 214);
             this.output5.Name = "output5";
             this.output5.Size = new System.Drawing.Size(200, 120);
             this.output5.TabIndex = 25;
@@ -345,6 +365,11 @@
             // childsPerGenerations
             // 
             this.childsPerGenerations.Location = new System.Drawing.Point(39, 151);
+            this.childsPerGenerations.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
             this.childsPerGenerations.Name = "childsPerGenerations";
             this.childsPerGenerations.Size = new System.Drawing.Size(68, 20);
             this.childsPerGenerations.TabIndex = 33;
@@ -465,7 +490,7 @@
             this.Controls.Add(this.output3);
             this.Controls.Add(this.output2);
             this.Controls.Add(this.output1);
-            this.Controls.Add(this.pAdaptableImages);
+            this.Controls.Add(this.pAdaptableImagesPercentage);
             this.Controls.Add(this.pAwA);
             this.Controls.Add(this.pNAwNa);
             this.Controls.Add(this.pAwNa);
@@ -493,7 +518,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pAwNa)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pNAwNa)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pAwA)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pAdaptableImages)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pAdaptableImagesPercentage)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.output1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.output2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.output3)).EndInit();
@@ -532,7 +557,7 @@
         private System.Windows.Forms.NumericUpDown pAwNa;
         private System.Windows.Forms.NumericUpDown pNAwNa;
         private System.Windows.Forms.NumericUpDown pAwA;
-        private System.Windows.Forms.NumericUpDown pAdaptableImages;
+        private System.Windows.Forms.NumericUpDown pAdaptableImagesPercentage;
         private System.Windows.Forms.PictureBox output1;
         private System.Windows.Forms.PictureBox output2;
         private System.Windows.Forms.PictureBox output3;

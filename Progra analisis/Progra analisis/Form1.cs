@@ -66,6 +66,51 @@ namespace Progra_analisis
             }
         }
 
+        private void hideWidgets()
+        {
+            this.Q_generations.Hide();
+            this.Q_population.Hide();
+            this.mutabilityPercentage.Hide();
+            this.pAwNa.Hide();
+            this.pNAwNa.Hide();
+            this.pAwA.Hide();
+            this.pAdaptableImagesPercentage.Hide();
+            this.adapatblesPercentageToCopy.Hide();
+            this.childsPerGenerations.Hide();
+
+            this.label2.Hide();
+            this.label3.Hide();
+            this.label4.Hide();
+            this.label5.Hide();
+            this.label6.Hide();
+            this.label7.Hide();
+            this.label8.Hide();
+            this.label9.Hide();
+            this.label10.Hide();
+            this.label11.Hide();
+            this.label12.Hide();
+
+            this.selected_picture.Hide();
+            this.BT_selectImage.Hide();
+            this.button1.Hide();
+
+            this.RGBSelected.Hide();
+            this.darknessSelected.Hide();
+            this.manhattan.Hide();
+            this.Surprise.Hide();
+
+            this.output1.Visible = true;
+            this.output2.Visible = true;
+            this.output3.Visible = true;
+            this.output4.Visible = true;
+            this.output5.Visible = true;
+            this.output6.Visible = true;
+            this.output7.Visible = true;
+            this.output8.Visible = true;
+            this.output9.Visible = true;
+            this.output10.Visible = true;
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
 
@@ -102,9 +147,11 @@ namespace Progra_analisis
             //Cambiar a natural selection
             //threadLoading thread = new threadLoading(bitmapsTest);
 
-            int numberOfAaptables = Convert.ToInt32(((this.pAdaptableImages.Value) / 100) * this.Q_population.Value);
+            int numberOfAaptables = Convert.ToInt32(((this.pAdaptableImagesPercentage.Value) / 100) * this.Q_population.Value);
             int mutationValidation = Convert.ToInt32((this.Q_population.Value - this.childsPerGenerations.Value - ((this.adapatblesPercentageToCopy.Value / 100) * numberOfAaptables)));
-;
+
+
+
             if (bitImage != null &&
                 this.Q_generations.Value > 1 &&
                 this.Q_population.Value > 1 &&
@@ -114,45 +161,18 @@ namespace Progra_analisis
                 this.sectionsPerImage.Value > 2 &&
                 this.mutationsPerGeneration.Value <= mutationValidation)
             {
-                if (this.pAdaptableImages.Value > 0 && this.adapatblesPercentageToCopy.Value <= this.childsPerGenerations.Value 
-                    || pAdaptableImages.Value == 0)
+                if ( numberOfAaptables >= 2)
                 {
-                    this.Q_generations.Hide();
-                    this.Q_population.Hide();
-                    this.mutabilityPercentage.Hide();
-                    this.pAwNa.Hide();
-                    this.pNAwNa.Hide();
-                    this.pAwA.Hide();
-                    this.pAdaptableImages.Hide();
-                    this.adapatblesPercentageToCopy.Hide();
-                    this.childsPerGenerations.Hide();
+                    hideWidgets();
 
-                    this.label2.Hide();
-                    this.label3.Hide();
-                    this.label5.Hide();
-                    this.label6.Hide();
-                    this.label7.Hide();
-                    this.label8.Hide();
-                    this.label9.Hide();
-                    this.label10.Hide();
-                    this.label11.Hide();
-                    this.label12.Hide();
-
-                    this.selected_picture.Hide();
-                    this.BT_selectImage.Hide();
-                    this.button1.Hide();
-
-                    this.output1.Visible = true;
-                    this.output2.Visible = true;
-                    this.output3.Visible = true;
-                    this.output4.Visible = true;
-                    this.output5.Visible = true;
-                    this.output6.Visible = true;
-                    this.output7.Visible = true;
-                    this.output8.Visible = true;
-                    this.output9.Visible = true;
-                    this.output10.Visible = true;
-
+                    if (this.RGBSelected.Checked == true)
+                    {
+                        Individual.histrogramSelected = 0;
+                    }
+                    else
+                    {
+                        Individual.histrogramSelected = 1;
+                    }
 
                     NaturalSelection naturalSelection = new NaturalSelection(bitImage,
                         Decimal.ToInt32(this.Q_generations.Value),
@@ -162,11 +182,12 @@ namespace Progra_analisis
                         Decimal.ToDouble(this.pAwNa.Value) / 100,
                         Decimal.ToDouble(this.pNAwNa.Value) / 100,
                         Decimal.ToDouble(this.pAwA.Value) / 100,
-                        Decimal.ToDouble(this.pAdaptableImages.Value) / 100,
+                        Decimal.ToDouble(this.pAdaptableImagesPercentage.Value) / 100,
                         Decimal.ToInt32(this.adapatblesPercentageToCopy.Value) / 100,
                         Decimal.ToInt32(this.sectionsPerImage.Value));
 
-                    Statistics statistics = new Statistics(naturalSelection);
+                    //Statistics statistics = new Statistics(naturalSelection);
+
                     Individual[] imagesToDisplay = naturalSelection.genericAlgorithm();
 
                     this.output1.Image = imagesToDisplay[0].getBitmap();
@@ -184,7 +205,7 @@ namespace Progra_analisis
                 }
                 else
                 {
-                    MessageBox.Show("Verify the percentages of adapatbles Percentage To Copy and childs per generation");
+                    MessageBox.Show("Verify there has to be at least two adaptables individuals to be able to cross");
                 }
 
             }
