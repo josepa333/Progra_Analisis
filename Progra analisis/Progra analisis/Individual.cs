@@ -229,6 +229,7 @@ namespace Progra_analisis
             }
             return 0;
         }
+
         public Individual crossOverLookingOver(Individual soulmate)
         {
             Bitmap bitmap_kid = new Bitmap(bitmap.Width, bitmap.Height);

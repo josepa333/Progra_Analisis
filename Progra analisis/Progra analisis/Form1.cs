@@ -121,7 +121,7 @@ namespace Progra_analisis
         private void run()
         {
 
-            Individual[] imagesToDisplay = naturalSelection.genericAlgorithm();
+            
 
             while (naturalSelection.getGenerationCounter() < naturalSelection.getGenerations())
             {
@@ -130,36 +130,7 @@ namespace Progra_analisis
             lock (locker)
             {
                 
-                this.output1.Image = imagesToDisplay[0].getBitmap();
-                this.distance1.Text = imagesToDisplay[0].getDistance().ToString();
 
-                this.output2.Image = imagesToDisplay[1].getBitmap();
-                this.distance2.Text = imagesToDisplay[1].getDistance().ToString();
-
-                this.output3.Image = imagesToDisplay[2].getBitmap();
-                this.distance3.Text = imagesToDisplay[2].getDistance().ToString();
-
-
-                this.output4.Image = imagesToDisplay[3].getBitmap();
-                this.distance4.Text = imagesToDisplay[3].getDistance().ToString();
-
-                this.output5.Image = imagesToDisplay[4].getBitmap();
-                this.distance5.Text = imagesToDisplay[4].getDistance().ToString();
-
-                this.output6.Image = imagesToDisplay[5].getBitmap();
-                this.distance6.Text = imagesToDisplay[5].getDistance().ToString();
-
-                this.output7.Image = imagesToDisplay[6].getBitmap();
-                this.distance7.Text = imagesToDisplay[6].getDistance().ToString();
-
-                this.output8.Image = imagesToDisplay[7].getBitmap();
-                this.distance8.Text = imagesToDisplay[7].getDistance().ToString();
-
-                this.output9.Image = imagesToDisplay[8].getBitmap();
-                this.distance9.Text = imagesToDisplay[8].getDistance().ToString();
-
-                this.output10.Image = imagesToDisplay[9].getBitmap();
-                this.distance10.Text = imagesToDisplay[9].getDistance().ToString();
 
             }
         }
@@ -239,11 +210,43 @@ namespace Progra_analisis
                         Decimal.ToInt32(this.adapatblesPercentageToCopy.Value) / 100,
                         Decimal.ToInt32(this.sectionsPerImage.Value));
 
-                    threadLoading thread = new threadLoading(naturalSelection);
+                    Individual[] imagesToDisplay = naturalSelection.genericAlgorithm();
+
+                    this.output1.Image = imagesToDisplay[0].getBitmap();
+                    this.distance1.Text = imagesToDisplay[0].getDistance().ToString();
+
+                    this.output2.Image = imagesToDisplay[1].getBitmap();
+                    this.distance2.Text = imagesToDisplay[1].getDistance().ToString();
+
+                    this.output3.Image = imagesToDisplay[2].getBitmap();
+                    this.distance3.Text = imagesToDisplay[2].getDistance().ToString();
+
+
+                    this.output4.Image = imagesToDisplay[3].getBitmap();
+                    this.distance4.Text = imagesToDisplay[3].getDistance().ToString();
+
+                    this.output5.Image = imagesToDisplay[4].getBitmap();
+                    this.distance5.Text = imagesToDisplay[4].getDistance().ToString();
+
+                    this.output6.Image = imagesToDisplay[5].getBitmap();
+                    this.distance6.Text = imagesToDisplay[5].getDistance().ToString();
+
+                    this.output7.Image = imagesToDisplay[6].getBitmap();
+                    this.distance7.Text = imagesToDisplay[6].getDistance().ToString();
+
+                    this.output8.Image = imagesToDisplay[7].getBitmap();
+                    this.distance8.Text = imagesToDisplay[7].getDistance().ToString();
+
+                    this.output9.Image = imagesToDisplay[8].getBitmap();
+                    this.distance9.Text = imagesToDisplay[8].getDistance().ToString();
+
+                    this.output10.Image = imagesToDisplay[9].getBitmap();
+                    this.distance10.Text = imagesToDisplay[9].getDistance().ToString();
+                    //threadLoading thread = new threadLoading(naturalSelection);
                     //Statistics statistics = new Statistics(naturalSelection);
 
-                    Thread thr = new Thread(new ThreadStart(run));
-                    thr.Start();
+                    //Thread thr = new Thread(new ThreadStart(run));
+                    //thr.Start();
 
                 }
                 else
