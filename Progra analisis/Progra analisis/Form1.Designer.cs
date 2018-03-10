@@ -36,12 +36,10 @@
             this.button1 = new System.Windows.Forms.Button();
             this.Q_population = new System.Windows.Forms.NumericUpDown();
             this.label3 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.mutabilityPercentage = new System.Windows.Forms.NumericUpDown();
             this.pAwNa = new System.Windows.Forms.NumericUpDown();
             this.pNAwNa = new System.Windows.Forms.NumericUpDown();
             this.pAwA = new System.Windows.Forms.NumericUpDown();
@@ -72,7 +70,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.selected_picture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Q_generations)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Q_population)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.mutabilityPercentage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pAwNa)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pNAwNa)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pAwA)).BeginInit();
@@ -176,15 +173,6 @@
             this.label3.TabIndex = 8;
             this.label3.Text = "Quantity of population";
             // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(111, 225);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(108, 13);
-            this.label5.TabIndex = 10;
-            this.label5.Text = "Mutability percentage";
-            // 
             // label6
             // 
             this.label6.AutoSize = true;
@@ -220,18 +208,6 @@
             this.label9.Size = new System.Drawing.Size(154, 13);
             this.label9.TabIndex = 14;
             this.label9.Text = "Percetage of adaptable images";
-            // 
-            // mutabilityPercentage
-            // 
-            this.mutabilityPercentage.Location = new System.Drawing.Point(37, 225);
-            this.mutabilityPercentage.Maximum = new decimal(new int[] {
-            100000,
-            0,
-            0,
-            0});
-            this.mutabilityPercentage.Name = "mutabilityPercentage";
-            this.mutabilityPercentage.Size = new System.Drawing.Size(68, 20);
-            this.mutabilityPercentage.TabIndex = 16;
             // 
             // pAwNa
             // 
@@ -300,7 +276,7 @@
             // 
             // output5
             // 
-            this.output5.Location = new System.Drawing.Point(29, 214);
+            this.output5.Location = new System.Drawing.Point(29, 215);
             this.output5.Name = "output5";
             this.output5.Size = new System.Drawing.Size(200, 120);
             this.output5.TabIndex = 25;
@@ -506,12 +482,10 @@
             this.Controls.Add(this.pAwA);
             this.Controls.Add(this.pNAwNa);
             this.Controls.Add(this.pAwNa);
-            this.Controls.Add(this.mutabilityPercentage);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.label5);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.Q_population);
             this.Controls.Add(this.button1);
@@ -526,7 +500,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.selected_picture)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Q_generations)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Q_population)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.mutabilityPercentage)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pAwNa)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pNAwNa)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pAwA)).EndInit();
@@ -560,12 +533,10 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.NumericUpDown Q_population;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.NumericUpDown mutabilityPercentage;
         private System.Windows.Forms.NumericUpDown pAwNa;
         private System.Windows.Forms.NumericUpDown pNAwNa;
         private System.Windows.Forms.NumericUpDown pAwA;

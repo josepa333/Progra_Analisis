@@ -17,8 +17,7 @@ namespace Progra_analisis
         public Form1()
         {
             InitializeComponent();
-            //Statistics.loadStatistics();
-
+            
             this.output1.SizeMode = PictureBoxSizeMode.StretchImage;
             this.output2.SizeMode = PictureBoxSizeMode.StretchImage;
             this.output3.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -72,18 +71,19 @@ namespace Progra_analisis
         {
             this.Q_generations.Hide();
             this.Q_population.Hide();
-            this.mutabilityPercentage.Hide();
+            this.mutationsPerGeneration.Hide();
             this.pAwNa.Hide();
             this.pNAwNa.Hide();
             this.pAwA.Hide();
             this.pAdaptableImagesPercentage.Hide();
             this.adapatblesPercentageToCopy.Hide();
             this.childsPerGenerations.Hide();
+            this.sectionsPerImage.Hide();
+            
 
             this.label2.Hide();
             this.label3.Hide();
             this.label4.Hide();
-            this.label5.Hide();
             this.label6.Hide();
             this.label7.Hide();
             this.label8.Hide();
@@ -204,12 +204,6 @@ namespace Progra_analisis
                     this.output8.Image = imagesToDisplay[7].getBitmap();
                     this.output9.Image = imagesToDisplay[8].getBitmap();
                     this.output10.Image = imagesToDisplay[9].getBitmap();
-
-                    Statistics.saveStatistics();
-                    //Statistics.loadStatistics();
-                    //Statistics statistic = new Statistics(naturalSelection);
-                    //Statistics.addStatistic(statistic);
-                    //Statistics.saveStatistics();
                     
                 }
                 else
