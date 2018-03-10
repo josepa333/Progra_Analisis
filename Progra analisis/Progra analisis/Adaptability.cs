@@ -29,7 +29,7 @@ namespace Progra_analisis
             return distanceValue;
         }
 
-        private int darknessDistance(List<List<int>> individual)
+        private int manhattanDarkness(List<List<int>> individual)
         {
             int distanceValue = 0;
 
@@ -50,7 +50,7 @@ namespace Progra_analisis
 
         private void setDistanceDarknessHistogram(List<List<int>> gradientHistogram)
         {
-            distanceDarknessHistogram = darknessDistance(gradientHistogram); //Function for gradient distance
+            distanceDarknessHistogram = manhattanDarkness(gradientHistogram); //Function for gradient distance
         }
 
         private void setDistanceAverage()

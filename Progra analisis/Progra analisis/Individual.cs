@@ -11,7 +11,7 @@ namespace Progra_analisis
     {
         public static Individual finalImage;
         public static int sectionsPerImage = 3;
-        public static int isRGBSelected;
+        public static int histrogramSelected; //0 = RGB and 1 = darkness
 
         private int geneticMutability = 20; //Mutability in the genes of each Image, if there is a mutation
         private List<List<int>> histogramDarkness;
@@ -59,8 +59,7 @@ namespace Progra_analisis
                     }
                 }
 
-                fillRGBHistogram(pixelPerSection);
-                //fillDarknessHistogram(pixelPerSection); //implemented into the other fill histrogram
+                fillHistogram(pixelPerSection);
                 pixelPerSection = new ArrayList();
 
                 if (contadorX == sectionsPerImage-1 && contadorY == sectionsPerImage-1)
@@ -82,7 +81,7 @@ namespace Progra_analisis
             }
         }
 
-        private void fillRGBHistogram(ArrayList pixelPerSection)//Fills the histograms with the total appearances of each tone of the color
+        private void fillHistogram(ArrayList pixelPerSection)//Fills the histograms with the total appearances of each tone of the color
         {
             ArrayList redHistogram = new ArrayList();
             ArrayList greenHistogram = new ArrayList();
@@ -108,13 +107,13 @@ namespace Progra_analisis
             {
                 Color clr = (Color)pixelPerSection[i];
 
-                if (isRGBSelected == 0 || isRGBSelected == 2)
+                if (histrogramSelected == 0)
                 {
                     redHistogram[clr.R] = (int)redHistogram[clr.R] + 1;
                     greenHistogram[clr.G] = (int)greenHistogram[clr.G] + 1;
                     blueHistogram[clr.B] = (int)blueHistogram[clr.B] + 1;
                 }
-                if (isRGBSelected == 1 || isRGBSelected == 2)
+                if (histrogramSelected == 1)
                 {
                     if (clr.A < 127)
                     {
@@ -141,28 +140,6 @@ namespace Progra_analisis
             }
 
             histogramRGB.Add(sectionRGB);
-            histogramDarkness.Add(sectionBinary);
-        }
-
-        private void fillDarknessHistogram(ArrayList pixelPerSection)
-        {
-            List<int> sectionBinary = new List<int>(2);//
-
-            sectionBinary.Add(0);
-            sectionBinary.Add(0);
-
-            for (int i = 0; i < pixelPerSection.Count; i++)
-            {
-                int colorAverage = (((Color)pixelPerSection[i]).R + ((Color)pixelPerSection[i]).G + ((Color)pixelPerSection[i]).B) / 3;
-                if (colorAverage < 127)
-                {
-                    sectionBinary[0]++;
-                }
-                else
-                {
-                    sectionBinary[1]++;
-                }
-            }
             histogramDarkness.Add(sectionBinary);
         }
 
