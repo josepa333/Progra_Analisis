@@ -66,6 +66,8 @@
             this.label4 = new System.Windows.Forms.Label();
             this.RGBSelected = new System.Windows.Forms.RadioButton();
             this.darknessSelected = new System.Windows.Forms.RadioButton();
+            this.manhattan = new System.Windows.Forms.RadioButton();
+            this.Surprise = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.selected_picture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Q_generations)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Q_population)).BeginInit();
@@ -92,7 +94,7 @@
             // 
             // BT_selectImage
             // 
-            this.BT_selectImage.Location = new System.Drawing.Point(791, 462);
+            this.BT_selectImage.Location = new System.Drawing.Point(821, 560);
             this.BT_selectImage.Name = "BT_selectImage";
             this.BT_selectImage.Size = new System.Drawing.Size(150, 23);
             this.BT_selectImage.TabIndex = 0;
@@ -139,7 +141,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(947, 462);
+            this.button1.Location = new System.Drawing.Point(977, 560);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 6;
@@ -412,11 +414,37 @@
             this.darknessSelected.UseVisualStyleBackColor = true;
             this.darknessSelected.CheckedChanged += new System.EventHandler(this.darknessSelected_CheckedChanged);
             // 
+            // manhattan
+            // 
+            this.manhattan.AutoSize = true;
+            this.manhattan.Location = new System.Drawing.Point(37, 527);
+            this.manhattan.Name = "manhattan";
+            this.manhattan.Size = new System.Drawing.Size(76, 17);
+            this.manhattan.TabIndex = 41;
+            this.manhattan.TabStop = true;
+            this.manhattan.Text = "Manhattan";
+            this.manhattan.UseVisualStyleBackColor = true;
+            this.manhattan.CheckedChanged += new System.EventHandler(this.manhattan_CheckedChanged);
+            // 
+            // Surprise
+            // 
+            this.Surprise.AutoSize = true;
+            this.Surprise.Location = new System.Drawing.Point(37, 550);
+            this.Surprise.Name = "Surprise";
+            this.Surprise.Size = new System.Drawing.Size(63, 17);
+            this.Surprise.TabIndex = 42;
+            this.Surprise.TabStop = true;
+            this.Surprise.Text = "Surprise";
+            this.Surprise.UseVisualStyleBackColor = true;
+            this.Surprise.CheckedChanged += new System.EventHandler(this.Surprise_CheckedChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1062, 496);
+            this.ClientSize = new System.Drawing.Size(1062, 595);
+            this.Controls.Add(this.Surprise);
+            this.Controls.Add(this.manhattan);
             this.Controls.Add(this.darknessSelected);
             this.Controls.Add(this.RGBSelected);
             this.Controls.Add(this.label4);
@@ -525,6 +553,8 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.RadioButton RGBSelected;
         private System.Windows.Forms.RadioButton darknessSelected;
+        private System.Windows.Forms.RadioButton manhattan;
+        private System.Windows.Forms.RadioButton Surprise;
     }
 }
 

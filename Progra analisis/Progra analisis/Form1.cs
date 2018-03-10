@@ -227,5 +227,23 @@ namespace Progra_analisis
                 this.darknessSelected.Checked = true;
             }
         }
+
+        private void manhattan_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.Surprise.Checked == true)
+            {
+                this.Surprise.Checked = false;
+                this.manhattan.Checked = true;
+            }
+        }
+
+        private void Surprise_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.manhattan.Checked == true)
+            {
+                this.manhattan.Checked = false;
+                this.Surprise.Checked = true;
+            }
+        }
     }
 }
