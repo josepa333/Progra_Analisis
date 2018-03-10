@@ -18,12 +18,12 @@ namespace Progra_analisis
             InitializeComponent();
         }
 
-        public void setPicture(Bitmap bmImage)
+        private void loadingScreen_Load(object sender, EventArgs e)
         {
-            this.actualPicture.Image = bmImage;
+
         }
 
-        private void loadingScreen_Load(object sender, EventArgs e)
+        private void label2_Click(object sender, EventArgs e)
         {
 
         }

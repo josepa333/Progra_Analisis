@@ -232,37 +232,50 @@ namespace Progra_analisis
                 Individual[] nulo = new Individual[0];
                 return nulo;
             }
-            
+
             while (cross_A_A != 0)
             {
-                if (adaptables.Length >= 2)
+                parents = parentsToCross(adaptables, notAdaptables, 1);
+
+                if (cross_A_A % 5 == 0 && adaptables.Length >= 2)
                 {
-                    parents = parentsToCross(adaptables, notAdaptables, 1);
-                    childs[childsIndex] = parents[0].crossOver(parents[1]);
-                    childsIndex++;
+                    childs[childsIndex] = parents[0].crossOverLookingOver(parents[1]);
                 }
+                else if (adaptables.Length >= 2)
+                {
+                    childs[childsIndex] = parents[0].crossOver(parents[1]);
+                }
+                childsIndex++;
                 cross_A_A--;
                 childAmount--;
             }
             while (cross_A_NA != 0)
             {
-                if (adaptables.Length >= 1 && notAdaptables.Length >= 1)
+                parents = parentsToCross(adaptables, notAdaptables, 2);
+                if (cross_A_NA % 5 == 0 && adaptables.Length >= 1 && notAdaptables.Length >= 1)
                 {
-                    parents = parentsToCross(adaptables, notAdaptables, 2);
-                    childs[childsIndex] = parents[0].crossOver(parents[1]);
-                    childsIndex++;
+                    childs[childsIndex] = parents[0].crossOverLookingOver(parents[1]);
                 }
+                else if (adaptables.Length >= 1 && notAdaptables.Length >= 1)
+                {
+                    childs[childsIndex] = parents[0].crossOver(parents[1]);
+                }
+                childsIndex++;
                 cross_A_NA--;
                 childAmount--;
             }
             while (cross_NA_NA != 0)
             {
-                if (notAdaptables.Length >= 2)
+                parents = parentsToCross(adaptables, notAdaptables, 3);
+                if (cross_NA_NA % 5 == 0 && notAdaptables.Length >= 2)
                 {
-                    parents = parentsToCross(adaptables, notAdaptables, 3);
-                    childs[childsIndex] = parents[0].crossOver(parents[1]);
-                    childsIndex++;
+                    childs[childsIndex] = parents[0].crossOverLookingOver(parents[1]);
                 }
+                else if (notAdaptables.Length >= 2)
+                {
+                    childs[childsIndex] = parents[0].crossOver(parents[1]);
+                }
+                childsIndex++;
                 cross_NA_NA--;
                 childAmount--;
             }
@@ -270,7 +283,14 @@ namespace Progra_analisis
             while (childAmount != 0)
             {
                 parents = parentsToCross(adaptables, notAdaptables, 3);
-                childs[childsIndex] = parents[0].crossOver(parents[1]);
+                if (childAmount % 5 == 0)
+                {
+                    childs[childsIndex] = parents[0].crossOverLookingOver(parents[1]);
+                }
+                else
+                {
+                    childs[childsIndex] = parents[0].crossOver(parents[1]);
+                }
                 childsIndex++;
                 childAmount--;
             }
@@ -378,15 +398,18 @@ namespace Progra_analisis
                 }
                 generationCounter++;
                 generation++;
+
                 //MessageBox.Show("Finaliza gen");
             }
             Sort.quickSort(finalResult, 0, finalResult.Length - 1);
+
             return finalResult;
         }
 
         public Bitmap getPositionCero()
         {
-            return images[0].getBitmap();
+            Bitmap bit = new Bitmap(images[0].getBitmap());
+            return bit;
         }
     }
 }

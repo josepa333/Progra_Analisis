@@ -6,12 +6,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Xml.Serialization;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 using CsvHelper;
+using System.Xml.Serialization;
 
 namespace Progra_analisis
 {
-    class Statistics
+    [Serializable()] class Statistics : ISerializable
     {
         public static ArrayList statisticsRegister = new ArrayList();
         public static ArrayList topStatisticsRegister = new ArrayList();
@@ -53,21 +55,19 @@ namespace Progra_analisis
 
         private static void serializeList(ArrayList list, string path)
         {
-            var serializer = new XmlSerializer(typeof(ArrayList));
-            using (var stream = File.OpenWrite(path))
+            using (Stream fs = new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.None))
             {
-                serializer.Serialize(stream, list);
+                XmlSerializer serializer = new XmlSerializer(typeof(ArrayList));
+                serializer.Serialize(fs, list);
             }
         }
 
         private static void deserialize(ArrayList list, string path)
         {
-            var serializer = new XmlSerializer(typeof(ArrayList));
-            using (var stream = File.OpenRead(path))
+            XmlSerializer serializer = new XmlSerializer(typeof(ArrayList));
+            using (FileStream fs = File.OpenRead(path))
             {
-                var other = (ArrayList)(serializer.Deserialize(stream));
-                list.Clear();
-                list.AddRange(other);
+                list = (ArrayList)serializer.Deserialize(fs);
             }
         }
 
@@ -101,6 +101,21 @@ namespace Progra_analisis
             cross_NA_NA_percentage = Convert.ToDouble((naturalSelection.getCross_NA_NA_percentage() * 100) / childsPerGeneration);
             bestDistance = naturalSelection.getBestDistance();
             typeOfHistogram = naturalSelection.getTypeOfHistogram();
+        }
+
+        public Statistics(SerializationInfo info, StreamingContext ctxt)
+        {
+            childsPerGeneration = (int)info.GetValue("childsPerGeneration", typeof(int));
+            mutationsPerGeneration = (int)info.GetValue("mutationsPerGeneration", typeof(int));
+            generations = (int)info.GetValue("generations", typeof(int));
+            population = (int)info.GetValue("population", typeof(int));
+            adapatblesPercentageToCopy = (double)info.GetValue("adapatblesPercentageToCopy", typeof(double));
+            adaptableImagesPercentage = (double)info.GetValue("adaptableImagesPercentage", typeof(double));
+            cross_A_A_percentage = (double)info.GetValue("cross_A_A_percentage", typeof(double));
+            cross_A_NA_percentage = (double)info.GetValue("cross_A_NA_percentage", typeof(double));
+            cross_NA_NA_percentage = (double)info.GetValue("cross_NA_NA_percentage", typeof(double));
+            bestDistance = (int)info.GetValue("bestDistance", typeof(int));
+            typeOfHistogram = (string)info.GetValue("typeOfHistogram", typeof(string));
         }
 
         public static void addStatistic(Statistics statistic)
@@ -211,6 +226,21 @@ namespace Progra_analisis
         public string getTypeOfHistogram()
         {
             return typeOfHistogram;
+        }
+
+        public void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            info.AddValue("adaptableImagesPercentage", adaptableImagesPercentage);
+            info.AddValue("adaptableImagesPercentage", adaptableImagesPercentage);
+            info.AddValue("cross_A_A_percentage", cross_A_A_percentage);
+            info.AddValue("cross_NA_NA_percentage", cross_NA_NA_percentage);
+            info.AddValue("cross_A_NA_percentage", cross_A_NA_percentage);
+            info.AddValue("mutationsPerGeneration", mutationsPerGeneration);
+            info.AddValue("childsPerGeneration", childsPerGeneration);
+            info.AddValue("generations", generations);
+            info.AddValue("population", population);
+            info.AddValue("bestDistance", bestDistance);
+            info.AddValue("typeOfHistogram", typeOfHistogram);
         }
     }
 }

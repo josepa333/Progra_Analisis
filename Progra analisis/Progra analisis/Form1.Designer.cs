@@ -36,12 +36,10 @@
             this.button1 = new System.Windows.Forms.Button();
             this.Q_population = new System.Windows.Forms.NumericUpDown();
             this.label3 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.mutabilityPercentage = new System.Windows.Forms.NumericUpDown();
             this.pAwNa = new System.Windows.Forms.NumericUpDown();
             this.pNAwNa = new System.Windows.Forms.NumericUpDown();
             this.pAwA = new System.Windows.Forms.NumericUpDown();
@@ -69,10 +67,19 @@
             this.manhattan = new System.Windows.Forms.RadioButton();
             this.Surprise = new System.Windows.Forms.RadioButton();
             this.saveResults = new System.Windows.Forms.Button();
+            this.distance1 = new System.Windows.Forms.Label();
+            this.distance2 = new System.Windows.Forms.Label();
+            this.distance3 = new System.Windows.Forms.Label();
+            this.distance4 = new System.Windows.Forms.Label();
+            this.distance5 = new System.Windows.Forms.Label();
+            this.distance6 = new System.Windows.Forms.Label();
+            this.distance7 = new System.Windows.Forms.Label();
+            this.distance8 = new System.Windows.Forms.Label();
+            this.distance9 = new System.Windows.Forms.Label();
+            this.distance10 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.selected_picture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Q_generations)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Q_population)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.mutabilityPercentage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pAwNa)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pNAwNa)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pAwA)).BeginInit();
@@ -176,15 +183,6 @@
             this.label3.TabIndex = 8;
             this.label3.Text = "Quantity of population";
             // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(111, 225);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(108, 13);
-            this.label5.TabIndex = 10;
-            this.label5.Text = "Mutability percentage";
-            // 
             // label6
             // 
             this.label6.AutoSize = true;
@@ -220,18 +218,6 @@
             this.label9.Size = new System.Drawing.Size(154, 13);
             this.label9.TabIndex = 14;
             this.label9.Text = "Percetage of adaptable images";
-            // 
-            // mutabilityPercentage
-            // 
-            this.mutabilityPercentage.Location = new System.Drawing.Point(37, 225);
-            this.mutabilityPercentage.Maximum = new decimal(new int[] {
-            100000,
-            0,
-            0,
-            0});
-            this.mutabilityPercentage.Name = "mutabilityPercentage";
-            this.mutabilityPercentage.Size = new System.Drawing.Size(68, 20);
-            this.mutabilityPercentage.TabIndex = 16;
             // 
             // pAwNa
             // 
@@ -300,7 +286,7 @@
             // 
             // output5
             // 
-            this.output5.Location = new System.Drawing.Point(29, 214);
+            this.output5.Location = new System.Drawing.Point(29, 215);
             this.output5.Name = "output5";
             this.output5.Size = new System.Drawing.Size(200, 120);
             this.output5.TabIndex = 25;
@@ -474,11 +460,111 @@
             this.saveResults.UseVisualStyleBackColor = true;
             this.saveResults.Click += new System.EventHandler(this.saveResults_Click);
             // 
+            // distance1
+            // 
+            this.distance1.AutoSize = true;
+            this.distance1.Location = new System.Drawing.Point(26, 52);
+            this.distance1.Name = "distance1";
+            this.distance1.Size = new System.Drawing.Size(35, 13);
+            this.distance1.TabIndex = 44;
+            this.distance1.Text = "label5";
+            // 
+            // distance2
+            // 
+            this.distance2.AutoSize = true;
+            this.distance2.Location = new System.Drawing.Point(270, 52);
+            this.distance2.Name = "distance2";
+            this.distance2.Size = new System.Drawing.Size(35, 13);
+            this.distance2.TabIndex = 45;
+            this.distance2.Text = "label5";
+            // 
+            // distance3
+            // 
+            this.distance3.AutoSize = true;
+            this.distance3.Location = new System.Drawing.Point(517, 52);
+            this.distance3.Name = "distance3";
+            this.distance3.Size = new System.Drawing.Size(35, 13);
+            this.distance3.TabIndex = 46;
+            this.distance3.Text = "label5";
+            // 
+            // distance4
+            // 
+            this.distance4.AutoSize = true;
+            this.distance4.Location = new System.Drawing.Point(772, 50);
+            this.distance4.Name = "distance4";
+            this.distance4.Size = new System.Drawing.Size(35, 13);
+            this.distance4.TabIndex = 47;
+            this.distance4.Text = "label5";
+            // 
+            // distance5
+            // 
+            this.distance5.AutoSize = true;
+            this.distance5.Location = new System.Drawing.Point(26, 199);
+            this.distance5.Name = "distance5";
+            this.distance5.Size = new System.Drawing.Size(35, 13);
+            this.distance5.TabIndex = 48;
+            this.distance5.Text = "label5";
+            // 
+            // distance6
+            // 
+            this.distance6.AutoSize = true;
+            this.distance6.Location = new System.Drawing.Point(270, 196);
+            this.distance6.Name = "distance6";
+            this.distance6.Size = new System.Drawing.Size(35, 13);
+            this.distance6.TabIndex = 49;
+            this.distance6.Text = "label5";
+            // 
+            // distance7
+            // 
+            this.distance7.AutoSize = true;
+            this.distance7.Location = new System.Drawing.Point(517, 200);
+            this.distance7.Name = "distance7";
+            this.distance7.Size = new System.Drawing.Size(35, 13);
+            this.distance7.TabIndex = 50;
+            this.distance7.Text = "label5";
+            // 
+            // distance8
+            // 
+            this.distance8.AutoSize = true;
+            this.distance8.Location = new System.Drawing.Point(775, 200);
+            this.distance8.Name = "distance8";
+            this.distance8.Size = new System.Drawing.Size(35, 13);
+            this.distance8.TabIndex = 51;
+            this.distance8.Text = "label5";
+            // 
+            // distance9
+            // 
+            this.distance9.AutoSize = true;
+            this.distance9.Location = new System.Drawing.Point(270, 337);
+            this.distance9.Name = "distance9";
+            this.distance9.Size = new System.Drawing.Size(35, 13);
+            this.distance9.TabIndex = 52;
+            this.distance9.Text = "label5";
+            // 
+            // distance10
+            // 
+            this.distance10.AutoSize = true;
+            this.distance10.Location = new System.Drawing.Point(517, 349);
+            this.distance10.Name = "distance10";
+            this.distance10.Size = new System.Drawing.Size(35, 13);
+            this.distance10.TabIndex = 53;
+            this.distance10.Text = "label5";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1062, 595);
+            this.Controls.Add(this.distance10);
+            this.Controls.Add(this.distance9);
+            this.Controls.Add(this.distance8);
+            this.Controls.Add(this.distance7);
+            this.Controls.Add(this.distance6);
+            this.Controls.Add(this.distance5);
+            this.Controls.Add(this.distance4);
+            this.Controls.Add(this.distance3);
+            this.Controls.Add(this.distance2);
+            this.Controls.Add(this.distance1);
             this.Controls.Add(this.saveResults);
             this.Controls.Add(this.Surprise);
             this.Controls.Add(this.manhattan);
@@ -506,12 +592,10 @@
             this.Controls.Add(this.pAwA);
             this.Controls.Add(this.pNAwNa);
             this.Controls.Add(this.pAwNa);
-            this.Controls.Add(this.mutabilityPercentage);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.label5);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.Q_population);
             this.Controls.Add(this.button1);
@@ -526,7 +610,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.selected_picture)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Q_generations)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Q_population)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.mutabilityPercentage)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pAwNa)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pNAwNa)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pAwA)).EndInit();
@@ -560,12 +643,10 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.NumericUpDown Q_population;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.NumericUpDown mutabilityPercentage;
         private System.Windows.Forms.NumericUpDown pAwNa;
         private System.Windows.Forms.NumericUpDown pNAwNa;
         private System.Windows.Forms.NumericUpDown pAwA;
@@ -593,6 +674,16 @@
         private System.Windows.Forms.RadioButton manhattan;
         private System.Windows.Forms.RadioButton Surprise;
         private System.Windows.Forms.Button saveResults;
+        private System.Windows.Forms.Label distance1;
+        private System.Windows.Forms.Label distance2;
+        private System.Windows.Forms.Label distance3;
+        private System.Windows.Forms.Label distance4;
+        private System.Windows.Forms.Label distance5;
+        private System.Windows.Forms.Label distance6;
+        private System.Windows.Forms.Label distance7;
+        private System.Windows.Forms.Label distance8;
+        private System.Windows.Forms.Label distance9;
+        private System.Windows.Forms.Label distance10;
     }
 }
 
