@@ -330,7 +330,7 @@ namespace Progra_analisis
         }
 
         
-        public int getHighestAdaptability()
+        public int getBestDistance()
         {
             return images[0].getDistance();
         }
@@ -379,7 +379,7 @@ namespace Progra_analisis
                 }
                 generationCounter++;
                 generation++;
-                //MessageBox.Show("Finaliza gen");
+                MessageBox.Show("Finaliza gen");
             }
             Sort.quickSort(finalResult, 0, finalResult.Length - 1);
             return finalResult;
