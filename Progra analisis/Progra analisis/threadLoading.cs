@@ -33,7 +33,7 @@ namespace Progra_analisis
             while (true)
             {
                 view.actualPicture.Image = naturalPointer.getPositionCero();
-                view.label2.Text = naturalPointer.getGenerationCounter().ToString();
+                //view.label2.Text = naturalPointer.getGenerationCounter().ToString();
                 Thread.Sleep(1000);
                 contador++;
             }

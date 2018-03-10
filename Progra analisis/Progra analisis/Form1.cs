@@ -123,7 +123,7 @@ namespace Progra_analisis
 
             Individual[] imagesToDisplay = naturalSelection.genericAlgorithm();
 
-            while (naturalSelection.getGenerationCounter() - 1  < naturalSelection.getGenerations())
+            while (naturalSelection.getGenerationCounter() < naturalSelection.getGenerations())
             {
                 Thread.Sleep(1000);
             }
@@ -160,7 +160,7 @@ namespace Progra_analisis
 
                 this.output10.Image = imagesToDisplay[9].getBitmap();
                 this.distance10.Text = imagesToDisplay[9].getDistance().ToString();
-                
+
             }
         }
 
