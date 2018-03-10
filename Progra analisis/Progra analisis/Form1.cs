@@ -166,7 +166,7 @@ namespace Progra_analisis
                         Decimal.ToInt32(this.adapatblesPercentageToCopy.Value) / 100,
                         Decimal.ToInt32(this.sectionsPerImage.Value));
 
-
+                    Statistics statistics = new Statistics(naturalSelection);
                     Individual[] imagesToDisplay = naturalSelection.genericAlgorithm();
 
                     this.output1.Image = imagesToDisplay[0].getBitmap();

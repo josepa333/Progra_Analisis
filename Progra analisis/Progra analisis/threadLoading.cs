@@ -14,6 +14,8 @@ namespace Progra_analisis
     {
         public NaturalSelection naturalPointer;
         public loadingScreen view;
+
+        //Borrar
         public List<Bitmap> bitmapsTest = new List<Bitmap>(5);
 
         public threadLoading(List<Bitmap> p_bitmapsTest)//NaturalSelection pNaturalPointer

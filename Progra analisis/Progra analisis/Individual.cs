@@ -11,6 +11,7 @@ namespace Progra_analisis
     {
         public static Individual finalImage;
         public static int sectionsPerImage = 3;
+        public static int isRGBSelected;
 
         private int geneticMutability = 20; //Mutability in the genes of each Image, if there is a mutation
         private List<List<int>> histogramDarkness;
@@ -106,17 +107,23 @@ namespace Progra_analisis
             for (int i = 0; i < pixelPerSection.Count; i++)
             {
                 Color clr = (Color)pixelPerSection[i];
-                redHistogram[clr.R] = (int)redHistogram[clr.R] + 1;
-                greenHistogram[clr.G] = (int)greenHistogram[clr.G] + 1;
-                blueHistogram[clr.B] = (int)blueHistogram[clr.B] + 1;
 
-                if (clr.A < 127)
+                if (isRGBSelected == 0 || isRGBSelected == 2)
                 {
-                    sectionBinary[0]++;
+                    redHistogram[clr.R] = (int)redHistogram[clr.R] + 1;
+                    greenHistogram[clr.G] = (int)greenHistogram[clr.G] + 1;
+                    blueHistogram[clr.B] = (int)blueHistogram[clr.B] + 1;
                 }
-                else
+                if (isRGBSelected == 1 || isRGBSelected == 2)
                 {
-                    sectionBinary[1]++;
+                    if (clr.A < 127)
+                    {
+                        sectionBinary[0]++;
+                    }
+                    else
+                    {
+                        sectionBinary[1]++;
+                    }
                 }
             }
 
