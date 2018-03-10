@@ -24,10 +24,10 @@ namespace Progra_analisis
         private int childsPerGeneration;
         private int generations;
         private int population;
-        private int highestAdaptabilityReached;
+        private int bestDistance;
         private string typeOfHistogram;
-        private string statisticsRegisterPath = Environment.CurrentDirectory + "\\statistics.txt";
-        private string topStatisticsRegisterPath = Environment.CurrentDirectory + "\\topStatistics.txt";
+        private static string statisticsRegisterPath = Environment.CurrentDirectory + "\\statistics.txt";
+        private static string topStatisticsRegisterPath = Environment.CurrentDirectory + "\\topStatistics.txt";
 
         //private void writeToFile(string path, string text)
         //{
@@ -51,7 +51,7 @@ namespace Progra_analisis
         //    return content;
         //}
 
-        private void serializeList(ArrayList list, string path)
+        private static void serializeList(ArrayList list, string path)
         {
             var serializer = new XmlSerializer(typeof(ArrayList));
             using (var stream = File.OpenWrite(path))
@@ -60,7 +60,7 @@ namespace Progra_analisis
             }
         }
 
-        private void deserialize(ArrayList list, string path)
+        private static void deserialize(ArrayList list, string path)
         {
             var serializer = new XmlSerializer(typeof(ArrayList));
             using (var stream = File.OpenRead(path))
@@ -71,12 +71,12 @@ namespace Progra_analisis
             }
         }
 
-        private void addToTopStatistics(Statistics statistic)
+        private static void addToTopStatistics(Statistics statistic)
         {
             for (int i = 0; i < topStatisticsRegister.Count; i++)
             {
                 Statistics element = (Statistics)topStatisticsRegister[i];
-                if (element.getHighestAdaptabilityReached() < statistic.getHighestAdaptabilityReached())
+                if (element.getBestDistance() > statistic.getBestDistance())
                 {
                     topStatisticsRegister.Insert(i, statistic);
                     if (topStatisticsRegister.Count > 10)
@@ -99,26 +99,36 @@ namespace Progra_analisis
             cross_A_A_percentage = Convert.ToDouble((naturalSelection.getCross_A_A_percentage() * 100) / childsPerGeneration);
             cross_A_NA_percentage = Convert.ToDouble((naturalSelection.getCross_A_NA_percentage() * 100) / childsPerGeneration);
             cross_NA_NA_percentage = Convert.ToDouble((naturalSelection.getCross_NA_NA_percentage() * 100) / childsPerGeneration);
-            highestAdaptabilityReached = naturalSelection.getHighestAdaptability();
+            bestDistance = naturalSelection.getBestDistance();
             typeOfHistogram = naturalSelection.getTypeOfHistogram();
-            try
-            {
-                deserialize(statisticsRegister, statisticsRegisterPath);
-                deserialize(topStatisticsRegister, topStatisticsRegisterPath);
-            }
-            catch(Exception)
-            {
-                Console.WriteLine("The file could not be read.");
-            }
         }
 
-        public void addStatistic(Statistics statistic)
+        public static void addStatistic(Statistics statistic)
         {
             statisticsRegister.Add(statistic);
             addToTopStatistics(statistic);
         }
 
-        public void downloadStatisticsCSV(int typeOfStatistics) //1 for all, or 2 for top 10
+        public static void loadStatistics()
+        {
+            try
+            {
+                deserialize(statisticsRegister, statisticsRegisterPath);
+                deserialize(topStatisticsRegister, topStatisticsRegisterPath);
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("The file could not be read.");
+            }
+        }
+
+        public static void saveStatistics()
+        {
+            serializeList(statisticsRegister, statisticsRegisterPath);
+            serializeList(topStatisticsRegister, topStatisticsRegisterPath);
+        }
+
+        public static void downloadStatisticsCSV(int typeOfStatistics) //1 for all, or 2 for top 10
         {
             using (SaveFileDialog sfd = new SaveFileDialog() { Filter = "CSV|*.csv", ValidateNames = true})
             {
@@ -193,9 +203,9 @@ namespace Progra_analisis
             return population;
         }
 
-        public int getHighestAdaptabilityReached()
+        public int getBestDistance()
         {
-            return highestAdaptabilityReached;
+            return bestDistance;
         }
 
         public string getTypeOfHistogram()
