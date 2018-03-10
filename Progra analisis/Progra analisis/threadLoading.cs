@@ -18,10 +18,9 @@ namespace Progra_analisis
         //Borrar
         public List<Bitmap> bitmapsTest = new List<Bitmap>(5);
 
-        public threadLoading(List<Bitmap> p_bitmapsTest)//NaturalSelection pNaturalPointer
+        public threadLoading(NaturalSelection pNaturalPointer)//NaturalSelection pNaturalPointer
         {
-            //naturalPointer = pNaturalPointer;
-            bitmapsTest = p_bitmapsTest;
+            naturalPointer = pNaturalPointer;
             view = new loadingScreen();
             view.Show();
             Thread updater = new Thread(checker);
@@ -31,9 +30,10 @@ namespace Progra_analisis
         public void checker()
         {
             int contador = 0;
-            while (contador <5)
+            while (true)
             {
-                view.setPicture(bitmapsTest[contador]);
+                view.actualPicture.Image = naturalPointer.getPositionCero();
+                view.label2.Text = naturalPointer.getGenerationCounter().ToString();
                 Thread.Sleep(1000);
                 contador++;
             }

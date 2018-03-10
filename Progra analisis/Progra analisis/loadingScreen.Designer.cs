@@ -30,6 +30,7 @@
         {
             this.actualPicture = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.actualPicture)).BeginInit();
             this.SuspendLayout();
             // 
@@ -51,11 +52,22 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "Best of  generation";
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(13, 284);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(60, 13);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "generacion";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
+            // 
             // loadingScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(454, 335);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.actualPicture);
             this.Name = "loadingScreen";
@@ -70,5 +82,6 @@
         #endregion
         private System.Windows.Forms.Label label1;
         public System.Windows.Forms.PictureBox actualPicture;
+        public System.Windows.Forms.Label label2;
     }
 }

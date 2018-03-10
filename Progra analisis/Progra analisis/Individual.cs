@@ -18,7 +18,8 @@ namespace Progra_analisis
         private List<List<int>> histogramRGB;
         private Adaptability adaptability;
         private Bitmap bitmap;
-
+        private object lockObject = new object();
+        private object locker = new object();
 
         private Bitmap generateBitmap()
         {
@@ -29,12 +30,11 @@ namespace Progra_analisis
             {
                 for (int j = 0; j < newImage.Height; j++)
                 {
-                    int a = rnd.Next(0, 256);
                     int rojo = rnd.Next(0, 256);
                     int verde = rnd.Next(0, 256);
                     int azul = rnd.Next(0, 256);
 
-                    Color newco = Color.FromArgb(a, rojo, verde, azul);
+                    Color newco = Color.FromArgb(255, rojo, verde, azul);
                     newImage.SetPixel(i, j, newco);
                 }
             }
@@ -193,18 +193,62 @@ namespace Progra_analisis
         public Individual crossOver(Individual soulmate)
         {
             Bitmap bitmap_kid = new Bitmap(bitmap.Width, bitmap.Height);
-            Random rnd = new Random();
-            for (int i = 0; i < bitmap.Width; i++)
+            lock (lockObject)
             {
-                for (int j = 0; j < bitmap.Height; j++)
+                Random rnd = new Random();
+                for (int i = 0; i < bitmap.Width; i++)
                 {
-                    if (rnd.Next(0, 1) == 2)
+                    for (int j = 0; j < bitmap.Height; j++)
                     {
-                        bitmap_kid.SetPixel(i, j, bitmap.GetPixel(i, j));
+                        Color clr = bitmap.GetPixel(i, j);
+                        if (rnd.Next(0, 1) == 2)
+                        {
+                            bitmap_kid.SetPixel(i, j, Color.FromArgb(255, clr.R, clr.G, clr.B));
+                        }
+                        else
+                        {
+                            clr = soulmate.getBitmap().GetPixel(i, j);
+                            bitmap_kid.SetPixel(i, j, Color.FromArgb(255, clr.R, clr.G, clr.B));
+                        }
                     }
-                    else
+                }
+            }
+            return new Individual(bitmap_kid);
+        }
+
+
+        private int checkPixel(int i, int j, Color father, Color mother)
+        {
+            Color clr = finalImage.getBitmap().GetPixel(i, j);
+            int distanceFather = Math.Abs(father.R - clr.R) + Math.Abs(father.G - clr.G) + Math.Abs(father.B - clr.B);
+            int distanceMother = Math.Abs(mother.R - clr.R) + Math.Abs(mother.G - clr.G) + Math.Abs(mother.B - clr.B);
+
+            if (distanceFather < distanceMother)
+            {
+                return 1;
+            }
+            return 0;
+        }
+        public Individual crossOverLookingOver(Individual soulmate)
+        {
+            Bitmap bitmap_kid = new Bitmap(bitmap.Width, bitmap.Height);
+            Random rnd = new Random();
+
+            lock (lockObject)
+            {
+                for (int i = 0; i < bitmap.Width; i++)
+                {
+                    for (int j = 0; j < bitmap.Height; j++)
                     {
-                        bitmap_kid.SetPixel(i, j, soulmate.getBitmap().GetPixel(i, j));
+                        int which = checkPixel(i, j, bitmap.GetPixel(i, j), soulmate.getBitmap().GetPixel(i, j));
+                        if (which == 1)
+                        {
+                            bitmap_kid.SetPixel(i, j, bitmap.GetPixel(i, j));
+                        }
+                        else
+                        {
+                            bitmap_kid.SetPixel(i, j, soulmate.getBitmap().GetPixel(i, j));
+                        }
                     }
                 }
             }
@@ -233,7 +277,12 @@ namespace Progra_analisis
 
         public Bitmap getBitmap()
         {
-            return bitmap;
+            Bitmap b;
+            lock (lockObject)
+            {
+               b  = new Bitmap(bitmap);
+            }
+            return b;
         }
 
         public List<List<int>> getHistogramRGB()
