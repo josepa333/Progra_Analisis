@@ -39,6 +39,7 @@ namespace Progra_analisis
             this.output8.Visible = false;
             this.output9.Visible = false;
             this.output10.Visible = false;
+            this.saveResults.Visible = false;
             
         }
 
@@ -109,6 +110,7 @@ namespace Progra_analisis
             this.output8.Visible = true;
             this.output9.Visible = true;
             this.output10.Visible = true;
+            this.saveResults.Visible = true;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -265,6 +267,11 @@ namespace Progra_analisis
                 this.manhattan.Checked = false;
                 this.Surprise.Checked = true;
             }
+        }
+
+        private void saveResults_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

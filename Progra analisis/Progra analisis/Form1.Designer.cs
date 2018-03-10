@@ -68,6 +68,7 @@
             this.darknessSelected = new System.Windows.Forms.RadioButton();
             this.manhattan = new System.Windows.Forms.RadioButton();
             this.Surprise = new System.Windows.Forms.RadioButton();
+            this.saveResults = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.selected_picture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Q_generations)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Q_population)).BeginInit();
@@ -463,11 +464,22 @@
             this.Surprise.UseVisualStyleBackColor = true;
             this.Surprise.CheckedChanged += new System.EventHandler(this.Surprise_CheckedChanged);
             // 
+            // saveResults
+            // 
+            this.saveResults.Location = new System.Drawing.Point(671, 560);
+            this.saveResults.Name = "saveResults";
+            this.saveResults.Size = new System.Drawing.Size(137, 23);
+            this.saveResults.TabIndex = 43;
+            this.saveResults.Text = "Save results";
+            this.saveResults.UseVisualStyleBackColor = true;
+            this.saveResults.Click += new System.EventHandler(this.saveResults_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1062, 595);
+            this.Controls.Add(this.saveResults);
             this.Controls.Add(this.Surprise);
             this.Controls.Add(this.manhattan);
             this.Controls.Add(this.darknessSelected);
@@ -580,6 +592,7 @@
         private System.Windows.Forms.RadioButton darknessSelected;
         private System.Windows.Forms.RadioButton manhattan;
         private System.Windows.Forms.RadioButton Surprise;
+        private System.Windows.Forms.Button saveResults;
     }
 }
 
