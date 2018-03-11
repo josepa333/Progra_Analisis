@@ -28,8 +28,8 @@ namespace Progra_analisis
         private int population;
         private double bestDistance;
         private string typeOfHistogram;
-        private static string statisticsRegisterPath = Environment.CurrentDirectory + "\\statistics.txt";
-        private static string topStatisticsRegisterPath = Environment.CurrentDirectory + "\\topStatistics.txt";
+        private static string statisticsRegisterPath = Environment.CurrentDirectory + "\\statistics.XML";
+        private static string topStatisticsRegisterPath = Environment.CurrentDirectory + "\\topStatistics.XML";
 
         //private void writeToFile(string path, string text)
         //{
