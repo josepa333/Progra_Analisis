@@ -21,7 +21,8 @@ namespace Progra_analisis
         public Form1()
         {
             InitializeComponent();
-            
+            Statistics.loadStatistics();
+
             this.output1.SizeMode = PictureBoxSizeMode.StretchImage;
             this.output2.SizeMode = PictureBoxSizeMode.StretchImage;
             this.output3.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -258,6 +259,8 @@ namespace Progra_analisis
                     //Thread thr = new Thread(new ThreadStart(run));
                     //thr.Start();
 
+                    Statistics statistic = new Statistics(naturalSelection);
+                    Statistics.addStatistic(statistic);
                 }
                 else
                 {
@@ -325,7 +328,8 @@ namespace Progra_analisis
 
         private void saveResults_Click(object sender, EventArgs e)
         {
-
+            Statistics.saveStatistics();
+            MessageBox.Show("The progress has been saved.");
         }
     }
 }
