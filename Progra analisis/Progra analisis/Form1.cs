@@ -253,8 +253,6 @@ namespace Progra_analisis
                     this.distance10.Text = imagesToDisplay[9].getDistance().ToString();
 
 
-
-                    //Statistics statistics = new Statistics(naturalSelection);
                     //threadLoading thread = new threadLoading(naturalSelection);
                     //Thread thr = new Thread(new ThreadStart(run));
                     //thr.Start();

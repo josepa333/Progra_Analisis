@@ -283,10 +283,7 @@ namespace Progra_analisis
         public Bitmap getBitmap()
         {
             Bitmap b;
-            lock (lockObject)
-            {
-               b  = new Bitmap(bitmap);
-            }
+            b  = new Bitmap(bitmap);
             return b;
         }
 
