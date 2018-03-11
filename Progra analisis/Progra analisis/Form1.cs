@@ -21,6 +21,7 @@ namespace Progra_analisis
         public Form1()
         {
             InitializeComponent();
+            Statistics.saveStatistics();
             Statistics.loadStatistics();
 
             this.output1.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -33,6 +34,17 @@ namespace Progra_analisis
             this.output8.SizeMode = PictureBoxSizeMode.StretchImage;
             this.output9.SizeMode = PictureBoxSizeMode.StretchImage;
             this.output10.SizeMode = PictureBoxSizeMode.StretchImage;
+
+            this.distance1.Visible = false;
+            this.distance2.Visible = false;
+            this.distance3.Visible = false;
+            this.distance4.Visible = false;
+            this.distance5.Visible = false;
+            this.distance6.Visible = false;
+            this.distance7.Visible = false;
+            this.distance8.Visible = false;
+            this.distance9.Visible = false;
+            this.distance10.Visible = false;
 
             this.output1.Visible = false;
             this.output2.Visible = false;
@@ -83,7 +95,7 @@ namespace Progra_analisis
             this.pAdaptableImagesPercentage.Hide();
             this.adapatblesPercentageToCopy.Hide();
             this.childsPerGenerations.Hide();
-            this.sectionsPerImage.Hide();
+            
             
 
             this.label2.Hide();
@@ -95,7 +107,7 @@ namespace Progra_analisis
             this.label9.Hide();
             this.label10.Hide();
             this.label11.Hide();
-            this.label12.Hide();
+            
 
             this.selected_picture.Hide();
             this.BT_selectImage.Hide();
@@ -105,6 +117,18 @@ namespace Progra_analisis
             this.darknessSelected.Hide();
             this.manhattan.Hide();
             this.Surprise.Hide();
+
+            this.distance1.Visible = true;
+            this.distance2.Visible = true;
+            this.distance3.Visible = true;
+            this.distance4.Visible = true;
+            this.distance5.Visible = true;
+            this.distance6.Visible = true;
+            this.distance7.Visible = true;
+            this.distance8.Visible = true;
+            this.distance9.Visible = true;
+            this.distance10.Visible = true;
+
 
             this.output1.Visible = true;
             this.output2.Visible = true;
@@ -183,7 +207,6 @@ namespace Progra_analisis
                 this.childsPerGenerations.Value > 1 &&
                 ((this.pAwNa.Value + this.pNAwNa.Value + this.pAwA.Value) == 100) &&
                 this.childsPerGenerations.Value <= this.Q_population.Value &&
-                this.sectionsPerImage.Value > 2 &&
                 this.mutationsPerGeneration.Value <= mutationValidation)
             {
                 if ( numberOfAaptables >= 2)
@@ -218,7 +241,7 @@ namespace Progra_analisis
                         Decimal.ToDouble(this.pAwA.Value) / 100,
                         Decimal.ToDouble(this.pAdaptableImagesPercentage.Value) / 100,
                         Decimal.ToInt32(this.adapatblesPercentageToCopy.Value) / 100,
-                        Decimal.ToInt32(this.sectionsPerImage.Value));
+                        3);
 
                     Individual[] imagesToDisplay = naturalSelection.genericAlgorithm();
 

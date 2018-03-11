@@ -54,12 +54,10 @@
             this.output8 = new System.Windows.Forms.PictureBox();
             this.output9 = new System.Windows.Forms.PictureBox();
             this.output10 = new System.Windows.Forms.PictureBox();
-            this.sectionsPerImage = new System.Windows.Forms.NumericUpDown();
             this.label10 = new System.Windows.Forms.Label();
             this.childsPerGenerations = new System.Windows.Forms.NumericUpDown();
             this.label11 = new System.Windows.Forms.Label();
             this.adapatblesPercentageToCopy = new System.Windows.Forms.NumericUpDown();
-            this.label12 = new System.Windows.Forms.Label();
             this.mutationsPerGeneration = new System.Windows.Forms.NumericUpDown();
             this.label4 = new System.Windows.Forms.Label();
             this.RGBSelected = new System.Windows.Forms.RadioButton();
@@ -96,7 +94,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.output8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.output9)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.output10)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sectionsPerImage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.childsPerGenerations)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.adapatblesPercentageToCopy)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.mutationsPerGeneration)).BeginInit();
@@ -336,13 +333,6 @@
             this.output10.TabIndex = 30;
             this.output10.TabStop = false;
             // 
-            // sectionsPerImage
-            // 
-            this.sectionsPerImage.Location = new System.Drawing.Point(37, 417);
-            this.sectionsPerImage.Name = "sectionsPerImage";
-            this.sectionsPerImage.Size = new System.Drawing.Size(68, 20);
-            this.sectionsPerImage.TabIndex = 31;
-            // 
             // label10
             // 
             this.label10.AutoSize = true;
@@ -380,15 +370,6 @@
             this.adapatblesPercentageToCopy.Name = "adapatblesPercentageToCopy";
             this.adapatblesPercentageToCopy.Size = new System.Drawing.Size(68, 20);
             this.adapatblesPercentageToCopy.TabIndex = 35;
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(111, 423);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(97, 13);
-            this.label12.TabIndex = 36;
-            this.label12.Text = "Sections per image";
             // 
             // mutationsPerGeneration
             // 
@@ -469,90 +450,90 @@
             this.distance1.AutoSize = true;
             this.distance1.Location = new System.Drawing.Point(26, 52);
             this.distance1.Name = "distance1";
-            this.distance1.Size = new System.Drawing.Size(35, 13);
+            this.distance1.Size = new System.Drawing.Size(51, 13);
             this.distance1.TabIndex = 44;
-            this.distance1.Text = "label5";
+            this.distance1.Text = "Distancia";
             // 
             // distance2
             // 
             this.distance2.AutoSize = true;
             this.distance2.Location = new System.Drawing.Point(270, 52);
             this.distance2.Name = "distance2";
-            this.distance2.Size = new System.Drawing.Size(35, 13);
+            this.distance2.Size = new System.Drawing.Size(51, 13);
             this.distance2.TabIndex = 45;
-            this.distance2.Text = "label5";
+            this.distance2.Text = "Distancia";
             // 
             // distance3
             // 
             this.distance3.AutoSize = true;
             this.distance3.Location = new System.Drawing.Point(517, 52);
             this.distance3.Name = "distance3";
-            this.distance3.Size = new System.Drawing.Size(35, 13);
+            this.distance3.Size = new System.Drawing.Size(51, 13);
             this.distance3.TabIndex = 46;
-            this.distance3.Text = "label5";
+            this.distance3.Text = "Distancia";
             // 
             // distance4
             // 
             this.distance4.AutoSize = true;
             this.distance4.Location = new System.Drawing.Point(772, 50);
             this.distance4.Name = "distance4";
-            this.distance4.Size = new System.Drawing.Size(35, 13);
+            this.distance4.Size = new System.Drawing.Size(51, 13);
             this.distance4.TabIndex = 47;
-            this.distance4.Text = "label5";
+            this.distance4.Text = "Distancia";
             // 
             // distance5
             // 
             this.distance5.AutoSize = true;
             this.distance5.Location = new System.Drawing.Point(26, 199);
             this.distance5.Name = "distance5";
-            this.distance5.Size = new System.Drawing.Size(35, 13);
+            this.distance5.Size = new System.Drawing.Size(51, 13);
             this.distance5.TabIndex = 48;
-            this.distance5.Text = "label5";
+            this.distance5.Text = "Distancia";
             // 
             // distance6
             // 
             this.distance6.AutoSize = true;
             this.distance6.Location = new System.Drawing.Point(270, 196);
             this.distance6.Name = "distance6";
-            this.distance6.Size = new System.Drawing.Size(35, 13);
+            this.distance6.Size = new System.Drawing.Size(51, 13);
             this.distance6.TabIndex = 49;
-            this.distance6.Text = "label5";
+            this.distance6.Text = "Distancia";
             // 
             // distance7
             // 
             this.distance7.AutoSize = true;
             this.distance7.Location = new System.Drawing.Point(517, 200);
             this.distance7.Name = "distance7";
-            this.distance7.Size = new System.Drawing.Size(35, 13);
+            this.distance7.Size = new System.Drawing.Size(51, 13);
             this.distance7.TabIndex = 50;
-            this.distance7.Text = "label5";
+            this.distance7.Text = "Distancia";
             // 
             // distance8
             // 
             this.distance8.AutoSize = true;
             this.distance8.Location = new System.Drawing.Point(775, 200);
             this.distance8.Name = "distance8";
-            this.distance8.Size = new System.Drawing.Size(35, 13);
+            this.distance8.Size = new System.Drawing.Size(51, 13);
             this.distance8.TabIndex = 51;
-            this.distance8.Text = "label5";
+            this.distance8.Text = "Distancia";
             // 
             // distance9
             // 
             this.distance9.AutoSize = true;
             this.distance9.Location = new System.Drawing.Point(270, 337);
             this.distance9.Name = "distance9";
-            this.distance9.Size = new System.Drawing.Size(35, 13);
+            this.distance9.Size = new System.Drawing.Size(51, 13);
             this.distance9.TabIndex = 52;
-            this.distance9.Text = "label5";
+            this.distance9.Text = "Distancia";
             // 
             // distance10
             // 
             this.distance10.AutoSize = true;
             this.distance10.Location = new System.Drawing.Point(517, 349);
             this.distance10.Name = "distance10";
-            this.distance10.Size = new System.Drawing.Size(35, 13);
+            this.distance10.Size = new System.Drawing.Size(51, 13);
             this.distance10.TabIndex = 53;
-            this.distance10.Text = "label5";
+            this.distance10.Text = "Distancia";
             // 
             // groupBox1
             // 
@@ -594,12 +575,10 @@
             this.Controls.Add(this.saveResults);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.mutationsPerGeneration);
-            this.Controls.Add(this.label12);
             this.Controls.Add(this.adapatblesPercentageToCopy);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.childsPerGenerations);
             this.Controls.Add(this.label10);
-            this.Controls.Add(this.sectionsPerImage);
             this.Controls.Add(this.output10);
             this.Controls.Add(this.output9);
             this.Controls.Add(this.output8);
@@ -646,7 +625,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.output8)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.output9)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.output10)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sectionsPerImage)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.childsPerGenerations)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.adapatblesPercentageToCopy)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.mutationsPerGeneration)).EndInit();
@@ -687,12 +665,10 @@
         private System.Windows.Forms.PictureBox output8;
         private System.Windows.Forms.PictureBox output9;
         private System.Windows.Forms.PictureBox output10;
-        private System.Windows.Forms.NumericUpDown sectionsPerImage;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.NumericUpDown childsPerGenerations;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.NumericUpDown adapatblesPercentageToCopy;
-        private System.Windows.Forms.Label label12;
         private System.Windows.Forms.NumericUpDown mutationsPerGeneration;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.RadioButton RGBSelected;
