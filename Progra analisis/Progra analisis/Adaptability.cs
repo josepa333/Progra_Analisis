@@ -11,9 +11,9 @@ namespace Progra_analisis
     {
         private int manhattanDistanceRGBHistogram;
         private int manhattanDistanceDarknessHistogram;
-        private int klDistanceRGBHistogram;
-        private int klDisatanceDarknessHistogram;
-        private int distance;
+        private double klDistanceRGBHistogram;
+        private double klDisatanceDarknessHistogram;
+        private double distance;
 
         private int manhattanRGB(List<List<int>> individual)
         {
@@ -95,15 +95,15 @@ namespace Progra_analisis
             }
         }
 
-        public int getDistance()
+        public double getDistance()
         {
             return distance;
         }
 
 
-        private int klRGB(List<List<int>> individual)
+        private double klRGB(List<List<int>> individual)
         {
-            List<List<double>> probabilityDistributionRGB = Individual.probabilityDistributionRGB;
+            double[,] probabilityDistributionRGB = Individual.probabilityDistributionRGB;
             double pX = 0;
             double qX = 0;
             double distanceValue = 0;
@@ -112,13 +112,13 @@ namespace Progra_analisis
             {
                 for (int i = 0; i < individual[section].Count; i++)
                 {
-                    qX = probabilityDistributionRGB[section][i];
+                    qX = probabilityDistributionRGB[section,i];
                     pX = individual[section][i] / Individual.numberOfPixels;
 
                     distanceValue += pX * Math.Log10(pX) - pX * Math.Log10(qX);
                 }
             }
-            return Convert.ToInt32(distanceValue);
+            return distanceValue;
         }
     }
 }

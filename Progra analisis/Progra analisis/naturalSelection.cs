@@ -42,9 +42,6 @@ namespace Progra_analisis
 
             Individual.finalImage = new Individual(desireImage,0);
             Individual.finalImage.dataForFinalImage();
-            Individual.probDistributionRGB(Individual.finalImage.getHistogramRGB());
-            Individual.probDistributionDarkness(Individual.finalImage.getHistogramDarkness());
-
 
             MessageBox.Show("FinalImage");
             Individual.sectionsPerImage = sectionsPerImage;
@@ -352,7 +349,7 @@ namespace Progra_analisis
         }
 
         
-        public int getBestDistance()
+        public double getBestDistance()
         {
             return images[0].getDistance();
         }

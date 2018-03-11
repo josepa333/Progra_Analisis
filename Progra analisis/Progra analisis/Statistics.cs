@@ -26,7 +26,7 @@ namespace Progra_analisis
         private int childsPerGeneration;
         private int generations;
         private int population;
-        private int bestDistance;
+        private double bestDistance;
         private string typeOfHistogram;
         private static string statisticsRegisterPath = Environment.CurrentDirectory + "\\statistics.txt";
         private static string topStatisticsRegisterPath = Environment.CurrentDirectory + "\\topStatistics.txt";
@@ -218,7 +218,7 @@ namespace Progra_analisis
             return population;
         }
 
-        public int getBestDistance()
+        public double getBestDistance()
         {
             return bestDistance;
         }
