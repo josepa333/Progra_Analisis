@@ -13,6 +13,9 @@ namespace Progra_analisis
         public static int sectionsPerImage = 3;
         public static int histrogramSelected = 0; //0 = RGB and 1 = darkness
         public static int distanceSelected = 0; // 0 = Manhattan and 1 = Surprise
+        public static List<List<double>> probabilityDistributionRGB = new List<List<double>>(sectionsPerImage * sectionsPerImage);
+        public static List<List<double>> probabilityDistributionDarkness = new List<List<double>>(sectionsPerImage * sectionsPerImage);
+        public static int numberOfPixels;
 
         private List<List<int>> histogramDarkness;
         private List<List<int>> histogramRGB;
@@ -170,6 +173,7 @@ namespace Progra_analisis
             histogramRGB = new List<List<int>>();
             histogramDarkness = new List<List<int>>();
             bitmap = p_kid;
+            Individual.numberOfPixels = (p_kid.Height / 3) * (p_kid.Width / 3);
         }
 
         public Individual(Bitmap p_kid)
@@ -312,6 +316,37 @@ namespace Progra_analisis
         public int getDistance()
         {
             return adaptability.getDistance();
+        }
+
+        public static void probDistributionRGB(List<List<int>> histogramRGB)
+        { 
+            List<double> probablityPerSection = new List<double>(256);
+
+            for (int section = 0; section < histogramRGB.Count; section++)
+            {
+                for (int i = 0; i < histogramRGB[section].Count; i++)
+                {
+                    probablityPerSection.Add(histogramRGB[section][i] / Individual.numberOfPixels);
+                }
+                Individual.probabilityDistributionRGB.Add(probablityPerSection);
+                probablityPerSection.Clear();
+            }
+        }
+
+        public static void probDistributionDarkness(List<List<int>> histogramDarkness)
+        {
+
+            List<double> probablityPerSection = new List<double>(256);
+
+            for (int section = 0; section < histogramDarkness.Count; section++)
+            {
+                for (int i = 0; i < histogramDarkness[section].Count; i++)
+                {
+                    probablityPerSection.Add(histogramDarkness[section][i] / Individual.numberOfPixels);
+                }
+                Individual.probabilityDistributionDarkness.Add(probablityPerSection);
+                probablityPerSection.Clear();
+            }
         }
     }
 }

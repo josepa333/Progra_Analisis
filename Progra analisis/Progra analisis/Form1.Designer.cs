@@ -77,6 +77,8 @@
             this.distance8 = new System.Windows.Forms.Label();
             this.distance9 = new System.Windows.Forms.Label();
             this.distance10 = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.selected_picture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Q_generations)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Q_population)).BeginInit();
@@ -98,11 +100,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.childsPerGenerations)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.adapatblesPercentageToCopy)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.mutationsPerGeneration)).BeginInit();
+            this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // BT_selectImage
             // 
-            this.BT_selectImage.Location = new System.Drawing.Point(821, 560);
+            this.BT_selectImage.Location = new System.Drawing.Point(821, 581);
             this.BT_selectImage.Name = "BT_selectImage";
             this.BT_selectImage.Size = new System.Drawing.Size(150, 23);
             this.BT_selectImage.TabIndex = 0;
@@ -154,7 +158,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(977, 560);
+            this.button1.Location = new System.Drawing.Point(977, 581);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 6;
@@ -405,7 +409,7 @@
             // RGBSelected
             // 
             this.RGBSelected.AutoSize = true;
-            this.RGBSelected.Location = new System.Drawing.Point(37, 444);
+            this.RGBSelected.Location = new System.Drawing.Point(6, 24);
             this.RGBSelected.Name = "RGBSelected";
             this.RGBSelected.Size = new System.Drawing.Size(48, 17);
             this.RGBSelected.TabIndex = 39;
@@ -417,7 +421,7 @@
             // darknessSelected
             // 
             this.darknessSelected.AutoSize = true;
-            this.darknessSelected.Location = new System.Drawing.Point(37, 467);
+            this.darknessSelected.Location = new System.Drawing.Point(6, 52);
             this.darknessSelected.Name = "darknessSelected";
             this.darknessSelected.Size = new System.Drawing.Size(70, 17);
             this.darknessSelected.TabIndex = 40;
@@ -429,7 +433,7 @@
             // manhattan
             // 
             this.manhattan.AutoSize = true;
-            this.manhattan.Location = new System.Drawing.Point(37, 527);
+            this.manhattan.Location = new System.Drawing.Point(6, 38);
             this.manhattan.Name = "manhattan";
             this.manhattan.Size = new System.Drawing.Size(76, 17);
             this.manhattan.TabIndex = 41;
@@ -441,7 +445,7 @@
             // Surprise
             // 
             this.Surprise.AutoSize = true;
-            this.Surprise.Location = new System.Drawing.Point(37, 550);
+            this.Surprise.Location = new System.Drawing.Point(6, 61);
             this.Surprise.Name = "Surprise";
             this.Surprise.Size = new System.Drawing.Size(63, 17);
             this.Surprise.TabIndex = 42;
@@ -452,7 +456,7 @@
             // 
             // saveResults
             // 
-            this.saveResults.Location = new System.Drawing.Point(671, 560);
+            this.saveResults.Location = new System.Drawing.Point(671, 581);
             this.saveResults.Name = "saveResults";
             this.saveResults.Size = new System.Drawing.Size(137, 23);
             this.saveResults.TabIndex = 43;
@@ -550,11 +554,33 @@
             this.distance10.TabIndex = 53;
             this.distance10.Text = "label5";
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.manhattan);
+            this.groupBox1.Controls.Add(this.Surprise);
+            this.groupBox1.Location = new System.Drawing.Point(29, 520);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(200, 84);
+            this.groupBox1.TabIndex = 54;
+            this.groupBox1.TabStop = false;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.darknessSelected);
+            this.groupBox2.Controls.Add(this.RGBSelected);
+            this.groupBox2.Location = new System.Drawing.Point(29, 439);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(200, 75);
+            this.groupBox2.TabIndex = 55;
+            this.groupBox2.TabStop = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1062, 595);
+            this.ClientSize = new System.Drawing.Size(1062, 614);
+            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.distance10);
             this.Controls.Add(this.distance9);
             this.Controls.Add(this.distance8);
@@ -566,10 +592,6 @@
             this.Controls.Add(this.distance2);
             this.Controls.Add(this.distance1);
             this.Controls.Add(this.saveResults);
-            this.Controls.Add(this.Surprise);
-            this.Controls.Add(this.manhattan);
-            this.Controls.Add(this.darknessSelected);
-            this.Controls.Add(this.RGBSelected);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.mutationsPerGeneration);
             this.Controls.Add(this.label12);
@@ -628,6 +650,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.childsPerGenerations)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.adapatblesPercentageToCopy)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.mutationsPerGeneration)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -684,6 +710,8 @@
         private System.Windows.Forms.Label distance8;
         private System.Windows.Forms.Label distance9;
         private System.Windows.Forms.Label distance10;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox groupBox2;
     }
 }
 

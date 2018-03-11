@@ -198,6 +198,15 @@ namespace Progra_analisis
                         Individual.histrogramSelected = 1;
                     }
 
+                    if (this.manhattan.Checked == true)
+                    {
+                        Individual.distanceSelected = 0;
+                    }
+                    else
+                    {
+                        Individual.distanceSelected = 1;
+                    }
+
                     naturalSelection = new NaturalSelection(bitImage,
                         Decimal.ToInt32(this.Q_generations.Value),
                         Decimal.ToInt32(this.Q_population.Value),
@@ -221,7 +230,6 @@ namespace Progra_analisis
                     this.output3.Image = imagesToDisplay[2].getBitmap();
                     this.distance3.Text = imagesToDisplay[2].getDistance().ToString();
 
-
                     this.output4.Image = imagesToDisplay[3].getBitmap();
                     this.distance4.Text = imagesToDisplay[3].getDistance().ToString();
 
@@ -242,9 +250,11 @@ namespace Progra_analisis
 
                     this.output10.Image = imagesToDisplay[9].getBitmap();
                     this.distance10.Text = imagesToDisplay[9].getDistance().ToString();
-                    //threadLoading thread = new threadLoading(naturalSelection);
-                    //Statistics statistics = new Statistics(naturalSelection);
 
+
+
+                    //Statistics statistics = new Statistics(naturalSelection);
+                    //threadLoading thread = new threadLoading(naturalSelection);
                     //Thread thr = new Thread(new ThreadStart(run));
                     //thr.Start();
 

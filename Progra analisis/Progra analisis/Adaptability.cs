@@ -11,8 +11,8 @@ namespace Progra_analisis
     {
         private int manhattanDistanceRGBHistogram;
         private int manhattanDistanceDarknessHistogram;
-        private int surpriseDistanceRGBHistogram;
-        private int surpriseDistanceDarknessHistogram;
+        private int klDistanceRGBHistogram;
+        private int klDisatanceDarknessHistogram;
         private int distance;
 
         private int manhattanRGB(List<List<int>> individual)
@@ -59,14 +59,14 @@ namespace Progra_analisis
 
         private void setSurpriseRGBHistogram(List<List<int>> RGBHistogram)
         {
-            //surpriseDistanceRGBHistogram = supriseRGB(RGBHistogram);
-            distance = surpriseDistanceRGBHistogram;
+            klDistanceRGBHistogram = klRGB(RGBHistogram);
+            distance = klDistanceRGBHistogram;
         }
 
         private void setSurpriseDarknessHistogram(List<List<int>> darknessHistogram)
         {
-            //surpriseDistanceDarknessHistogram = surpriseDarkness(darknessHistogram);
-            distance = surpriseDistanceDarknessHistogram;
+            //klDisatanceDarknessHistogram = klDarkness(darknessHistogram);
+            distance = klDisatanceDarknessHistogram;
         }
 
         public Adaptability(List<List<int>> histogram)
@@ -98,6 +98,27 @@ namespace Progra_analisis
         public int getDistance()
         {
             return distance;
+        }
+
+
+        private int klRGB(List<List<int>> individual)
+        {
+            List<List<double>> probabilityDistributionRGB = Individual.probabilityDistributionRGB;
+            double pX = 0;
+            double qX = 0;
+            double distanceValue = 0;
+
+            for (int section = 0; section < individual.Count; section++)
+            {
+                for (int i = 0; i < individual[section].Count; i++)
+                {
+                    qX = probabilityDistributionRGB[section][i];
+                    pX = individual[section][i] / Individual.numberOfPixels;
+
+                    distanceValue += pX * Math.Log10(pX) - pX * Math.Log10(qX);
+                }
+            }
+            return Convert.ToInt32(distanceValue);
         }
     }
 }
