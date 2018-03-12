@@ -65,6 +65,15 @@ namespace Progra_analisis
             
         }
 
+        struct DataParameter
+        {
+            public int Process;
+            public int Delay;
+        }
+
+        private DataParameter _inputparameter;
+
+
         private void BT_selectImage_Click(object sender, EventArgs e)
         {
             
@@ -165,38 +174,13 @@ namespace Progra_analisis
         private void button1_Click(object sender, EventArgs e)
         {
 
-            /*
-            //Borrar todo dentro de esto despues de probar
-            List<Bitmap> bitmapsTest = new List<Bitmap>(5);
-
-            Bitmap newImage = new Bitmap(bitImage.Width, bitImage.Height);
-            Random rnd = new Random();
-            int contador = 0;
-
-            while (contador < 5)
+            if (!backgroundWorker.IsBusy)
             {
-                for (int i = 0; i < newImage.Width; i++)
-                {
-                    for (int j = 0; j < newImage.Height; j++)
-                    {
-                        int a = rnd.Next(0, 256);
-                        int rojo = rnd.Next(0, 256);
-                        int verde = rnd.Next(0, 256);
-                        int azul = rnd.Next(0, 256);
-
-                        Color newco = Color.FromArgb(a, rojo, verde, azul);
-                        newImage.SetPixel(i, j, newco);
-                    }
-                }
-                bitmapsTest.Add(newImage);
-                contador++;
+                _inputparameter.Delay = 100;
+                _inputparameter.Process = 1200;
+                backgroundWorker.RunWorkerAsync(_inputparameter);
             }
-            bitmapsTest.Add(bitImage);
 
-            //Borrar
-            */
-            //Cambiar a natural selection
-            
 
             int numberOfAaptables = Convert.ToInt32(((this.pAdaptableImagesPercentage.Value) / 100) * this.Q_population.Value);
             int mutationValidation = Convert.ToInt32((this.Q_population.Value - this.childsPerGenerations.Value - ((this.adapatblesPercentageToCopy.Value / 100) * numberOfAaptables)));
@@ -359,6 +343,43 @@ namespace Progra_analisis
         private void goBack_Click(object sender, EventArgs e)
         {
             hideWidgets();
+            if (backgroundWorker.IsBusy)
+                backgroundWorker.CancelAsync();
+        }
+
+        private void backgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            lblProgress.Text = string.Format("Limpando...{0}%", e.ProgressPercentage);
+        }
+
+        private void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            int process = ((DataParameter)e.Argument).Process;
+            int delay = ((DataParameter)e.Argument).Delay;
+            int index = 1;
+            try
+            {
+                for (int i = 0; i < process; i++)
+                {
+                    if (!backgroundWorker.CancellationPending)
+                    {
+                        backgroundWorker.ReportProgress(index++ * 100 / process,string.Format("Process data {0},i"));
+                        Thread.Sleep(delay);//used to simulate lengh of operation
+                        //Add your code here
+                        //...
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                backgroundWorker.CancelAsync();
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            MessageBox.Show("Limpeza Terminada.");
         }
     }
 }

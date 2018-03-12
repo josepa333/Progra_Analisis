@@ -80,6 +80,8 @@
             this.goBack = new System.Windows.Forms.Button();
             this.output11 = new System.Windows.Forms.PictureBox();
             this.distance11 = new System.Windows.Forms.Label();
+            this.backgroundWorker = new System.ComponentModel.BackgroundWorker();
+            this.lblProgress = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.selected_picture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Q_generations)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Q_population)).BeginInit();
@@ -586,11 +588,29 @@
             this.distance11.TabIndex = 58;
             this.distance11.Text = "Distancia";
             // 
+            // backgroundWorker
+            // 
+            this.backgroundWorker.WorkerReportsProgress = true;
+            this.backgroundWorker.WorkerSupportsCancellation = true;
+            this.backgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker_DoWork);
+            this.backgroundWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker_ProgressChanged);
+            this.backgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker_RunWorkerCompleted);
+            // 
+            // lblProgress
+            // 
+            this.lblProgress.AutoSize = true;
+            this.lblProgress.Location = new System.Drawing.Point(428, 13);
+            this.lblProgress.Name = "lblProgress";
+            this.lblProgress.Size = new System.Drawing.Size(48, 13);
+            this.lblProgress.TabIndex = 59;
+            this.lblProgress.Text = "Progress";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1062, 614);
+            this.Controls.Add(this.lblProgress);
             this.Controls.Add(this.distance11);
             this.Controls.Add(this.output11);
             this.Controls.Add(this.goBack);
@@ -726,6 +746,8 @@
         private System.Windows.Forms.Button goBack;
         private System.Windows.Forms.PictureBox output11;
         private System.Windows.Forms.Label distance11;
+        private System.ComponentModel.BackgroundWorker backgroundWorker;
+        private System.Windows.Forms.Label lblProgress;
     }
 }
 
