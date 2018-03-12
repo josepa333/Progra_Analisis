@@ -283,9 +283,7 @@ namespace Progra_analisis
 
         public Bitmap getBitmap()
         {
-            Bitmap b;
-            b  = new Bitmap(bitmap);
-            return b;
+            return bitmap;
         }
 
         public List<List<int>> getHistogramRGB()

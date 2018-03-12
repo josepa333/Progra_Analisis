@@ -65,7 +65,7 @@ namespace Progra_analisis
 
         private void setSurpriseDarknessHistogram(List<List<int>> darknessHistogram)
         {
-            //klDisatanceDarknessHistogram = klDarkness(darknessHistogram);
+            klDisatanceDarknessHistogram = klDarkness(darknessHistogram);
             distance = klDisatanceDarknessHistogram;
         }
 
@@ -120,5 +120,27 @@ namespace Progra_analisis
             }
             return distanceValue;
         }
+
+        private double klDarkness(List<List<int>> individual)
+        {
+            double[,] probabilityDistributionDarkness = Individual.probabilityDistributionDarkness;
+            double pX = 0;
+            double qX = 0;
+            double distanceValue = 0;
+
+            for (int section = 0; section < individual.Count; section++)
+            {
+                for (int i = 0; i < individual[section].Count; i++)
+                {
+                    qX = probabilityDistributionDarkness[section, i];
+                    pX = individual[section][i] / Individual.numberOfPixels;
+
+                    distanceValue += (pX * Math.Log10(pX) - pX * Math.Log10(qX)) * 10;
+                }
+            }
+            return distanceValue;
+        }
+
+
     }
 }

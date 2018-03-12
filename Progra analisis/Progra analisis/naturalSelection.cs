@@ -240,7 +240,7 @@ namespace Progra_analisis
 
                 if (cross_A_A % 5 == 0 && adaptables.Length >= 2)
                 {
-                    childs[childsIndex] = parents[0].crossOverLookingOver(parents[1]);
+                  childs[childsIndex] = parents[0].crossOverLookingOver(parents[1]);
                 }
                 else if (adaptables.Length >= 2)
                 {
@@ -275,7 +275,7 @@ namespace Progra_analisis
                 else if (notAdaptables.Length >= 2)
                 {
                     childs[childsIndex] = parents[0].crossOver(parents[1]);
-                }
+               }
                 childsIndex++;
                 cross_NA_NA--;
                 childAmount--;
@@ -284,14 +284,14 @@ namespace Progra_analisis
             while (childAmount != 0)
             {
                 parents = parentsToCross(adaptables, notAdaptables, 3);
-                if (childAmount % 5 == 0)
+              /*  if (childAmount % 5 == 0)
                 {
                     childs[childsIndex] = parents[0].crossOverLookingOver(parents[1]);
                 }
                 else
-                {
+                {*/
                     childs[childsIndex] = parents[0].crossOver(parents[1]);
-                }
+              //  }
                 childsIndex++;
                 childAmount--;
             }
