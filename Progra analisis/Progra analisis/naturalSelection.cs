@@ -22,7 +22,10 @@ namespace Progra_analisis
         private int generations;
         private int population;
         private int generationCounter;
-        
+        private double bestDistance;
+        private double normalDistance;
+        private double worstDistance;
+
 
 
         public NaturalSelection(
@@ -60,6 +63,9 @@ namespace Progra_analisis
             cross_A_NA_percentage = Convert.ToInt32(pCross_A_NA_percentage * childsPerGeneration);
             images = new Individual[population];
             createImages(population);
+            bestDistance = images[0].getDistance();
+            normalDistance = images[images.Length / 2].getDistance();
+            worstDistance = images[images.Length - 1].getDistance();
             Sort.quickSort(images, 0, images.Length - 1);
             generationCounter = 0;
         }
@@ -362,7 +368,29 @@ namespace Progra_analisis
             }
             return "";
         }
-        
+
+        public void evalNewDistances(double newBestDistance, double newNormalDistance, double newWorstDistance)
+        {
+            if (bestDistance < newBestDistance)
+            {
+                bestDistance = newBestDistance;
+            }
+            if (normalDistance < newNormalDistance)
+            {
+                normalDistance = newNormalDistance;
+            }
+            if (worstDistance < newWorstDistance)
+            {
+                worstDistance = newWorstDistance;
+            }
+        }
+
+        public double[] getBestDistances()
+        {
+            double[] distances = new double[] { bestDistance, normalDistance, worstDistance };
+            return distances;
+        }
+
         public Individual[] genericAlgorithm()
         {
             int finalResultIndex = 0;
@@ -391,6 +419,7 @@ namespace Progra_analisis
                     finalResult[finalResultIndex] = images[0];
                     finalResultIndex++;
                 }
+                evalNewDistances(images[0].getDistance(), images[images.Length / 2].getDistance(), images[images.Length - 1].getDistance());
                 generationCounter++;
                 generation++;
             }
