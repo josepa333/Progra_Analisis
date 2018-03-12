@@ -82,6 +82,10 @@
             this.distance11 = new System.Windows.Forms.Label();
             this.backgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.lblProgress = new System.Windows.Forms.Label();
+            this.mediumDistance = new System.Windows.Forms.Label();
+            this.bestDistance = new System.Windows.Forms.Label();
+            this.worstDistance = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.selected_picture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Q_generations)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Q_population)).BeginInit();
@@ -605,11 +609,51 @@
             this.lblProgress.TabIndex = 59;
             this.lblProgress.Text = "Progress";
             // 
+            // mediumDistance
+            // 
+            this.mediumDistance.AutoSize = true;
+            this.mediumDistance.Location = new System.Drawing.Point(1126, 101);
+            this.mediumDistance.Name = "mediumDistance";
+            this.mediumDistance.Size = new System.Drawing.Size(87, 13);
+            this.mediumDistance.TabIndex = 60;
+            this.mediumDistance.Text = "Medium distance";
+            // 
+            // bestDistance
+            // 
+            this.bestDistance.AutoSize = true;
+            this.bestDistance.Location = new System.Drawing.Point(1126, 63);
+            this.bestDistance.Name = "bestDistance";
+            this.bestDistance.Size = new System.Drawing.Size(71, 13);
+            this.bestDistance.TabIndex = 61;
+            this.bestDistance.Text = "Best distance";
+            // 
+            // worstDistance
+            // 
+            this.worstDistance.AutoSize = true;
+            this.worstDistance.Location = new System.Drawing.Point(1126, 143);
+            this.worstDistance.Name = "worstDistance";
+            this.worstDistance.Size = new System.Drawing.Size(78, 13);
+            this.worstDistance.TabIndex = 62;
+            this.worstDistance.Text = "Worst distance";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(1058, 23);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(79, 13);
+            this.label14.TabIndex = 63;
+            this.label14.Text = "Best distances:";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1062, 614);
+            this.ClientSize = new System.Drawing.Size(1273, 614);
+            this.Controls.Add(this.label14);
+            this.Controls.Add(this.worstDistance);
+            this.Controls.Add(this.bestDistance);
+            this.Controls.Add(this.mediumDistance);
             this.Controls.Add(this.lblProgress);
             this.Controls.Add(this.distance11);
             this.Controls.Add(this.output11);
@@ -748,6 +792,10 @@
         private System.Windows.Forms.Label distance11;
         private System.ComponentModel.BackgroundWorker backgroundWorker;
         private System.Windows.Forms.Label lblProgress;
+        private System.Windows.Forms.Label mediumDistance;
+        private System.Windows.Forms.Label bestDistance;
+        private System.Windows.Forms.Label worstDistance;
+        private System.Windows.Forms.Label label14;
     }
 }
 

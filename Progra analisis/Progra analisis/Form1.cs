@@ -62,6 +62,10 @@ namespace Progra_analisis
             this.output10.Visible = false;
             this.output11.Visible = false;
             this.saveResults.Visible = false;
+
+            this.bestDistance.Visible = false;
+            this.worstDistance.Visible = false;
+            this.mediumDistance.Visible = false;
             
         }
 
@@ -154,6 +158,10 @@ namespace Progra_analisis
             this.output10.Visible = !this.output10.Visible;
             this.output11.Visible = !this.output11.Visible;
             this.saveResults.Visible = !this.saveResults.Visible;
+
+            this.bestDistance.Visible = !this.bestDistance.Visible;
+            this.worstDistance.Visible = !this.worstDistance.Visible;
+            this.mediumDistance.Visible = !this.mediumDistance.Visible;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -213,6 +221,11 @@ namespace Progra_analisis
                         3);
 
                     Individual[] imagesToDisplay = naturalSelection.genericAlgorithm();
+                    double[] bestDistances = naturalSelection.getBestDistances();
+
+                    this.bestDistance.Text = bestDistances[0].ToString();
+                    this.mediumDistance.Text = bestDistances[1].ToString();
+                    this.worstDistance.Text = bestDistances[2].ToString();
 
                     this.output1.Image = imagesToDisplay[0].getBitmap();
                     this.distance1.Text = imagesToDisplay[0].getGeneration().ToString();   ; //imagesToDisplay[0].getDistance().ToString();
