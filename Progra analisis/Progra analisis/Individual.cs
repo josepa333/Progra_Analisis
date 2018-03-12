@@ -62,8 +62,15 @@ namespace Progra_analisis
                         pixelPerSection.Add(bitmap.GetPixel(i, j));
                     }
                 }
+                if (histrogramSelected == 0)
+                {
+                    fillHistogramRGB(pixelPerSection);
+                }
+                else
+                {
+                    fillHistogramDarkness(pixelPerSection);
+                }
 
-                fillHistogram(pixelPerSection);
                 pixelPerSection = new ArrayList();
 
                 if (contadorX == sectionsPerImage-1 && contadorY == sectionsPerImage-1)
@@ -85,19 +92,13 @@ namespace Progra_analisis
             }
         }
 
-        private void fillHistogram(ArrayList pixelPerSection)//Fills the histograms with the total appearances of each tone of the color
+        private void fillHistogramRGB(ArrayList pixelPerSection)//Fills the histograms with the total appearances of each tone of the color
         {
             ArrayList redHistogram = new ArrayList();
             ArrayList greenHistogram = new ArrayList();
             ArrayList blueHistogram = new ArrayList();
 
-            List<int> sectionBinary = new List<int>(2);
             List<int> sectionRGB = new List<int>(768);
-
-
-            //add to elements to binary section
-            sectionBinary.Add(0);
-            sectionBinary.Add(0);
 
             //add the 255 elements to the RBG arrays
             for (int i = 0; i < 256; i++)
@@ -111,47 +112,51 @@ namespace Progra_analisis
             {
                 Color clr = (Color)pixelPerSection[i];
 
-                if (histrogramSelected == 0)
+                redHistogram[clr.R] = (int)redHistogram[clr.R] + 1;
+                greenHistogram[clr.G] = (int)greenHistogram[clr.G] + 1;
+                blueHistogram[clr.B] = (int)blueHistogram[clr.B] + 1;
+
+            }
+            for (int i = 0; i < 256; i++)
+            {
+                sectionRGB.Add((int)redHistogram[i]);
+            }
+            for (int i = 0; i < 256; i++)
+            {
+                sectionRGB.Add((int)greenHistogram[i]);
+            }
+            for (int i = 0; i < 256; i++)
+            {
+                sectionRGB.Add((int)blueHistogram[i]);
+            }
+            histogramRGB.Add(sectionRGB);
+        }
+
+        private void fillHistogramDarkness(ArrayList pixelPerSection)//Fills the histograms with the total appearances of each tone of the color
+        {
+            List<int> sectionBinary = new List<int>(2);
+            //add to elements to binary section
+            sectionBinary.Add(0);
+            sectionBinary.Add(0);
+            for (int i = 0; i < pixelPerSection.Count; i++)
+            {
+                Color clr = (Color)pixelPerSection[i];
+                double value = Math.Sqrt(0.299 * Math.Pow(clr.R, 2) + 0.587  * Math.Pow(clr.G, 2) + 0.114 * Math.Pow(clr.B, 2));
+                if (value < 127)
                 {
-                    redHistogram[clr.R] = (int)redHistogram[clr.R] + 1;
-                    greenHistogram[clr.G] = (int)greenHistogram[clr.G] + 1;
-                    blueHistogram[clr.B] = (int)blueHistogram[clr.B] + 1;
+                    sectionBinary[0]++;
                 }
                 else
                 {
-                    if (clr.A < 127)
-                    {
-                        sectionBinary[0]++;
-                    }
-                    else
-                    {
-                        sectionBinary[1]++;
-                    }
+                    sectionBinary[1]++;
                 }
+
             }
-            if (histrogramSelected == 0)
-            {
-                for (int i = 0; i < 256; i++)
-                {
-                    sectionRGB.Add((int)redHistogram[i]);
-                }
-                for (int i = 0; i < 256; i++)
-                {
-                    sectionRGB.Add((int)greenHistogram[i]);
-                }
-                for (int i = 0; i < 256; i++)
-                {
-                    sectionRGB.Add((int)blueHistogram[i]);
-                }
-                histogramRGB.Add(sectionRGB);
-            }
-            else
-            {
-                histogramDarkness.Add(sectionBinary);
-            }   
+            histogramDarkness.Add(sectionBinary);
         }
 
-        public Individual()
+
+            public Individual()
         {
             histogramRGB = new List<List<int>>(sectionsPerImage * sectionsPerImage);
             histogramDarkness = new List<List<int>>(sectionsPerImage * sectionsPerImage);
