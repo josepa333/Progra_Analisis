@@ -24,6 +24,7 @@ namespace Progra_analisis
             Statistics.saveStatistics();
             Statistics.loadStatistics();
 
+            
             this.output1.SizeMode = PictureBoxSizeMode.StretchImage;
             this.output2.SizeMode = PictureBoxSizeMode.StretchImage;
             this.output3.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -34,7 +35,9 @@ namespace Progra_analisis
             this.output8.SizeMode = PictureBoxSizeMode.StretchImage;
             this.output9.SizeMode = PictureBoxSizeMode.StretchImage;
             this.output10.SizeMode = PictureBoxSizeMode.StretchImage;
+            this.output11.SizeMode = PictureBoxSizeMode.StretchImage;
 
+            this.goBack.Visible = false;
             this.distance1.Visible = false;
             this.distance2.Visible = false;
             this.distance3.Visible = false;
@@ -45,6 +48,7 @@ namespace Progra_analisis
             this.distance8.Visible = false;
             this.distance9.Visible = false;
             this.distance10.Visible = false;
+            this.distance11.Visible = false;
 
             this.output1.Visible = false;
             this.output2.Visible = false;
@@ -56,6 +60,7 @@ namespace Progra_analisis
             this.output8.Visible = false;
             this.output9.Visible = false;
             this.output10.Visible = false;
+            this.output11.Visible = false;
             this.saveResults.Visible = false;
             
         }
@@ -86,61 +91,60 @@ namespace Progra_analisis
 
         private void hideWidgets()
         {
-            this.Q_generations.Hide();
-            this.Q_population.Hide();
-            this.mutationsPerGeneration.Hide();
-            this.pAwNa.Hide();
-            this.pNAwNa.Hide();
-            this.pAwA.Hide();
-            this.pAdaptableImagesPercentage.Hide();
-            this.adapatblesPercentageToCopy.Hide();
-            this.childsPerGenerations.Hide();
-            
-            
-
-            this.label2.Hide();
-            this.label3.Hide();
-            this.label4.Hide();
-            this.label6.Hide();
-            this.label7.Hide();
-            this.label8.Hide();
-            this.label9.Hide();
-            this.label10.Hide();
-            this.label11.Hide();
-            
-
-            this.selected_picture.Hide();
-            this.BT_selectImage.Hide();
-            this.button1.Hide();
-
-            this.RGBSelected.Hide();
-            this.darknessSelected.Hide();
-            this.manhattan.Hide();
-            this.Surprise.Hide();
-
-            this.distance1.Visible = true;
-            this.distance2.Visible = true;
-            this.distance3.Visible = true;
-            this.distance4.Visible = true;
-            this.distance5.Visible = true;
-            this.distance6.Visible = true;
-            this.distance7.Visible = true;
-            this.distance8.Visible = true;
-            this.distance9.Visible = true;
-            this.distance10.Visible = true;
+            this.Q_generations.Visible = !this.Q_generations.Visible;
+            this.Q_population.Visible = !this.Q_population.Visible;
+            this.mutationsPerGeneration.Visible = !this.mutationsPerGeneration.Visible;
+            this.pAwNa.Visible = !this.pAwNa.Visible;
+            this.pNAwNa.Visible = !this.pNAwNa.Visible;
+            this.pAwA.Visible = !this.pAwA.Visible;
+            this.pAdaptableImagesPercentage.Visible = !this.pAdaptableImagesPercentage.Visible;
+            this.adapatblesPercentageToCopy.Visible = !this.adapatblesPercentageToCopy.Visible;
+            this.childsPerGenerations.Visible = !this.childsPerGenerations.Visible;
+            this.goBack.Visible = !this.goBack.Visible;
 
 
-            this.output1.Visible = true;
-            this.output2.Visible = true;
-            this.output3.Visible = true;
-            this.output4.Visible = true;
-            this.output5.Visible = true;
-            this.output6.Visible = true;
-            this.output7.Visible = true;
-            this.output8.Visible = true;
-            this.output9.Visible = true;
-            this.output10.Visible = true;
-            this.saveResults.Visible = true;
+            this.label2.Visible = !this.label2.Visible;
+            this.label3.Visible = !this.label3.Visible;
+            this.label4.Visible = !this.label4.Visible;
+            this.label6.Visible = !this.label6.Visible;
+            this.label7.Visible = !this.label7.Visible;
+            this.label8.Visible = !this.label8.Visible;
+            this.label9.Visible = !this.label9.Visible;
+            this.label10.Visible = !this.label10.Visible;
+            this.label11.Visible = !this.label11.Visible;
+
+            this.selected_picture.Visible = !this.selected_picture.Visible;
+            this.BT_selectImage.Visible = !this.BT_selectImage.Visible;
+            this.button1.Visible = !this.button1.Visible;
+
+            this.groupBox2.Visible = !this.groupBox2.Visible;
+            this.groupBox1.Visible = !this.groupBox1.Visible;
+
+            this.distance1.Visible = !this.distance1.Visible;
+            this.distance2.Visible = !this.distance2.Visible;
+            this.distance3.Visible = !this.distance3.Visible;
+            this.distance4.Visible = !this.distance4.Visible;
+            this.distance5.Visible = !this.distance5.Visible;
+            this.distance6.Visible = !this.distance6.Visible;
+            this.distance7.Visible = !this.distance7.Visible;
+            this.distance8.Visible = !this.distance8.Visible;
+            this.distance9.Visible = !this.distance9.Visible;
+            this.distance10.Visible = !this.distance10.Visible;
+            this.distance11.Visible = !this.distance11.Visible;
+
+
+            this.output1.Visible = !this.output1.Visible;
+            this.output2.Visible = !this.output2.Visible;
+            this.output3.Visible = !this.output3.Visible;
+            this.output4.Visible = !this.output4.Visible;
+            this.output5.Visible = !this.output5.Visible;
+            this.output6.Visible = !this.output6.Visible;
+            this.output7.Visible = !this.output7.Visible;
+            this.output8.Visible = !this.output8.Visible;
+            this.output9.Visible = !this.output9.Visible;
+            this.output10.Visible = !this.output10.Visible;
+            this.output11.Visible = !this.output11.Visible;
+            this.saveResults.Visible = !this.saveResults.Visible;
         }
 
         private void run()
@@ -154,8 +158,6 @@ namespace Progra_analisis
             }
             lock (locker)
             {
-                
-
 
             }
         }
@@ -199,8 +201,6 @@ namespace Progra_analisis
             int numberOfAaptables = Convert.ToInt32(((this.pAdaptableImagesPercentage.Value) / 100) * this.Q_population.Value);
             int mutationValidation = Convert.ToInt32((this.Q_population.Value - this.childsPerGenerations.Value - ((this.adapatblesPercentageToCopy.Value / 100) * numberOfAaptables)));
             
-
-
             if (bitImage != null &&
                 this.Q_generations.Value > 1 &&
                 this.Q_population.Value > 1 &&
@@ -246,34 +246,37 @@ namespace Progra_analisis
                     Individual[] imagesToDisplay = naturalSelection.genericAlgorithm();
 
                     this.output1.Image = imagesToDisplay[0].getBitmap();
-                    this.distance1.Text = imagesToDisplay[0].getDistance().ToString();
+                    this.distance1.Text = imagesToDisplay[0].getGeneration().ToString();   ; //imagesToDisplay[0].getDistance().ToString();
 
                     this.output2.Image = imagesToDisplay[1].getBitmap();
-                    this.distance2.Text = imagesToDisplay[1].getDistance().ToString();
+                    this.distance2.Text = imagesToDisplay[1].getGeneration().ToString();
 
                     this.output3.Image = imagesToDisplay[2].getBitmap();
-                    this.distance3.Text = imagesToDisplay[2].getDistance().ToString();
+                    this.distance3.Text = imagesToDisplay[2].getGeneration().ToString();
 
                     this.output4.Image = imagesToDisplay[3].getBitmap();
-                    this.distance4.Text = imagesToDisplay[3].getDistance().ToString();
+                    this.distance4.Text = imagesToDisplay[3].getGeneration().ToString();
 
                     this.output5.Image = imagesToDisplay[4].getBitmap();
-                    this.distance5.Text = imagesToDisplay[4].getDistance().ToString();
+                    this.distance5.Text = imagesToDisplay[4].getGeneration().ToString();
 
                     this.output6.Image = imagesToDisplay[5].getBitmap();
-                    this.distance6.Text = imagesToDisplay[5].getDistance().ToString();
+                    this.distance6.Text = imagesToDisplay[5].getGeneration().ToString();
 
                     this.output7.Image = imagesToDisplay[6].getBitmap();
-                    this.distance7.Text = imagesToDisplay[6].getDistance().ToString();
+                    this.distance7.Text = imagesToDisplay[6].getGeneration().ToString();
 
                     this.output8.Image = imagesToDisplay[7].getBitmap();
-                    this.distance8.Text = imagesToDisplay[7].getDistance().ToString();
+                    this.distance8.Text = imagesToDisplay[7].getGeneration().ToString();
 
                     this.output9.Image = imagesToDisplay[8].getBitmap();
-                    this.distance9.Text = imagesToDisplay[8].getDistance().ToString();
+                    this.distance9.Text = imagesToDisplay[8].getGeneration().ToString();
 
                     this.output10.Image = imagesToDisplay[9].getBitmap();
-                    this.distance10.Text = imagesToDisplay[9].getDistance().ToString();
+                    this.distance10.Text = imagesToDisplay[9].getGeneration().ToString();
+
+                    this.output11.Image = imagesToDisplay[10].getBitmap();
+                    this.distance11.Text = imagesToDisplay[10].getGeneration().ToString();
 
 
                     //threadLoading thread = new threadLoading(naturalSelection);
@@ -351,6 +354,11 @@ namespace Progra_analisis
         {
             Statistics.saveStatistics();
             MessageBox.Show("The progress has been saved.");
+        }
+
+        private void goBack_Click(object sender, EventArgs e)
+        {
+            hideWidgets();
         }
     }
 }

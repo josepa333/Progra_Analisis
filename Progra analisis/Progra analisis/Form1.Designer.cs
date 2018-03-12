@@ -77,6 +77,9 @@
             this.distance10 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.goBack = new System.Windows.Forms.Button();
+            this.output11 = new System.Windows.Forms.PictureBox();
+            this.distance11 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.selected_picture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Q_generations)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Q_population)).BeginInit();
@@ -99,6 +102,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.mutationsPerGeneration)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.output11)).BeginInit();
             this.SuspendLayout();
             // 
             // BT_selectImage
@@ -165,7 +169,7 @@
             // 
             // Q_population
             // 
-            this.Q_population.Location = new System.Drawing.Point(39, 108);
+            this.Q_population.Location = new System.Drawing.Point(39, 99);
             this.Q_population.Maximum = new decimal(new int[] {
             1000000,
             0,
@@ -178,7 +182,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(113, 110);
+            this.label3.Location = new System.Drawing.Point(113, 101);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(110, 13);
             this.label3.TabIndex = 8;
@@ -187,7 +191,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(111, 264);
+            this.label6.Location = new System.Drawing.Point(111, 234);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(160, 13);
             this.label6.TabIndex = 11;
@@ -196,7 +200,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(111, 305);
+            this.label7.Location = new System.Drawing.Point(111, 263);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(168, 13);
             this.label7.TabIndex = 12;
@@ -205,7 +209,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(111, 338);
+            this.label8.Location = new System.Drawing.Point(111, 292);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(152, 13);
             this.label8.TabIndex = 13;
@@ -214,7 +218,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(111, 372);
+            this.label9.Location = new System.Drawing.Point(113, 185);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(154, 13);
             this.label9.TabIndex = 14;
@@ -222,7 +226,7 @@
             // 
             // pAwNa
             // 
-            this.pAwNa.Location = new System.Drawing.Point(37, 262);
+            this.pAwNa.Location = new System.Drawing.Point(37, 232);
             this.pAwNa.Maximum = new decimal(new int[] {
             10000,
             0,
@@ -234,28 +238,28 @@
             // 
             // pNAwNa
             // 
-            this.pNAwNa.Location = new System.Drawing.Point(37, 302);
+            this.pNAwNa.Location = new System.Drawing.Point(37, 260);
             this.pNAwNa.Name = "pNAwNa";
             this.pNAwNa.Size = new System.Drawing.Size(68, 20);
             this.pNAwNa.TabIndex = 18;
             // 
             // pAwA
             // 
-            this.pAwA.Location = new System.Drawing.Point(37, 335);
+            this.pAwA.Location = new System.Drawing.Point(37, 289);
             this.pAwA.Name = "pAwA";
             this.pAwA.Size = new System.Drawing.Size(68, 20);
             this.pAwA.TabIndex = 19;
             // 
             // pAdaptableImagesPercentage
             // 
-            this.pAdaptableImagesPercentage.Location = new System.Drawing.Point(37, 365);
+            this.pAdaptableImagesPercentage.Location = new System.Drawing.Point(39, 178);
             this.pAdaptableImagesPercentage.Name = "pAdaptableImagesPercentage";
             this.pAdaptableImagesPercentage.Size = new System.Drawing.Size(68, 20);
             this.pAdaptableImagesPercentage.TabIndex = 20;
             // 
             // output1
             // 
-            this.output1.Location = new System.Drawing.Point(29, 75);
+            this.output1.Location = new System.Drawing.Point(39, 73);
             this.output1.Name = "output1";
             this.output1.Size = new System.Drawing.Size(200, 120);
             this.output1.TabIndex = 21;
@@ -287,7 +291,7 @@
             // 
             // output5
             // 
-            this.output5.Location = new System.Drawing.Point(29, 215);
+            this.output5.Location = new System.Drawing.Point(39, 214);
             this.output5.Name = "output5";
             this.output5.Size = new System.Drawing.Size(200, 120);
             this.output5.TabIndex = 25;
@@ -303,7 +307,7 @@
             // 
             // output7
             // 
-            this.output7.Location = new System.Drawing.Point(520, 225);
+            this.output7.Location = new System.Drawing.Point(520, 214);
             this.output7.Name = "output7";
             this.output7.Size = new System.Drawing.Size(200, 120);
             this.output7.TabIndex = 27;
@@ -311,7 +315,7 @@
             // 
             // output8
             // 
-            this.output8.Location = new System.Drawing.Point(771, 225);
+            this.output8.Location = new System.Drawing.Point(771, 214);
             this.output8.Name = "output8";
             this.output8.Size = new System.Drawing.Size(200, 120);
             this.output8.TabIndex = 28;
@@ -319,7 +323,7 @@
             // 
             // output9
             // 
-            this.output9.Location = new System.Drawing.Point(270, 359);
+            this.output9.Location = new System.Drawing.Point(178, 360);
             this.output9.Name = "output9";
             this.output9.Size = new System.Drawing.Size(200, 120);
             this.output9.TabIndex = 29;
@@ -327,7 +331,7 @@
             // 
             // output10
             // 
-            this.output10.Location = new System.Drawing.Point(520, 365);
+            this.output10.Location = new System.Drawing.Point(428, 360);
             this.output10.Name = "output10";
             this.output10.Size = new System.Drawing.Size(200, 120);
             this.output10.TabIndex = 30;
@@ -336,7 +340,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(111, 397);
+            this.label10.Location = new System.Drawing.Point(113, 210);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(163, 13);
             this.label10.TabIndex = 32;
@@ -345,7 +349,7 @@
             // 
             // childsPerGenerations
             // 
-            this.childsPerGenerations.Location = new System.Drawing.Point(39, 151);
+            this.childsPerGenerations.Location = new System.Drawing.Point(39, 126);
             this.childsPerGenerations.Maximum = new decimal(new int[] {
             100000,
             0,
@@ -358,7 +362,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(113, 153);
+            this.label11.Location = new System.Drawing.Point(113, 128);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(111, 13);
             this.label11.TabIndex = 34;
@@ -366,14 +370,14 @@
             // 
             // adapatblesPercentageToCopy
             // 
-            this.adapatblesPercentageToCopy.Location = new System.Drawing.Point(37, 391);
+            this.adapatblesPercentageToCopy.Location = new System.Drawing.Point(39, 204);
             this.adapatblesPercentageToCopy.Name = "adapatblesPercentageToCopy";
             this.adapatblesPercentageToCopy.Size = new System.Drawing.Size(68, 20);
             this.adapatblesPercentageToCopy.TabIndex = 35;
             // 
             // mutationsPerGeneration
             // 
-            this.mutationsPerGeneration.Location = new System.Drawing.Point(39, 189);
+            this.mutationsPerGeneration.Location = new System.Drawing.Point(39, 152);
             this.mutationsPerGeneration.Name = "mutationsPerGeneration";
             this.mutationsPerGeneration.Size = new System.Drawing.Size(68, 20);
             this.mutationsPerGeneration.TabIndex = 37;
@@ -381,7 +385,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(113, 191);
+            this.label4.Location = new System.Drawing.Point(113, 154);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(124, 13);
             this.label4.TabIndex = 38;
@@ -484,7 +488,7 @@
             // distance5
             // 
             this.distance5.AutoSize = true;
-            this.distance5.Location = new System.Drawing.Point(26, 199);
+            this.distance5.Location = new System.Drawing.Point(36, 196);
             this.distance5.Name = "distance5";
             this.distance5.Size = new System.Drawing.Size(51, 13);
             this.distance5.TabIndex = 48;
@@ -520,7 +524,7 @@
             // distance9
             // 
             this.distance9.AutoSize = true;
-            this.distance9.Location = new System.Drawing.Point(270, 337);
+            this.distance9.Location = new System.Drawing.Point(178, 338);
             this.distance9.Name = "distance9";
             this.distance9.Size = new System.Drawing.Size(51, 13);
             this.distance9.TabIndex = 52;
@@ -529,7 +533,7 @@
             // distance10
             // 
             this.distance10.AutoSize = true;
-            this.distance10.Location = new System.Drawing.Point(517, 349);
+            this.distance10.Location = new System.Drawing.Point(425, 338);
             this.distance10.Name = "distance10";
             this.distance10.Size = new System.Drawing.Size(51, 13);
             this.distance10.TabIndex = 53;
@@ -555,11 +559,41 @@
             this.groupBox2.TabIndex = 55;
             this.groupBox2.TabStop = false;
             // 
+            // goBack
+            // 
+            this.goBack.Location = new System.Drawing.Point(554, 581);
+            this.goBack.Name = "goBack";
+            this.goBack.Size = new System.Drawing.Size(111, 23);
+            this.goBack.TabIndex = 56;
+            this.goBack.Text = "Back to menu";
+            this.goBack.UseVisualStyleBackColor = true;
+            this.goBack.Click += new System.EventHandler(this.goBack_Click);
+            // 
+            // output11
+            // 
+            this.output11.Location = new System.Drawing.Point(659, 360);
+            this.output11.Name = "output11";
+            this.output11.Size = new System.Drawing.Size(200, 120);
+            this.output11.TabIndex = 57;
+            this.output11.TabStop = false;
+            // 
+            // distance11
+            // 
+            this.distance11.AutoSize = true;
+            this.distance11.Location = new System.Drawing.Point(656, 338);
+            this.distance11.Name = "distance11";
+            this.distance11.Size = new System.Drawing.Size(51, 13);
+            this.distance11.TabIndex = 58;
+            this.distance11.Text = "Distancia";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1062, 614);
+            this.Controls.Add(this.distance11);
+            this.Controls.Add(this.output11);
+            this.Controls.Add(this.goBack);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.distance10);
@@ -632,6 +666,7 @@
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.output11)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -688,6 +723,9 @@
         private System.Windows.Forms.Label distance10;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Button goBack;
+        private System.Windows.Forms.PictureBox output11;
+        private System.Windows.Forms.Label distance11;
     }
 }
 

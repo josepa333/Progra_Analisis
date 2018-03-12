@@ -43,7 +43,6 @@ namespace Progra_analisis
             Individual.finalImage = new Individual(desireImage,0);
             Individual.finalImage.dataForFinalImage();
 
-            MessageBox.Show("FinalImage");
             Individual.sectionsPerImage = sectionsPerImage;
 
             childsPerGeneration = pChildsPerGeneration;
@@ -60,11 +59,8 @@ namespace Progra_analisis
             cross_NA_NA_percentage = Convert.ToInt32(pCross_NA_NA_percentage * childsPerGeneration);
             cross_A_NA_percentage = Convert.ToInt32(pCross_A_NA_percentage * childsPerGeneration);
             images = new Individual[population];
-            MessageBox.Show("Population");
             createImages(population);
-            MessageBox.Show("Imagenes creadas");
             Sort.quickSort(images, 0, images.Length - 1);
-            MessageBox.Show("Listo");
             generationCounter = 0;
         }
 
@@ -74,7 +70,6 @@ namespace Progra_analisis
             {
                 images[i] = new Individual();
             }
-            MessageBox.Show("Listas imagenes");
         }
 
         //Selects the adaptable individuals of the population
@@ -373,11 +368,10 @@ namespace Progra_analisis
             int finalResultIndex = 0;
             int generation = 0;
             int generationPercentage = Convert.ToInt32((0.10) * (generations));
-            Individual[] finalResult = new Individual[10];
+            Individual[] finalResult = new Individual[14];
 
             while (generation != generations)
             {
-                //MessageBox.Show("Inicia generacion");
                 //Selection
                 Individual[] adaptables = selection_A();
                 Individual[] notAdaptables = selection_NA();
@@ -393,16 +387,15 @@ namespace Progra_analisis
 
                 if(generation % generationPercentage == 0)
                 {
+                    images[0].setGeneration(generation);
                     finalResult[finalResultIndex] = images[0];
                     finalResultIndex++;
                 }
                 generationCounter++;
                 generation++;
-
-                //MessageBox.Show("Finaliza gen");
             }
-            Sort.quickSort(finalResult, 0, finalResult.Length - 1);
-
+            images[0].setGeneration(generation);
+            finalResult[finalResultIndex] = images[0];
             return finalResult;
         }
 

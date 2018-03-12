@@ -17,6 +17,7 @@ namespace Progra_analisis
         public static double[,] probabilityDistributionDarkness = new double[sectionsPerImage * sectionsPerImage, 768];
         public static int numberOfPixels;
 
+        private int generationWhenUsed = 0;
         private List<List<int>> histogramDarkness;
         private List<List<int>> histogramRGB;
         private Adaptability adaptability;
@@ -335,5 +336,16 @@ namespace Progra_analisis
                 }
             }
         }
+
+        public int getGeneration()
+        {
+            return generationWhenUsed;
+        }
+
+        public void setGeneration(int gen)
+        {
+            generationWhenUsed =  gen;
+        }
+
     }
 }
