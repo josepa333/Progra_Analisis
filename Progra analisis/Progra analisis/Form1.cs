@@ -156,21 +156,6 @@ namespace Progra_analisis
             this.saveResults.Visible = !this.saveResults.Visible;
         }
 
-        private void run()
-        {
-
-            
-
-            while (naturalSelection.getGenerationCounter() < naturalSelection.getGenerations())
-            {
-                Thread.Sleep(1000);
-            }
-            lock (locker)
-            {
-
-            }
-        }
-
         private void button1_Click(object sender, EventArgs e)
         {
             /*
@@ -179,8 +164,8 @@ namespace Progra_analisis
                 _inputparameter.Delay = 100;
                 _inputparameter.Process = 1200;
                 backgroundWorker.RunWorkerAsync(_inputparameter);
-            }
-            */
+            }*/
+            
 
             int numberOfAaptables = Convert.ToInt32(((this.pAdaptableImagesPercentage.Value) / 100) * this.Q_population.Value);
             int mutationValidation = Convert.ToInt32((this.Q_population.Value - this.childsPerGenerations.Value - ((this.adapatblesPercentageToCopy.Value / 100) * numberOfAaptables)));
@@ -349,6 +334,7 @@ namespace Progra_analisis
 
         private void backgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
+            this.output6.Image = naturalSelection.getPositionCero();
             lblProgress.Text = string.Format("Limpando...{0}%", e.ProgressPercentage);
         }
 
@@ -359,14 +345,17 @@ namespace Progra_analisis
             int index = 1;
             try
             {
-                for (int i = 0; i < process; i++)
+                for (int i = 1; i < process; i++)
                 {
                     if (!backgroundWorker.CancellationPending)
                     {
-                        backgroundWorker.ReportProgress(index++ * 100 / process,string.Format("Process data {0},i"));
-                        Thread.Sleep(delay);//used to simulate lengh of operation
-                        //Add your code here
-                        //...
+                        backgroundWorker.ReportProgress(index++ * 100 / (1 + process));
+                        Thread.Sleep(1000);
+                    }
+                    if (naturalSelection.getGenerations()- 2 < naturalSelection.getGenerationCounter())
+                    {
+                        if (backgroundWorker.IsBusy)
+                            backgroundWorker.CancelAsync();
                     }
                 }
             }

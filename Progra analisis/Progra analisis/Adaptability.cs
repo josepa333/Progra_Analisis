@@ -115,7 +115,7 @@ namespace Progra_analisis
                     qX = probabilityDistributionRGB[section,i];
                     pX = individual[section][i] / Individual.numberOfPixels;
 
-                    distanceValue += Math.Sqrt( (pX * Math.Log10(pX) - pX * Math.Log10(qX)));
+                    distanceValue +=  (pX * Math.Log10(pX) - pX * Math.Log10(qX)) * 10;
                 }
             }
             return distanceValue;
