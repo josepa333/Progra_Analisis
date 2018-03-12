@@ -57,13 +57,13 @@ namespace Progra_analisis
             distance = manhattanDistanceDarknessHistogram;
         }
 
-        private void setSurpriseRGBHistogram(List<List<int>> RGBHistogram)
+        private void setKLRGBHistogram(List<List<int>> RGBHistogram)
         {
             klDistanceRGBHistogram = klRGB(RGBHistogram);
             distance = klDistanceRGBHistogram;
         }
 
-        private void setSurpriseDarknessHistogram(List<List<int>> darknessHistogram)
+        private void setKLDarknessHistogram(List<List<int>> darknessHistogram)
         {
             klDisatanceDarknessHistogram = klDarkness(darknessHistogram);
             distance = klDisatanceDarknessHistogram;
@@ -79,7 +79,7 @@ namespace Progra_analisis
                 }
                 if (Individual.distanceSelected == 1)
                 {
-                    setSurpriseRGBHistogram(histogram);
+                    setKLRGBHistogram(histogram);
                 }
             }
             if (Individual.histrogramSelected == 1)
@@ -90,7 +90,7 @@ namespace Progra_analisis
                 }
                 if (Individual.distanceSelected == 1)
                 {
-                    setSurpriseDarknessHistogram(histogram);
+                    setKLDarknessHistogram(histogram);
                 }
             }
         }
@@ -107,16 +107,28 @@ namespace Progra_analisis
             double pX = 0;
             double qX = 0;
             double distanceValue = 0;
+            double newDistance = 0;
+            double minDistancePerSection = 0;
 
             for (int section = 0; section < individual.Count; section++)
             {
-                for (int i = 0; i < individual[section].Count; i++)
+                qX = probabilityDistributionRGB[section, 0];
+                pX = individual[section][0] / Individual.numberOfPixels;
+
+                minDistancePerSection = (pX * Math.Log10(pX) - pX * Math.Log10(qX)) * 10;
+                for (int i = 1; i < individual[section].Count; i++)
                 {
                     qX = probabilityDistributionRGB[section,i];
                     pX = individual[section][i] / Individual.numberOfPixels;
 
-                    distanceValue +=  (pX * Math.Log10(pX) - pX * Math.Log10(qX)) * 10;
+                    newDistance = (pX * Math.Log10(pX) - pX * Math.Log10(qX)) * 10;
+                    if (newDistance < minDistancePerSection)
+                    {
+                        minDistancePerSection = newDistance;
+                    }
                 }
+                distanceValue += minDistancePerSection;
+                minDistancePerSection = 0;
             }
             return distanceValue;
         }
@@ -127,16 +139,28 @@ namespace Progra_analisis
             double pX = 0;
             double qX = 0;
             double distanceValue = 0;
+            double newDistance = 0;
+            double minDistancePerSection = 0;
 
             for (int section = 0; section < individual.Count; section++)
             {
-                for (int i = 0; i < individual[section].Count; i++)
+                qX = probabilityDistributionDarkness[section, 0];
+                pX = individual[section][0] / Individual.numberOfPixels;
+
+                minDistancePerSection = (pX * Math.Log10(pX) - pX * Math.Log10(qX)) * 10; 
+                for (int i = 1; i < individual[section].Count; i++)
                 {
                     qX = probabilityDistributionDarkness[section, i];
                     pX = individual[section][i] / Individual.numberOfPixels;
 
-                    distanceValue += (pX * Math.Log10(pX) - pX * Math.Log10(qX)) * 10;
+                    newDistance = (pX * Math.Log10(pX) - pX * Math.Log10(qX)) * 10;
+                    if (newDistance < minDistancePerSection)
+                    {
+                        minDistancePerSection = newDistance;
+                    }
                 }
+                distanceValue += minDistancePerSection;
+                minDistancePerSection = 0;
             }
             return distanceValue;
         }

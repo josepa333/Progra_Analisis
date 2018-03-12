@@ -304,8 +304,8 @@ namespace Progra_analisis
         public void dataForFinalImage()
         {
             dissectImage();
-            Individual.probDistributionRGB(Individual.finalImage.getHistogramRGB());
-            Individual.probDistributionDarkness(Individual.finalImage.getHistogramDarkness());
+            Individual.setProbDistributionRGB(Individual.finalImage.getHistogramRGB());
+            Individual.setProbDistributionDarkness(Individual.finalImage.getHistogramDarkness());
         }
 
         public double getDistance()
@@ -313,7 +313,7 @@ namespace Progra_analisis
             return adaptability.getDistance();
         }
 
-        public static void probDistributionRGB(List<List<int>> histogramRGB)
+        public static void setProbDistributionRGB(List<List<int>> histogramRGB)
         { 
             double[] probablityPerSection = new double[768];
 
@@ -326,16 +326,16 @@ namespace Progra_analisis
             }
         }
 
-        public static void probDistributionDarkness(List<List<int>> histogramDarkness)
+        public static void setProbDistributionDarkness(List<List<int>> histogramDarkness)
         {
 
-            List<double> probablityPerSection = new List<double>(768);
+            double[] probablityPerSection = new double[768];
 
             for (int section = 0; section < histogramDarkness.Count; section++)
             {
                 for (int i = 0; i < histogramDarkness[section].Count; i++)
                 {
-                    Individual.probabilityDistributionRGB[section, i] = (histogramDarkness[section][i] / Individual.numberOfPixels);
+                    Individual.probabilityDistributionDarkness[section,i] = (histogramDarkness[section][i] / Individual.numberOfPixels);
                 }
             }
         }
