@@ -173,14 +173,14 @@ namespace Progra_analisis
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            /*
             if (!backgroundWorker.IsBusy)
             {
                 _inputparameter.Delay = 100;
                 _inputparameter.Process = 1200;
                 backgroundWorker.RunWorkerAsync(_inputparameter);
             }
-
+            */
 
             int numberOfAaptables = Convert.ToInt32(((this.pAdaptableImagesPercentage.Value) / 100) * this.Q_population.Value);
             int mutationValidation = Convert.ToInt32((this.Q_population.Value - this.childsPerGenerations.Value - ((this.adapatblesPercentageToCopy.Value / 100) * numberOfAaptables)));
