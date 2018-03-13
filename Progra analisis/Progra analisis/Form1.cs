@@ -387,5 +387,11 @@ namespace Progra_analisis
         {
 
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Statistics.downloadStatisticsCSV();
+            MessageBox.Show("The statistics have beed downloaded in 'statisticsRegister.csv' and 'topStatisticsRegister.csv'.");
+        }
     }
 }

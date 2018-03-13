@@ -13,7 +13,9 @@ using System.Xml.Serialization;
 
 namespace Progra_analisis
 {
-    [Serializable()] class Statistics : ISerializable
+    [XmlInclude(typeof(Statistics))]
+    [Serializable]
+    public class Statistics : ISerializable
     {
         public static ArrayList statisticsRegister = new ArrayList();
         public static ArrayList topStatisticsRegister = new ArrayList();
@@ -111,6 +113,8 @@ namespace Progra_analisis
             typeOfHistogram = naturalSelection.getTypeOfHistogram();
             typeOfDistance = naturalSelection.getTypeOfDistance();
         }
+
+        public Statistics() { }
 
         public Statistics(SerializationInfo info, StreamingContext ctxt)
         {

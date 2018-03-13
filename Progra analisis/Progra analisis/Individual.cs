@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace Progra_analisis
 {
-    class Individual
+    public class Individual
     {
         public static Individual finalImage;
         public static int sectionsPerImage = 3;

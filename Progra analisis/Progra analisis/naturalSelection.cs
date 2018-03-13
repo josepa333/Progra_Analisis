@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace Progra_analisis
 {
-    class NaturalSelection
+    public class NaturalSelection
     {
         private Individual[] images;
         private double adapatblesPercentageToCopy; //The adaptables that will continue next generation

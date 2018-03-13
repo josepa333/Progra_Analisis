@@ -86,6 +86,7 @@
             this.bestDistance = new System.Windows.Forms.Label();
             this.worstDistance = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
+            this.button2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.selected_picture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Q_generations)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Q_population)).BeginInit();
@@ -438,10 +439,10 @@
             this.Surprise.AutoSize = true;
             this.Surprise.Location = new System.Drawing.Point(6, 61);
             this.Surprise.Name = "Surprise";
-            this.Surprise.Size = new System.Drawing.Size(63, 17);
+            this.Surprise.Size = new System.Drawing.Size(100, 17);
             this.Surprise.TabIndex = 42;
             this.Surprise.TabStop = true;
-            this.Surprise.Text = "Surprise";
+            this.Surprise.Text = "Kullback Leibler";
             this.Surprise.UseVisualStyleBackColor = true;
             this.Surprise.CheckedChanged += new System.EventHandler(this.Surprise_CheckedChanged);
             // 
@@ -646,11 +647,22 @@
             this.label14.TabIndex = 63;
             this.label14.Text = "Best distances:";
             // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(428, 581);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(102, 23);
+            this.button2.TabIndex = 64;
+            this.button2.Text = "Download .csv";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1273, 614);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.label14);
             this.Controls.Add(this.worstDistance);
             this.Controls.Add(this.bestDistance);
@@ -797,6 +809,7 @@
         private System.Windows.Forms.Label bestDistance;
         private System.Windows.Forms.Label worstDistance;
         private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Button button2;
     }
 }
 
