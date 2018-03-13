@@ -118,7 +118,7 @@ namespace Progra_analisis
                 minDistancePerSection = (pX * Math.Log10(pX) - pX * Math.Log10(qX)) * 10;
                 for (int i = 1; i < individual[section].Count; i++)
                 {
-                    qX = probabilityDistributionRGB[section,i];
+                    qX = probabilityDistributionRGB[section, i];
                     pX = individual[section][i] / Individual.numberOfPixels;
 
                     newDistance = (pX * Math.Log10(pX) - pX * Math.Log10(qX)) * 10;
@@ -147,7 +147,7 @@ namespace Progra_analisis
                 qX = probabilityDistributionDarkness[section, 0];
                 pX = individual[section][0] / Individual.numberOfPixels;
 
-                minDistancePerSection = (pX * Math.Log10(pX) - pX * Math.Log10(qX)) * 10; 
+                minDistancePerSection = (pX * Math.Log10(pX) - pX * Math.Log10(qX)) * 10;
                 for (int i = 1; i < individual[section].Count; i++)
                 {
                     qX = probabilityDistributionDarkness[section, i];
@@ -165,6 +165,45 @@ namespace Progra_analisis
             return distanceValue;
         }
 
+        //private double klRGB(List<List<int>> individual)
+        //{
+        //    double[,] probabilityDistributionRGB = Individual.probabilityDistributionRGB;
+        //    double pX = 0;
+        //    double qX = 0;
+        //    double distanceValue = 0;
+
+        //    for (int section = 0; section < individual.Count; section++)
+        //    {
+        //        for (int i = 1; i < individual[section].Count; i++)
+        //        {
+        //            qX = probabilityDistributionRGB[section, i];
+        //            pX = individual[section][i] / Individual.numberOfPixels;
+
+        //            distanceValue += (pX * Math.Log10(pX) - pX * Math.Log10(qX)) * 10;
+        //        }
+        //    }
+        //    return distanceValue;
+        //}
+
+        //private double klDarkness(List<List<int>> individual)
+        //{
+        //    double[,] probabilityDistributionDarkness = Individual.probabilityDistributionDarkness;
+        //    double pX = 0;
+        //    double qX = 0;
+        //    double distanceValue = 0;
+
+        //    for (int section = 0; section < individual.Count; section++)
+        //    {
+        //        for (int i = 1; i < individual[section].Count; i++)
+        //        {
+        //            qX = probabilityDistributionDarkness[section, i];
+        //            pX = individual[section][i] / Individual.numberOfPixels;
+
+        //            distanceValue += (pX * Math.Log10(pX) - pX * Math.Log10(qX)) * 10;
+        //        }
+        //    }
+        //    return distanceValue;
+        //}
 
     }
 }

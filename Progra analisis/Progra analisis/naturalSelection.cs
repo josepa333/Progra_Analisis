@@ -348,38 +348,44 @@ namespace Progra_analisis
         {
             return generationCounter;
         }
-
-        
-        public double getBestDistance()
-        {
-            return images[0].getDistance();
-        }
-        
         
         public string getTypeOfHistogram()
         {
             if (Individual.histrogramSelected == 0)
             {
-                return "RGB Histogram";
+                return "RGB";
             }
             if (Individual.histrogramSelected == 1)
             {
-                return "Darkness Histogram";
+                return "Darkness";
+            }
+            return "";
+        }
+
+        public string getTypeOfDistance()
+        {
+            if (Individual.distanceSelected == 0)
+            {
+                return "Manhattan";
+            }
+            if (Individual.distanceSelected == 1)
+            {
+                return "Kullback Leibler";
             }
             return "";
         }
 
         public void evalNewDistances(double newBestDistance, double newNormalDistance, double newWorstDistance)
         {
-            if (bestDistance < newBestDistance)
+            if (bestDistance > newBestDistance)
             {
                 bestDistance = newBestDistance;
             }
-            if (normalDistance < newNormalDistance)
+            if (normalDistance > newNormalDistance)
             {
                 normalDistance = newNormalDistance;
             }
-            if (worstDistance < newWorstDistance)
+            if (worstDistance > newWorstDistance)
             {
                 worstDistance = newWorstDistance;
             }

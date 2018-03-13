@@ -472,6 +472,7 @@
             this.distance2.Size = new System.Drawing.Size(51, 13);
             this.distance2.TabIndex = 45;
             this.distance2.Text = "Distancia";
+            this.distance2.Click += new System.EventHandler(this.distance2_Click);
             // 
             // distance3
             // 

@@ -17,19 +17,24 @@ namespace Progra_analisis
     {
         public static ArrayList statisticsRegister = new ArrayList();
         public static ArrayList topStatisticsRegister = new ArrayList();
-        private double adapatblesPercentageToCopy; //The adaptables that will continue next generation
-        private double adaptableImagesPercentage; //Defines the percentage of each population that will be defined as the most adaptables.
-        private double cross_A_A_percentage; //Cross percentage of childs from two parents with high adaptability.
-        private double cross_NA_NA_percentage; //Cross percentage of childs from two parents with low adaptability.
-        private double cross_A_NA_percentage; //Cross percentage of chlds from a high adaptability parent with a lowone.
-        private int mutationsPerGeneration;
-        private int childsPerGeneration;
-        private int generations;
-        private int population;
-        private double bestDistance;
-        private string typeOfHistogram;
-        private static string statisticsRegisterPath = Environment.CurrentDirectory + "\\statistics.XML";
-        private static string topStatisticsRegisterPath = Environment.CurrentDirectory + "\\topStatistics.XML";
+        private static double adapatblesPercentageToCopy; //The adaptables that will continue next generation
+        private static double adaptableImagesPercentage; //Defines the percentage of each population that will be defined as the most adaptables.
+        private static double cross_A_A_percentage; //Cross percentage of childs from two parents with high adaptability.
+        private static double cross_NA_NA_percentage; //Cross percentage of childs from two parents with low adaptability.
+        private static double cross_A_NA_percentage; //Cross percentage of chlds from a high adaptability parent with a lowone.
+        private static int mutationsPerGeneration;
+        private static int childsPerGeneration;
+        private static int generations;
+        private static int population;
+        private static double bestDistance;
+        private static double normalDistance;
+        private static double worstDistance;
+        private static string typeOfHistogram;
+        private static string typeOfDistance;
+        private static string statisticsRegisterPathXML = Environment.CurrentDirectory + "\\statistics.XML";
+        private static string topStatisticsRegisterPathXML = Environment.CurrentDirectory + "\\topStatistics.XML";
+        private static string statisticsRegisterPathCSV = Environment.CurrentDirectory + "\\statistics.csv";
+        private static string topStatisticsRegisterPathCSV = Environment.CurrentDirectory + "\\topStatistics.csv";
 
         //private void writeToFile(string path, string text)
         //{
@@ -99,8 +104,12 @@ namespace Progra_analisis
             cross_A_A_percentage = Convert.ToDouble((naturalSelection.getCross_A_A_percentage() * 100) / childsPerGeneration);
             cross_A_NA_percentage = Convert.ToDouble((naturalSelection.getCross_A_NA_percentage() * 100) / childsPerGeneration);
             cross_NA_NA_percentage = Convert.ToDouble((naturalSelection.getCross_NA_NA_percentage() * 100) / childsPerGeneration);
-            bestDistance = naturalSelection.getBestDistance();
+            double[] distances = naturalSelection.getBestDistances();
+            bestDistance = distances[0];
+            normalDistance = distances[1];
+            worstDistance = distances[2];
             typeOfHistogram = naturalSelection.getTypeOfHistogram();
+            typeOfDistance = naturalSelection.getTypeOfDistance();
         }
 
         public Statistics(SerializationInfo info, StreamingContext ctxt)
@@ -114,8 +123,11 @@ namespace Progra_analisis
             cross_A_A_percentage = (double)info.GetValue("cross_A_A_percentage", typeof(double));
             cross_A_NA_percentage = (double)info.GetValue("cross_A_NA_percentage", typeof(double));
             cross_NA_NA_percentage = (double)info.GetValue("cross_NA_NA_percentage", typeof(double));
-            bestDistance = (int)info.GetValue("bestDistance", typeof(int));
+            bestDistance = (double)info.GetValue("bestDistance", typeof(double));
+            normalDistance = (double)info.GetValue("normalDistance", typeof(double));
+            worstDistance = (double)info.GetValue("worstDistance", typeof(double));
             typeOfHistogram = (string)info.GetValue("typeOfHistogram", typeof(string));
+            typeOfDistance = (string)info.GetValue("typeOfDistance", typeof(string));
         }
 
         public static void addStatistic(Statistics statistic)
@@ -128,8 +140,8 @@ namespace Progra_analisis
         {
             try
             {
-                deserialize(statisticsRegister, statisticsRegisterPath);
-                deserialize(topStatisticsRegister, topStatisticsRegisterPath);
+                deserialize(statisticsRegister, statisticsRegisterPathXML);
+                deserialize(topStatisticsRegister, topStatisticsRegisterPathXML);
             }
             catch (Exception)
             {
@@ -139,38 +151,30 @@ namespace Progra_analisis
 
         public static void saveStatistics()
         {
-            serializeList(statisticsRegister, statisticsRegisterPath);
-            serializeList(topStatisticsRegister, topStatisticsRegisterPath);
+            serializeList(statisticsRegister, statisticsRegisterPathXML);
+            serializeList(topStatisticsRegister, topStatisticsRegisterPathXML);
         }
 
-        public static void downloadStatisticsCSV(int typeOfStatistics) //1 for all, or 2 for top 10
+        public static void downloadStatisticsCSV()
         {
-            using (SaveFileDialog sfd = new SaveFileDialog() { Filter = "CSV|*.csv", ValidateNames = true})
-            {
-                if(sfd.ShowDialog() == DialogResult.OK)
-                {
-                    using (var sw = new StreamWriter(sfd.FileName))
-                    {
-                        var writer = new CsvWriter(sw);
-                        writer.WriteHeader(typeof(Statistics));
-                        if (typeOfStatistics == 1)
-                        {
-                            foreach (Statistics s in statisticsRegister)
-                            {
-                                writer.WriteRecord(s);
-                            }
-                        }
-                        if(typeOfStatistics == 2)
-                        {
-                            foreach (Statistics s in topStatisticsRegister)
-                            {
-                                writer.WriteRecord(s);
-                            }
-                        }
-                    }
-                    MessageBox.Show("Se han descargado las estadísticas de los distintos procesos.", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-            }
+            StringBuilder csvContent = new StringBuilder();
+            csvContent.AppendLine("Type of Histogram," + typeOfHistogram);
+            csvContent.AppendLine("Type of Distance," + typeOfDistance);
+            csvContent.AppendLine("Time,");
+            csvContent.AppendLine("Generations," + generations.ToString());
+            csvContent.AppendLine("Population," + population.ToString());
+            csvContent.AppendLine("Childs per Generation," + childsPerGeneration.ToString());
+            csvContent.AppendLine("Mutations per Generation," + mutationsPerGeneration.ToString());
+            csvContent.AppendLine("Adaptables Percentage," + adaptableImagesPercentage.ToString());
+            csvContent.AppendLine("Adaptables Percentage to Copy," + adapatblesPercentageToCopy.ToString());
+            csvContent.AppendLine("A_A Cross Percentage," + cross_A_A_percentage.ToString());
+            csvContent.AppendLine("A_NA Cross Percentage," + cross_A_NA_percentage.ToString());
+            csvContent.AppendLine("NA_NA Cross Percentage," + cross_NA_NA_percentage.ToString());
+            csvContent.AppendLine("Best Distance," + bestDistance.ToString());
+            csvContent.AppendLine("Normal Distance," + normalDistance.ToString());
+            csvContent.AppendLine("Worst Distance," + worstDistance.ToString());
+            File.AppendAllText(statisticsRegisterPathCSV, csvContent.ToString());
+            File.AppendAllText(topStatisticsRegisterPathCSV, csvContent.ToString());
         }
 
         public double getAdaptablesPercentageToCopy()
@@ -223,9 +227,24 @@ namespace Progra_analisis
             return bestDistance;
         }
 
+        public double getNormalDistance()
+        {
+            return normalDistance;
+        }
+
+        public double getWorstDistance()
+        {
+            return worstDistance;
+        }
+
         public string getTypeOfHistogram()
         {
             return typeOfHistogram;
+        }
+
+        public string getTypeOfDistance()
+        {
+            return typeOfDistance;
         }
 
         public void GetObjectData(SerializationInfo info, StreamingContext context)
@@ -240,7 +259,10 @@ namespace Progra_analisis
             info.AddValue("generations", generations);
             info.AddValue("population", population);
             info.AddValue("bestDistance", bestDistance);
+            info.AddValue("normalDistance", normalDistance);
+            info.AddValue("worstDistance", worstDistance);
             info.AddValue("typeOfHistogram", typeOfHistogram);
+            info.AddValue("typeOfDistance", typeOfDistance);
         }
     }
 }

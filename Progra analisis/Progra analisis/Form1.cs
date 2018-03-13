@@ -21,7 +21,6 @@ namespace Progra_analisis
         public Form1()
         {
             InitializeComponent();
-            Statistics.saveStatistics();
             Statistics.loadStatistics();
 
             
@@ -228,37 +227,37 @@ namespace Progra_analisis
                     this.worstDistance.Text = bestDistances[2].ToString();
 
                     this.output1.Image = imagesToDisplay[0].getBitmap();
-                    this.distance1.Text = imagesToDisplay[0].getGeneration().ToString();   ; //imagesToDisplay[0].getDistance().ToString();
+                    this.distance1.Text = imagesToDisplay[0].getDistance().ToString();   ; //imagesToDisplay[0].getDistance().ToString();
 
                     this.output2.Image = imagesToDisplay[1].getBitmap();
-                    this.distance2.Text = imagesToDisplay[1].getGeneration().ToString();
+                    this.distance2.Text = imagesToDisplay[1].getDistance().ToString();
 
                     this.output3.Image = imagesToDisplay[2].getBitmap();
-                    this.distance3.Text = imagesToDisplay[2].getGeneration().ToString();
+                    this.distance3.Text = imagesToDisplay[2].getDistance().ToString();
 
                     this.output4.Image = imagesToDisplay[3].getBitmap();
-                    this.distance4.Text = imagesToDisplay[3].getGeneration().ToString();
+                    this.distance4.Text = imagesToDisplay[3].getDistance().ToString();
 
                     this.output5.Image = imagesToDisplay[4].getBitmap();
-                    this.distance5.Text = imagesToDisplay[4].getGeneration().ToString();
+                    this.distance5.Text = imagesToDisplay[4].getDistance().ToString();
 
                     this.output6.Image = imagesToDisplay[5].getBitmap();
-                    this.distance6.Text = imagesToDisplay[5].getGeneration().ToString();
+                    this.distance6.Text = imagesToDisplay[5].getDistance().ToString();
 
                     this.output7.Image = imagesToDisplay[6].getBitmap();
-                    this.distance7.Text = imagesToDisplay[6].getGeneration().ToString();
+                    this.distance7.Text = imagesToDisplay[6].getDistance().ToString();
 
                     this.output8.Image = imagesToDisplay[7].getBitmap();
-                    this.distance8.Text = imagesToDisplay[7].getGeneration().ToString();
+                    this.distance8.Text = imagesToDisplay[7].getDistance().ToString();
 
                     this.output9.Image = imagesToDisplay[8].getBitmap();
-                    this.distance9.Text = imagesToDisplay[8].getGeneration().ToString();
+                    this.distance9.Text = imagesToDisplay[8].getDistance().ToString();
 
                     this.output10.Image = imagesToDisplay[9].getBitmap();
-                    this.distance10.Text = imagesToDisplay[9].getGeneration().ToString();
+                    this.distance10.Text = imagesToDisplay[9].getDistance().ToString();
 
                     this.output11.Image = imagesToDisplay[10].getBitmap();
-                    this.distance11.Text = imagesToDisplay[10].getGeneration().ToString();
+                    this.distance11.Text = imagesToDisplay[10].getDistance().ToString();
 
 
                     //threadLoading thread = new threadLoading(naturalSelection);
@@ -382,6 +381,11 @@ namespace Progra_analisis
         private void backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             MessageBox.Show("Limpeza Terminada.");
+        }
+
+        private void distance2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
