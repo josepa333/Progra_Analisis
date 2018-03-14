@@ -18,21 +18,18 @@ namespace Prueba
         static void Main(string[] args)
         {
             string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\Progra_Analisis\ima.JPG";
-            Bitmap ima = new Bitmap(path, true);
-            Individual.finalBitMap = ima;
-            Individual.finalImage = new Individual(ima);
-            List<Individual> images = new List<Individual>(5);
+            Bitmap image1 = new Bitmap(path, true);
+            Bitmap image2 = new Bitmap(path, true);
 
-            for (int i = 0; i < 5; i++)
+            Bitmap bitmap = new Bitmap(image1.Width * 11, image1.Height);
+            using (Graphics g = Graphics.FromImage(bitmap))
             {
-                images.Add(new Individual());
-
+                g.DrawImage(image1, 0, 0);
+                g.DrawImage(image1, image1.Width, 0);
+                g.DrawImage(image1, image1.Width * 2, 0);
+                g.DrawImage(image1, image1.Width * 3, 0);
             }
-
-            images[1].getBitmap().Save(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\Progra_Analisis\newima1.JPG");
-            Console.ReadKey();
-
-            images[2].getBitmap().Save(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\Progra_Analisis\newima.JPG");
+            bitmap.Save(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\Progra_Analisis\newima1.JPG");
             Console.ReadKey();
         }
     }
