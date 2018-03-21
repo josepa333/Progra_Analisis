@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Drawing;
 using System.Collections;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace Progra_analisis
 {
@@ -25,6 +26,7 @@ namespace Progra_analisis
         private double bestDistance;
         private double normalDistance;
         private double worstDistance;
+        private Stopwatch time;
 
 
 
@@ -42,6 +44,8 @@ namespace Progra_analisis
             int sectionsPerImage
             )
         {
+            time = new Stopwatch();
+            time.Start();
 
             Individual.finalImage = new Individual(desireImage,0);
             Individual.finalImage.dataForFinalImage();
@@ -238,7 +242,7 @@ namespace Progra_analisis
             {
                 parents = parentsToCross(adaptables, notAdaptables, 1);
 
-                if (cross_A_A % 5 == 0 && adaptables.Length >= 2)
+                if (cross_A_A % 10 == 0 && adaptables.Length >= 2)
                 {
                   childs[childsIndex] = parents[0].crossOverLookingOver(parents[1]);
                 }
@@ -253,7 +257,7 @@ namespace Progra_analisis
             while (cross_A_NA != 0)
             {
                 parents = parentsToCross(adaptables, notAdaptables, 2);
-                if (cross_A_NA % 5 == 0 && adaptables.Length >= 1 && notAdaptables.Length >= 1)
+                if (cross_A_NA % 10 == 0 && adaptables.Length >= 1 && notAdaptables.Length >= 1)
                 {
                     childs[childsIndex] = parents[0].crossOverLookingOver(parents[1]);
                 }
@@ -268,7 +272,7 @@ namespace Progra_analisis
             while (cross_NA_NA != 0)
             {
                 parents = parentsToCross(adaptables, notAdaptables, 3);
-                if (cross_NA_NA % 5 == 0 && notAdaptables.Length >= 2)
+                if (cross_NA_NA % 10 == 0 && notAdaptables.Length >= 2)
                 {
                     childs[childsIndex] = parents[0].crossOverLookingOver(parents[1]);
                 }
@@ -375,6 +379,11 @@ namespace Progra_analisis
             return "";
         }
 
+        public string getTime()
+        {
+            return time.Elapsed.ToString();
+        }
+
         public void evalNewDistances(double newBestDistance, double newNormalDistance, double newWorstDistance)
         {
             if (bestDistance > newBestDistance)
@@ -431,6 +440,7 @@ namespace Progra_analisis
             }
             images[0].setGeneration(generation);
             finalResult[finalResultIndex] = images[0];
+            time.Stop();
             return finalResult;
         }
 
