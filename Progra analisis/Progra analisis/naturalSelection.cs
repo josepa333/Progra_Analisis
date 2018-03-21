@@ -341,7 +341,7 @@ namespace Progra_analisis
 
         public double getAdaptablesPercentageToCopy()
         {
-            return adapatblesPercentageToCopy;
+            return adapatblesPercentageToCopy * 100;
         }
 
         public int getGenerationCounter()

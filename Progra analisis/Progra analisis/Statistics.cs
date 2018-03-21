@@ -13,30 +13,30 @@ using System.Xml.Serialization;
 
 namespace Progra_analisis
 {
-    [XmlInclude(typeof(Statistics))]
+    [XmlInclude(typeof(Statistics[]))]
     [Serializable]
     public class Statistics : ISerializable
     {
         public static ArrayList statisticsRegister = new ArrayList();
         public static ArrayList topStatisticsRegister = new ArrayList();
-        private static double adapatblesPercentageToCopy; //The adaptables that will continue next generation
-        private static double adaptableImagesPercentage; //Defines the percentage of each population that will be defined as the most adaptables.
-        private static double cross_A_A_percentage; //Cross percentage of childs from two parents with high adaptability.
-        private static double cross_NA_NA_percentage; //Cross percentage of childs from two parents with low adaptability.
-        private static double cross_A_NA_percentage; //Cross percentage of chlds from a high adaptability parent with a lowone.
-        private static int mutationsPerGeneration;
-        private static int childsPerGeneration;
-        private static int generations;
-        private static int population;
-        private static double bestDistance;
-        private static double normalDistance;
-        private static double worstDistance;
-        private static string typeOfHistogram;
-        private static string typeOfDistance;
-        private static string statisticsRegisterPathXML = Environment.CurrentDirectory + "\\statistics.XML";
-        private static string topStatisticsRegisterPathXML = Environment.CurrentDirectory + "\\topStatistics.XML";
-        private static string statisticsRegisterPathCSV = Environment.CurrentDirectory + "\\statistics.csv";
-        private static string topStatisticsRegisterPathCSV = Environment.CurrentDirectory + "\\topStatistics.csv";
+        public double adapatblesPercentageToCopy; //The adaptables that will continue next generation
+        public double adaptableImagesPercentage; //Defines the percentage of each population that will be defined as the most adaptables.
+        public double cross_A_A_percentage; //Cross percentage of childs from two parents with high adaptability.
+        public double cross_NA_NA_percentage; //Cross percentage of childs from two parents with low adaptability.
+        public double cross_A_NA_percentage; //Cross percentage of chlds from a high adaptability parent with a lowone.
+        public int mutationsPerGeneration;
+        public int childsPerGeneration;
+        public int generations;
+        public int population;
+        public double bestDistance;
+        public double normalDistance;
+        public double worstDistance;
+        public string typeOfHistogram;
+        public string typeOfDistance;
+        public static string statisticsRegisterPathXML = Environment.CurrentDirectory + "\\statistics.XML";
+        public static string topStatisticsRegisterPathXML = Environment.CurrentDirectory + "\\topStatistics.XML";
+        public static string statisticsRegisterPathCSV = Environment.CurrentDirectory + "\\statistics.csv";
+        public static string topStatisticsRegisterPathCSV = Environment.CurrentDirectory + "\\topStatistics.csv";
 
         //private void writeToFile(string path, string text)
         //{
@@ -59,22 +59,24 @@ namespace Progra_analisis
         //    }
         //    return content;
         //}
-
+      
         private static void serializeList(ArrayList list, string path)
         {
             using (Stream fs = new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.None))
             {
-                XmlSerializer serializer = new XmlSerializer(typeof(ArrayList));
-                serializer.Serialize(fs, list);
+                Statistics[] listaStats = list.ToArray(typeof(Statistics)) as Statistics[];
+                XmlSerializer serializer = new XmlSerializer(typeof(Statistics[]));
+                serializer.Serialize(fs, listaStats);
             }
         }
 
         private static void deserialize(ArrayList list, string path)
         {
-            XmlSerializer serializer = new XmlSerializer(typeof(ArrayList));
+            XmlSerializer serializer = new XmlSerializer(typeof(Statistics[]));
             using (FileStream fs = File.OpenRead(path))
             {
-                list = (ArrayList)serializer.Deserialize(fs);
+                Statistics[] array = (Statistics[])serializer.Deserialize(fs);
+                list.AddRange(array);
             }
         }
 
@@ -83,7 +85,7 @@ namespace Progra_analisis
             for (int i = 0; i < topStatisticsRegister.Count; i++)
             {
                 Statistics element = (Statistics)topStatisticsRegister[i];
-                if (element.getBestDistance() > statistic.getBestDistance())
+                if (element.bestDistance > statistic.bestDistance)
                 {
                     topStatisticsRegister.Insert(i, statistic);
                     if (topStatisticsRegister.Count > 10)
@@ -114,7 +116,7 @@ namespace Progra_analisis
             typeOfDistance = naturalSelection.getTypeOfDistance();
         }
 
-        public Statistics() { }
+        private Statistics() { }
 
         public Statistics(SerializationInfo info, StreamingContext ctxt)
         {
@@ -161,94 +163,47 @@ namespace Progra_analisis
 
         public static void downloadStatisticsCSV()
         {
+            File.Delete(statisticsRegisterPathCSV);
+            File.Delete(topStatisticsRegisterPathCSV);
             StringBuilder csvContent = new StringBuilder();
-            csvContent.AppendLine("Type of Histogram," + typeOfHistogram);
-            csvContent.AppendLine("Type of Distance," + typeOfDistance);
-            csvContent.AppendLine("Time,");
-            csvContent.AppendLine("Generations," + generations.ToString());
-            csvContent.AppendLine("Population," + population.ToString());
-            csvContent.AppendLine("Childs per Generation," + childsPerGeneration.ToString());
-            csvContent.AppendLine("Mutations per Generation," + mutationsPerGeneration.ToString());
-            csvContent.AppendLine("Adaptables Percentage," + adaptableImagesPercentage.ToString());
-            csvContent.AppendLine("Adaptables Percentage to Copy," + adapatblesPercentageToCopy.ToString());
-            csvContent.AppendLine("A_A Cross Percentage," + cross_A_A_percentage.ToString());
-            csvContent.AppendLine("A_NA Cross Percentage," + cross_A_NA_percentage.ToString());
-            csvContent.AppendLine("NA_NA Cross Percentage," + cross_NA_NA_percentage.ToString());
-            csvContent.AppendLine("Best Distance," + bestDistance.ToString());
-            csvContent.AppendLine("Normal Distance," + normalDistance.ToString());
-            csvContent.AppendLine("Worst Distance," + worstDistance.ToString());
+            for (int i = 0; i < statisticsRegister.Count; i++)
+            {
+                csvContent.AppendLine("Type of Histogram,,," + ((Statistics)statisticsRegister[i]).typeOfHistogram);
+                csvContent.AppendLine("Type of Distance,,," + ((Statistics)statisticsRegister[i]).typeOfDistance);
+                csvContent.AppendLine("Time,,,");
+                csvContent.AppendLine("Generations,,," + ((Statistics)statisticsRegister[i]).generations);
+                csvContent.AppendLine("Population,,," + ((Statistics)statisticsRegister[i]).population);
+                csvContent.AppendLine("Childs per Generation,,," + ((Statistics)statisticsRegister[i]).childsPerGeneration);
+                csvContent.AppendLine("Mutations per Generation,,," + ((Statistics)statisticsRegister[i]).mutationsPerGeneration);
+                csvContent.AppendLine("Adaptables Percentage,,," + ((Statistics)statisticsRegister[i]).adaptableImagesPercentage);
+                csvContent.AppendLine("Adaptables Percentage to Copy,,," + ((Statistics)statisticsRegister[i]).adapatblesPercentageToCopy);
+                csvContent.AppendLine("A_A Cross Percentage,,," + ((Statistics)statisticsRegister[i]).cross_A_A_percentage);
+                csvContent.AppendLine("A_NA Cross Percentage,,," + ((Statistics)statisticsRegister[i]).cross_A_NA_percentage);
+                csvContent.AppendLine("NA_NA Cross Percentage,,," + ((Statistics)statisticsRegister[i]).cross_NA_NA_percentage);
+                csvContent.AppendLine("Best Distance,,," + ((Statistics)statisticsRegister[i]).bestDistance);
+                csvContent.AppendLine("Normal Distance,,," + ((Statistics)statisticsRegister[i]).normalDistance);
+                csvContent.AppendLine("Worst Distance,,," + ((Statistics)statisticsRegister[i]).worstDistance);
+            }
             File.AppendAllText(statisticsRegisterPathCSV, csvContent.ToString());
+            for (int i = 0; i < topStatisticsRegister.Count; i++)
+            {
+                csvContent.AppendLine("Type of Histogram,,," + ((Statistics)topStatisticsRegister[i]).typeOfHistogram);
+                csvContent.AppendLine("Type of Distance,,," + ((Statistics)topStatisticsRegister[i]).typeOfDistance);
+                csvContent.AppendLine("Time,,,");
+                csvContent.AppendLine("Generations,,," + ((Statistics)topStatisticsRegister[i]).generations);
+                csvContent.AppendLine("Population,,," + ((Statistics)topStatisticsRegister[i]).population);
+                csvContent.AppendLine("Childs per Generation,,," + ((Statistics)topStatisticsRegister[i]).childsPerGeneration);
+                csvContent.AppendLine("Mutations per Generation,,," + ((Statistics)topStatisticsRegister[i]).mutationsPerGeneration);
+                csvContent.AppendLine("Adaptables Percentage,,," + ((Statistics)topStatisticsRegister[i]).adaptableImagesPercentage);
+                csvContent.AppendLine("Adaptables Percentage to Copy,,," + ((Statistics)topStatisticsRegister[i]).adapatblesPercentageToCopy);
+                csvContent.AppendLine("A_A Cross Percentage,,," + ((Statistics)topStatisticsRegister[i]).cross_A_A_percentage);
+                csvContent.AppendLine("A_NA Cross Percentage,,," + ((Statistics)topStatisticsRegister[i]).cross_A_NA_percentage);
+                csvContent.AppendLine("NA_NA Cross Percentage,,," + ((Statistics)topStatisticsRegister[i]).cross_NA_NA_percentage);
+                csvContent.AppendLine("Best Distance,,," + ((Statistics)topStatisticsRegister[i]).bestDistance);
+                csvContent.AppendLine("Normal Distance,,," + ((Statistics)topStatisticsRegister[i]).normalDistance);
+                csvContent.AppendLine("Worst Distance,,," + ((Statistics)topStatisticsRegister[i]).worstDistance);
+            }
             File.AppendAllText(topStatisticsRegisterPathCSV, csvContent.ToString());
-        }
-
-        public double getAdaptablesPercentageToCopy()
-        {
-            return adapatblesPercentageToCopy;
-        }
-
-        public double getAdaptableImagesPercentage()
-        {
-            return adaptableImagesPercentage;
-        }
-
-        public double getCross_A_A_percentage()
-        {
-            return cross_A_A_percentage;
-        }
-
-        public double getCross_A_NA_percentage()
-        {
-            return cross_A_NA_percentage;
-        }
-
-        public double getCross_NA_NA_percentage()
-        {
-            return cross_NA_NA_percentage;
-        }
-
-        public int getMutationsPerGeneration()
-        {
-            return mutationsPerGeneration;
-        }
-
-        public int getChildsPerGeneration()
-        {
-            return childsPerGeneration;
-        }
-
-        public int getGenerations()
-        {
-            return generations;
-        }
-
-        public int getPopulation()
-        {
-            return population;
-        }
-
-        public double getBestDistance()
-        {
-            return bestDistance;
-        }
-
-        public double getNormalDistance()
-        {
-            return normalDistance;
-        }
-
-        public double getWorstDistance()
-        {
-            return worstDistance;
-        }
-
-        public string getTypeOfHistogram()
-        {
-            return typeOfHistogram;
-        }
-
-        public string getTypeOfDistance()
-        {
-            return typeOfDistance;
         }
 
         public void GetObjectData(SerializationInfo info, StreamingContext context)

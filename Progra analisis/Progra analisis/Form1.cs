@@ -216,7 +216,7 @@ namespace Progra_analisis
                         Decimal.ToDouble(this.pNAwNa.Value) / 100,
                         Decimal.ToDouble(this.pAwA.Value) / 100,
                         Decimal.ToDouble(this.pAdaptableImagesPercentage.Value) / 100,
-                        Decimal.ToInt32(this.adapatblesPercentageToCopy.Value) / 100,
+                        Decimal.ToDouble(this.adapatblesPercentageToCopy.Value) / 100,
                         3);
 
                     Individual[] imagesToDisplay = naturalSelection.genericAlgorithm();
