@@ -259,6 +259,20 @@ namespace Progra_analisis
                     this.output11.Image = imagesToDisplay[10].getBitmap();
                     this.distance11.Text = imagesToDisplay[10].getDistance().ToString();
 
+                    int width = imagesToDisplay[9].getBitmap().Width;
+                    int height = imagesToDisplay[9].getBitmap().Height;
+
+                    Bitmap bitmap = new Bitmap( width * 11, height);
+                    using (Graphics g = Graphics.FromImage(bitmap))
+                    {
+                        for(int i = 0; i < 11; i++)
+                        {
+                            g.DrawImage(imagesToDisplay[i].getBitmap(), width * i, 0);
+                        }
+                    }
+
+                    bitmap.Save(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\newima1.JPG");
+
 
                     //threadLoading thread = new threadLoading(naturalSelection);
                     //Thread thr = new Thread(new ThreadStart(run));
