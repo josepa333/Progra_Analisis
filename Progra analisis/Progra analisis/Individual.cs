@@ -22,8 +22,6 @@ namespace Progra_analisis
         private List<List<int>> histogramRGB;
         private Adaptability adaptability;
         private Bitmap bitmap;
-        private object lockObject = new object();
-        private object locker = new object();
 
         private Bitmap generateBitmap()
         {
@@ -47,17 +45,17 @@ namespace Progra_analisis
 
         private void dissectImage()
         {
-            int contadorX = 0;
-            int contadorY = 0;
+            int counterX = 0;
+            int counterY = 0;
             int fatherWidht = bitmap.Width / sectionsPerImage;
             int fatherHight = bitmap.Height / sectionsPerImage;
             ArrayList pixelPerSection = new ArrayList();
 
-            while (contadorX != sectionsPerImage && contadorY != sectionsPerImage)
+            while (counterX != sectionsPerImage && counterY != sectionsPerImage)
             {
-                for (int j = (bitmap.Height / sectionsPerImage) * contadorY; j < (bitmap.Height / sectionsPerImage) * (contadorY + 1); j++)
+                for (int j = (bitmap.Height / sectionsPerImage) * counterY; j < (bitmap.Height / sectionsPerImage) * (counterY + 1); j++)
                 {
-                    for (int i = (bitmap.Width / sectionsPerImage) * contadorX; i < (bitmap.Width / sectionsPerImage) * (contadorX + 1); i++)
+                    for (int i = (bitmap.Width / sectionsPerImage) * counterX; i < (bitmap.Width / sectionsPerImage) * (counterX + 1); i++)
                     {
                         pixelPerSection.Add(bitmap.GetPixel(i, j));
                     }
@@ -73,20 +71,20 @@ namespace Progra_analisis
 
                 pixelPerSection = new ArrayList();
 
-                if (contadorX == sectionsPerImage-1 && contadorY == sectionsPerImage-1)
+                if (counterX == sectionsPerImage-1 && counterY == sectionsPerImage-1)
                 {
                     break;
                 }
                 else
                 {
-                    if (contadorX == sectionsPerImage-1)
+                    if (counterX == sectionsPerImage-1)
                     {
-                        contadorX = 0;
-                        contadorY++;
+                        counterX = 0;
+                        counterY++;
                     }
                     else
                     {
-                        contadorX++;
+                        counterX++;
                     }
                 }
             }
@@ -203,23 +201,20 @@ namespace Progra_analisis
         public Individual crossOver(Individual soulmate)
         {
             Bitmap bitmap_kid = new Bitmap(bitmap.Width, bitmap.Height);
-            lock (lockObject)
+            Random rnd = new Random();
+            for (int i = 0; i < bitmap.Width; i++)
             {
-                Random rnd = new Random();
-                for (int i = 0; i < bitmap.Width; i++)
+                for (int j = 0; j < bitmap.Height; j++)
                 {
-                    for (int j = 0; j < bitmap.Height; j++)
+                    Color clr = bitmap.GetPixel(i, j);
+                    if (rnd.Next(0, 1) == 2)
                     {
-                        Color clr = bitmap.GetPixel(i, j);
-                        if (rnd.Next(0, 1) == 2)
-                        {
-                            bitmap_kid.SetPixel(i, j, Color.FromArgb(255, clr.R, clr.G, clr.B));
-                        }
-                        else
-                        {
-                            clr = soulmate.getBitmap().GetPixel(i, j);
-                            bitmap_kid.SetPixel(i, j, Color.FromArgb(255, clr.R, clr.G, clr.B));
-                        }
+                        bitmap_kid.SetPixel(i, j, Color.FromArgb(255, clr.R, clr.G, clr.B));
+                    }
+                    else
+                    {
+                        clr = soulmate.getBitmap().GetPixel(i, j);
+                        bitmap_kid.SetPixel(i, j, Color.FromArgb(255, clr.R, clr.G, clr.B));
                     }
                 }
             }
@@ -245,21 +240,18 @@ namespace Progra_analisis
             Bitmap bitmap_kid = new Bitmap(bitmap.Width, bitmap.Height);
             Random rnd = new Random();
 
-            lock (lockObject)
+            for (int i = 0; i < bitmap.Width; i++)
             {
-                for (int i = 0; i < bitmap.Width; i++)
+                for (int j = 0; j < bitmap.Height; j++)
                 {
-                    for (int j = 0; j < bitmap.Height; j++)
+                    int which = checkPixel(i, j, bitmap.GetPixel(i, j), soulmate.getBitmap().GetPixel(i, j));
+                    if (which == 1)
                     {
-                        int which = checkPixel(i, j, bitmap.GetPixel(i, j), soulmate.getBitmap().GetPixel(i, j));
-                        if (which == 1)
-                        {
-                            bitmap_kid.SetPixel(i, j, bitmap.GetPixel(i, j));
-                        }
-                        else
-                        {
-                            bitmap_kid.SetPixel(i, j, soulmate.getBitmap().GetPixel(i, j));
-                        }
+                        bitmap_kid.SetPixel(i, j, bitmap.GetPixel(i, j));
+                    }
+                    else
+                    {
+                        bitmap_kid.SetPixel(i, j, soulmate.getBitmap().GetPixel(i, j));
                     }
                 }
             }

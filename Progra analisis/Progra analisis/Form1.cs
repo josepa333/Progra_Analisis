@@ -16,7 +16,6 @@ namespace Progra_analisis
     {
         private NaturalSelection naturalSelection;
         private Bitmap bitImage;
-        private Object locker = new Object();
 
         public Form1()
         {
@@ -68,13 +67,6 @@ namespace Progra_analisis
             
         }
 
-        struct DataParameter
-        {
-            public int Process;
-            public int Delay;
-        }
-
-        private DataParameter _inputparameter;
 
 
         private void BT_selectImage_Click(object sender, EventArgs e)
@@ -86,7 +78,6 @@ namespace Progra_analisis
             if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 filename = openFileDialog1.FileName;
-                //MessageBox.Show(filename);
             }
 
             try
@@ -165,14 +156,6 @@ namespace Progra_analisis
 
         private void button1_Click(object sender, EventArgs e)
         {
-            /*
-            if (!backgroundWorker.IsBusy)
-            {
-                _inputparameter.Delay = 100;
-                _inputparameter.Process = 1200;
-                backgroundWorker.RunWorkerAsync(_inputparameter);
-            }*/
-            
 
             int numberOfAaptables = Convert.ToInt32(((this.pAdaptableImagesPercentage.Value) / 100) * this.Q_population.Value);
             int mutationValidation = Convert.ToInt32((this.Q_population.Value - this.childsPerGenerations.Value - ((this.adapatblesPercentageToCopy.Value / 100) * numberOfAaptables)));
@@ -227,7 +210,7 @@ namespace Progra_analisis
                     this.worstDistance.Text = bestDistances[2].ToString();
 
                     this.output1.Image = imagesToDisplay[0].getBitmap();
-                    this.distance1.Text = imagesToDisplay[0].getDistance().ToString();   ; //imagesToDisplay[0].getDistance().ToString();
+                    this.distance1.Text = imagesToDisplay[0].getDistance().ToString();   ; 
 
                     this.output2.Image = imagesToDisplay[1].getBitmap();
                     this.distance2.Text = imagesToDisplay[1].getDistance().ToString();
@@ -272,11 +255,6 @@ namespace Progra_analisis
                     }
 
                     bitmap.Save(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\newima1.JPG");
-
-
-                    //threadLoading thread = new threadLoading(naturalSelection);
-                    //Thread thr = new Thread(new ThreadStart(run));
-                    //thr.Start();
 
                     Statistics statistic = new Statistics(naturalSelection);
                     Statistics.addStatistic(statistic);
@@ -366,30 +344,6 @@ namespace Progra_analisis
 
         private void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
-            int process = ((DataParameter)e.Argument).Process;
-            int delay = ((DataParameter)e.Argument).Delay;
-            int index = 1;
-            try
-            {
-                for (int i = 1; i < process; i++)
-                {
-                    if (!backgroundWorker.CancellationPending)
-                    {
-                        backgroundWorker.ReportProgress(index++ * 100 / (1 + process));
-                        Thread.Sleep(1000);
-                    }
-                    if (naturalSelection.getGenerations()- 2 < naturalSelection.getGenerationCounter())
-                    {
-                        if (backgroundWorker.IsBusy)
-                            backgroundWorker.CancelAsync();
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                backgroundWorker.CancelAsync();
-                MessageBox.Show(ex.Message);
-            }
         }
 
         private void backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)

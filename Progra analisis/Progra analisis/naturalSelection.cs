@@ -32,15 +32,15 @@ namespace Progra_analisis
 
         public NaturalSelection(
             Bitmap desireImage, 
-            int pGenerations, /**/
-            int pPopulation,/**/
-            int pChildsPerGeneration,/*no mayor a population*/
+            int pGenerations,
+            int pPopulation,
+            int pChildsPerGeneration,
             int pMutationsPerGeneration,
             double pCross_A_NA_percentage,
             double pCross_NA_NA_percentage, 
             double pCross_A_A_percentage,
-            double pAdaptableImagesPercentage,/*  */
-            double pAdapatblesPercentageToCopy,/*menor o igual que adaptable image percentaje*/ 
+            double pAdaptableImagesPercentage,
+            double pAdapatblesPercentageToCopy,
             int sectionsPerImage
             )
         {
@@ -299,7 +299,7 @@ namespace Progra_analisis
                 childsIndex++;
                 childAmount--;
             }
-            Sort.quickSort(childs, 0, childs.Length - 1); //Se pueden hacer experimentos, porque el meter los hijos ya ordenados, puede que al utilizar x algoritmo de ordenamiento despues, sea más eficiente.
+            Sort.quickSort(childs, 0, childs.Length - 1); 
             return childs;
         }
 
@@ -422,12 +422,6 @@ namespace Progra_analisis
                 Individual[] newChilds = crossOver(adaptables, notAdaptables);
                 //Evolution
                 evolution(newChilds, adaptables);
-
-                if(generation % 10 == 0)
-                {
-                    //seteo de la imagen
-                }
-
                 if(generation % generationPercentage == 0)
                 {
                     images[0].setGeneration(generation);

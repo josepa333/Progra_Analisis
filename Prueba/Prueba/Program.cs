@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,20 +18,43 @@ namespace Prueba
         
         static void Main(string[] args)
         {
-            string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\Progra_Analisis\ima.JPG";
-            Bitmap image1 = new Bitmap(path, true);
-            Bitmap image2 = new Bitmap(path, true);
 
-            Bitmap bitmap = new Bitmap(image1.Width * 11, image1.Height);
-            using (Graphics g = Graphics.FromImage(bitmap))
+            int elementos = 51200;
+            List<int> pixelPerSection = new List<int>(elementos);
+
+            Random rnd = new Random();
+
+            for (int section = 0; section < elementos; section++)
             {
-                g.DrawImage(image1, 0, 0);
-                g.DrawImage(image1, image1.Width, 0);
-                g.DrawImage(image1, image1.Width * 2, 0);
-                g.DrawImage(image1, image1.Width * 3, 0);
+                int rojo = rnd.Next(0, 256);
+                pixelPerSection.Add(rojo);
             }
-            bitmap.Save(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\Progra_Analisis\newima1.JPG");
+
+
+
+            Stopwatch timer = new Stopwatch();
+            timer.Start();
+            List<int> sectionBinary = new List<int>(2);
+            //add to elements to binary section
+            sectionBinary.Add(0);
+            sectionBinary.Add(0);
+            for (int i = 0; i < pixelPerSection.Count; i++)
+            {
+                int clr = pixelPerSection[i];
+                double value = Math.Sqrt(0.299 * Math.Pow(clr, 2) + 0.587 * Math.Pow(clr, 2) + 0.114 * Math.Pow(clr, 2));
+                if (value < 127)
+                {
+                    sectionBinary[0]++;
+                }
+                else
+                {
+                    sectionBinary[1]++;
+                }
+            }
+            timer.Stop();
+            Console.WriteLine(timer.Elapsed.ToString());
             Console.ReadKey();
+
         }
     }
 }
