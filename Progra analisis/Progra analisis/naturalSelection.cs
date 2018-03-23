@@ -288,14 +288,7 @@ namespace Progra_analisis
             while (childAmount != 0)
             {
                 parents = parentsToCross(adaptables, notAdaptables, 3);
-              /*  if (childAmount % 5 == 0)
-                {
-                    childs[childsIndex] = parents[0].crossOverLookingOver(parents[1]);
-                }
-                else
-                {*/
                     childs[childsIndex] = parents[0].crossOver(parents[1]);
-              //  }
                 childsIndex++;
                 childAmount--;
             }

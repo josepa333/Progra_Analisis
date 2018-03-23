@@ -100,24 +100,6 @@ namespace Progra_analisis
 
         private Statistics() { }
 
-        //public Statistics(SerializationInfo info, StreamingContext ctxt)
-        //{
-        //    childsPerGeneration = (int)info.GetValue("childsPerGeneration", typeof(int));
-        //    mutationsPerGeneration = (int)info.GetValue("mutationsPerGeneration", typeof(int));
-        //    generations = (int)info.GetValue("generations", typeof(int));
-        //    population = (int)info.GetValue("population", typeof(int));
-        //    adapatblesPercentageToCopy = (double)info.GetValue("adapatblesPercentageToCopy", typeof(double));
-        //    adaptableImagesPercentage = (double)info.GetValue("adaptableImagesPercentage", typeof(double));
-        //    cross_A_A_percentage = (double)info.GetValue("cross_A_A_percentage", typeof(double));
-        //    cross_A_NA_percentage = (double)info.GetValue("cross_A_NA_percentage", typeof(double));
-        //    cross_NA_NA_percentage = (double)info.GetValue("cross_NA_NA_percentage", typeof(double));
-        //    bestDistance = (double)info.GetValue("bestDistance", typeof(double));
-        //    normalDistance = (double)info.GetValue("normalDistance", typeof(double));
-        //    worstDistance = (double)info.GetValue("worstDistance", typeof(double));
-        //    typeOfHistogram = (string)info.GetValue("typeOfHistogram", typeof(string));
-        //    typeOfDistance = (string)info.GetValue("typeOfDistance", typeof(string));
-        //}
-
         public static void addStatistic(Statistics statistic)
         {
             statisticsRegister.Add(statistic);
