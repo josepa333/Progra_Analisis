@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='UTF-8' standalone='yes'?>
+<xmi:XMI xmlns:xmi='http://www.omg.org/spec/XMI/20110701' xmlns:uml='http://www.omg.org/spec/UML/20110701'>
+ <documentation exporter='Oracle JDeveloper' exporterVersion='12.1.3.0.0'/>
+ <uml:UseCase xmi:type='uml:UseCase' xmi:uuid='urn:uuid:42348122-27ba-4628-b0fb-5c4b0de4f6c0'
+   isAbstract='false'
+   isFinalSpecialization='false'
+   isLeaf='false'
+   name='Registrar servicio'
+   visibility='public'>
+  <subject href='urn:uuid:0c61a80f-23ad-420f-8872-3887d2e5691e'/>
+ </uml:UseCase>
+</xmi:XMI>

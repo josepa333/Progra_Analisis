@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8' standalone='yes'?>
+<xmi:XMI xmlns:xmi='http://www.omg.org/spec/XMI/20110701' xmlns:uml='http://www.omg.org/spec/UML/20110701'>
+ <documentation exporter='Oracle JDeveloper' exporterVersion='12.1.3.0.0'/>
+ <uml:UseCase xmi:type='uml:UseCase' xmi:uuid='urn:uuid:7da05571-e5bf-4037-9e19-94acf0934668'
+   isAbstract='false'
+   isFinalSpecialization='false'
+   isLeaf='false'
+   name='Registrar proyecto PREGUNTA'
+   visibility='public'>
+  <subject href='urn:uuid:0c61a80f-23ad-420f-8872-3887d2e5691e'/>
+  <include xmi:type='uml:Include' xmi:uuid='urn:uuid:47231c0f-7cc7-4cfa-b6f4-38a967901c01'>
+   <addition href='urn:uuid:f54e3a8e-4dd1-4815-8a20-10c53569365d'/>
+  </include>
+  <include xmi:type='uml:Include' xmi:uuid='urn:uuid:976afff0-fa52-4018-8fea-f22cf68983b1'>
+   <addition href='urn:uuid:8a71e58c-25db-4496-9f0c-17bbf1f017b6'/>
+  </include>
+ </uml:UseCase>
+</xmi:XMI>

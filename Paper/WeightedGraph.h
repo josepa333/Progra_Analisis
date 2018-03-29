@@ -272,7 +272,8 @@ public:
                     }
                 }
             }
-        }
+            
+        }	
 };
 
 #endif // WEIGHTEDGRAPH_H
