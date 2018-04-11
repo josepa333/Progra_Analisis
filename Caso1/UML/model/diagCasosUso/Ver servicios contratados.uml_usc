@@ -12,5 +12,9 @@
    <extendedCase href='urn:uuid:ceea69ad-9f9d-446d-9c5c-79aa78fddcef'/>
    <extensionLocation href='urn:uuid:acfbf504-8380-48f6-93de-0b647d1696fd'/>
   </extend>
+  <extend xmi:type='uml:Extend' xmi:uuid='urn:uuid:840f2fcc-f419-4d3c-8c1e-4c5aec3a7287'>
+   <extendedCase href='urn:uuid:737b7237-9c45-4167-829f-b43a9ba5e686'/>
+   <extensionLocation href='urn:uuid:673716fd-05f6-4e8b-bb01-be6245a281a3'/>
+  </extend>
  </uml:UseCase>
 </xmi:XMI>

@@ -7,6 +7,7 @@
    isLeaf='false'
    name='Registrar servicio provedor'
    visibility='public'>
+  <clientDependency href='urn:uuid:2745bb17-1116-4228-ae87-348d9c9fb451'/>
   <subject href='urn:uuid:0c61a80f-23ad-420f-8872-3887d2e5691e'/>
  </uml:UseCase>
 </xmi:XMI>

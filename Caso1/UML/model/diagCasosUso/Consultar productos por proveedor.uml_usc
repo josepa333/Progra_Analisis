@@ -5,8 +5,9 @@
    isAbstract='false'
    isFinalSpecialization='false'
    isLeaf='false'
-   name='Consultar productos'
+   name='Consultar productos por proveedor'
    visibility='public'>
+  <clientDependency href='urn:uuid:8bc39d3a-c8a9-437b-bb30-6837a4def8b6'/>
   <subject href='urn:uuid:0c61a80f-23ad-420f-8872-3887d2e5691e'/>
  </uml:UseCase>
 </xmi:XMI>

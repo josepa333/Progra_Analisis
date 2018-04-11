@@ -7,6 +7,7 @@
    isLeaf='false'
    name='Modificar supervisor'
    visibility='public'>
+  <clientDependency href='urn:uuid:8959a694-67a4-4096-a430-78d2310a886e'/>
   <subject href='urn:uuid:0c61a80f-23ad-420f-8872-3887d2e5691e'/>
  </uml:UseCase>
 </xmi:XMI>

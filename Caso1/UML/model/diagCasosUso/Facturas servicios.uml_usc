@@ -7,7 +7,6 @@
    isLeaf='false'
    name='Facturas servicios'
    visibility='public'>
-  <subject href='urn:uuid:0c61a80f-23ad-420f-8872-3887d2e5691e'/>
   <extend xmi:type='uml:Extend' xmi:uuid='urn:uuid:cb270ad0-f695-40f7-930d-28b88201557f'>
    <extendedCase href='urn:uuid:737b7237-9c45-4167-829f-b43a9ba5e686'/>
    <extensionLocation href='urn:uuid:673716fd-05f6-4e8b-bb01-be6245a281a3'/>

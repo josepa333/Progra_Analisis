@@ -7,6 +7,7 @@
    isLeaf='false'
    name='Consultar proyecto'
    visibility='public'>
+  <clientDependency href='urn:uuid:10ffa6dd-d5a2-419a-88d5-110417e5937c'/>
   <subject href='urn:uuid:0c61a80f-23ad-420f-8872-3887d2e5691e'/>
   <extensionPoint xmi:type='uml:ExtensionPoint' xmi:uuid='urn:uuid:97d91201-e0e6-4659-86b3-12057fd5ad26'
     isLeaf='false'

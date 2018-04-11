@@ -6,7 +6,5 @@
    isFinalSpecialization='false'
    isLeaf='false'
    name='UseCase3'
-   visibility='public'>
-  <subject href='urn:uuid:0c61a80f-23ad-420f-8872-3887d2e5691e'/>
- </uml:UseCase>
+   visibility='public'/>
 </xmi:XMI>

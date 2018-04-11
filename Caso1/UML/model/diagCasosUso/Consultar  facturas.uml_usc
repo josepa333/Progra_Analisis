@@ -7,6 +7,7 @@
    isLeaf='false'
    name='Consultar  facturas'
    visibility='public'>
+  <clientDependency href='urn:uuid:90a30ab7-1998-45ea-88ad-d21308dac825'/>
   <subject href='urn:uuid:0c61a80f-23ad-420f-8872-3887d2e5691e'/>
   <extend xmi:type='uml:Extend' xmi:uuid='urn:uuid:8c0b6e26-3d34-4e4a-9bc4-f47f6497f5a5'>
    <extendedCase href='urn:uuid:f950478a-6f9f-43d2-8438-c9744b7f80e6'/>

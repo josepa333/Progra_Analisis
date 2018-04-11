@@ -5,12 +5,16 @@
    isAbstract='false'
    isFinalSpecialization='false'
    isLeaf='false'
-   name='Ver materiales solicitados'
+   name='Ver materiales contratados'
    visibility='public'>
   <subject href='urn:uuid:0c61a80f-23ad-420f-8872-3887d2e5691e'/>
   <extend xmi:type='uml:Extend' xmi:uuid='urn:uuid:986b2b9d-24ee-4d52-b853-3d329b8ace67'>
    <extendedCase href='urn:uuid:ceea69ad-9f9d-446d-9c5c-79aa78fddcef'/>
    <extensionLocation href='urn:uuid:acfbf504-8380-48f6-93de-0b647d1696fd'/>
+  </extend>
+  <extend xmi:type='uml:Extend' xmi:uuid='urn:uuid:9f72ee74-0a33-4b7d-968d-d3f35f316ae5'>
+   <extendedCase href='urn:uuid:737b7237-9c45-4167-829f-b43a9ba5e686'/>
+   <extensionLocation href='urn:uuid:673716fd-05f6-4e8b-bb01-be6245a281a3'/>
   </extend>
  </uml:UseCase>
 </xmi:XMI>

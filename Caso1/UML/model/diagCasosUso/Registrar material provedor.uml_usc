@@ -7,6 +7,7 @@
    isLeaf='false'
    name='Registrar material provedor'
    visibility='public'>
+  <clientDependency href='urn:uuid:d74816a6-edb2-46df-9e22-86fc8f19934e'/>
   <subject href='urn:uuid:0c61a80f-23ad-420f-8872-3887d2e5691e'/>
  </uml:UseCase>
 </xmi:XMI>

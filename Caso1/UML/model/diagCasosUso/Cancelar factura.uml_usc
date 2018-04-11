@@ -9,7 +9,7 @@
    visibility='public'>
   <subject href='urn:uuid:0c61a80f-23ad-420f-8872-3887d2e5691e'/>
   <extend xmi:type='uml:Extend' xmi:uuid='urn:uuid:a5a1d612-9827-46f7-aebd-c2e403dc4d12'>
-   <extendedCase href='urn:uuid:f950478a-6f9f-43d2-8438-c9744b7f80e6'/>
+   <extendedCase href='urn:uuid:737b7237-9c45-4167-829f-b43a9ba5e686'/>
    <extensionLocation href='urn:uuid:97d91201-e0e6-4659-86b3-12057fd5ad26'/>
   </extend>
  </uml:UseCase>

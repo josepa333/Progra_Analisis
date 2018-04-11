@@ -7,6 +7,7 @@
    isLeaf='false'
    name='Reportar horas trabajadas por empleado'
    visibility='public'>
+  <clientDependency href='urn:uuid:dafcac2a-0280-4e91-aef1-f7f73ad7da97'/>
   <subject href='urn:uuid:0c61a80f-23ad-420f-8872-3887d2e5691e'/>
  </uml:UseCase>
 </xmi:XMI>

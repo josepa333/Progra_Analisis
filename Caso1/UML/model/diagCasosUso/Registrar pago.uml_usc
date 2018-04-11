@@ -5,8 +5,15 @@
    isAbstract='false'
    isFinalSpecialization='false'
    isLeaf='false'
-   name='Realizar pago'
+   name='Registrar pago'
    visibility='public'>
   <subject href='urn:uuid:0c61a80f-23ad-420f-8872-3887d2e5691e'/>
+  <extend xmi:type='uml:Extend' xmi:uuid='urn:uuid:550ccd95-f8f2-42e0-8d8d-c6b416bcc372'>
+   <extendedCase href='urn:uuid:f950478a-6f9f-43d2-8438-c9744b7f80e6'/>
+   <extensionLocation href='urn:uuid:97d91201-e0e6-4659-86b3-12057fd5ad26'/>
+  </extend>
+  <extensionPoint xmi:type='uml:ExtensionPoint' xmi:uuid='urn:uuid:db7cda92-f0f5-436e-b31d-6ffb117b67be'
+    isLeaf='false'
+    name='DefaultExtensionPoint'/>
  </uml:UseCase>
 </xmi:XMI>

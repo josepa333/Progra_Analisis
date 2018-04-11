@@ -5,6 +5,6 @@
    isAbstract='false'
    isFinalSpecialization='false'
    isLeaf='false'
-   name='Compañía'
+   name='Supervisor'
    visibility='public'/>
 </xmi:XMI>

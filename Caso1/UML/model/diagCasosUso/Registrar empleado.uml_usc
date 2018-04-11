@@ -5,7 +5,7 @@
    isAbstract='false'
    isFinalSpecialization='false'
    isLeaf='false'
-   name='Añadir empleado'
+   name='Registrar empleado'
    visibility='public'>
   <subject href='urn:uuid:0c61a80f-23ad-420f-8872-3887d2e5691e'/>
  </uml:UseCase>

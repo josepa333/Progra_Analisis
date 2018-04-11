@@ -23,7 +23,7 @@
     isUnique='true'
     aggregation='none'>
    <association href='urn:uuid:fda7473a-8a0c-4630-a075-184461a13a4b'/>
-   <type href='urn:uuid:859acc86-e94e-497e-af31-f6a4d2a4902a'/>
+   <type href='urn:uuid:deba2e9b-75fe-4358-9880-656804888ca5'/>
    <lowerValue xmi:type='uml:LiteralInteger' xmi:uuid='urn:uuid:d115ea3b-b2c2-4d39-818a-c654ea83416e'
      value='1'
      visibility='public'/>

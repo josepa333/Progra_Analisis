@@ -8,5 +8,9 @@
    name='Registrar factura'
    visibility='public'>
   <subject href='urn:uuid:0c61a80f-23ad-420f-8872-3887d2e5691e'/>
+  <extend xmi:type='uml:Extend' xmi:uuid='urn:uuid:29eda352-63ff-4079-b920-03353694d44b'>
+   <extendedCase href='urn:uuid:f950478a-6f9f-43d2-8438-c9744b7f80e6'/>
+   <extensionLocation href='urn:uuid:97d91201-e0e6-4659-86b3-12057fd5ad26'/>
+  </extend>
  </uml:UseCase>
 </xmi:XMI>

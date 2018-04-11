@@ -7,6 +7,7 @@
    isLeaf='false'
    name='Ver cuentas por pagar'
    visibility='public'>
+  <clientDependency href='urn:uuid:f6965e62-8cab-42fb-8637-07d1f3165198'/>
   <subject href='urn:uuid:0c61a80f-23ad-420f-8872-3887d2e5691e'/>
   <extend xmi:type='uml:Extend' xmi:uuid='urn:uuid:1e8b94b3-634a-4096-b4d5-5858ecbcbbeb'>
    <extendedCase href='urn:uuid:f950478a-6f9f-43d2-8438-c9744b7f80e6'/>

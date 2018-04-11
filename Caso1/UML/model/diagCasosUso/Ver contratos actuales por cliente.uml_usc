@@ -5,8 +5,10 @@
    isAbstract='false'
    isFinalSpecialization='false'
    isLeaf='false'
-   name='Ver proyectos actuales'
+   name='Ver contratos actuales por cliente'
    visibility='public'>
+  <clientDependency href='urn:uuid:2a1d117b-2823-4f4b-a379-1c6a2d27ea7f'/>
+  <clientDependency href='urn:uuid:e6d5d1e3-7c87-47da-a358-31c2adb95e0c'/>
   <subject href='urn:uuid:0c61a80f-23ad-420f-8872-3887d2e5691e'/>
  </uml:UseCase>
 </xmi:XMI>

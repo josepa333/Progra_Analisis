@@ -7,7 +7,6 @@
    isLeaf='false'
    name='Solicitar servicio'
    visibility='public'>
-  <subject href='urn:uuid:0c61a80f-23ad-420f-8872-3887d2e5691e'/>
   <extend xmi:type='uml:Extend' xmi:uuid='urn:uuid:c4982a59-8645-44b7-89d3-f13dcce8af0d'>
    <extendedCase href='urn:uuid:f950478a-6f9f-43d2-8438-c9744b7f80e6'/>
    <extensionLocation href='urn:uuid:97d91201-e0e6-4659-86b3-12057fd5ad26'/>

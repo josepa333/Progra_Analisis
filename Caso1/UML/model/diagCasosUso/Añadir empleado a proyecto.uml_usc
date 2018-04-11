@@ -7,6 +7,7 @@
    isLeaf='false'
    name='Añadir empleado a proyecto'
    visibility='public'>
+  <clientDependency href='urn:uuid:04018c71-3784-499d-bf12-12d3ae1b228f'/>
   <subject href='urn:uuid:0c61a80f-23ad-420f-8872-3887d2e5691e'/>
   <extend xmi:type='uml:Extend' xmi:uuid='urn:uuid:b41753e0-eae3-4850-b8ef-3860567fed9e'>
    <extendedCase href='urn:uuid:f950478a-6f9f-43d2-8438-c9744b7f80e6'/>
