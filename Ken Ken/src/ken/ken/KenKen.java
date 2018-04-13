@@ -15,7 +15,9 @@ public class KenKen {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        matrix matrix = new matrix(5);
+        proto view = new proto(matrix.matrix,5);
+        view.setVisible(true);
+        
     }
-    
 }
