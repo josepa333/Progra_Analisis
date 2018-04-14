@@ -3,9 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ken.ken;
+package View;
 
-import javax.swing.JTable;
+import Model.NodekenKen;
+import View.Tabla;
+
 
 /**
  *
@@ -17,7 +19,7 @@ public class proto extends javax.swing.JFrame {
     /**
      * Creates new form proto
      */
-    public proto(nodeMatrix matriz[][] ,int size) {
+    public proto(NodekenKen matriz[][] ,int size) {
         
         initComponents();
          tablaBase.ver_tabla( kenkentable, size,  matriz);

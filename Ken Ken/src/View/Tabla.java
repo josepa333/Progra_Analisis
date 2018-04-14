@@ -1,13 +1,15 @@
-package ken.ken;
+package View;
+
 
 import java.awt.Color;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import Model.*;
 
 public class Tabla {
     
-    public void ver_tabla(JTable pTabla,int cantidadVertices, nodeMatrix matriz[][]){
+    public void ver_tabla(JTable pTabla,int cantidadVertices, NodekenKen matriz[][]){
         
         pTabla.setDefaultRenderer(Object.class, new Render());
         DefaultTableModel tablaPredeterminada = new DefaultTableModel(){
@@ -26,7 +28,7 @@ public class Tabla {
                 fila[0] ="";
                 for(int j = 0 ; j<cantidadVertices; j++){
                     JButton botonPeso = new JButton("p0");
-                    Color c = new Color(matriz[i][j].counter * 15, matriz[i][j].counter * 15, matriz[i][j].counter * 15);
+                    Color c = new Color(matriz[i][j].getRGB()[0],matriz[i][j].getRGB()[1],matriz[i][j].getRGB()[2]);
                     botonPeso.setBackground(c);
                     fila[j] =botonPeso;
                 }

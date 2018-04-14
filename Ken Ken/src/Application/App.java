@@ -3,21 +3,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ken.ken;
+package Application;
+
+import Model.KenKen;
+import View.proto;
 
 /**
  *
  * @author jose pablo
  */
-public class KenKen {
+public class App {
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        matrix matrix = new matrix(5);
-        proto view = new proto(matrix.matrix,5);
+        KenKen matrix = new KenKen(10);
+        proto view = new proto(matrix.getMatrix(),10);
         view.setVisible(true);
-        
     }
 }
