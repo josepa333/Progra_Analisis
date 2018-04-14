@@ -12,6 +12,7 @@ import java.util.ArrayList;
  * @author jose pablo
  */
 public class KenKen {
+     public static ArrayList<ArrayList<int[]>> shapes;
      private NodekenKen matrix[][];
      private int counter;
      private char[] operations;
@@ -105,8 +106,18 @@ public class KenKen {
          if(matrix[row][col+1].isCheck() == true && matrix[row+1][col].isCheck() == true &&
                  matrix[row+1][col+1].isCheck() ==true){
              
-             int operation = (int) (Math.random() * 3);
-             int result = (int) (Math.random() * 1000) + 5;
+             int operation = (int) (Math.random() * 3);//+-*/%^
+             int result = 0;
+             if(operation == 0){
+                 result = (int) (Math.random() * 30) + 5; 
+             }
+             else if(operation == 1){
+                 result = (int) (Math.random() * 25) * -1; 
+             }
+             else if(operation == 1){
+                  result = (int) (Math.random() * 1000) + 5; 
+             }
+             
              int r =  (int) (Math.random() * 255) + 1;
              int g =  (int) (Math.random() * 255) + 1;
              int b =  (int) (Math.random() * 255) + 1;
@@ -128,7 +139,8 @@ public class KenKen {
      
       private boolean createPowerOfTwo(int row, int col){
           
-          int result = (int) (Math.random() *5)+1;
+          int pow = (int) (Math.random() * size);
+          int result = (int) Math.pow(2, pow);
           int r =  (int) (Math.random() * 255) + 1;
           int g =  (int) (Math.random() * 255) + 1;
           int b =  (int) (Math.random() * 255) + 1;
