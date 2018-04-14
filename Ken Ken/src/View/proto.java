@@ -11,6 +11,7 @@ import com.thoughtworks.xstream.io.xml.DomDriver;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -45,9 +46,11 @@ public class proto extends javax.swing.JFrame {
         catch (FileNotFoundException ex) {
             Logger.getLogger(proto.class.getName()).log(Level.SEVERE, null, ex);
         }
-        kenkenMatrix = (NodekenKen[][]) (xstream.fromXML(readerKenKen));
-        
+        ArrayList<String> data = (ArrayList<String>) (xstream.fromXML(readerKenKen));
+        kenkenMatrix = (NodekenKen[][]) (xstream.fromXML(data.get(0)));
+        size =  (Integer) (xstream.fromXML(data.get(1)));
         tablaBase.ver_tabla( kenkentable, size,  kenkenMatrix);
+        
     }
     
         public  void saveXML(){//Move to controller??
@@ -57,13 +60,16 @@ public class proto extends javax.swing.JFrame {
         catch (FileNotFoundException ex){
             Logger.getLogger(proto.class.getName()).log(Level.SEVERE, null, ex);
         }
+        ArrayList<String> data = new ArrayList<>();
         xml = xstream.toXML(kenkenMatrix);
+        data.add(xml);
+        xml = xstream.toXML(size);
+        data.add(xml);
+        xml = xstream.toXML(data);
         out.println(xml);
         out.close();
     }
     
-    
- 
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -144,7 +150,6 @@ public class proto extends javax.swing.JFrame {
     private void loadBTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadBTActionPerformed
         loadXML();
     }//GEN-LAST:event_loadBTActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;

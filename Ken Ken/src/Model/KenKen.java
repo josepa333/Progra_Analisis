@@ -67,16 +67,17 @@ public class KenKen {
          if(row == size-1 && col == size-1 ){
              return false;
          }
+ 
          if(col != size - 1 &&  matrix[row][col+1].isCheck() == true){
              
              int operation = (int) (Math.random() * 5);
-             int result = (int) (Math.random() * 1000) + 5;
+             int result= determineResultForTwoNodes(operation);
              int r =  (int) (Math.random() * 255) + 1;
-            int g =  (int) (Math.random() * 255) + 1;
-            int b =  (int) (Math.random() * 255) + 1;
+             int g =  (int) (Math.random() * 255) + 1;
+             int b =  (int) (Math.random() * 255) + 1;
              
              matrix[row][col] = new NodekenKen(counter, operations[operation], result, new int[] {r,g,b});//create the four nodes
-             matrix[row][col+1] = new NodekenKen(counter, operations[operation], result, new int[] {r,g,b});
+             matrix[row][col+1] = new NodekenKen(counter, ' ', 0, new int[] {r,g,b});
              matrix[row][col].setCheck(false);
              matrix[row][col+1].setCheck(false); //The will have a operation asigned
              counter++;
@@ -85,13 +86,13 @@ public class KenKen {
          if(row != size - 1 &&  matrix[row+1][col].isCheck() == true){
              
              int operation = (int) (Math.random() * 5);
-             int result = (int) (Math.random() * 1000) + 5;
+             int result = determineResultForTwoNodes(operation);
              int r =  (int) (Math.random() * 255) + 1;
              int g =  (int) (Math.random() * 255) + 1;
              int b =  (int) (Math.random() * 255) + 1;
             
              matrix[row][col] = new NodekenKen(counter, operations[operation], result, new int[] {r,g,b});//create the four nodes
-             matrix[row+1][col] = new NodekenKen(counter, operations[operation], result, new int[] {r,g,b});
+             matrix[row+1][col] = new NodekenKen(counter, ' ', 0, new int[] {r,g,b});
              matrix[row][col].setCheck(false);
              matrix[row+1][col].setCheck(false);
              counter++;
@@ -108,25 +109,15 @@ public class KenKen {
                  matrix[row+1][col+1].isCheck() ==true){
              
              int operation = (int) (Math.random() * 3);//+-*/%^
-             int result = 0;
-             if(operation == 0){
-                 result = (int) (Math.random() * 30) + 5; 
-             }
-             else if(operation == 1){
-                 result = (int) (Math.random() * 25) * -1; 
-             }
-             else if(operation == 1){
-                  result = (int) (Math.random() * 1000) + 5; 
-             }
-             
+             int result = determineResultForValuesSquare(operation);
              int r =  (int) (Math.random() * 255) + 1;
              int g =  (int) (Math.random() * 255) + 1;
              int b =  (int) (Math.random() * 255) + 1;
  
              matrix[row][col] = new NodekenKen(counter, operations[operation], result, new int[] {r,g,b});//create the four nodes
-             matrix[row][col+1] = new NodekenKen(counter, operations[operation], result, new int[] {r,g,b});
-             matrix[row+1][col] = new NodekenKen(counter, operations[operation], result, new int[] {r,g,b});
-             matrix[row+1][col+1] = new NodekenKen(counter, operations[operation], result, new int[] {r,g,b});
+             matrix[row][col+1] = new NodekenKen(counter, ' ', 0, new int[] {r,g,b});
+             matrix[row+1][col] = new NodekenKen(counter,  ' ', 0, new int[] {r,g,b});
+             matrix[row+1][col+1] = new NodekenKen(counter, ' ', 0, new int[] {r,g,b});
              
              matrix[row][col].setCheck(false);
              matrix[row][col+1].setCheck(false);
@@ -136,6 +127,64 @@ public class KenKen {
              return true;//Shape created
          }
          return false;
+     }
+     
+     private int determineResultForTwoNodes(int operation){
+ 
+         int result = 0;   //{'+','-','*','/','%','^'};
+         switch (operation) {
+             case 0:
+                 result = (int) (Math.random() * ( size + (size-1) ) );
+                 if(result <  3 ){
+                     result =  3;
+                 }break;
+             case 1:
+                 result = (int) (Math.random() * (size));
+                 int pow = (int) (Math.random() * 2) + 1;
+                 int minus1 = (int) Math.pow( -1, pow);
+                 result *= minus1; break;
+             case 2:
+                 result = (int) (Math.random() * (size * (size-1) ));
+                 if(result < 2){
+                     result = 2;
+                 }   break;
+             case 3://  divi 
+                 result = (int) (Math.random() * (size)) + 1;
+                 break;
+             case 4:// %
+                 result = (int) (Math.random() * (size-1)) + 1;
+                 break;
+             default:
+                 break;
+         }
+         return result;
+     }
+     
+     private int determineResultForValuesSquare(int operation){// Tomar en cuenta negativos, dependiendo del size del KenKen!!!!! 
+         int result = 0;   //{'+','-','*','/','%','^'};
+         switch (operation) {
+             case 0:
+                 result = (int) (Math.random() * ( (size * 2) + ((size-1)  * 2 ) ));
+                 if(result <  6 ){
+                     result =  6;
+                 }break;
+             case 1:
+                 result = (int) (Math.random() * (1- (size + ((size-1) * 2) ) )) * -1;
+                 int pow = (int) (Math.random() * 2) + 1;
+                 int minus1 = (int) Math.pow( -1, pow);
+                 result *= minus1;
+                 if( result > (size-5) ){
+                     result = result * -1;
+                 }   break;
+             case 2:
+                 result = (int) (Math.random() * (size * size * (size-1) *  (size-1) ))  ;
+                 if(result < 4){
+                     result = 4;
+                 }   break;
+             default:
+                 break;
+         }
+         return result;
      }
      
       private boolean createPowerOfTwo(int row, int col){

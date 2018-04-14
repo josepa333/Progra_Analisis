@@ -27,7 +27,14 @@ public class Tabla {
             for(int i=0; i<cantidadVertices; i++){
                 fila[0] ="";
                 for(int j = 0 ; j<cantidadVertices; j++){
-                    JButton botonPeso = new JButton("p0");
+                    JButton botonPeso;
+                    if(matriz[i][j].getResult() == 0){
+                        botonPeso = new JButton(Integer.toString(matriz[i][j].getValue()));
+                    }
+                    else{
+                        botonPeso = new JButton(Integer.toString(matriz[i][j].getResult()) + " " +matriz[i][j].getOperator() + 
+                                " " +Integer.toString(matriz[i][j].getValue()));
+                    }
                     Color c = new Color(matriz[i][j].getRGB()[0],matriz[i][j].getRGB()[1],matriz[i][j].getRGB()[2]);
                     botonPeso.setBackground(c);
                     fila[j] =botonPeso;

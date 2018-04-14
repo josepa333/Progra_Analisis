@@ -9,6 +9,7 @@ package Model;
  *
  * @author jose pablo
  */
+
 public class NodekenKen {
     private NodekenKen next;
     private NodekenKen previous;
@@ -27,6 +28,7 @@ public class NodekenKen {
     result = pResult;
     check = false;
     RGB = pRGB;
+    value = 0;
     }
     
     public NodekenKen(){
