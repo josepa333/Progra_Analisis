@@ -28,7 +28,7 @@ public class Tabla {
                 fila[0] ="";
                 for(int j = 0 ; j<cantidadVertices; j++){
                     JButton botonPeso;
-                    if(matriz[i][j].getResult() == 0){
+                    if(matriz[i][j].getOperator() == ' '){
                         botonPeso = new JButton(Integer.toString(matriz[i][j].getValue()));
                     }
                     else{

@@ -20,7 +20,6 @@ public class App {
     public static void main(String[] args) {
         KenKen matrix = new KenKen(9);
         proto view = new proto(matrix.getMatrix(),9);
-        
         view.setVisible(true);
     }
 }
