@@ -19,6 +19,7 @@ public class KenKen {
      private int counter;
      private char[] operations;
      private int size;
+     private int[] rangeOfValues;
      
      public  KenKen(int pSize){
          size = pSize;
@@ -26,7 +27,7 @@ public class KenKen {
          matrixOfValues = new int[size][size];
          counter = 0;
          operations = new char[] {'+','-','*','/','%','^'};
-         
+         rangeOfValues = new int[] {1,2,3,4,5,6,7,8,9,0,-1,-2,-3,-4,-5,-6,-7,-8,-9};
          createNodes();
          fillMatrixValues();
          fillMatrix();
@@ -40,12 +41,41 @@ public class KenKen {
          }
      }
       
-     private void fillMatrixValues(){
-         for(int i=0; i < size;i++){
-             for(int j = 0 ; j < size ; j++ ){
-                 matrixOfValues[i][j] = 2;
+     private void fillMatrixValues(){  //Make it right 
+         int range = 0;
+         for(int i=0; i < size; i++){
+             for(int j = 0 ; j < size; j++ ){
+                 int value = 0;
+                 boolean flag = false;
+                 while(flag == false){
+                     value = rangeOfValues[range];
+                     flag = checkColumn(j,value)   & checkRow(i,value) ;
+                     range++;
+                 }
+                 range = 0;
+                 matrixOfValues[i][j] = value;
+                 System.out.print(Integer.toString( matrixOfValues[i][j] ));
+             }
+             System.out.println(" ");
+         }
+     }
+     
+     private boolean checkColumn(int col,int value){
+         for(int i = 0; i < size; i++){
+             if(matrixOfValues[i][col] == value ){
+                 return false;
              }
          }
+         return true;
+     }
+     
+     private boolean checkRow(int row,int value){
+         for(int i = 0; i < size; i++){
+             if(matrixOfValues[row][i] == value ){
+                 return false;
+             }
+         }
+         return true;
      }
      
      private void fillMatrix(){
@@ -92,7 +122,6 @@ public class KenKen {
              }
          }
      }
-     
      
      //Shapes
      private boolean createTwoNodes(int row, int col){
@@ -362,8 +391,6 @@ public class KenKen {
          return false;
      }
      
-
-     
      //Results
      private int determineResultForTwoNodes(int operation, int value1, int value2){
  
@@ -402,7 +429,7 @@ public class KenKen {
              case 2:
                  result = value1 * value2 * value3 * value4;
                  break;
-             case 3:
+             case 3: 
                  result = value1 / value2 / value3 / value4;
                  break;
              default:
