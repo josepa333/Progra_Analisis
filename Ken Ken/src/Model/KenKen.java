@@ -549,6 +549,39 @@ public class KenKen {
           return factors;
       }  
 
+<<<<<<< HEAD
+=======
+      private ArrayList<int[]> permutationsAddition(int cells, int sum){
+      
+      }
+      
+      private ArrayList<int[]> addition2Cells(ArrayList<int[]> permutations, int minValue, int maxValue){
+         int[] permutation = new int[] {minValue, maxValue};
+         permutations.add(permutation);
+         if(maxValue > 0){
+             while(minValue <= maxValue){
+                 minValue++;
+                 maxValue--;
+                 permutation[0] = minValue;
+                 permutation[1] = maxValue;
+                 permutations.add(permutation);
+             }
+             return permutations;
+         }
+         if(maxValue < 0){
+             while(maxValue <= minValue){
+                 minValue--;
+                 maxValue++;
+                 permutation[0] = minValue;
+                 permutation[1] = maxValue;
+             }
+         }
+         if(maxValue == 0){
+         
+         }
+      }
+      
+>>>>>>> 0fbc139e42477fa58a6d8f8de7e9637a185bb885
       //sets and gets 
       public NodekenKen[][] getMatrix() {
           return matrix;
