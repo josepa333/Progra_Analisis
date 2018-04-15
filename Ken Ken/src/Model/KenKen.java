@@ -13,7 +13,10 @@ import java.util.ArrayList;
  * @author jose pablo
  */
 public class KenKen {
-     public static ArrayList<ArrayList<int[]>> shapes;
+     private ArrayList<ArrayList<int[]>> shapes;
+     private ArrayList<int[]> oneNode;
+     private ArrayList<int[]> twoNodes;
+     private ArrayList<int[]> fourNodes;
      private NodekenKen matrix[][];
      private int matrixOfValues[][];
      private int counter;
@@ -28,6 +31,8 @@ public class KenKen {
          counter = 0;
          operations = new char[] {'+','-','*','/','%','^'};
          rangeOfValues = new int[] {1,2,3,4,5,6,7,8,9,0,-1,-2,-3,-4,-5,-6,-7,-8,-9};
+         shapes = new ArrayList<>();
+         
          createNodes();
      }
      
@@ -125,6 +130,9 @@ public class KenKen {
                  }
              }
          }
+         shapes.add(oneNode);
+         shapes.add(twoNodes);
+         shapes.add(fourNodes);
      }
      
      //Shapes
@@ -144,8 +152,13 @@ public class KenKen {
              
              matrix[row][col] = new NodekenKen(counter, operations[operation], result, new int[] {r,g,b});//create the four nodes
              matrix[row][col+1] = new NodekenKen(counter, ' ', 0, new int[] {r,g,b});
+             
              matrix[row][col].setCheck(false);
              matrix[row][col+1].setCheck(false);  //The will have a operation asigned
+             
+             //Next and add to array shapes 
+             matrix[row][col].setNext(matrix[row][col+1]);
+             twoNodes.add(new int[]{row,col});
              counter++;
              return true;
          }
@@ -161,6 +174,7 @@ public class KenKen {
              matrix[row+1][col] = new NodekenKen(counter, ' ', 0, new int[] {r,g,b});
              matrix[row][col].setCheck(false);
              matrix[row+1][col].setCheck(false);
+             twoNodes.add(new int[]{row,col});
              counter++;
              return true;
          }
@@ -192,6 +206,13 @@ public class KenKen {
              matrix[row][col+1].setCheck(false);
              matrix[row+1][col].setCheck(false);
              matrix[row+1][col+1].setCheck(false); //The will have a operation asigned
+             
+             //Next and shapes
+             matrix[row][col].setNext(matrix[row][col+1]);
+             matrix[row][col+1].setNext(matrix[row+1][col]);
+             matrix[row+1][col].setNext(matrix[row+1][col+1]);
+             
+             fourNodes.add(new int[]{row,col});
              counter++;
              return true;//Shape created
          }
@@ -207,6 +228,7 @@ public class KenKen {
           
           matrix[row][col] = new NodekenKen(counter, operations[5], result, new int[] {r,g,b});
           matrix[row][col].setCheck(false);
+          oneNode.add(new int[]{row,col});
           counter++;
           return true;
       }
@@ -236,6 +258,13 @@ public class KenKen {
              matrix[row][col+1].setCheck(false);
              matrix[row+1][col].setCheck(false);
              matrix[row+1][col-1].setCheck(false); //The will have a operation asigned
+             
+             //Next and shapes
+             matrix[row][col].setNext(matrix[row][col+1]);
+             matrix[row][col+1].setNext(matrix[row+1][col]);
+             matrix[row+1][col].setNext(matrix[row+1][col-1]);
+             
+             fourNodes.add(new int[]{row,col});
              counter++;
              return true;//Shape created
          }
@@ -267,6 +296,13 @@ public class KenKen {
              matrix[row+1][col+1].setCheck(false);
              matrix[row+1][col].setCheck(false);
              matrix[row+1][col-1].setCheck(false); //The will have a operation asigned
+             
+             //nex and shapes
+             matrix[row][col].setNext(matrix[row+1][col+1]);
+             matrix[row+1][col+1].setNext(matrix[row+1][col]);
+             matrix[row+1][col].setNext(matrix[row+1][col-1]);
+             
+             fourNodes.add(new int[]{row,col});
              counter++;
              return true;//Shape created
              
@@ -298,6 +334,13 @@ public class KenKen {
              matrix[row+1][col].setCheck(false);
              matrix[row+2][col].setCheck(false);
              matrix[row+3][col].setCheck(false); //The will have a operation asigned
+             
+             //Next and shaps
+             matrix[row][col].setNext(matrix[row+1][col]);
+             matrix[row+1][col].setNext(matrix[row+2][col]);
+             matrix[row+2][col].setNext(matrix[row+3][col]);
+             
+             fourNodes.add(new int[]{row,col});
              counter++;
              return true;//Shape created
          }
@@ -329,6 +372,13 @@ public class KenKen {
              matrix[row][col+1].setCheck(false);
              matrix[row][col+2].setCheck(false);
              matrix[row][col+3].setCheck(false); //The will have a operation asigned
+             
+             //Next and hsapes
+             matrix[row][col].setNext(matrix[row][col+1]);
+             matrix[row][col+1].setNext(matrix[row][col+2]);
+             matrix[row][col+2].setNext(matrix[row][col+3]);
+             
+             fourNodes.add(new int[]{row,col});
              counter++;
              return true;//Shape created
          }
@@ -359,6 +409,13 @@ public class KenKen {
              matrix[row+1][col].setCheck(false);
              matrix[row+2][col].setCheck(false);
              matrix[row+2][col+1].setCheck(false); //The will have a operation asigned
+             
+             //Next and shapes
+             matrix[row][col].setNext(matrix[row+1][col]);
+             matrix[row+1][col].setNext(matrix[row+2][col]);
+             matrix[row+2][col].setNext(matrix[row+2][col+1]);
+             
+             fourNodes.add(new int[]{row,col});
              counter++;
              return true;//Shape created
          }
@@ -389,6 +446,13 @@ public class KenKen {
              matrix[row][col+1].setCheck(false);
              matrix[row][col+2].setCheck(false);
              matrix[row+1][col+2].setCheck(false); //The will have a operation asigned
+             
+             //Next and shapes
+             matrix[row][col].setNext(matrix[row][col+1]);
+             matrix[row][col+1].setNext(matrix[row][col+2]);
+             matrix[row][col+2].setNext(matrix[row+1][col+2]);
+             
+             fourNodes.add(new int[]{row,col});
              counter++;
              return true;//Shape created
          }
@@ -485,8 +549,6 @@ public class KenKen {
           return factors;
       }  
 
-      
-      
       //sets and gets 
       public NodekenKen[][] getMatrix() {
           return matrix;

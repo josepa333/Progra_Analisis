@@ -12,7 +12,6 @@ package Model;
 
 public class NodekenKen {
     private NodekenKen next;
-    private NodekenKen previous;
     private int value;
     private boolean check;
     private int counter;
@@ -20,9 +19,9 @@ public class NodekenKen {
     private int result;
     private int RGB[];
 
-    
+
     public NodekenKen(int pCounter, char pOperator,int pResult, int pRGB[]){
-    next=previous=null;
+    next=null;
     counter = pCounter;
     operator = pOperator;
     result = pResult;
@@ -32,13 +31,13 @@ public class NodekenKen {
     }
     
     public NodekenKen(){
-        next=previous=null;
+        next=null;
         check = true;
     }
     
-    public void addAdjacentNodes(NodekenKen pNext,NodekenKen pPrevious){
+    public void addAdjacentNodes(NodekenKen pNext){
         next=pNext;
-        previous=pPrevious;
+        
     }
 
     public NodekenKen getNext() {
@@ -47,14 +46,6 @@ public class NodekenKen {
 
     public void setNext(NodekenKen next) {
         this.next = next;
-    }
-
-    public NodekenKen getPrevious() {
-        return previous;
-    }
-
-    public void setPrevious(NodekenKen previous) {
-        this.previous = previous;
     }
 
     public int getValue() {
@@ -104,5 +95,4 @@ public class NodekenKen {
     public void setRGB(int[] RGB) {
         this.RGB = RGB;
     }
-    
 }
