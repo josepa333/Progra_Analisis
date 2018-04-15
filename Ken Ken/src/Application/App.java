@@ -18,8 +18,7 @@ public class App {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        KenKen matrix = new KenKen(5);
-        proto view = new proto(matrix.getMatrix(),5);
+        proto view = new proto();
         view.setVisible(true);
     }
 }

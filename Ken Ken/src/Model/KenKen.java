@@ -29,8 +29,6 @@ public class KenKen {
          operations = new char[] {'+','-','*','/','%','^'};
          rangeOfValues = new int[] {1,2,3,4,5,6,7,8,9,0,-1,-2,-3,-4,-5,-6,-7,-8,-9};
          createNodes();
-         fillMatrixValues();
-         fillMatrix();
      }
      
      private void createNodes(){
@@ -41,6 +39,12 @@ public class KenKen {
          }
      }
       
+     public void changeMatrix(int pSize){
+         size = pSize;
+         fillMatrixValues();
+         fillMatrix();
+     }
+     
      private void fillMatrixValues(){  //Make it right 
          int range = 0;
          for(int i=0; i < size; i++){
@@ -483,8 +487,7 @@ public class KenKen {
 
       
       
-      
-      
+      //sets and gets 
       public NodekenKen[][] getMatrix() {
           return matrix;
       }
@@ -517,31 +520,3 @@ public class KenKen {
             this.size = size;
         }
 }
-
-
-/*private int determineResultForValuesSquare(int operation,int row, int col){// Tomar en cuenta negativos, dependiendo del size del KenKen!!!!! 
-         int result = 0;   //{'+','-','*','/','%','^'};
-         switch (operation) {
-             case 0:
-                 result = (int) (Math.random() * ( (size * 2) + ((size-1)  * 2 ) ));
-                 if(result <  6 ){
-                     result =  6;
-                 }break;
-             case 1:
-                 result = (int) (Math.random() * (1- (size + ((size-1) * 2) ) )) * -1;
-                 int pow = (int) (Math.random() * 2) + 1;
-                 int minus1 = (int) Math.pow( -1, pow);
-                 result *= minus1;
-                 if( result > (size-5) ){
-                     result = result * -1;
-                 }   break;
-             case 2:
-                 result = (int) (Math.random() * (size * size * (size-1) *  (size-1) ))  ;
-                 if(result < 4){
-                     result = 4;
-                 }   break;
-             default:
-                 break;
-         }
-         return result;
-     }*/

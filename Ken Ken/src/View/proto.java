@@ -5,6 +5,7 @@
  */
 package View;
 
+import Model.KenKen;
 import Model.NodekenKen;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
@@ -28,13 +29,11 @@ public class proto extends javax.swing.JFrame {
     private final XStream xstream;
     private PrintWriter out = null;
     private String xml;
-    private NodekenKen kenkenMatrix[][];
+    private KenKen kenkenMatrix;
     
-    public proto(NodekenKen matrix[][] ,int pSize) {
+    public proto() {
         initComponents();
-        size = pSize;
-        kenkenMatrix = matrix;
-        tablaBase.ver_tabla( kenkentable, size,  kenkenMatrix);
+        kenkenMatrix = new KenKen(5);
         xstream = new XStream(new DomDriver());
     }
     
@@ -47,10 +46,10 @@ public class proto extends javax.swing.JFrame {
             Logger.getLogger(proto.class.getName()).log(Level.SEVERE, null, ex);
         }
         ArrayList<String> data = (ArrayList<String>) (xstream.fromXML(readerKenKen));
-        kenkenMatrix = (NodekenKen[][]) (xstream.fromXML(data.get(0)));
+        kenkenMatrix = (KenKen) (xstream.fromXML(data.get(0)));
         size =  (Integer) (xstream.fromXML(data.get(1)));
-        tablaBase.ver_tabla( kenkentable, size,  kenkenMatrix);
-        
+        tablaBase.ver_tabla( kenkentable, size,  kenkenMatrix.getMatrix() );
+
     }
     
         public  void saveXML(){//Move to controller??
@@ -83,8 +82,13 @@ public class proto extends javax.swing.JFrame {
         kenkentable = new javax.swing.JTable();
         saveBT = new javax.swing.JButton();
         loadBT = new javax.swing.JButton();
+        generateBT = new javax.swing.JButton();
+        sizeOfKenKen = new javax.swing.JSpinner();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(0, 0, 0));
+        setPreferredSize(new java.awt.Dimension(1200, 600));
 
         kenkentable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -113,6 +117,17 @@ public class proto extends javax.swing.JFrame {
             }
         });
 
+        generateBT.setText("Generate");
+        generateBT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                generateBTActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 204));
+        jLabel1.setText("Proyecto 2 – KenKen (ケンケン)");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -120,11 +135,17 @@ public class proto extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 713, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1253, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(saveBT)
-                        .addGap(38, 38, 38)
+                        .addComponent(generateBT)
+                        .addGap(18, 18, 18)
+                        .addComponent(sizeOfKenKen, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(loadBT)
+                        .addGap(18, 18, 18)
+                        .addComponent(saveBT))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -132,12 +153,16 @@ public class proto extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(100, 100, 100)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(42, 42, 42)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(saveBT)
-                    .addComponent(loadBT))
-                .addContainerGap(108, Short.MAX_VALUE))
+                    .addComponent(loadBT)
+                    .addComponent(generateBT)
+                    .addComponent(sizeOfKenKen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
         pack();
@@ -151,10 +176,20 @@ public class proto extends javax.swing.JFrame {
         loadXML();
     }//GEN-LAST:event_loadBTActionPerformed
 
+    private void generateBTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generateBTActionPerformed
+        size = (int) this.sizeOfKenKen.getValue();
+        kenkenMatrix = new KenKen( size );
+        kenkenMatrix.changeMatrix( size );
+        tablaBase.ver_tabla( kenkentable, size,  kenkenMatrix.getMatrix());
+    }//GEN-LAST:event_generateBTActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton generateBT;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable kenkentable;
     private javax.swing.JButton loadBT;
     private javax.swing.JButton saveBT;
+    private javax.swing.JSpinner sizeOfKenKen;
     // End of variables declaration//GEN-END:variables
 }
