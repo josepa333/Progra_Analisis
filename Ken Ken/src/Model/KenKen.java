@@ -549,8 +549,6 @@ public class KenKen {
           return factors;
       }  
 
-<<<<<<< HEAD
-=======
       private ArrayList<int[]> permutationsAddition(int cells, int sum){
       
       }
@@ -581,7 +579,6 @@ public class KenKen {
          }
       }
       
->>>>>>> 0fbc139e42477fa58a6d8f8de7e9637a185bb885
       //sets and gets 
       public NodekenKen[][] getMatrix() {
           return matrix;
