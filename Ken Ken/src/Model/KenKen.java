@@ -485,15 +485,16 @@ public class KenKen {
           return factors;
       }  
 
-      private ArrayList<int[]> permutationsAddition(int cells, int sum){
+    private ArrayList<int[]> permutationsAddition(int cells, int sum){
       
-      }
+    }
       
-      private ArrayList<int[]> addition2Cells(ArrayList<int[]> permutations, int minValue, int maxValue){
-         int[] permutation = new int[] {minValue, maxValue};
-         permutations.add(permutation);
-         if(maxValue > 0){
-             while(minValue <= maxValue){
+    private ArrayList<int[]> addition2Cells(ArrayList<int[]> permutations, int minValue, int maxValue, int cells){
+          
+        int[] permutation = new int[] {minValue, maxValue};
+        permutations.add(permutation);
+        if(maxValue > 0){
+            while(minValue <= maxValue){
                  minValue++;
                  maxValue--;
                  permutation[0] = minValue;
@@ -508,11 +509,26 @@ public class KenKen {
                  maxValue++;
                  permutation[0] = minValue;
                  permutation[1] = maxValue;
+                 permutations.add(permutation);
              }
+             return permutations;
          }
          if(maxValue == 0){
-         
+             int maxRangeValue = getMaxRangeValue();
+             while(maxValue <= maxRangeValue){
+                 minValue--;
+                 maxValue++;
+                 permutation[0] = minValue;
+                 permutation[1] = maxValue;
+                 permutations.add(permutation);
+             }
+             return permutations;
          }
+         return permutations;
+      }
+      
+      private ArrayList<int[]> addition4Cells(ArrayList<int[]> permutations, int minValue, int maxValue){
+          ArrayList
       }
       
       //sets and gets 
