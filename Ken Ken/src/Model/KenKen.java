@@ -41,7 +41,7 @@ public class KenKen {
          twoNodes = new ArrayList<>();  
          fourNodes = new ArrayList<>();
          allPermutations = new HashMap<>();
-         
+         System.out.println("Max "+ Integer.toString(getMaxRangeValue()) +"Min" + Integer.toString( getMinRangeValue()));
          createNodes();
      }
      
@@ -572,7 +572,6 @@ public class KenKen {
           factors.add(1);
           factors.add(1);
           return factors;
-<<<<<<< HEAD
     }
     
     public ArrayList<int[]> manageFactor2(int result){
@@ -665,19 +664,32 @@ public class KenKen {
          
          }
       }
-=======
-      }  
-
-    private ArrayList<int[]> permutationsAddition(int cells, int sum){
-        ArrayList<int[]> permutations = new ArrayList<>();
-        if(cells == 2){
-            addition2Cells(permutations, sum)
-        }
-        if(cells == 4){
-            addition4Cells(permutations, sum);
-        }
-        return permutations;
-    }
+      
+      private ArrayList<int[]> permutationsAddition(int cells, int sum){
+          ArrayList<int[]> permutations = new ArrayList<>();
+          if(cells == 2){
+              addition2Cells(permutations, sum);
+                      }
+          if(cells == 4){
+              //addition4Cells(permutations, sum);
+          }
+          return permutations;
+      }
+      
+      private int getMaxRangeValue(){
+          if(size < 9){
+              return size;
+          }
+          return 9;
+      }
+      
+      private int getMinRangeValue(){
+          if(size <= 9){
+              return 1;
+          }
+          return rangeOfValues[size-1];
+      }
+      
       
     private ArrayList<int[]> addition2Cells(ArrayList<int[]> permutations, int sum){
         int maxValue = getMaxRangeValue();
@@ -710,7 +722,7 @@ public class KenKen {
                 permutation[permutation.length - 2]++;
                 permutation[permutation.length - 1]--;
                 permutations.add(permutation);
-                swapValues(permutation);
+                //swapValues(permutation);
                 permutations.add(permutation);
             }
             return permutations;
@@ -878,7 +890,6 @@ public class KenKen {
 //            return permutations;
 //        }
 //    }
->>>>>>> 5e3c2406d73b5e8e54d16959ba5bebdc5e6bbb5c
       
       //solve
 
