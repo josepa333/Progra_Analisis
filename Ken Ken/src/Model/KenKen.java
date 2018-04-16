@@ -550,50 +550,215 @@ public class KenKen {
       }  
 
     private ArrayList<int[]> permutationsAddition(int cells, int sum){
-      
+        ArrayList<int[]> permutations = new ArrayList<>();
+        if(cells == 2){
+            addition2Cells(permutations, sum)
+        }
+        if(cells == 4){
+            addition4Cells(permutations, sum);
+        }
+        return permutations;
     }
       
-    private ArrayList<int[]> addition2Cells(ArrayList<int[]> permutations, int minValue, int maxValue, int cells){
-          
+    private ArrayList<int[]> addition2Cells(ArrayList<int[]> permutations, int sum){
+        int maxValue = getMaxRangeValue();
+        int minValue = getMinRangeValue();
+        while((maxValue > sum) && (maxValue >= minValue)){
+            maxValue--;
+        }
+        minValue = sum - maxValue;
         int[] permutation = new int[] {minValue, maxValue};
         permutations.add(permutation);
         if(maxValue > 0){
-            while(minValue <= maxValue){
-                 minValue++;
-                 maxValue--;
-                 permutation[0] = minValue;
-                 permutation[1] = maxValue;
-                 permutations.add(permutation);
-             }
-             return permutations;
-         }
-         if(maxValue < 0){
-             while(maxValue <= minValue){
-                 minValue--;
-                 maxValue++;
-                 permutation[0] = minValue;
-                 permutation[1] = maxValue;
-                 permutations.add(permutation);
-             }
-             return permutations;
-         }
-         if(maxValue == 0){
-             int maxRangeValue = getMaxRangeValue();
-             while(maxValue <= maxRangeValue){
-                 minValue--;
-                 maxValue++;
-                 permutation[0] = minValue;
-                 permutation[1] = maxValue;
-                 permutations.add(permutation);
-             }
-             return permutations;
-         }
-         return permutations;
-      }
+            while(permutation[permutation.length - 2] <= maxValue){
+                permutation[permutation.length - 2]++;
+                permutation[permutation.length - 1]--;
+                permutations.add(permutation);
+            }
+            return permutations;
+        }
+        if(maxValue < 0){
+            while(permutation[permutation.length - 1] <= minValue){
+                permutation[permutation.length - 2]--;
+                permutation[permutation.length - 1]++;
+                permutations.add(permutation);
+            }
+            return permutations;
+        }
+        if(maxValue == 0){
+            int maxRangeValue = getMaxRangeValue();
+            while(permutation[permutation.length - 1] <= maxRangeValue){
+                permutation[permutation.length - 2]++;
+                permutation[permutation.length - 1]--;
+                permutations.add(permutation);
+                swapValues(permutation);
+                permutations.add(permutation);
+            }
+            return permutations;
+        }
+        return permutations;
+    }
       
-      private ArrayList<int[]> addition4Cells(ArrayList<int[]> permutations, int minValue, int maxValue){
-          ArrayList
-      }
+//    private ArrayList<int[]> addition4Cells(ArrayList<int[]> permutations, int minValue, int maxValue){
+//        addition2Cells(permutations, minValue, maxValue, 4);
+//        int[] basePermutation = new int[] {0, 0 , minValue, maxValue};
+//        int[] permutation = basePermutation;
+//        if(maxValue > 0){
+//            if(minValue == 0){
+//                int minRangeValue = getMinRangeValue();
+//                while(permutation[0] <= minRangeValue){
+//                    permutation[0]++;
+//                    permutation[2]--;
+//                    permutations.add(permutation);
+//                    permutations.add(swapPermutation(permutation));
+//                    swapValues(permutation);
+//                    permutations.add(permutation);
+//                    permutations.add(swapPermutation(permutation));
+//                }
+//                permutation = basePermutation;
+//                while(permutation[1] <= minRangeValue){
+//                    permutation[1]++;
+//                    permutation[2]--;
+//                    permutations.add(permutation);
+//                    permutations.add(swapPermutation(permutation));
+//                    swapValues(permutation);
+//                    permutations.add(permutation);
+//                    permutations.add(swapPermutation(permutation));
+//                }
+//                permutation = basePermutation;
+//            }
+//            else{
+//                while(permutation[0] <= minValue){
+//                    permutation[0]++;
+//                    permutation[2]--;
+//                    permutations.add(permutation);
+//                    permutations.add(swapPermutation(permutation));
+//                }
+//                permutation = basePermutation;
+//                while(permutation[1] <= minValue){
+//                    permutation[1]++;
+//                    permutation[2]--;
+//                    permutations.add(permutation);
+//                    permutations.add(swapPermutation(permutation));
+//                }
+//                permutation = basePermutation;
+//            }
+//            while(permutation[0] <= maxValue){
+//                permutation[0]++;
+//                permutation[3]--;
+//                permutations.add(permutation);
+//                permutations.add(swapPermutation(permutation));
+//            }
+//            permutation = basePermutation;
+//            while(permutation[1] <= maxValue){
+//                permutation[1]++;
+//                permutation[3]--;
+//                permutations.add(permutation);
+//                permutations.add(swapPermutation(permutation));
+//            }
+//            return permutations;
+//        }
+//        if(maxValue < 0){
+//            if(minValue == 0){
+//                int minRangeValue = getMinRangeValue();
+//                while(permutation[0] <= minRangeValue){
+//                    permutation[0]++;
+//                    permutation[2]--;
+//                    permutations.add(permutation);
+//                    permutations.add(swapPermutation(permutation));
+//                    swapValues(permutation);
+//                    permutations.add(permutation);
+//                    permutations.add(swapPermutation(permutation));
+//                }
+//                permutation = basePermutation;
+//                while(permutation[1] <= minRangeValue){
+//                    permutation[1]++;
+//                    permutation[2]--;
+//                    permutations.add(permutation);
+//                    permutations.add(swapPermutation(permutation));
+//                    swapValues(permutation);
+//                    permutations.add(permutation);
+//                    permutations.add(swapPermutation(permutation));
+//                }
+//                permutation = basePermutation;
+//            }
+//            else{
+//                while(permutation[2] <= 0){
+//                    permutation[0]--;
+//                    permutation[2]++;
+//                    permutations.add(permutation);
+//                    permutations.add(swapPermutation(permutation));
+//                }
+//                permutation = basePermutation;
+//                while(permutation[2] <= 0){
+//                    permutation[1]--;
+//                    permutation[2]++;
+//                    permutations.add(permutation);
+//                    permutations.add(swapPermutation(permutation));
+//                }
+//                permutation = basePermutation;
+//            }
+//            while(permutation[3] <= 0){
+//                permutation[0]--;
+//                permutation[3]++;
+//                permutations.add(permutation);
+//                permutations.add(swapPermutation(permutation));
+//            }
+//            permutation = basePermutation;
+//            while(permutation[3] <= 0){
+//                permutation[1]--;
+//                permutation[3]++;
+//                permutations.add(permutation);
+//                permutations.add(swapPermutation(permutation));
+//            }
+//            return permutations;
+//        }
+//        if(maxValue == 0){
+//            int minRangeValue = getMinRangeValue();
+//            int maxRangeValue = getMaxRangeValue();
+//            while(permutation[0] <= minRangeValue){
+//                permutation[0]++;
+//                permutation[2]--;
+//                permutations.add(permutation);
+//                permutations.add(swapPermutation(permutation));
+//                swapValues(permutation);
+//                permutations.add(permutation);
+//                permutations.add(swapPermutation(permutation));
+//            }
+//            permutation = basePermutation;
+//            while(permutation[1] <= minRangeValue){
+//                permutation[1]++;
+//                permutation[2]--;
+//                permutations.add(permutation);
+//                permutations.add(swapPermutation(permutation));
+//                swapValues(permutation);
+//                permutations.add(permutation);
+//                permutations.add(swapPermutation(permutation));
+//            }
+//            permutation = basePermutation;
+//            while(permutation[0] <= maxRangeValue){
+//                permutation[0]++;
+//                permutation[3]--;
+//                permutations.add(permutation);
+//                permutations.add(swapPermutation(permutation));
+//                swapValues(permutation);
+//                permutations.add(permutation);
+//                permutations.add(swapPermutation(permutation));
+//            }
+//            permutation = basePermutation;
+//            while(permutation[1] <= maxRangeValue){
+//                permutation[1]++;
+//                permutation[3]--;
+//                permutations.add(permutation);
+//                permutations.add(swapPermutation(permutation));
+//                swapValues(permutation);
+//                permutations.add(permutation);
+//                permutations.add(swapPermutation(permutation));
+//            }
+//            permutation = basePermutation;
+//            return permutations;
+//        }
+//    }
       
       //sets and gets 
       public NodekenKen[][] getMatrix() {
