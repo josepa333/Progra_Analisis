@@ -19,7 +19,7 @@ public class Tabla {
         };
         tablaPredeterminada.addColumn("   ");
         for(int i = 0; i<cantidadVertices-1; i++){
-            tablaPredeterminada.addColumn("");
+            tablaPredeterminada.addColumn(Integer.toString(i+1));
         }
         
         Object fila[] = new Object[cantidadVertices+1];
@@ -43,6 +43,6 @@ public class Tabla {
             }
         }
         pTabla.setModel(tablaPredeterminada);
-        pTabla.setRowHeight(20);
+        pTabla.setRowHeight(30);
     }
 }

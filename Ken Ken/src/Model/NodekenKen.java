@@ -18,9 +18,10 @@ public class NodekenKen {
     private char operator;
     private int result;
     private int RGB[];
+    private int coordinates[];
 
 
-    public NodekenKen(int pCounter, char pOperator,int pResult, int pRGB[]){
+    public NodekenKen(int pCounter, char pOperator,int pResult, int pRGB[],int row, int col){
     next=null;
     counter = pCounter;
     operator = pOperator;
@@ -28,6 +29,7 @@ public class NodekenKen {
     check = false;
     RGB = pRGB;
     value = 0;
+    coordinates = new int[]{row,col};
     }
     
     public NodekenKen(){
@@ -95,4 +97,13 @@ public class NodekenKen {
     public void setRGB(int[] RGB) {
         this.RGB = RGB;
     }
+
+    public int[] getCoordinates() {
+        return coordinates;
+    }
+
+    public void setCoordinates(int[] coordinates) {
+        this.coordinates = coordinates;
+    }
+    
 }
