@@ -28,7 +28,7 @@ public class NodekenKen {
     result = pResult;
     check = false;
     RGB = pRGB;
-    value = 0;
+    value = -10;
     coordinates = new int[]{row,col};
     }
     

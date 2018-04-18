@@ -10,10 +10,18 @@ package Model;
  * @author jose pablo
  */
 public class Solution {
-     private KenKen kenken;
+     private NodekenKen matrix[][];
 
-     public Solution(KenKen pKenken){
-         kenken = pKenken;
+     public Solution(){
+         matrix = pMatrix;
      }
+
+    public NodekenKen[][] getMatrix() {
+        return matrix;
+    }
+
+    public void setMatrix(NodekenKen[][] matrix) {
+        this.matrix = matrix;
+    }
      
 }
