@@ -665,17 +665,6 @@ public class KenKen {
          }
       }
       
-      private ArrayList<int[]> permutationsAddition(int cells, int sum){
-          ArrayList<int[]> permutations = new ArrayList<>();
-          if(cells == 2){
-              addition2Cells(permutations, sum);
-                      }
-          if(cells == 4){
-              //addition4Cells(permutations, sum);
-          }
-          return permutations;
-      }
-      
       private int getMaxRangeValue(){
           if(size < 9){
               return size;
@@ -690,10 +679,27 @@ public class KenKen {
           return rangeOfValues[size-1];
       }
       
+    private void swapValues(int[] permutation){
+        int temp = permutation[0];
+        permutation[0] = permutation[1];
+        permutation[1] = temp;
+    }
       
-    private ArrayList<int[]> addition2Cells(ArrayList<int[]> permutations, int sum){
+    private ArrayList<int[]> permutationsAddition(int cells, int sum){
+          ArrayList<int[]> permutations = new ArrayList<>();
+          if(cells == 2){
+              addittion2Cells(permutations, sum);
+                      }
+          if(cells == 4){
+              addittion4Cells(permutations, sum);
+          }
+          return permutations;
+    }
+      
+    private ArrayList<int[]> addittion2Cells(ArrayList<int[]> permutations, int sum){
         int maxValue = getMaxRangeValue();
         int minValue = getMinRangeValue();
+        int[] newPermutation;
         while((maxValue > sum) && (maxValue >= minValue)){
             maxValue--;
         }
@@ -701,33 +707,80 @@ public class KenKen {
         int[] permutation = new int[] {minValue, maxValue};
         permutations.add(permutation);
         if(maxValue > 0){
-            while(permutation[permutation.length - 2] <= maxValue){
-                permutation[permutation.length - 2]++;
-                permutation[permutation.length - 1]--;
-                permutations.add(permutation);
+            while(permutation[0] <= maxValue){
+                permutation[0]++;
+                permutation[1]--;
+                newPermutation = new int[] {permutation[0], permutation[1]};
+                permutations.add(newPermutation);
             }
             return permutations;
         }
         if(maxValue < 0){
-            while(permutation[permutation.length - 1] <= minValue){
-                permutation[permutation.length - 2]--;
-                permutation[permutation.length - 1]++;
-                permutations.add(permutation);
+            while(permutation[1] <= minValue){
+                permutation[0]--;
+                permutation[1]++;
+                newPermutation = new int[] {permutation[0], permutation[1]};
+                permutations.add(newPermutation);
             }
             return permutations;
         }
         if(maxValue == 0){
             int maxRangeValue = getMaxRangeValue();
-            while(permutation[permutation.length - 1] <= maxRangeValue){
-                permutation[permutation.length - 2]++;
-                permutation[permutation.length - 1]--;
-                permutations.add(permutation);
-                //swapValues(permutation);
-                permutations.add(permutation);
+            while(permutation[1] <= maxRangeValue){
+                permutation[0]++;
+                permutation[1]--;
+                newPermutation = new int[] {permutation[0], permutation[1]};
+                permutations.add(newPermutation);
+                swapValues(permutation);
+                newPermutation = new int[] {permutation[0], permutation[1]};
+                permutations.add(newPermutation);
             }
             return permutations;
         }
         return permutations;
+    }
+    
+    private void permut4Cells(ArrayList<int[]> permutations, int minValue, int maxValue){
+        int[] permutation = new int[] {maxValue, maxValue, maxValue, maxValue};
+        int x = 0;
+        while(permutation[3] >= minValue){
+            while(permutation[2] >= minValue){
+                while(permutation[1] >= minValue){
+                    while(permutation[0] >= minValue){
+                        int[] newPermutation = new int[] {permutation[0], permutation[1], permutation[2], permutation[3]};
+                        permutations.add(newPermutation);
+                        x++;
+                        permutation[0]--;
+                    }
+                    permutation[0] = maxValue;
+                    permutation[1]--;
+                }
+                permutation[0] = maxValue;
+                permutation[1] = maxValue;
+                permutation[2]--;
+            }
+            permutation[0] = maxValue;
+            permutation[1] = maxValue;
+            permutation[2] = maxValue;
+            permutation[3]--;
+        }
+    }
+    
+    private ArrayList<int[]> addittion4Cells(ArrayList<int[]> permutations, int sum){
+        ArrayList<int[]> addittionPermutations = new ArrayList<>();
+        permut4Cells(permutations, getMinRangeValue(), getMaxRangeValue());
+        int permutationSum = 0;
+        for(int i = 0; i < permutations.size(); i++){
+            int[] permutation = permutations.get(i);
+            for(int j = 0; j < permutation.length; j++){
+                permutationSum += permutation[j];
+            }
+            if(permutationSum == sum){
+                addittionPermutations.add(permutation);
+            }
+            permutationSum = 0;
+        }
+        return addittionPermutations;
     }
       
 //    private ArrayList<int[]> addition4Cells(ArrayList<int[]> permutations, int minValue, int maxValue){
