@@ -49,7 +49,6 @@ public class proto extends javax.swing.JFrame {
         kenkenMatrix = (KenKen) (xstream.fromXML(data.get(0)));
         size =  (Integer) (xstream.fromXML(data.get(1)));
         tablaBase.ver_tabla( kenkentable, size,  kenkenMatrix.getMatrix() );
-
     }
     
         public  void saveXML(){//Move to controller??
