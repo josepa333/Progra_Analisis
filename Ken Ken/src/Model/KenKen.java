@@ -20,14 +20,18 @@ public class KenKen {
      private ArrayList<int[]> twoNodes;
      private ArrayList<int[]> fourNodes;
      private HashMap<Integer,ArrayList<int[]>> allPermutations;
-     
      private NodekenKen matrix[][];
-     private int matrixOfValues[][];
+     
+     
      private int counter;
      private char[] operations;
      private int size;
      
-     private int[] rangeOfValues;//Borra cuando ya se tengan las plantillas. 
+     //Matrix values  
+     private int matrixOfValues[][];
+     private boolean doneValues;
+      private int[] rangeOfValues;
+    
      
      public  KenKen(int pSize){
          size = pSize;
@@ -41,10 +45,14 @@ public class KenKen {
          twoNodes = new ArrayList<>();  
          fourNodes = new ArrayList<>();
          allPermutations = new HashMap<>();
-         System.out.println("Max "+ Integer.toString(getMaxRangeValue()) +"Min" + Integer.toString( getMinRangeValue()));
          createNodes();
+         doneValues = false;
      }
      
+     
+     private void backTracking(){
+         
+     }
      private void createNodes(){
          for(int i=0; i < size;i++){
              for(int j = 0 ; j < size ; j++ ){
@@ -56,45 +64,86 @@ public class KenKen {
      public void changeMatrix(int pSize){
          size = pSize;
          fillMatrixValues();
+         setValues();
          fillMatrix();
      }
      
-     private void fillMatrixValues(){  //Make it right 
-         int range = 0;
-         for(int i=0; i < size; i++){
-             for(int j = 0 ; j < size; j++ ){
-                 int value = 0;
-                 boolean flag = false;
-                 while(flag == false){
-                     value = rangeOfValues[range];
-                     flag = checkColumn(j,value)   & checkRow(i,value) ;
-                     range++;
-                 }
-                 range = 0;
-                 matrixOfValues[i][j] = value;
-                 System.out.print(Integer.toString( matrixOfValues[i][j] ));
+    public void setValues(){
+        int i,j;
+        if( allDone() == true){
+            print();
+            doneValues = true;
+        }
+        else{
+            i = j = 0;
+            for (int y = 0; y < size ; y++) {
+                for (int x = 0; x < size;x++) {
+                    if(matrixOfValues[y][x] == -10){
+                        i = y;
+                        j = x;
+                        break;
+                    }
+                }
+            }
+            int value;
+            for (int k = 0; k < size; k++) {
+                value = rangeOfValues[k];
+                if(checkRow(i,value) && checkColumn(j,value)){
+                    matrixOfValues[i][j] = value;
+                    setValues();
+                }
+            }
+            if(doneValues == false){
+                matrixOfValues[i][j] = -10;
+            }
+        }
+    }
+ 
+    public void fillMatrixValues(){
+        for(int i = 0; i< size;i++){
+            for(int j = 0 ; j< size; j++){
+                matrixOfValues[i][j]= -10;
+            }
+        }
+    }
+    
+    private boolean allDone(){
+        for (int i = 0; i <size; i++) {
+            for (int j = 0; j < size; j++) {
+                if( matrixOfValues[i][j] == -10){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    public void print(){
+        for(int i = 0; i< size;i++){
+            for(int j = 0 ; j<size; j++){
+                System.out.print(Integer.toString(matrixOfValues[i][j]));
+            }
+            System.out.println(" ");
+        }
+    }
+
+    private boolean checkRow(int row,int value){
+         for(int i = 0; i < size; i++){
+             if(matrixOfValues[row][i] == value){
+                 return false;
              }
-             System.out.println(" ");
          }
-     }
+         return true;
+    }
      
-     private boolean checkColumn(int col,int value){
+    public boolean checkColumn(int col,int value){
          for(int i = 0; i < size; i++){
              if(matrixOfValues[i][col] == value ){
                  return false;
              }
          }
          return true;
-     }
-     
-     private boolean checkRow(int row,int value){
-         for(int i = 0; i < size; i++){
-             if(matrixOfValues[row][i] == value ){
-                 return false;
-             }
-         }
-         return true;
-     }
+    }    
      
      private void fillMatrix(){
          
@@ -231,18 +280,20 @@ public class KenKen {
      
      private boolean createPowerOfTwo(int row, int col){
           
-          int result = (int) Math.pow(2, matrixOfValues[row][col]);
-          allPermutations.put(counter, powerOfTwo(result));
+         if( matrixOfValues[row][col] >= 0){
+             int result = (int) Math.pow(2, matrixOfValues[row][col]);
+             allPermutations.put(counter, powerOfTwo(result));
+             int r =  (int) (Math.random() * 255) + 1;
+             int g =  (int) (Math.random() * 255) + 1;
+             int b =  (int) (Math.random() * 255) + 1;
           
-          int r =  (int) (Math.random() * 255) + 1;
-          int g =  (int) (Math.random() * 255) + 1;
-          int b =  (int) (Math.random() * 255) + 1;
-          
-          matrix[row][col] = new NodekenKen(counter, operations[5], result, new int[] {r,g,b}, row, col);
-          matrix[row][col].setCheck(false);
-          oneNode.add(new int[]{row,col});
-          counter++;
-          return true;
+            matrix[row][col] = new NodekenKen(counter, operations[5], result, new int[] {r,g,b}, row, col);
+            matrix[row][col].setCheck(false);
+            oneNode.add(new int[]{row,col});
+            counter++;
+            return true;
+         }
+         return false;
       }
      
      private boolean createS(int row, int col){
@@ -475,6 +526,10 @@ public class KenKen {
      private int determineResultForTwoNodes(int idShape, int operation, int value1, int value2){
  
          int result = 0;   //{'+','-','*','/','%','^'};
+         if((value1 == 0 || value2 == 0 ) && (operation == 2 || operation == 3 ) ){
+             operation = 0;
+         }
+         
          switch (operation) {
              case 0:
                  result =value1 + value2;
@@ -504,6 +559,9 @@ public class KenKen {
      
      private int determineResultForValuesSquare(int idShape,int operation,int value1, int value2, int value3, int value4){// Tomar en cuenta negativos, dependiendo del size del KenKen!!!!! 
          int result = 0;   //{'+','-','*','/','%','^'};
+         if((value1 == 0 || value2 == 0 || value3 == 0 || value4 == 0) && (operation == 2 || operation == 3 ) ){
+             operation = 0;
+         }
          switch (operation) {
              case 0:
                  result = value1 + value2 + value3 + value4;
@@ -531,8 +589,11 @@ public class KenKen {
       private ArrayList<int[]> module(int result){//IDK yet if it is going to be moved 
           
           ArrayList<int[]> pairs = new ArrayList<>();
-          for(int i = 1; i < size ; i++){
-              for(int j = 1 ; j < i ; j++ ){
+          for(int i = getMinRangeValue(); i < getMaxRangeValue() + 1 ; i++){
+              for(int j = getMinRangeValue() ; j < getMaxRangeValue() + 1 ; j++ ){
+                  if( j == 0){
+                      continue;
+                  }
                   if( i%j == result){
                       pairs.add(new int[] {i,j} ); 
                       System.out.println(Integer.toString(i) + " " +Integer.toString(j));

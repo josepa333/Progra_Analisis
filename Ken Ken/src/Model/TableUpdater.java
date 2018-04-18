@@ -32,6 +32,7 @@ public class TableUpdater extends Thread{
                 System.out.println("Update");
                 baseTable.ver_tabla(table, size, matrix);
                 Thread.sleep(1000);
+                
             }
         }
         catch(InterruptedException e){
