@@ -5,9 +5,11 @@
  */
 package Model;
 
+
 import java.util.ArrayList;
-import java.util.Collections;
+
 import java.util.HashMap;
+
 
 /**
  *
@@ -18,8 +20,119 @@ public class Solution {
     private boolean failure = false;
     private int shapeType;
     private int[] permutation;
+    private int[] beginOfSection;
     private HashMap< Integer, HashMap<Integer,ArrayList<Integer> >> rows;
     private HashMap< Integer, HashMap<Integer,ArrayList<Integer> >> cols;//Parametro del constructor
+    
+    private boolean podeBySquare(){
+        if(permutation[0] == permutation[1]){
+            return false;
+        }
+        if(permutation[2] == permutation[3]){
+            return false;
+        }
+        if(permutation[0] == permutation[2]){
+            return false;
+        }
+        if(permutation[1] == permutation[3]){
+            return false;
+        }
+        return true;
+    }
+    
+    private boolean podeByL(){
+        if(permutation[0] == permutation[1]){
+            return false;
+        }
+        if(permutation[1] == permutation[2]){
+            return false;
+        }
+        if(permutation[0] == permutation[2]){
+            return false;
+        }
+        if(permutation[2] == permutation[3]){
+            return false;
+        }
+        return true;
+    }
+    
+    private boolean podeByS(){
+        if(permutation[0] == permutation[1]){
+            return false;
+        }
+        if(permutation[2] == permutation[3]){
+            return false;
+        }
+        if(permutation[0] == permutation[2]){
+            return false;
+        }
+        return true;
+    }
+    
+    private boolean podeByT(){
+        if(permutation[0] == permutation[2]){
+            return false;
+        }
+        if(permutation[1] == permutation[2]){
+            return false;
+        }
+        if(permutation[2] == permutation[3]){
+            return false;
+        }
+        if(permutation[1] == permutation[3]){
+            return false;
+        }
+        return true;
+    }
+    
+    private boolean podeByStick(){
+        if(permutation[0] == permutation[1]){
+            return false;
+        }
+        if(permutation[0] == permutation[2]){
+            return false;
+        }
+        if(permutation[0] == permutation[3]){
+            return false;
+        }
+        if(permutation[1] == permutation[2]){
+            return false;
+        }
+        if(permutation[1] == permutation[3]){
+            return false;
+        }
+        if(permutation[2] == permutation[3]){
+            return false;
+        }
+        return true;
+    }
+    
+    private boolean podeByShape(){
+        boolean promising = true;
+        switch(shapeType){
+            case 2:
+                promising = podeBySquare();
+                break;
+            case 3:
+                promising = podeByL();
+                break;
+            case 4:
+                promising = podeByS();
+                break;
+            case 5:
+                promising = podeByT();
+                break;
+            case 6:
+                promising = podeByStick();
+                break;
+            default:
+                break;
+        }
+        return promising;
+
+    }
+        
+    
     // Para que se modifiquen dentro de cada uno
     
      public Solution(){
@@ -51,21 +164,33 @@ public class Solution {
         return true;
     }
     
+<<<<<<< HEAD
     //It copies the previous matrix that was updated with a new permutation
     //Revisar
     private void copyMatrix(NodekenKen[][] pastMatrix){
         //Collections.copy(matrix, pastMatrix);
+=======
+    private void addPermutation(int[] permutation){
+        NodekenKen node = matrix[beginOfSection[0]][beginOfSection[1]];
+        int i = 0;
+        while(node != null){
+            node.setValue(permutation[i]);
+            node = node.getNext();
+            i++;
+        }
+>>>>>>> 7fdefabd43a7aea39871e66a3c40b190f2af9fe4
     }
-    
     
     public Solution(NodekenKen pMatrix[][]){
         matrix = pMatrix;
     }
      
-    public Solution(Solution solution, int pShapeType, int[] section, int[] pPermutation){
-        copyMatrix(solution.getMatrix());
+    public Solution(Solution solution, int pShapeType, int[] pBeginOfSection, int[] pPermutation){
+        matrix = solution.getMatrix().clone();
         shapeType = pShapeType;
+        beginOfSection = pBeginOfSection;
         permutation = pPermutation;
+        addPermutation(permutation);
     }
      
     public boolean isFailure(){
@@ -73,8 +198,15 @@ public class Solution {
     }
     
     public boolean isPromising(){
+<<<<<<< HEAD
        // podeByShape();
         podeByRowColumn();
         return true;
+=======
+        if(podeByShape()){
+            return podeByRowColumn();
+        }
+        return false;
+>>>>>>> 7fdefabd43a7aea39871e66a3c40b190f2af9fe4
     }
 }
