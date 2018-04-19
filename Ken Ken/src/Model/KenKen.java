@@ -693,14 +693,13 @@ public class KenKen {
            for(int j = sizeF/2; j < sizeF ;j++){
                value2 *= (int) factors.get(j);
            }
-           if(value1 <= size && value2 <=size){
+           if(value1 <= size && value2 <=size && value1 != value2){
                System.out.println(Integer.toString(value1)  + " " +Integer.toString(value2));
                combinations.add(new int[]{value1,value2});
            }
            value1 = 1;
            value2 = 1;
            Collections.rotate(factors, 1);
-           
         }
         return combinations;
     }
@@ -748,7 +747,7 @@ public class KenKen {
             for (int j = getMinRangeValue(); j < getMaxRangeValue(); j++) {
                 if(j == 0)
                     continue;
-                if( i / j == result){
+                if( i / j == result && i != j){
                     System.out.println(Integer.toString(i) +" " +Integer.toString(j)  );
                     pairs.add(new int[]{i,j});
                 }
