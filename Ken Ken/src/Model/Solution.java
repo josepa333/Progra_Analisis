@@ -164,12 +164,13 @@ public class Solution {
         return true;
     }
     
-<<<<<<< HEAD
+
     //It copies the previous matrix that was updated with a new permutation
     //Revisar
     private void copyMatrix(NodekenKen[][] pastMatrix){
         //Collections.copy(matrix, pastMatrix);
-=======
+    }
+        
     private void addPermutation(int[] permutation){
         NodekenKen node = matrix[beginOfSection[0]][beginOfSection[1]];
         int i = 0;
@@ -178,7 +179,6 @@ public class Solution {
             node = node.getNext();
             i++;
         }
->>>>>>> 7fdefabd43a7aea39871e66a3c40b190f2af9fe4
     }
     
     public Solution(NodekenKen pMatrix[][]){
@@ -198,15 +198,13 @@ public class Solution {
     }
     
     public boolean isPromising(){
-<<<<<<< HEAD
+
        // podeByShape();
         podeByRowColumn();
-        return true;
-=======
+
         if(podeByShape()){
             return podeByRowColumn();
         }
         return false;
->>>>>>> 7fdefabd43a7aea39871e66a3c40b190f2af9fe4
     }
 }
