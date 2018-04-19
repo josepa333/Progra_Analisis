@@ -13,7 +13,7 @@ public class Solution {
      private NodekenKen matrix[][];
 
      public Solution(){
-         matrix = pMatrix;
+         
      }
 
     public NodekenKen[][] getMatrix() {

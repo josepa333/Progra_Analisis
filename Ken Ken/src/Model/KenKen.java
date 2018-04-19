@@ -53,6 +53,7 @@ public class KenKen {
      private void backTracking(){
          
      }
+     
      private void createNodes(){
          for(int i=0; i < size;i++){
              for(int j = 0 ; j < size ; j++ ){
@@ -346,7 +347,7 @@ public class KenKen {
              
              int operation = (int) (Math.random() * 4);//+-*/ 
              int result = determineResultForValuesSquare(counter, operation, matrixOfValues[row][col],
-                     matrixOfValues[row+1][col+1],matrixOfValues[row+1][col],matrixOfValues[row+1][col-1]);
+                    matrixOfValues[row+1][col-1],matrixOfValues[row+1][col],matrixOfValues[row+1][col+1]);
              
              int r =  (int) (Math.random() * 255) + 1;
              int g =  (int) (Math.random() * 255) + 1;
@@ -547,7 +548,7 @@ public class KenKen {
                  break;
              case 3://  divi 
                  result =value1 / value2;
-                 //Division de Richi
+                 allPermutations.put(idShape, divition2(result));
                  break;
              case 4:// %
                  result =value1 % value2;
@@ -700,6 +701,21 @@ public class KenKen {
            Collections.rotate(factors, 1);
         }
         return combinations;
+    }
+    
+    public ArrayList<int[]>  divition2(int result){
+        ArrayList<int[]> pairs = new ArrayList<>();
+        for (int i = getMinRangeValue(); i < getMaxRangeValue(); i++) {
+            for (int j = getMinRangeValue(); j < getMaxRangeValue(); j++) {
+                if(j == 0)
+                    continue;
+                if( i / j == result){
+                    System.out.println(Integer.toString(i) +" " +Integer.toString(j)  );
+                    pairs.add(new int[]{i,j});
+                }
+            }
+        }
+        return pairs;
     }
       
       private void addition2Cells(ArrayList<int[]> permutations, int minValue, int maxValue){
