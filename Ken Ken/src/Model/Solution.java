@@ -21,8 +21,8 @@ public class Solution {
     private int shapeType;
     private int[] permutation;
     private int[] beginOfSection;
-    private HashMap< Integer, HashMap<Integer,ArrayList<Integer> >> rows;
-    private HashMap< Integer, HashMap<Integer,ArrayList<Integer> >> cols;//Parametro del constructor
+    private HashMap< Integer, HashMap<Integer,Byte>> rows;
+    private HashMap< Integer, HashMap<Integer,Byte>> cols;//Parametro del constructor
     
     private boolean podeBySquare(){
         if(permutation[0] == permutation[1]){
@@ -131,47 +131,30 @@ public class Solution {
         return promising;
 
     }
-        
-    
-    // Para que se modifiquen dentro de cada uno
-    
-     public Solution(){
-         failure = true;
-     }
-
-    public NodekenKen[][] getMatrix() {
-        return matrix;
-    }
-    
-    private boolean podaeByShape(){
-        return true;
-        //Validar por tipo de forma que no se puedan repetir 2 numeros en la permutacion
-    }
     
     private boolean podeByRowColumn(){
-        if(checkRow() == false || checkColumn() == false){
-            return false;
-        }
-        return true;
-    }
-    
-    private boolean checkRow(){
-        return true;
-
-    }
-    
-    private boolean checkColumn(){
-        return true;
-    }
-    
-    private void addPermutation(int[] permutation){
         NodekenKen node = matrix[beginOfSection[0]][beginOfSection[1]];
         int i = 0;
         while(node != null){
-            node.setValue(permutation[i]);
+            if ((rows.get(node.getCoordinates()[0]).get(permutation[i]) != null) &&
+                    (cols.get(node.getCoordinates()[1]).get(permutation[i]) != null)){
+                    return false;
+            }
+            else{
+                node.setValue(permutation[i]);
+                rows.get(node.getCoordinates()[0]).put(permutation[i], 1);
+                cols.get(node.getCoordinates()[1]).put(permutation[i], 1);
+            }
             node = node.getNext();
             i++;
         }
+        return true;
+    }
+    
+    // Para que se modifiquen dentro de cada uno
+    
+    public Solution(){
+        failure = true;
     }
     
     public Solution(NodekenKen pMatrix[][]){
@@ -183,7 +166,6 @@ public class Solution {
         shapeType = pShapeType;
         beginOfSection = pBeginOfSection;
         permutation = pPermutation;
-        addPermutation(permutation);
     }
      
     public boolean isFailure(){
@@ -195,5 +177,9 @@ public class Solution {
             return podeByRowColumn();
         }
         return false;
+    }
+
+    public NodekenKen[][] getMatrix() {
+        return matrix;
     }
 }
