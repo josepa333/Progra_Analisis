@@ -635,8 +635,10 @@ public class KenKen {
                       continue;
                   }
                   if( i%j == result){
-                      pairs.add(new int[] {i,j} ); 
-                      System.out.println(Integer.toString(i) + " " +Integer.toString(j));
+                      if(i != j){
+                          pairs.add(new int[] {i,j} ); 
+                          System.out.println(Integer.toString(i) + " " +Integer.toString(j));
+                      }
                   }
               }
           }
@@ -646,9 +648,8 @@ public class KenKen {
       private ArrayList<int[]> powerOfTwo(int result){
           ArrayList<int[]> uniqueValue = new ArrayList<>();
           int counter = 0;
-          Math.log(256) / Math.log(2);
           while (result > counter && counter <= size){
-              if(Math.pow(2,counter) == result){
+              if(Math.pow(counter,3) == result){
                     System.out.println(Integer.toString(counter));
                     uniqueValue.add(new int[counter]);
                     break;
