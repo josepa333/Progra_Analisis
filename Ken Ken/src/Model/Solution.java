@@ -133,6 +133,32 @@ public class Solution {
     }
     
     private boolean podeByRowColumn(){
+<<<<<<< HEAD
+=======
+        if(checkRow() == false || checkColumn() == false){
+            return false;
+        }
+        return true;
+    }
+    
+    private boolean checkRow(){
+        return true;
+
+    }
+    
+    private boolean checkColumn(){
+        return true;
+    }
+    
+
+    //It copies the previous matrix that was updated with a new permutation
+    //Revisar
+    private void copyMatrix(NodekenKen[][] pastMatrix){
+        //Collections.copy(matrix, pastMatrix);
+    }
+        
+    private void addPermutation(int[] permutation){
+>>>>>>> ded96cde4dd0a7b6cabbeb88f1dfa067ba924f05
         NodekenKen node = matrix[beginOfSection[0]][beginOfSection[1]];
         int i = 0;
         while(node != null){
@@ -173,6 +199,10 @@ public class Solution {
     }
     
     public boolean isPromising(){
+
+       // podeByShape();
+        podeByRowColumn();
+
         if(podeByShape()){
             return podeByRowColumn();
         }
