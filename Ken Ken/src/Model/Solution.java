@@ -5,7 +5,6 @@
  */
 package Model;
 
-import java.util.Collections;
 
 /**
  *
@@ -16,15 +15,111 @@ public class Solution {
     private boolean failure = false;
     private int shapeType;
     private int[] permutation;
-     public Solution(){
-         failure = true;
-     }
-
-    public NodekenKen[][] getMatrix() {
-        return matrix;
-
+    private int[] beginOfSection;
+    
+    private boolean podeBySquare(){
+        if(permutation[0] == permutation[1]){
+            return false;
+        }
+        if(permutation[2] == permutation[3]){
+            return false;
+        }
+        if(permutation[0] == permutation[2]){
+            return false;
+        }
+        if(permutation[1] == permutation[3]){
+            return false;
+        }
+        return true;
+    }
+    
+    private boolean podeByL(){
+        if(permutation[0] == permutation[1]){
+            return false;
+        }
+        if(permutation[1] == permutation[2]){
+            return false;
+        }
+        if(permutation[0] == permutation[2]){
+            return false;
+        }
+        if(permutation[2] == permutation[3]){
+            return false;
+        }
+        return true;
+    }
+    
+    private boolean podeByS(){
+        if(permutation[0] == permutation[1]){
+            return false;
+        }
+        if(permutation[2] == permutation[3]){
+            return false;
+        }
+        if(permutation[0] == permutation[2]){
+            return false;
+        }
+        return true;
+    }
+    
+    private boolean podeByT(){
+        if(permutation[0] == permutation[2]){
+            return false;
+        }
+        if(permutation[1] == permutation[2]){
+            return false;
+        }
+        if(permutation[2] == permutation[3]){
+            return false;
+        }
+        if(permutation[1] == permutation[3]){
+            return false;
+        }
+        return true;
+    }
+    
+    private boolean podeByStick(){
+        if(permutation[0] == permutation[1]){
+            return false;
+        }
+        if(permutation[0] == permutation[2]){
+            return false;
+        }
+        if(permutation[0] == permutation[3]){
+            return false;
+        }
+        if(permutation[1] == permutation[2]){
+            return false;
+        }
+        if(permutation[1] == permutation[3]){
+            return false;
+        }
+        if(permutation[2] == permutation[3]){
+            return false;
+        }
+        return true;
+    }
+    
     private boolean podeByShape(){
-        //Validar por tipo de forma que no se puedan repetir 2 numeros en la permutacion
+        boolean promising = true;
+        switch(shapeType){
+            case 2:
+                promising = podeBySquare();
+                break;
+            case 3:
+                promising = podeByL();
+                break;
+            case 4:
+                promising = podeByS();
+                break;
+            case 5:
+                promising = podeByT();
+                break;
+            case 6:
+                promising = podeByStick();
+                break;
+        }
+        return promising;
     }
     
     private boolean podeByRowColumn(){
@@ -46,17 +141,21 @@ public class Solution {
     //It copies the previous matrix that was updated with a new permutation
     //Revisar
     private void copyMatrix(NodekenKen[][] pastMatrix){
-        Collections.copy(matrix, pastMatrix);
+        matrix = pastMatrix.clone();
     }
     
+    public Solution(){
+        failure = true;
+    }
     
     public Solution(NodekenKen pMatrix[][]){
         matrix = pMatrix;
     }
      
-    public Solution(Solution solution, int pShapeType, int[] section, int[] pPermutation){
+    public Solution(Solution solution, int pShapeType, int[] pBeginOfSection, int[] pPermutation){
         copyMatrix(solution.getMatrix());
         shapeType = pShapeType;
+        beginOfSection = pBeginOfSection;
         permutation = pPermutation;
     }
      
@@ -68,5 +167,9 @@ public class Solution {
         podeByShape();
         podeByRowColumn();
         return true;
+    }
+    
+    public NodekenKen[][] getMatrix() {
+        return matrix;
     }
 }
