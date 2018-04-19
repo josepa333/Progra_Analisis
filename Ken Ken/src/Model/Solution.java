@@ -47,7 +47,7 @@ public class Solution {
     public Solution(){
         failure = true;
     }
-     
+    
     public Solution(NodekenKen pMatrix[][]){
         matrix = pMatrix;
     }

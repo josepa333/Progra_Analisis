@@ -21,7 +21,7 @@ public class KenKen {
      private ArrayList<int[]> fourNodes;
      private HashMap<Integer,ArrayList<int[]>> allPermutations;
      private NodekenKen matrix[][];
-     
+     private Solution solution;
      
      private int counter;
      private char[] operations;
@@ -35,9 +35,9 @@ public class KenKen {
      
      public  KenKen(int pSize){
          size = pSize;
+         counter = 0;
          matrix = new NodekenKen[size][size];
          matrixOfValues = new int[size][size];
-         counter = 0;
          operations = new char[] {'+','-','*','/','%','^'};
          rangeOfValues = new int[] {1,2,3,4,5,6,7,8,9,0,-1,-2,-3,-4,-5,-6,-7,-8,-9};
          shapes = new ArrayList<>();
@@ -45,8 +45,8 @@ public class KenKen {
          twoNodes = new ArrayList<>();  
          fourNodes = new ArrayList<>();
          allPermutations = new HashMap<>();
-         createNodes();
          doneValues = false;
+         createNodes();
      }
      
     private Solution solveKenKen(){
@@ -86,6 +86,8 @@ public class KenKen {
          fillMatrixValues();
          setValues();
          fillMatrix();
+         solution = new Solution();
+         solution.setMatrix(matrix);
      }
      
     public void setValues(){
