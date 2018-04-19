@@ -5,7 +5,9 @@
  */
 package Model;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 
 /**
  *
@@ -16,14 +18,20 @@ public class Solution {
     private boolean failure = false;
     private int shapeType;
     private int[] permutation;
+    private HashMap< Integer, HashMap<Integer,ArrayList<Integer> >> rows;
+    private HashMap< Integer, HashMap<Integer,ArrayList<Integer> >> cols;//Parametro del constructor
+    // Para que se modifiquen dentro de cada uno
+    
      public Solution(){
          failure = true;
      }
 
     public NodekenKen[][] getMatrix() {
         return matrix;
-
-    private boolean podeByShape(){
+    }
+    
+    private boolean podaeByShape(){
+        return true;
         //Validar por tipo de forma que no se puedan repetir 2 numeros en la permutacion
     }
     

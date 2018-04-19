@@ -6,8 +6,6 @@
 package Model;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
 
 //kenkenTemplate.xml; 
@@ -27,6 +25,7 @@ public class KenKen {
      private HashMap<Integer,ArrayList<int[]>> allPermutations;
      private NodekenKen matrix[][];
      private Solution solution;
+
      
      private int counter;
      private char[] operations;
@@ -59,15 +58,15 @@ public class KenKen {
          createNodes();
      }
      
-    private Solution solveKenKen(){
-        Solution solution = new Solution(matrix);
-        return solution;
-    } 
+    //private Solution solveKenKen(){
+        //Solution solution = new Solution(matrix);
+        //return solution;
+    //} 
      
     private Solution backTracking(Solution solution, int sectionId, int shapeType){
-        if(solution.isComplete()){
-            return solution;
-        }
+       // if(solution.isComplete()){
+           // return solution;
+        //}
         if(sectionId == shapes.get(shapeType).size()){
             shapeType += 1;
             sectionId = 0;
@@ -86,7 +85,7 @@ public class KenKen {
         }
         return new Solution();
     }
-    
+ 
      private void createNodes(){
          for(int i=0; i < size;i++){
              for(int j = 0 ; j < size ; j++ ){
@@ -101,7 +100,7 @@ public class KenKen {
          setValues();
          fillMatrix();
          solution = new Solution();
-         solution.setMatrix(matrix);
+         //solution.setMatrix(matrix);
      }
      
     public void setValues(){
@@ -238,7 +237,7 @@ public class KenKen {
          if(row == size-1 && col == size-1 ){
              return false;
          }
-
+         
          if(col != size - 1 &&  matrix[row][col+1].isCheck() == true){
              
              int operation = (int) (Math.random() * 5);
@@ -252,8 +251,8 @@ public class KenKen {
              int g =  (int) (Math.random() * 255) + 1;
              int b =  (int) (Math.random() * 255) + 1;
              
-             matrix[row][col] = new NodekenKen(counter, operations[operation], result, new int[] {r,g,b},row,col );//create the four nodes
-             matrix[row][col+1] = new NodekenKen(counter, ' ', 0, new int[] {r,g,b}, row, col+1);
+             matrix[row][col] = new NodekenKen(counter, operations[operation], result, new int[] {r,g,b} );//create the four nodes
+             matrix[row][col+1] = new NodekenKen(counter, ' ', 0, new int[] {r,g,b});
              
              matrix[row][col].setCheck(false);
              matrix[row][col+1].setCheck(false);  //The will have a operation asigned
@@ -275,8 +274,8 @@ public class KenKen {
              int g =  (int) (Math.random() * 255) + 1;
              int b =  (int) (Math.random() * 255) + 1;
             
-             matrix[row][col] = new NodekenKen(counter, operations[operation], result, new int[] {r,g,b}, row,col);//create the four nodes
-             matrix[row+1][col] = new NodekenKen(counter, ' ', 0, new int[] {r,g,b}, row+1, col);
+             matrix[row][col] = new NodekenKen(counter, operations[operation], result, new int[] {r,g,b});//create the four nodes
+             matrix[row+1][col] = new NodekenKen(counter, ' ', 0, new int[] {r,g,b});
              matrix[row][col].setCheck(false);
              matrix[row+1][col].setCheck(false);
              twoNodes.add(new int[]{row,col});
@@ -308,10 +307,10 @@ public class KenKen {
              int g =  (int) (Math.random() * 255) + 1;
              int b =  (int) (Math.random() * 255) + 1;
  
-             matrix[row][col] = new NodekenKen(counter, operations[operation], result, new int[] {r,g,b},row,col);//create the four nodes
-             matrix[row][col+1] = new NodekenKen(counter, ' ', 0, new int[] {r,g,b},row,col+1);
-             matrix[row+1][col] = new NodekenKen(counter,  ' ', 0, new int[] {r,g,b},row+1,col);
-             matrix[row+1][col+1] = new NodekenKen(counter, ' ', 0, new int[] {r,g,b}, row+1,col+1);
+             matrix[row][col] = new NodekenKen(counter, operations[operation], result, new int[] {r,g,b});//create the four nodes
+             matrix[row][col+1] = new NodekenKen(counter, ' ', 0, new int[] {r,g,b});
+             matrix[row+1][col] = new NodekenKen(counter,  ' ', 0, new int[] {r,g,b});
+             matrix[row+1][col+1] = new NodekenKen(counter, ' ', 0, new int[] {r,g,b});
              
              matrix[row][col].setCheck(false);
              matrix[row][col+1].setCheck(false);
@@ -333,13 +332,13 @@ public class KenKen {
      private boolean createPower(int row, int col){
           
          if( matrixOfValues[row][col] >= 0){
-             int result = (int) Math.pow(2, matrixOfValues[row][col]);
+             int result = (int) Math.pow(matrixOfValues[row][col],3);
              allPermutations.put(counter, power(result));
              int r =  (int) (Math.random() * 255) + 1;
              int g =  (int) (Math.random() * 255) + 1;
              int b =  (int) (Math.random() * 255) + 1;
           
-            matrix[row][col] = new NodekenKen(counter, operations[5], result, new int[] {r,g,b}, row, col);
+            matrix[row][col] = new NodekenKen(counter, operations[5], result, new int[] {r,g,b});
             matrix[row][col].setCheck(false);
             oneNode.add(new int[]{row,col});
             counter++;
@@ -368,10 +367,10 @@ public class KenKen {
              int g =  (int) (Math.random() * 255) + 1;
              int b =  (int) (Math.random() * 255) + 1;
  
-             matrix[row][col] = new NodekenKen(counter, operations[operation], result, new int[] {r,g,b}, row, col);//create the four nodes
-             matrix[row][col+1] = new NodekenKen(counter, ' ', 0, new int[] {r,g,b}, row, col+1);
-             matrix[row+1][col] = new NodekenKen(counter,  ' ', 0, new int[] {r,g,b}, row+1, col);
-             matrix[row+1][col-1] = new NodekenKen(counter, ' ', 0, new int[] {r,g,b}, row+1, col-1);
+             matrix[row][col] = new NodekenKen(counter, operations[operation], result, new int[] {r,g,b});//create the four nodes
+             matrix[row][col+1] = new NodekenKen(counter, ' ', 0, new int[] {r,g,b});
+             matrix[row+1][col] = new NodekenKen(counter,  ' ', 0, new int[] {r,g,b});
+             matrix[row+1][col-1] = new NodekenKen(counter, ' ', 0, new int[] {r,g,b});
              
              matrix[row][col].setCheck(false);
              matrix[row][col+1].setCheck(false);
@@ -413,10 +412,10 @@ public class KenKen {
              int g =  (int) (Math.random() * 255) + 1;
              int b =  (int) (Math.random() * 255) + 1;
  
-             matrix[row][col] = new NodekenKen(counter, operations[operation], result, new int[] {r,g,b}, row, col);//create the four nodes
-             matrix[row+1][col+1] = new NodekenKen(counter, ' ', 0, new int[] {r,g,b}, row+1, col+1);
-             matrix[row+1][col] = new NodekenKen(counter,  ' ', 0, new int[] {r,g,b}, row+1, col);
-             matrix[row+1][col-1] = new NodekenKen(counter, ' ', 0, new int[] {r,g,b}, row+1, col-1);
+             matrix[row][col] = new NodekenKen(counter, operations[operation], result, new int[] {r,g,b});//create the four nodes
+             matrix[row+1][col+1] = new NodekenKen(counter, ' ', 0, new int[] {r,g,b});
+             matrix[row+1][col] = new NodekenKen(counter,  ' ', 0, new int[] {r,g,b});
+             matrix[row+1][col-1] = new NodekenKen(counter, ' ', 0, new int[] {r,g,b});
              
              matrix[row][col].setCheck(false);
              matrix[row+1][col+1].setCheck(false);
@@ -458,10 +457,10 @@ public class KenKen {
              int g =  (int) (Math.random() * 255) + 1;
              int b =  (int) (Math.random() * 255) + 1;
  
-             matrix[row][col] = new NodekenKen(counter, operations[operation], result, new int[] {r,g,b}, row, col);//create the four nodes
-             matrix[row+1][col] = new NodekenKen(counter, ' ', 0, new int[] {r,g,b}, row+1, col);
-             matrix[row+2][col] = new NodekenKen(counter,  ' ', 0, new int[] {r,g,b}, row+2, col);
-             matrix[row+3][col] = new NodekenKen(counter, ' ', 0, new int[] {r,g,b}, row+3, col);
+             matrix[row][col] = new NodekenKen(counter, operations[operation], result, new int[] {r,g,b});//create the four nodes
+             matrix[row+1][col] = new NodekenKen(counter, ' ', 0, new int[] {r,g,b});
+             matrix[row+2][col] = new NodekenKen(counter,  ' ', 0, new int[] {r,g,b});
+             matrix[row+3][col] = new NodekenKen(counter, ' ', 0, new int[] {r,g,b});
              
              matrix[row][col].setCheck(false);
              matrix[row+1][col].setCheck(false);
@@ -503,10 +502,10 @@ public class KenKen {
              int g =  (int) (Math.random() * 255) + 1;
              int b =  (int) (Math.random() * 255) + 1;
  
-             matrix[row][col] = new NodekenKen(counter, operations[operation], result, new int[] {r,g,b}, row, col);//create the four nodes
-             matrix[row][col+1] = new NodekenKen(counter, ' ', 0, new int[] {r,g,b}, row, col+1);
-             matrix[row][col+2] = new NodekenKen(counter,  ' ', 0, new int[] {r,g,b}, row, col+2);
-             matrix[row][col+3] = new NodekenKen(counter, ' ', 0, new int[] {r,g,b}, row, col+3);
+             matrix[row][col] = new NodekenKen(counter, operations[operation], result, new int[] {r,g,b});//create the four nodes
+             matrix[row][col+1] = new NodekenKen(counter, ' ', 0, new int[] {r,g,b});
+             matrix[row][col+2] = new NodekenKen(counter,  ' ', 0, new int[] {r,g,b});
+             matrix[row][col+3] = new NodekenKen(counter, ' ', 0, new int[] {r,g,b});
              
              matrix[row][col].setCheck(false);
              matrix[row][col+1].setCheck(false);
@@ -547,10 +546,10 @@ public class KenKen {
              int g =  (int) (Math.random() * 255) + 1;
              int b =  (int) (Math.random() * 255) + 1;
  
-             matrix[row][col] = new NodekenKen(counter, operations[operation], result, new int[] {r,g,b}, row, col);//create the four nodes
-             matrix[row+1][col] = new NodekenKen(counter, ' ', 0, new int[] {r,g,b}, row+1, col);
-             matrix[row+2][col] = new NodekenKen(counter,  ' ', 0, new int[] {r,g,b}, row+2, col);
-             matrix[row+2][col+1] = new NodekenKen(counter, ' ', 0, new int[] {r,g,b}, row+2, col+1);
+             matrix[row][col] = new NodekenKen(counter, operations[operation], result, new int[] {r,g,b});//create the four nodes
+             matrix[row+1][col] = new NodekenKen(counter, ' ', 0, new int[] {r,g,b});
+             matrix[row+2][col] = new NodekenKen(counter,  ' ', 0, new int[] {r,g,b});
+             matrix[row+2][col+1] = new NodekenKen(counter, ' ', 0, new int[] {r,g,b});
              
              matrix[row][col].setCheck(false);
              matrix[row+1][col].setCheck(false);
@@ -591,10 +590,10 @@ public class KenKen {
              int g =  (int) (Math.random() * 255) + 1;
              int b =  (int) (Math.random() * 255) + 1;
  
-             matrix[row][col] = new NodekenKen(counter, operations[operation], result, new int[] {r,g,b}, row, col);//create the four nodes
-             matrix[row][col+1] = new NodekenKen(counter, ' ', 0, new int[] {r,g,b}, row, col+1);
-             matrix[row][col+2] = new NodekenKen(counter,  ' ', 0, new int[] {r,g,b}, row, col+2);
-             matrix[row+1][col+2] = new NodekenKen(counter, ' ', 0, new int[] {r,g,b}, row+1, col+2);
+             matrix[row][col] = new NodekenKen(counter, operations[operation], result, new int[] {r,g,b});//create the four nodes
+             matrix[row][col+1] = new NodekenKen(counter, ' ', 0, new int[] {r,g,b});
+             matrix[row][col+2] = new NodekenKen(counter,  ' ', 0, new int[] {r,g,b});
+             matrix[row+1][col+2] = new NodekenKen(counter, ' ', 0, new int[] {r,g,b});
              
              matrix[row][col].setCheck(false);
              matrix[row][col+1].setCheck(false);
@@ -652,15 +651,15 @@ public class KenKen {
          switch (operation) {
              case 0:
                  result = value1 + value2 + value3 + value4;
-                 //Suma de Richi
+                 allPermutations.put(idShape, multiplication4 (result));
                  break;
              case 1:
                  result = value1 - value2 - value3 - value4;
-                 //Resta de Richi
+                 allPermutations.put(idShape, multiplication4 (result));
                  break;
              case 2:
                  result = value1 * value2 * value3 * value4;
-                 allPermutations.put(idShape, multiplication2(result));
+                 allPermutations.put(idShape, multiplication4 (result));
                  break;
              case 3: 
                  result = value1 / value2 / value3 / value4;
@@ -746,7 +745,7 @@ public class KenKen {
                             break;
                         if(j == 0 || i == 0 || k == 0 || l == 0)
                             continue;
-                        if( i * j * k * l== result){
+                        if( i * j * k * l== result && !elementsRepeat(new int[]{i,j,k,l})){
                             System.out.println(Integer.toString(i) +" " +Integer.toString(j) +" " +Integer.toString(k) +" " +
                                     Integer.toString(l) );
                             pairs.add(new int[]{i,j,k,l});
@@ -762,7 +761,7 @@ public class KenKen {
         ArrayList<int[]> pairs = new ArrayList<>();
         for (int i = getMinRangeValue(); i < getMaxRangeValue(); i++) {
             for (int j = getMinRangeValue(); j < getMaxRangeValue(); j++) {
-                if(j == 0 || i == 0)
+                if(j == 0 || i == 0 || i == j)
                     continue;
                 if( i * j == result){
                     System.out.println(Integer.toString(i) +" " +Integer.toString(j)  );
