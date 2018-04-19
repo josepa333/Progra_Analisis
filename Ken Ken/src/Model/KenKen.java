@@ -646,6 +646,7 @@ public class KenKen {
       private ArrayList<int[]> powerOfTwo(int result){
           ArrayList<int[]> uniqueValue = new ArrayList<>();
           int counter = 0;
+          Math.log(256) / Math.log(2);
           while (result > counter && counter <= size){
               if(Math.pow(2,counter) == result){
                     System.out.println(Integer.toString(counter));
