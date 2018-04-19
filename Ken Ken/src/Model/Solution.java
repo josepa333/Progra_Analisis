@@ -5,12 +5,11 @@
  */
 package Model;
 
-<<<<<<< HEAD
-=======
+
 import java.util.ArrayList;
-import java.util.Collections;
+
 import java.util.HashMap;
->>>>>>> 941c8684861c809908c1bb2ffbe39376efb95bb4
+
 
 /**
  *
@@ -21,8 +20,9 @@ public class Solution {
     private boolean failure = false;
     private int shapeType;
     private int[] permutation;
-<<<<<<< HEAD
     private int[] beginOfSection;
+    private HashMap< Integer, HashMap<Integer,ArrayList<Integer> >> rows;
+    private HashMap< Integer, HashMap<Integer,ArrayList<Integer> >> cols;//Parametro del constructor
     
     private boolean podeBySquare(){
         if(permutation[0] == permutation[1]){
@@ -129,9 +129,10 @@ public class Solution {
                 break;
         }
         return promising;
-=======
-    private HashMap< Integer, HashMap<Integer,ArrayList<Integer> >> rows;
-    private HashMap< Integer, HashMap<Integer,ArrayList<Integer> >> cols;//Parametro del constructor
+
+    }
+        
+    
     // Para que se modifiquen dentro de cada uno
     
      public Solution(){
@@ -145,7 +146,6 @@ public class Solution {
     private boolean podaeByShape(){
         return true;
         //Validar por tipo de forma que no se puedan repetir 2 numeros en la permutacion
->>>>>>> 941c8684861c809908c1bb2ffbe39376efb95bb4
     }
     
     private boolean podeByRowColumn(){
@@ -174,10 +174,6 @@ public class Solution {
         }
     }
     
-    public Solution(){
-        failure = true;
-    }
-    
     public Solution(NodekenKen pMatrix[][]){
         matrix = pMatrix;
     }
@@ -199,9 +195,5 @@ public class Solution {
             return podeByRowColumn();
         }
         return false;
-    }
-    
-    public NodekenKen[][] getMatrix() {
-        return matrix;
     }
 }
