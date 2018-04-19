@@ -5,6 +5,8 @@
  */
 package Model;
 
+import java.util.Collections;
+
 /**
  *
  * @author jose pablo
@@ -44,11 +46,7 @@ public class Solution {
     //It copies the previous matrix that was updated with a new permutation
     //Revisar
     private void copyMatrix(NodekenKen[][] pastMatrix){
-        for(int i = 0; i < pastMatrix.length; i++){
-            for(int j = 0; j < pastMatrix[i].length; j++){
-                NodekenKen copiedNode = new NodekenKen();
-            }
-        }
+        Collections.copy(matrix, pastMatrix);
     }
     
     
