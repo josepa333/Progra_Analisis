@@ -54,7 +54,7 @@ public class Solution {
     //It copies the previous matrix that was updated with a new permutation
     //Revisar
     private void copyMatrix(NodekenKen[][] pastMatrix){
-        Collections.copy(matrix, pastMatrix);
+        //Collections.copy(matrix, pastMatrix);
     }
     
     
@@ -73,7 +73,7 @@ public class Solution {
     }
     
     public boolean isPromising(){
-        podeByShape();
+       // podeByShape();
         podeByRowColumn();
         return true;
     }

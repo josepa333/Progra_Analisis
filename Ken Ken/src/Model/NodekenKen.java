@@ -18,20 +18,22 @@ public class NodekenKen {
     private char operator;
     private int result;
     private int RGB[];
+    private int cordinatates[];
 
-    public NodekenKen(int pCounter, char pOperator,int pResult, int pRGB[]){
-    next=null;
-    counter = pCounter;
-    operator = pOperator;
-    result = pResult;
-    check = false;
-    RGB = pRGB;
-    value = -10;
-    }
-    
-    public NodekenKen(){
+    public NodekenKen(int  pCordinatates[]){
         next=null;
         check = true;
+        cordinatates= pCordinatates;
+    }
+    
+    public void setValues(int pCounter, char pOperator,int pResult, int pRGB[]){
+        next=null;
+        counter = pCounter;
+        operator = pOperator;
+        result = pResult;
+        check = false;
+        RGB = pRGB;
+        value = -10;
     }
 
     public NodekenKen getNext() {
