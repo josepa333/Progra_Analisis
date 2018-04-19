@@ -14,18 +14,15 @@ public class Solution {
     private boolean failure = false;
     private int shapeType;
     private int[] permutation;
-
-<<<<<<< HEAD
      public Solution(){
-         
+         failure = true;
      }
 
     public NodekenKen[][] getMatrix() {
         return matrix;
-=======
+
     private boolean podeByShape(){
         //Validar por tipo de forma que no se puedan repetir 2 numeros en la permutacion
->>>>>>> 7eb66da47b825d676bcff1e750e14453acfde649
     }
     
     private boolean podeByRowColumn(){
@@ -36,11 +33,12 @@ public class Solution {
     }
     
     private boolean checkRow(){
-    
+        return true;
+
     }
     
     private boolean checkColumn(){
-    
+        return true;
     }
     
     //It copies the previous matrix that was updated with a new permutation
@@ -53,9 +51,6 @@ public class Solution {
         }
     }
     
-    public Solution(){
-        failure = true;
-    }
     
     public Solution(NodekenKen pMatrix[][]){
         matrix = pMatrix;
@@ -74,9 +69,6 @@ public class Solution {
     public boolean isPromising(){
         podeByShape();
         podeByRowColumn();
-    }
-    
-    public NodekenKen[][] getMatrix(){
-        return matrix;
+        return true;
     }
 }
