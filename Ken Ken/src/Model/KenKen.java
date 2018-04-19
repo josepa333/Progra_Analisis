@@ -194,7 +194,7 @@ public class KenKen {
                                  flag = createSquare(i,j);
                                  break;
                             case 1:
-                                flag = createPowerOfTwo(i,j);
+                                flag = createPower(i,j);
                                 break;
                              case 2:
                                  flag = createTwoNodes(i,j);
@@ -238,10 +238,13 @@ public class KenKen {
          if(row == size-1 && col == size-1 ){
              return false;
          }
- 
+
          if(col != size - 1 &&  matrix[row][col+1].isCheck() == true){
              
              int operation = (int) (Math.random() * 5);
+             if( (matrixOfValues[row][col] == 0 || matrixOfValues[row][col+1] == 0) && (operation== 3 || operation== 2 )){
+                 operation = 0;
+             }
              int result= determineResultForTwoNodes(counter,operation,matrixOfValues[row][col] , matrixOfValues[row][col+1] );
              //Permutations
              
@@ -264,6 +267,9 @@ public class KenKen {
          if(row != size - 1 &&  matrix[row+1][col].isCheck() == true){
              
              int operation = (int) (Math.random() * 5);
+             if((matrixOfValues[row][col] == 0 || matrixOfValues[row + 1][col] == 0) && (operation== 3 || operation== 2 )){
+                 operation = 0;
+             }
              int result = determineResultForTwoNodes(counter,operation,matrixOfValues[row][col] , matrixOfValues[row+1][col] );
              int r =  (int) (Math.random() * 255) + 1;
              int g =  (int) (Math.random() * 255) + 1;
@@ -289,6 +295,12 @@ public class KenKen {
              
              int operation = (int) (Math.random() * 4);//+-*/  
              
+             if( (matrixOfValues[row][col] == 0|| matrixOfValues[row][col+1] == 0|| 
+                     matrixOfValues[row+1][col] == 0 ||matrixOfValues[row+1][col+1] == 0)
+                     && (operation== 3 || operation== 2 )){
+                 operation = 0;
+             }
+
              int result = determineResultForValuesSquare(counter,operation, matrixOfValues[row][col],
                      matrixOfValues[row][col+1],matrixOfValues[row+1][col],matrixOfValues[row+1][col+1]);
              
@@ -318,11 +330,11 @@ public class KenKen {
          return false;
      }
      
-     private boolean createPowerOfTwo(int row, int col){
+     private boolean createPower(int row, int col){
           
          if( matrixOfValues[row][col] >= 0){
              int result = (int) Math.pow(2, matrixOfValues[row][col]);
-             allPermutations.put(counter, powerOfTwo(result));
+             allPermutations.put(counter, power(result));
              int r =  (int) (Math.random() * 255) + 1;
              int g =  (int) (Math.random() * 255) + 1;
              int b =  (int) (Math.random() * 255) + 1;
@@ -344,7 +356,11 @@ public class KenKen {
                   && matrix[row+1][col-1].isCheck() ==true){
              
              int operation = (int) (Math.random() * 4);//+-*/ 
-             
+             //Non 0 * 
+             if( (matrixOfValues[row][col]  == 0|| matrixOfValues[row][col+1] == 0 || matrixOfValues[row+1][col ]== 0
+                     || matrixOfValues[row+1][col-1] == 0 ) && (operation== 3 || operation== 2 )){
+                 operation = 0;
+             }
              int result = determineResultForValuesSquare(counter,operation,matrixOfValues[row][col],
                      matrixOfValues[row][col+1],matrixOfValues[row+1][col],matrixOfValues[row+1][col-1]);
              
@@ -383,6 +399,13 @@ public class KenKen {
                   && matrix[row+1][col-1].isCheck() ==true){
              
              int operation = (int) (Math.random() * 4);//+-*/ 
+             
+             if( (matrixOfValues[row][col] == 0|| matrixOfValues[row+1][col-1] == 0|| 
+                     matrixOfValues[row+1][col] == 0|| matrixOfValues[row+1][col+1]== 0  )
+                     && (operation== 3 || operation== 2 )){
+                 operation = 0;
+             }
+             
              int result = determineResultForValuesSquare(counter, operation, matrixOfValues[row][col],
                     matrixOfValues[row+1][col-1],matrixOfValues[row+1][col],matrixOfValues[row+1][col+1]);
              
@@ -421,6 +444,13 @@ public class KenKen {
                  matrix[row+3][col].isCheck() == true ){
              
               int operation = (int) (Math.random() * 4);//+-*/ 
+              
+              if( (matrixOfValues[row][col] == 0|| matrixOfValues[row+1][col] == 0|| 
+                     matrixOfValues[row+2][col] == 0|| matrixOfValues[row+3][col]== 0  )
+                     && (operation== 3 || operation== 2 )){
+                 operation = 0;
+             }
+              
              int result = determineResultForValuesSquare(counter,operation,matrixOfValues[row][col],
                      matrixOfValues[row+1][col],matrixOfValues[row+2][col],matrixOfValues[row+3][col]);
              
@@ -459,6 +489,13 @@ public class KenKen {
                  matrix[row][col+3].isCheck() == true ){
              
              int operation = (int) (Math.random() * 4);//+-*/ 
+             
+             if( (matrixOfValues[row][col] == 0|| matrixOfValues[row][col+1] == 0|| 
+                     matrixOfValues[row][col+2] == 0|| matrixOfValues[row][col+3]== 0  )
+                     && (operation== 3 || operation== 2 )){
+                 operation = 0;
+             }
+             
              int result = determineResultForValuesSquare(counter,operation,matrixOfValues[row][col],
                      matrixOfValues[row][col+1],matrixOfValues[row][col+2],matrixOfValues[row][col+3]);
              
@@ -496,6 +533,13 @@ public class KenKen {
                  matrix[row+2][col+1].isCheck() == true ){
              
              int operation = (int) (Math.random() * 4);//+-*/ 
+             
+             if( (matrixOfValues[row][col] == 0|| matrixOfValues[row+1][col] == 0|| 
+                     matrixOfValues[row+2][col] == 0|| matrixOfValues[row+2][col+1]== 0  )
+                     && (operation== 3 || operation== 2 )){
+                 operation = 0;
+             }
+             
              int result = determineResultForValuesSquare(counter,operation,matrixOfValues[row][col],
                      matrixOfValues[row+1][col],matrixOfValues[row+2][col],matrixOfValues[row+2][col+1]);
              
@@ -533,6 +577,13 @@ public class KenKen {
                  matrix[row+1][col+2].isCheck() == true ){
              
              int operation = (int) (Math.random() * 4);//+-*/ 
+             
+             if( (matrixOfValues[row][col] == 0|| matrixOfValues[row][col+1] == 0|| 
+                     matrixOfValues[row][col+2] == 0|| matrixOfValues[row+1][col+2]== 0  )
+                     && (operation== 3 || operation== 2 )){
+                 operation = 0;
+             }
+             
              int result = determineResultForValuesSquare(counter,operation,matrixOfValues[row][col],
                      matrixOfValues[row][col+1],matrixOfValues[row][col+2],matrixOfValues[row+1][col+2]);
              
@@ -566,10 +617,6 @@ public class KenKen {
      private int determineResultForTwoNodes(int idShape, int operation, int value1, int value2){
  
          int result = 0;   //{'+','-','*','/','%','^'};
-         if((value1 == 0 || value2 == 0 ) && (operation == 2 || operation == 3 ) ){
-             operation = 0;
-         }
-         
          switch (operation) {
              case 0:
                  result =value1 + value2;
@@ -581,7 +628,7 @@ public class KenKen {
                  break;
              case 2:
                  result =value1 * value2;
-                 allPermutations.put(idShape, manageFactor2(result));
+                 allPermutations.put(idShape, multiplication2(result));
                  break;
              case 3://  divi 
                  result =value1 / value2;
@@ -613,7 +660,7 @@ public class KenKen {
                  break;
              case 2:
                  result = value1 * value2 * value3 * value4;
-                 allPermutations.put(idShape, manageFactor4(result));
+                 allPermutations.put(idShape, multiplication2(result));
                  break;
              case 3: 
                  result = value1 / value2 / value3 / value4;
@@ -645,17 +692,11 @@ public class KenKen {
           return pairs;
       }
       
-      private ArrayList<int[]> powerOfTwo(int result){
+      private ArrayList<int[]> power(int result){
           ArrayList<int[]> uniqueValue = new ArrayList<>();
-          int counter = 0;
-          while (result > counter && counter <= size){
-              if(Math.pow(counter,3) == result){
-                    System.out.println(Integer.toString(counter));
-                    uniqueValue.add(new int[counter]);
-                    break;
-                }
-                counter++;
-          }
+          int finalValue = (int) (Math.pow(result, (1.0/3.0)));
+          System.out.println(Integer.toString(finalValue)); 
+          uniqueValue.add(new int[finalValue]);
           return uniqueValue;
       }
       
@@ -676,70 +717,45 @@ public class KenKen {
           factors.add(1);
           return factors;
     }
+  
     
-    public ArrayList<int[]> manageFactor2(int result){
-        ArrayList<int[]> combinations = new ArrayList<>();
-        ArrayList<Integer> factors = factors(result);
-        
-        int value1 =1;
-        int value2 = 1;
-        int sizeF = factors.size();
-        
-        for(int i = 0; i< sizeF +1 ;i++){
-            
-           for(int j = 0; j < (sizeF/2);j++){
-               value1 *=(int) factors.get(j);
-           }
-           for(int j = sizeF/2; j < sizeF ;j++){
-               value2 *= (int) factors.get(j);
-           }
-           if(value1 <= size && value2 <=size && value1 != value2){
-               System.out.println(Integer.toString(value1)  + " " +Integer.toString(value2));
-               combinations.add(new int[]{value1,value2});
-           }
-           value1 = 1;
-           value2 = 1;
-           Collections.rotate(factors, 1);
+    public ArrayList<int[]>  multiplication4(int result){
+        ArrayList<int[]> pairs = new ArrayList<>();
+        for (int i = getMinRangeValue(); i < getMaxRangeValue(); i++) {
+            for (int j = getMinRangeValue(); j < getMaxRangeValue(); j++) {
+                for (int k = getMinRangeValue(); k < getMaxRangeValue(); k++) {
+                    for (int l = getMinRangeValue(); l < getMaxRangeValue(); l++) {
+                        if( i * j * k * l > result)
+                            break;
+                        if(j == 0 || i == 0 || k == 0 || l == 0)
+                            continue;
+                        if( i * j * k * l== result){
+                            System.out.println(Integer.toString(i) +" " +Integer.toString(j) +" " +Integer.toString(k) +" " +
+                                    Integer.toString(l) );
+                            pairs.add(new int[]{i,j,k,l});
+                        }
+                    }
+                }
+            }
         }
-        return combinations;
+        return pairs;
     }
     
-    public  ArrayList<int[]>  manageFactor4(int result){
-        ArrayList<int[]> combinations = new ArrayList<>();
-        ArrayList<Integer> factors = factors(result);
-        
-        int value1 =1;
-        int value2 = 1;
-        int value3 = 1;
-        int value4 = 1;
-        int sizeF = factors.size();
-        
-        for(int i = 0; i< sizeF +1 ;i++){
-           for(int j = 0; j < (sizeF/4);j++){
-               value1 *=(int) factors.get(j);
-           }
-           for(int j = (sizeF/4); j <(sizeF/4) * 2 ;j++){
-               value2 *= (int) factors.get(j);
-           }
-           for(int j = (sizeF/4) * 2; j < (sizeF/4) * 3;j++){
-               value3 *=(int) factors.get(j);
-           }
-           for(int j = (sizeF/4) * 3; j < sizeF ;j++){
-               value4 *= (int) factors.get(j);
-           }
-           if(value1 <= size && value2 <=size  && value3 <= size && value4 <= size  ){
-               System.out.println(Integer.toString(value1)  + " " +Integer.toString(value2) + " " + Integer.toString(value3) 
-                       +" "+ Integer.toString(value4) );
-               combinations.add(new int[]{value1,value2,value3,value4});
-           }
-           value1 = 1;
-           value2 = 1;
-           value3 = 1;
-           value4 = 1;
-           Collections.rotate(factors, 1);
+    public ArrayList<int[]>  multiplication2(int result){
+        ArrayList<int[]> pairs = new ArrayList<>();
+        for (int i = getMinRangeValue(); i < getMaxRangeValue(); i++) {
+            for (int j = getMinRangeValue(); j < getMaxRangeValue(); j++) {
+                if(j == 0 || i == 0)
+                    continue;
+                if( i * j == result){
+                    System.out.println(Integer.toString(i) +" " +Integer.toString(j)  );
+                    pairs.add(new int[]{i,j});
+                }
+            }
         }
-        return combinations;
+        return pairs;
     }
+    
     
     public ArrayList<int[]>  divition2(int result){
         ArrayList<int[]> pairs = new ArrayList<>();
