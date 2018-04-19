@@ -118,6 +118,8 @@ public class Solution {
             case 6:
                 promising = podeByStick();
                 break;
+            default:
+                break;
         }
         return promising;
     }
@@ -138,10 +140,14 @@ public class Solution {
         return true;
     }
     
-    //It copies the previous matrix that was updated with a new permutation
-    //Revisar
-    private void copyMatrix(NodekenKen[][] pastMatrix){
-        matrix = pastMatrix.clone();
+    private void addPermutation(int[] permutation){
+        NodekenKen node = matrix[beginOfSection[0]][beginOfSection[1]];
+        int i = 0;
+        while(node != null){
+            node.setValue(permutation[i]);
+            node = node.getNext();
+            i++;
+        }
     }
     
     public Solution(){
@@ -153,10 +159,11 @@ public class Solution {
     }
      
     public Solution(Solution solution, int pShapeType, int[] pBeginOfSection, int[] pPermutation){
-        copyMatrix(solution.getMatrix());
+        matrix = solution.getMatrix().clone();
         shapeType = pShapeType;
         beginOfSection = pBeginOfSection;
         permutation = pPermutation;
+        addPermutation(permutation);
     }
      
     public boolean isFailure(){
@@ -164,9 +171,10 @@ public class Solution {
     }
     
     public boolean isPromising(){
-        podeByShape();
-        podeByRowColumn();
-        return true;
+        if(podeByShape()){
+            return podeByRowColumn();
+        }
+        return false;
     }
     
     public NodekenKen[][] getMatrix() {
