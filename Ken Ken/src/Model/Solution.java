@@ -24,6 +24,34 @@ public class Solution {
     private HashMap< Integer, HashMap<Integer,Byte>> rows;
     private HashMap< Integer, HashMap<Integer,Byte>> cols;//Parametro del constructor
     
+    
+    public Solution(){
+        failure = true;
+    }
+    
+    public Solution(NodekenKen pMatrix[][]){
+        matrix = pMatrix;
+    }
+     
+    public Solution(Solution solution, int pShapeType, int[] pBeginOfSection, int[] pPermutation){
+        matrix = solution.getMatrix().clone();
+        shapeType = pShapeType;
+        beginOfSection = pBeginOfSection;
+        permutation = pPermutation;
+    }
+    
+    public boolean isPromising(){
+
+       // podeByShape();
+        podeByRowColumn();
+
+        if(podeByShape()){
+            return podeByRowColumn();
+        }
+        return false;
+    }
+    
+    
     private boolean podeBySquare(){
         if(permutation[0] == permutation[1]){
             return false;
@@ -177,37 +205,18 @@ public class Solution {
     
     // Para que se modifiquen dentro de cada uno
     
-    public Solution(){
-        failure = true;
-    }
-    
-    public Solution(NodekenKen pMatrix[][]){
-        matrix = pMatrix;
-    }
-     
-    public Solution(Solution solution, int pShapeType, int[] pBeginOfSection, int[] pPermutation){
-        matrix = solution.getMatrix().clone();
-        shapeType = pShapeType;
-        beginOfSection = pBeginOfSection;
-        permutation = pPermutation;
-    }
      
     public boolean isFailure(){
         return failure;
     }
+
     
-    public boolean isPromising(){
-
-       // podeByShape();
-        podeByRowColumn();
-
-        if(podeByShape()){
-            return podeByRowColumn();
-        }
-        return false;
+    public void setMatrix(NodekenKen pMatrix[][]) {
+        matrix= pMatrix;
     }
-
+    
     public NodekenKen[][] getMatrix() {
         return matrix;
     }
+    
 }

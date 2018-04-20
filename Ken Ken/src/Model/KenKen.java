@@ -104,7 +104,7 @@ public class KenKen {
          fillMatrix();
          System.out.println("fill Big done");
          solution = new Solution();
-         //solution.setMatrix(matrix);
+         solution.setMatrix(matrix);
      }
      
     public void setValues(){
