@@ -221,6 +221,7 @@ public class KenKen {
                                  flag = createHorizontalL(i,j);
                                  break;
                              default:
+                                 flag = createPower(i,j);
                                  break;
                          }
                     }

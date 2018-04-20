@@ -133,8 +133,6 @@ public class Solution {
     }
     
     private boolean podeByRowColumn(){
-<<<<<<< HEAD
-=======
         if(checkRow() == false || checkColumn() == false){
             return false;
         }
@@ -158,23 +156,23 @@ public class Solution {
     }
         
     private void addPermutation(int[] permutation){
->>>>>>> ded96cde4dd0a7b6cabbeb88f1dfa067ba924f05
         NodekenKen node = matrix[beginOfSection[0]][beginOfSection[1]];
         int i = 0;
+        byte a = Byte.parseByte("s");
         while(node != null){
             if ((rows.get(node.getCoordinates()[0]).get(permutation[i]) != null) &&
                     (cols.get(node.getCoordinates()[1]).get(permutation[i]) != null)){
-                    return false;
+                    return;
             }
             else{
                 node.setValue(permutation[i]);
-                rows.get(node.getCoordinates()[0]).put(permutation[i], 1);
-                cols.get(node.getCoordinates()[1]).put(permutation[i], 1);
+                rows.get(node.getCoordinates()[0]).put(permutation[i],a);
+                cols.get(node.getCoordinates()[1]).put(permutation[i], a);
             }
             node = node.getNext();
             i++;
         }
-        return true;
+        return;
     }
     
     // Para que se modifiquen dentro de cada uno
