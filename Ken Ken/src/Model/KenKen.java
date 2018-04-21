@@ -75,16 +75,17 @@ public class KenKen {
         ArrayList<int[]> permutations = allPermutations.get(node.getCounter());
         for(int k = 0; k < permutations.size(); k++){
             
-            Solution child = new Solution(solution, sectionInfo[2], sectionInfo, permutations.get(k) );
+            Solution child = new Solution(solution, sectionInfo[2], sectionInfo, permutations.get(k));
             if(child.isPromising()){
-                sectionId = sectionId +1;
-                Solution result = backTracking(child, sectionId);
+                int copySectionId = sectionId;
+                copySectionId += 1;
+                Solution result = backTracking(child, copySectionId);
                 if(result.isFailure() == false){
                     return result;
                 } 
             }
         }
-        return new Solution();
+        return solution;
     }
  
      private void createNodes(){

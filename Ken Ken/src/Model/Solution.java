@@ -189,6 +189,13 @@ public class Solution {
      
     public Solution(Solution solution, int pShapeType, int[] pBeginOfSection, int[] pPermutation){
         matrix = solution.getMatrix().clone();
+        System.out.println("MatrixSolution");
+        for(int i = 0; i < matrix.length; i++){
+            for(int j = 0; j < matrix[i].length; j++){
+                System.out.print(matrix[i][j].getValue() + "\t");
+            }
+            System.out.println();
+        }
         shapeType = pShapeType;
         beginOfSection = pBeginOfSection;
         permutation = pPermutation;
