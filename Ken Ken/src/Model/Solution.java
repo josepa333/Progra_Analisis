@@ -132,15 +132,27 @@ public class Solution {
     }
         
     private boolean podeByRowColumn(){
+        
         NodekenKen node = matrix[beginOfSection[0]][beginOfSection[1]];
         int i = 0;
         String a = "s";
-        while(node != null){
-            if ((rows.get(node.getCoordinates()[0]).get(permutation[i]) != null) &&
-                    (cols.get(node.getCoordinates()[1]).get(permutation[i]) != null)){
+        /*System.out.println("Una");
+        
+        for (int j = 0; j <  permutation.length; j++) {
+            System.out.println(Integer.toString( permutation[i] ));
+        }*/
+        
+        while(i < permutation.length){
+
+            int x = node.getCoordinates()[0];
+            int y = node.getCoordinates()[1];
+            int z = permutation[i];
+            
+            if ((rows.get(x).get(z) != null) &&
+                    (cols.get(y).get(z) != null)){
                     return false;
             }
-            else{
+            else{ 
                 node.setValue(permutation[i]);
                 rows.get(node.getCoordinates()[0]).put(permutation[i],a);
                 cols.get(node.getCoordinates()[1]).put(permutation[i], a);

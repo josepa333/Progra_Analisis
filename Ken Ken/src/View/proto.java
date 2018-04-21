@@ -223,6 +223,7 @@ public class proto extends javax.swing.JFrame {
         else{
             System.out.println("no hay");
         }
+        //kenkenMatrix.iterarPermutaciones();
        
         //Thread thread = new TableUpdater("Proccess1",tablaBase,kenkentable, size,  kenkenMatrix.getMatrix());
         //thread.start();

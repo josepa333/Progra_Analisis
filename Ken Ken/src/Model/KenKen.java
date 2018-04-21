@@ -8,6 +8,8 @@ package Model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 //kenkenTemplate.xml; 
 /**
@@ -56,6 +58,24 @@ public class KenKen {
          createNodes();
      }
      
+     
+     public void iterarPermutaciones(){
+         Iterator iterator = allPermutations.entrySet().iterator();
+         while (iterator.hasNext()) {
+             Map.Entry me2 = (Map.Entry) iterator.next();
+              ArrayList<int[]> element = (ArrayList<int[]>) me2.getValue();
+              System.out.println("Key: "+me2.getKey());
+             for (int i = 0; i < element.size(); i++) {
+                 System.out.print("Elementos permutacion: ");
+                 for (int j = 0; j < element.get(i).length; j++) {
+                     System.out.print(Integer.toString(  element.get(i)[j]  )+ "\t");
+                 }
+                 System.out.println("");
+             }
+        } 
+     }
+             
+             
     public Solution solveKenKen(){
         Solution solution = new Solution(matrix);
         return backTracking(solution, 0, 0);
@@ -70,13 +90,19 @@ public class KenKen {
             shapeType += 1;
             sectionId = 0;
         }
-        int[] section = shapes.get(shapeType).get(sectionId);
+        
+        System.out.println("shape type = " + Integer.toString(shapeType)+ " section id = "+Integer.toString(sectionId));
+        ArrayList<int[]> prueba = shapes.get(shapeType);
+        int[] section = prueba.get(sectionId);
+        
         NodekenKen node = matrix[section[0]][section[1]];
         ArrayList<int[]> permutations = allPermutations.get(node.getCounter());
         for(int k = 0; k < permutations.size(); k++){
-            Solution child = new Solution(solution, shapeType, section, permutations.get(k));
+            
+            Solution child = new Solution(solution, shapeType, section, permutations.get(k) );
             if(child.isPromising()){
-                Solution result = backTracking(child, ++sectionId, shapeType);
+                sectionId = sectionId +1;
+                Solution result = backTracking(child, sectionId, shapeType);
                 if(result.isFailure() == false){
                     return result;
                 } 
@@ -282,6 +308,8 @@ public class KenKen {
              
              matrix[row][col].setCheck(false);
              matrix[row+1][col].setCheck(false);
+             
+             matrix[row][col].setNext(matrix[row+1][col]);
              twoNodes.add(new int[]{row,col});
              counter++;
              return true;
@@ -664,7 +692,7 @@ public class KenKen {
                  break;
              case 3: 
                  result = value1 / value2 / value3 / value4;
-                 //Division de Richi 
+                  allPermutations.put(idShape, multiplication4 (result));
                  break;
              default:
                  break;
@@ -712,8 +740,7 @@ public class KenKen {
       private ArrayList<int[]> power(int result){
           ArrayList<int[]> uniqueValue = new ArrayList<>();
           int finalValue = (int) (Math.pow(result, (1.0/3.0)));
-          //System.out.println(Integer.toString(finalValue)); 
-          uniqueValue.add(new int[finalValue]);
+          uniqueValue.add(new int[]{finalValue});
           return uniqueValue;
       }
       
