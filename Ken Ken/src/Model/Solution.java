@@ -5,9 +5,6 @@
  */
 package Model;
 
-
-import java.util.ArrayList;
-
 import java.util.HashMap;
 
 
@@ -21,8 +18,8 @@ public class Solution {
     private int shapeType;
     private int[] permutation;
     private int[] beginOfSection;
-    private HashMap< Integer, HashMap<Integer,String>> rows;
-    private HashMap< Integer, HashMap<Integer,String>> cols;//Parametro del constructor
+    private HashMap< Integer, HashMap<Integer,Integer>> rows;
+    private HashMap< Integer, HashMap<Integer,Integer>> cols;//Parametro del constructor
     
     private boolean podeBySquare(){
         if(permutation[0] == permutation[1]){
@@ -154,8 +151,8 @@ public class Solution {
             }
             else{ 
                 node.setValue(permutation[i]);
-                rows.get(node.getCoordinates()[0]).put(permutation[i],a);
-                cols.get(node.getCoordinates()[1]).put(permutation[i], a);
+                rows.get(node.getCoordinates()[0]).put(permutation[i],permutation[i]);
+                cols.get(node.getCoordinates()[1]).put(permutation[i], permutation[i]);
             }
             node = node.getNext();
             i++;
@@ -205,11 +202,11 @@ public class Solution {
         return matrix;
     }
     
-    public HashMap<Integer, HashMap<Integer, String>> getRows(){
+    public HashMap<Integer, HashMap<Integer, Integer>> getRows(){
         return rows;
     }
     
-    public HashMap<Integer, HashMap<Integer, String>> getCols(){
+    public HashMap<Integer, HashMap<Integer, Integer>> getCols(){
         return cols;
     }
 }

@@ -11,7 +11,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-//kenkenTemplate.xml; 
 /**
  *
  * @author jose pablo
@@ -28,7 +27,7 @@ public class KenKen {
      private ArrayList<int[]> shapesStick;
      private HashMap<Integer,ArrayList<int[]>> allPermutations;
      private NodekenKen matrix[][];
-
+     
      private int counter;
      private char[] operations;
      private int size;
@@ -39,7 +38,6 @@ public class KenKen {
       private int[] rangeOfValues;
     
      
-      
      public  KenKen(int pSize){
          size = pSize;
          counter = 0;
@@ -62,33 +60,6 @@ public class KenKen {
          createNodes();
      }
      
-      public void printShape(){
-          for (int i = 0; i < shapes.size(); i++) {
-              System.out.println("Shape: " + Integer.toString(i));
-              for (int j = 0; j < shapes.get(i).size(); j++) {
-                  System.out.println( Integer.toString( shapes.get(i).get(j)[0]) + " " + Integer.toString( shapes.get(i).get(j)[1]) +" " +  Integer.toString( matrix[shapes.get(i).get(j)[0]][shapes.get(i).get(j)[1]].getCounter() )) ;
-              }
-          }
-      }
-      
-      
-     public void iterarPermutaciones(){
-         Iterator iterator = allPermutations.entrySet().iterator();
-         while (iterator.hasNext()) {
-             Map.Entry me2 = (Map.Entry) iterator.next();
-              ArrayList<int[]> element = (ArrayList<int[]>) me2.getValue();
-              System.out.println("Key: "+me2.getKey());
-             for (int i = 0; i < element.size(); i++) {
-                 System.out.print("Elementos permutacion: ");
-                 for (int j = 0; j < element.get(i).length; j++) {
-                     System.out.print(Integer.toString(  element.get(i)[j]  )+ "\t");
-                 }
-                 System.out.println("");
-             }
-        } 
-     }
-             
-             
     public Solution solveKenKen(){
         Solution solution = new Solution(matrix);
         return backTracking(solution, 0);
@@ -164,7 +135,7 @@ public class KenKen {
             }
         }
     }
- 
+    
     public void fillMatrixValues(){
         for(int i = 0; i< size;i++){
             for(int j = 0 ; j< size; j++){
@@ -297,6 +268,9 @@ public class KenKen {
                      || operation == 4)){
                  operation = 0;
              }
+             if( (matrixOfValues[row][col]  < matrixOfValues[row][col+1]) && (operation== 3)){
+                 operation = 0;
+             }
              int result= determineResultForTwoNodes(counter,operation,matrixOfValues[row][col] , matrixOfValues[row][col+1] );
              //Permutations
              
@@ -323,6 +297,10 @@ public class KenKen {
                      || operation == 4)){
                  operation = 0;
              }
+             if( (matrixOfValues[row][col]  < matrixOfValues[row+1][col]) && (operation== 3)){
+                 operation = 0;
+             }
+             
              int result = determineResultForTwoNodes(counter,operation,matrixOfValues[row][col] , matrixOfValues[row+1][col] );
              int r =  (int) (Math.random() * 255) + 1;
              int g =  (int) (Math.random() * 255) + 1;
@@ -349,11 +327,16 @@ public class KenKen {
          if(matrix[row][col+1].isCheck() == true && matrix[row+1][col].isCheck() == true &&
                  matrix[row+1][col+1].isCheck() ==true){
              
-             int operation = (int) (Math.random() * 3);//+-*/  
+             int operation = (int) (Math.random() * 4);//+-*/  
              
              if( (matrixOfValues[row][col] == 0|| matrixOfValues[row][col+1] == 0|| 
                      matrixOfValues[row+1][col] == 0 ||matrixOfValues[row+1][col+1] == 0)
                      && (operation== 3 || operation== 2 )){
+                 operation = 0;
+             }
+             
+             if( (operation== 3 ) && (matrixOfValues[row][col]/matrixOfValues[row][col+1] < matrixOfValues[row+1][col]) 
+                     && (matrixOfValues[row][col]/matrixOfValues[row][col+1] / matrixOfValues[row+1][col] < matrixOfValues[row+1][col+1])){
                  operation = 0;
              }
 
@@ -408,12 +391,18 @@ public class KenKen {
          if(matrix[row][col+1].isCheck() == true && matrix[row+1][col].isCheck() == true
                   && matrix[row+1][col-1].isCheck() ==true){
              
-             int operation = (int) (Math.random() * 3);//+-*/ 
+             int operation = (int) (Math.random() * 4);//+-*/ 
              //Non 0 * 
              if( (matrixOfValues[row][col]  == 0|| matrixOfValues[row][col+1] == 0 || matrixOfValues[row+1][col ]== 0
                      || matrixOfValues[row+1][col-1] == 0 ) && (operation== 3 || operation== 2 )){
                  operation = 0;
              }
+             
+             if( (operation== 3 )  && (matrixOfValues[row][col]/matrixOfValues[row][col+1] < matrixOfValues[row+1][col]) 
+                     && (matrixOfValues[row][col]/matrixOfValues[row][col+1] / matrixOfValues[row+1][col] < matrixOfValues[row+1][col-1])){
+                 operation = 0;
+             }
+
              int result = determineResultForValuesSquare(counter,operation,matrixOfValues[row][col],
                      matrixOfValues[row][col+1],matrixOfValues[row+1][col],matrixOfValues[row+1][col-1]);
              
@@ -456,6 +445,10 @@ public class KenKen {
              if( (matrixOfValues[row][col] == 0|| matrixOfValues[row+1][col-1] == 0|| 
                      matrixOfValues[row+1][col] == 0|| matrixOfValues[row+1][col+1]== 0  )
                      && (operation== 3 || operation== 2 )){
+                 operation = 0;
+             }
+             if((operation== 3 )  && (matrixOfValues[row][col]/matrixOfValues[row+1][col-1] < matrixOfValues[row+1][col]) 
+                     && (matrixOfValues[row][col]/matrixOfValues[row+1][col-1] / matrixOfValues[row+1][col] < matrixOfValues[row+1][col+1])){
                  operation = 0;
              }
              
@@ -501,6 +494,10 @@ public class KenKen {
               if( (matrixOfValues[row][col] == 0|| matrixOfValues[row+1][col] == 0|| 
                      matrixOfValues[row+2][col] == 0|| matrixOfValues[row+3][col]== 0  )
                      && (operation== 3 || operation== 2 )){
+                 operation = 0;
+             }
+              if( (operation== 3 )  && (matrixOfValues[row][col]/matrixOfValues[row+1][col] < matrixOfValues[row+2][col]) 
+                     && (matrixOfValues[row][col]/matrixOfValues[row+1][col] / matrixOfValues[row+2][col] < matrixOfValues[row+3][col])){
                  operation = 0;
              }
               
@@ -549,6 +546,11 @@ public class KenKen {
                  operation = 0;
              }
              
+             if((operation== 3 )  && (matrixOfValues[row][col]/matrixOfValues[row][col+1] < matrixOfValues[row][col+2]) 
+                     && (matrixOfValues[row][col]/matrixOfValues[row][col+1] / matrixOfValues[row][col+2] < matrixOfValues[row][col+3])){
+                 operation = 0;
+             }
+             
              int result = determineResultForValuesSquare(counter,operation,matrixOfValues[row][col],
                      matrixOfValues[row][col+1],matrixOfValues[row][col+2],matrixOfValues[row][col+3]);
              
@@ -590,6 +592,10 @@ public class KenKen {
              if( (matrixOfValues[row][col] == 0|| matrixOfValues[row+1][col] == 0|| 
                      matrixOfValues[row+2][col] == 0|| matrixOfValues[row+2][col+1]== 0  )
                      && (operation== 3 || operation== 2 )){
+                 operation = 0;
+             }
+             if((operation== 3 )  && (matrixOfValues[row][col]/matrixOfValues[row+1][col] < matrixOfValues[row+2][col]) &&
+                     (matrixOfValues[row][col]/matrixOfValues[row+1][col] / matrixOfValues[row+2][col] < matrixOfValues[row+2][col+1] )){
                  operation = 0;
              }
              
@@ -637,6 +643,10 @@ public class KenKen {
                  operation = 0;
              }
              
+             if((operation== 3 )  && (matrixOfValues[row][col]/matrixOfValues[row][col+1] < matrixOfValues[row][col+2]) 
+                     && (matrixOfValues[row][col]/matrixOfValues[row][col+1] / matrixOfValues[row][col+2] < matrixOfValues[row+1][col+2])){
+                 operation = 0;
+             }
              int result = determineResultForValuesSquare(counter,operation,matrixOfValues[row][col],
                      matrixOfValues[row][col+1],matrixOfValues[row][col+2],matrixOfValues[row+1][col+2]);
              
@@ -717,7 +727,7 @@ public class KenKen {
                  break;
              case 3: 
                  result = value1 / value2 / value3 / value4;
-                 allPermutations.put(idShape, multiplication4 (result));
+                 allPermutations.put(idShape, multiplication4 (result)); //DIVITION
                  break;
              default:
                  break;
@@ -787,7 +797,6 @@ public class KenKen {
           return factors;
     }
   
-    
     public ArrayList<int[]>  multiplication4(int result){
         ArrayList<int[]> pairs = new ArrayList<>();
         for (int i = 0; i < size; i++) {
@@ -826,13 +835,10 @@ public class KenKen {
         return pairs;
     }
     
-    
     public ArrayList<int[]>  divition2(int result){
         ArrayList<int[]> pairs = new ArrayList<>();
         for (int i = 0; i < size; i++) {
-            for (int j = 0; j < size; j++) {
-                if(j == 0)
-                    continue;
+            for (int j = i; j > 0; j--) {
                 if( i / j == result && i != j){
                     //System.out.println(Integer.toString(i) +" " +Integer.toString(j)  );
                     pairs.add(new int[]{i,j});
@@ -842,13 +848,13 @@ public class KenKen {
         return pairs;
     }
       
-      private int getMaxRangeValue(){
-          return size-1;
-      }
+    private int getMaxRangeValue(){
+        return size-1;
+    }
       
-      private int getMinRangeValue(){
-          return 0;
-      }
+    private int getMinRangeValue(){
+        return 0;
+    }
       
     private void swapValues(int[] permutation){
         int temp = permutation[0];
@@ -1122,6 +1128,32 @@ public class KenKen {
 //            return permutations;
 //        }
 //    }
+    
+        //Information
+        public void printShape(){  
+              for (int i = 0; i < shapes.size(); i++) {
+                  System.out.println("Shape: " + Integer.toString(i));
+                  for (int j = 0; j < shapes.get(i).size(); j++) {
+                      System.out.println( Integer.toString( shapes.get(i).get(j)[0]) + " " + Integer.toString( shapes.get(i).get(j)[1]) +" " +  Integer.toString( matrix[shapes.get(i).get(j)[0]][shapes.get(i).get(j)[1]].getCounter() )) ;
+                  }
+              }
+          } 
+        
+        public void iterarPermutaciones(){  
+             Iterator iterator = allPermutations.entrySet().iterator();
+             while (iterator.hasNext()) {
+                 Map.Entry me2 = (Map.Entry) iterator.next();
+                  ArrayList<int[]> element = (ArrayList<int[]>) me2.getValue();
+                  System.out.println("Key: "+me2.getKey());
+                 for (int i = 0; i < element.size(); i++) {
+                     System.out.print("Elementos permutacion: ");
+                     for (int j = 0; j < element.get(i).length; j++) {
+                         System.out.print(Integer.toString(  element.get(i)[j]  )+ "\t");
+                     }
+                     System.out.println("");
+                 }
+            } 
+         }
     
       //sets and gets 
       public NodekenKen[][] getMatrix() {
