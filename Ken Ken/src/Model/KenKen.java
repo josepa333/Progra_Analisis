@@ -723,11 +723,11 @@ public class KenKen {
                  break;
              case 2:
                  result = value1 * value2 * value3 * value4;
-                 allPermutations.put(idShape, multiplication4 (result));
+                 allPermutations.put(idShape, permutationsAddSub (4,result,3));
                  break;
              case 3: 
                  result = value1 / value2 / value3 / value4;
-                 allPermutations.put(idShape, multiplication4 (result)); //DIVITION
+                 allPermutations.put(idShape, permutationsAddSub (4,result,3)); //DIVITION
                  break;
              default:
                  break;
@@ -778,47 +778,6 @@ public class KenKen {
           uniqueValue.add(new int[]{finalValue});
           return uniqueValue;
       }
-      
-    public ArrayList<Integer> factors(int result){
-          ArrayList<Integer> factors = new ArrayList<>();
-          int div = 2;
-          while (result != 1){
-              if(result % div == 0){
-                  System.out.println( Integer.toString(div));
-                  factors.add(div);
-                  result = result / div;
-                  div = 2;
-                  continue;
-              }
-              div++;
-          }
-          factors.add(1);
-          factors.add(1);
-          return factors;
-    }
-  
-    public ArrayList<int[]>  multiplication4(int result){
-        ArrayList<int[]> pairs = new ArrayList<>();
-        for (int i = 0; i < size; i++) {
-            for (int j = 0; j < size; j++) {
-                for (int k = 0; k < size; k++) {
-                    for (int l = 0; l <size; l++) {
-                        if( i * j * k * l > result)
-                            break;
-                        if(j == 0 || i == 0 || k == 0 || l == 0)
-                            continue;
-                        if( i * j * k * l== result && !elementsRepeat(new int[]{i,j,k,l})){
-                            //System.out.println("Multi");
-                            //System.out.println(Integer.toString(i) +" " +Integer.toString(j) +" " +Integer.toString(k) +" " +
-                              //      Integer.toString(l) );
-                            pairs.add(new int[]{i,j,k,l});
-                        }
-                    }
-                }
-            }
-        }
-        return pairs;
-    }
     
     public ArrayList<int[]>  multiplication2(int result){
         ArrayList<int[]> pairs = new ArrayList<>();
@@ -871,7 +830,7 @@ public class KenKen {
             addittionSubtracttion2Cells(permutations, value);
         }
         if(cells == 4){
-            addittionSubtracttion4Cells(permutations, value, operation);
+            addSubProd4Cells(permutations, value, operation);
         }
         return permutations;
     }
@@ -931,7 +890,7 @@ public class KenKen {
         return permutations;
     }
     
-    private void addittionSubtracttion4Cells(ArrayList<int[]> permutations, int value, int operation){
+    private void addSubProd4Cells(ArrayList<int[]> permutations, int value, int operation){
         int minValue = getMinRangeValue();
         int maxValue = getMaxRangeValue();
         int[] permutation = new int[] {maxValue, maxValue, maxValue, maxValue};
@@ -941,15 +900,21 @@ public class KenKen {
                     while(permutation[0] >= minValue){
                         int[] newPermutation = new int[] {permutation[0], permutation[1], permutation[2], permutation[3]};
                         if(elementsRepeat(newPermutation) == false){
-                            if(operation == 1){
-                                if((newPermutation[0] + newPermutation[1] + newPermutation[2] + newPermutation[3]) == value){
-                                    permutations.add(newPermutation);
-                                }
-                            }
-                            if(operation == 2){
-                                if((-newPermutation[0] - newPermutation[1] - newPermutation[2] - newPermutation[3]) == value){
-                                    permutations.add(newPermutation);
-                                }
+                            switch (operation) {
+                                case 1:
+                                    if((newPermutation[0] + newPermutation[1] + newPermutation[2] + newPermutation[3]) == value){
+                                        permutations.add(newPermutation);
+                                    }   break;
+                                case 2:
+                                    if((-newPermutation[0] - newPermutation[1] - newPermutation[2] - newPermutation[3]) == value){
+                                        permutations.add(newPermutation);
+                                    }   break;
+                                case 3:
+                                    if((newPermutation[0] * newPermutation[1] * newPermutation[2] * newPermutation[3]) == value){
+                                        permutations.add(newPermutation);
+                                    }   break;
+                                default:
+                                    break;
                             }
                         }
                         permutation[0]--;
