@@ -77,7 +77,6 @@ public class KenKen {
             System.out.println("VACIO");
         }
         for(int k = 0; k < permutations.size(); k++){
-            
             Solution child = new Solution(solution, sectionInfo[2], sectionInfo, permutations.get(k));
             if(child.isPromising()){
                 int copySectionId = sectionId;
