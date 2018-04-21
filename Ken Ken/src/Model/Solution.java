@@ -24,34 +24,6 @@ public class Solution {
     private HashMap< Integer, HashMap<Integer,Byte>> rows;
     private HashMap< Integer, HashMap<Integer,Byte>> cols;//Parametro del constructor
     
-    
-    public Solution(){
-        failure = true;
-    }
-    
-    public Solution(NodekenKen pMatrix[][]){
-        matrix = pMatrix;
-    }
-     
-    public Solution(Solution solution, int pShapeType, int[] pBeginOfSection, int[] pPermutation){
-        matrix = solution.getMatrix().clone();
-        shapeType = pShapeType;
-        beginOfSection = pBeginOfSection;
-        permutation = pPermutation;
-    }
-    
-    public boolean isPromising(){
-
-       // podeByShape();
-        podeByRowColumn();
-
-        if(podeByShape()){
-            return podeByRowColumn();
-        }
-        return false;
-    }
-    
-    
     private boolean podeBySquare(){
         if(permutation[0] == permutation[1]){
             return false;
@@ -157,40 +129,16 @@ public class Solution {
                 break;
         }
         return promising;
-
-    }
-    
-    private boolean podeByRowColumn(){
-        if(checkRow() == false || checkColumn() == false){
-            return false;
-        }
-        return true;
-    }
-    
-    private boolean checkRow(){
-        return true;
-
-    }
-    
-    private boolean checkColumn(){
-        return true;
-    }
-    
-
-    //It copies the previous matrix that was updated with a new permutation
-    //Revisar
-    private void copyMatrix(NodekenKen[][] pastMatrix){
-        //Collections.copy(matrix, pastMatrix);
     }
         
-    private void addPermutation(int[] permutation){
+    private boolean podeByRowColumn(){
         NodekenKen node = matrix[beginOfSection[0]][beginOfSection[1]];
         int i = 0;
         byte a = Byte.parseByte("s");
         while(node != null){
             if ((rows.get(node.getCoordinates()[0]).get(permutation[i]) != null) &&
                     (cols.get(node.getCoordinates()[1]).get(permutation[i]) != null)){
-                    return;
+                    return false;
             }
             else{
                 node.setValue(permutation[i]);
@@ -200,23 +148,54 @@ public class Solution {
             node = node.getNext();
             i++;
         }
-        return;
+        return true;
     }
     
-    // Para que se modifiquen dentro de cada uno
+    public Solution(){
+        failure = true;
+    }
     
+    public Solution(NodekenKen pMatrix[][]){
+        matrix = pMatrix;
+        rows = new HashMap<>();
+        for(int row = 0; row < matrix.length; row++){
+            rows.put(row, new HashMap<>());
+        }
+        cols = new HashMap<>();
+        for(int col = 0; col < matrix[0].length; col++){
+            cols.put(col, new HashMap<>());
+        }
+    }
+     
+    public Solution(Solution solution, int pShapeType, int[] pBeginOfSection, int[] pPermutation){
+        matrix = solution.getMatrix().clone();
+        rows = solution.getRows();
+        cols = solution.getCols();
+        shapeType = pShapeType;
+        beginOfSection = pBeginOfSection;
+        permutation = pPermutation;
+    }
+    
+    public boolean isPromising(){
+        if(podeByShape()){
+            return podeByRowColumn();
+        }
+        return false;
+    }
      
     public boolean isFailure(){
         return failure;
     }
 
-    
-    public void setMatrix(NodekenKen pMatrix[][]) {
-        matrix= pMatrix;
-    }
-    
     public NodekenKen[][] getMatrix() {
         return matrix;
     }
     
+    public HashMap<Integer, HashMap<Integer, Byte>> getRows(){
+        return rows;
+    }
+    
+    public HashMap<Integer, HashMap<Integer, Byte>> getCols(){
+        return cols;
+    }
 }

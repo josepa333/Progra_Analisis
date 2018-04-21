@@ -59,15 +59,15 @@ public class KenKen {
          createNodes();
      }
      
-    //private Solution solveKenKen(){
-        //Solution solution = new Solution(matrix);
-        //return solution;
-    //} 
+    private Solution solveKenKen(){
+        Solution solution = new Solution(matrix);
+        return backTracking(solution, 0, 0);
+    } 
      
     private Solution backTracking(Solution solution, int sectionId, int shapeType){
-       // if(solution.isComplete()){
-           // return solution;
-        //}
+        if(shapeType == shapes.size()){
+            return solution;
+        }
         
         if(sectionId == shapes.get(shapeType).size()){
             shapeType += 1;
@@ -104,8 +104,6 @@ public class KenKen {
          System.out.println("values done");
          fillMatrix();
          System.out.println("fill Big done");
-         solution = new Solution();
-         solution.setMatrix(matrix);
      }
      
     public void setValues(){
