@@ -89,7 +89,7 @@ public class KenKen {
         if(sectionId == shapes.get(shapeType).size()){
             shapeType += 1;
             sectionId = 0;
-        }
+        }//
         
         System.out.println("shape type = " + Integer.toString(shapeType)+ " section id = "+Integer.toString(sectionId));
         ArrayList<int[]> prueba = shapes.get(shapeType);
