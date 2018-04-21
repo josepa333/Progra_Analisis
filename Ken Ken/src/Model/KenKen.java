@@ -25,9 +25,7 @@ public class KenKen {
      private ArrayList<int[]> shapesStick;
      private HashMap<Integer,ArrayList<int[]>> allPermutations;
      private NodekenKen matrix[][];
-     private Solution solution;
 
-     
      private int counter;
      private char[] operations;
      private int size;
@@ -37,7 +35,6 @@ public class KenKen {
      private boolean doneValues;
       private int[] rangeOfValues;
     
-     
      public  KenKen(int pSize){
          size = pSize;
          counter = 0;
@@ -59,7 +56,7 @@ public class KenKen {
          createNodes();
      }
      
-    private Solution solveKenKen(){
+    public Solution solveKenKen(){
         Solution solution = new Solution(matrix);
         return backTracking(solution, 0, 0);
     } 

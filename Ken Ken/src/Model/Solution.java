@@ -21,8 +21,8 @@ public class Solution {
     private int shapeType;
     private int[] permutation;
     private int[] beginOfSection;
-    private HashMap< Integer, HashMap<Integer,Byte>> rows;
-    private HashMap< Integer, HashMap<Integer,Byte>> cols;//Parametro del constructor
+    private HashMap< Integer, HashMap<Integer,String>> rows;
+    private HashMap< Integer, HashMap<Integer,String>> cols;//Parametro del constructor
     
     private boolean podeBySquare(){
         if(permutation[0] == permutation[1]){
@@ -134,7 +134,7 @@ public class Solution {
     private boolean podeByRowColumn(){
         NodekenKen node = matrix[beginOfSection[0]][beginOfSection[1]];
         int i = 0;
-        byte a = Byte.parseByte("s");
+        String a = "s";
         while(node != null){
             if ((rows.get(node.getCoordinates()[0]).get(permutation[i]) != null) &&
                     (cols.get(node.getCoordinates()[1]).get(permutation[i]) != null)){
@@ -191,11 +191,11 @@ public class Solution {
         return matrix;
     }
     
-    public HashMap<Integer, HashMap<Integer, Byte>> getRows(){
+    public HashMap<Integer, HashMap<Integer, String>> getRows(){
         return rows;
     }
     
-    public HashMap<Integer, HashMap<Integer, Byte>> getCols(){
+    public HashMap<Integer, HashMap<Integer, String>> getCols(){
         return cols;
     }
 }

@@ -6,6 +6,7 @@
 package View;
 
 import Model.KenKen;
+import Model.Solution;
 import Model.TableUpdater;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
@@ -214,8 +215,17 @@ public class proto extends javax.swing.JFrame {
     }//GEN-LAST:event_generateBTActionPerformed
 
     private void solveBTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_solveBTActionPerformed
-        Thread thread = new TableUpdater("Proccess1",tablaBase,kenkentable, size,  kenkenMatrix.getMatrix());
-        thread.start();
+        Solution solved = kenkenMatrix.solveKenKen();
+        if(solved.isFailure() == false){
+            kenkenMatrix.setMatrix(solved.getMatrix()); 
+            tablaBase.ver_tabla( kenkentable, size,  kenkenMatrix.getMatrix());
+        }
+        else{
+            System.out.println("no hay");
+        }
+       
+        //Thread thread = new TableUpdater("Proccess1",tablaBase,kenkentable, size,  kenkenMatrix.getMatrix());
+        //thread.start();
     }//GEN-LAST:event_solveBTActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
