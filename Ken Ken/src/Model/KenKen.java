@@ -695,7 +695,7 @@ public class KenKen {
                  break;
              case 3://  divi 
                  result =value1 / value2;
-                 allPermutations.put(idShape, divition2(result));
+                 allPermutations.put(idShape, permutationsDivision(2,result));
                  break;
              case 4:// %
                  result =value1 % value2;
@@ -727,7 +727,7 @@ public class KenKen {
                  break;
              case 3: 
                  result = value1 / value2 / value3 / value4;
-                 allPermutations.put(idShape, permutationsAddSub (4,result,3)); //DIVITION
+                 allPermutations.put(idShape, permutationsDivision (4,result)); //DIVITION
                  break;
              default:
                  break;
