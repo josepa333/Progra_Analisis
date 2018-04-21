@@ -18,6 +18,7 @@ import java.util.Map;
  */
 public class KenKen {
      private ArrayList<ArrayList<int[]>> shapes;
+     private ArrayList<int[]> sections;
      private ArrayList<int[]> oneNode;
      private ArrayList<int[]> twoNodes;
      private ArrayList<int[]> square;
@@ -45,6 +46,7 @@ public class KenKen {
          operations = new char[] {'+','-','*','/','%','^'};
          rangeOfValues = new int[] {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18};
          shapes = new ArrayList<>();
+         sections = new ArrayList<>();
          oneNode = new ArrayList<>();
          twoNodes = new ArrayList<>();  
          square = new ArrayList<>();
@@ -77,33 +79,30 @@ public class KenKen {
              
              
     public Solution solveKenKen(){
+        for(int i = 0; i < shapes.size(); i++){
+            for(int j = 0; j < shapes.get(i).size(); j++){
+                int[] beginOfSection = shapes.get(i).get(j);
+                sections.add(new int[]{beginOfSection[0], beginOfSection[1], i});
+            }
+        }
         Solution solution = new Solution(matrix);
-        return backTracking(solution, 0, 0);
+        return backTracking(solution, 0);
     } 
      
-    private Solution backTracking(Solution solution, int sectionId, int shapeType){
-        if(shapeType == shapes.size()){
-            System.out.println("Listo");
+    private Solution backTracking(Solution solution, int sectionId){
+        if(sectionId == sections.size()){
             return solution;
         }
         
-        if(sectionId == shapes.get(shapeType).size()){
-            shapeType += 1;
-            sectionId = 0;
-        }
-        
-        System.out.println("shape type = " + Integer.toString(shapeType)+ " section id = "+Integer.toString(sectionId));
-        ArrayList<int[]> prueba = shapes.get(shapeType);
-        int[] section = prueba.get(sectionId);
-        
-        NodekenKen node = matrix[section[0]][section[1]];
+        int[] sectionInfo = sections.get(sectionId);
+        NodekenKen node = matrix[sectionInfo[0]][sectionInfo[1]];
         ArrayList<int[]> permutations = allPermutations.get(node.getCounter());
         for(int k = 0; k < permutations.size(); k++){
             
-            Solution child = new Solution(solution, shapeType, section, permutations.get(k) );
+            Solution child = new Solution(solution, sectionInfo[2], sectionInfo, permutations.get(k) );
             if(child.isPromising()){
                 sectionId = sectionId +1;
-                Solution result = backTracking(child, sectionId, shapeType);
+                Solution result = backTracking(child, sectionId);
                 if(result.isFailure() == false){
                     return result;
                 } 
