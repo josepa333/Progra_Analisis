@@ -15,6 +15,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
 
@@ -219,7 +220,7 @@ public class proto extends javax.swing.JFrame {
             tablaBase.ver_tabla( kenkentable, size,  kenkenMatrix.getMatrix());
         }
         else{
-            System.out.println("no hay");
+            JOptionPane.showMessageDialog(null, "No hay.");
         }
         
         kenkenMatrix.printShape();
