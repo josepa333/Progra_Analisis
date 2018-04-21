@@ -79,12 +79,6 @@ public class KenKen {
              
              
     public Solution solveKenKen(){
-        for(int i = 0; i < shapes.size(); i++){
-            for(int j = 0; j < shapes.get(i).size(); j++){
-                int[] beginOfSection = shapes.get(i).get(j);
-                sections.add(new int[]{beginOfSection[0], beginOfSection[1], i});
-            }
-        }
         Solution solution = new Solution(matrix);
         return backTracking(solution, 0);
     } 
@@ -271,6 +265,12 @@ public class KenKen {
          if(shapesStick.size() > 0){
              shapes.add(shapesStick);
          }
+         for(int i = 0; i < shapes.size(); i++){
+            for(int j = 0; j < shapes.get(i).size(); j++){
+                int[] beginOfSection = shapes.get(i).get(j);
+                sections.add(new int[]{beginOfSection[0], beginOfSection[1], i});
+            }
+        }
      }
      
      //Shapes
