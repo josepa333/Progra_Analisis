@@ -7,6 +7,7 @@ package Model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Hashtable;
 
 
 /**
@@ -128,12 +129,27 @@ public class Solution {
         }
         return promising;
     }
-        
+    private boolean checkRow(int row,int value){
+         for(int i = 0; i < matrix.length; i++){
+             if(matrix[row][i].getValue() == value){
+                 return false;
+             }
+         }
+         return true;
+    }
+     
+    public boolean checkColumn(int col,int value){
+         for(int i = 0; i <  matrix.length; i++){
+             if(matrix[i][col].getValue() == value ){
+                 return false;
+             }
+         }
+         return true;
+    }   
     private boolean podeByRowColumn(){
         
         NodekenKen node = matrix[beginOfSection[0]][beginOfSection[1]];
         int i = 0;
-        String a = "s";
         /*System.out.println("Una");
         
         for (int j = 0; j <  permutation.length; j++) {
@@ -144,12 +160,9 @@ public class Solution {
 
             int x = node.getCoordinates()[0];
             int y = node.getCoordinates()[1];
-            int z = permutation[i];
-            
-            if ((rows.get(x).contains(z)) &&
-                    (cols.get(y).contains(z))){
+            int value = permutation[i];
+            if (checkRow(x,value) && checkColumn(y,value) ) {
                     System.out.println("Se repite numero en fila o columna");
-                    System.out.println(x + " " + y + " " + z);
                     return false;
             }
             else{ 
