@@ -73,6 +73,9 @@ public class KenKen {
         int[] sectionInfo = sections.get(sectionId);
         NodekenKen node = matrix[sectionInfo[0]][sectionInfo[1]];
         ArrayList<int[]> permutations = allPermutations.get(node.getCounter());
+        if(permutations.isEmpty()){
+            System.out.println("VACIO");
+        }
         for(int k = 0; k < permutations.size(); k++){
             
             Solution child = new Solution(solution, sectionInfo[2], sectionInfo, permutations.get(k) );
@@ -686,7 +689,7 @@ public class KenKen {
                  allPermutations.put(idShape, permutationsAddSub(2,result,1));
                  break;
              case 1:
-                 result =value1 - value2;
+                 result = -value1 - value2;
                  allPermutations.put(idShape, permutationsAddSub(2,result,2));
                  break;
              case 2:
