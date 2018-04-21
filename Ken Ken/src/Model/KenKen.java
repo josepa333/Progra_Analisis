@@ -5,6 +5,7 @@
  */
 package Model;
 
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -43,7 +44,7 @@ public class KenKen {
          matrix = new NodekenKen[size][size];
          matrixOfValues = new int[size][size];
          operations = new char[] {'+','-','*','/','%','^'};
-         rangeOfValues = new int[] {1,2,3,4,5,6,7,8,9,0,-1,-2,-3,-4,-5,-6,-7,-8,-9};
+         rangeOfValues = new int[] {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18};
          shapes = new ArrayList<>();
          oneNode = new ArrayList<>();
          twoNodes = new ArrayList<>();  
@@ -160,7 +161,7 @@ public class KenKen {
     public void print(){
         for(int i = 0; i< size;i++){
             for(int j = 0 ; j<size; j++){
-                System.out.print(Integer.toString(matrixOfValues[i][j]));
+                System.out.print(Integer.toString(matrixOfValues[i][j]) + "\t " );
             }
             System.out.println(" ");
         }
@@ -795,17 +796,11 @@ public class KenKen {
     }
       
       private int getMaxRangeValue(){
-          if(size < 9){
-              return size;
-          }
-          return 9;
+          return size - 1;
       }
       
       private int getMinRangeValue(){
-          if(size <= 9){
-              return 1;
-          }
-          return rangeOfValues[size-1];
+          return 0;
       }
       
     private void swapValues(int[] permutation){
