@@ -5,6 +5,7 @@
  */
 package Model;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 
@@ -18,8 +19,8 @@ public class Solution {
     private int shapeType;
     private int[] permutation;
     private int[] beginOfSection;
-    private HashMap< Integer, HashMap<Integer,Integer>> rows;
-    private HashMap< Integer, HashMap<Integer,Integer>> cols;//Parametro del constructor
+    private HashMap< Integer, ArrayList<Integer>> rows;
+    private HashMap< Integer, ArrayList<Integer>> cols;//Parametro del constructor
     
     private boolean podeBySquare(){
         if(permutation[0] == permutation[1]){
@@ -145,14 +146,16 @@ public class Solution {
             int y = node.getCoordinates()[1];
             int z = permutation[i];
             
-            if ((rows.get(x).get(z) != null) &&
-                    (cols.get(y).get(z) != null)){
+            if ((rows.get(x).contains(z)) &&
+                    (cols.get(y).contains(z))){
+                    System.out.println("Se repite numero en fila o columna");
+                    System.out.println(x + " " + y + " " + z);
                     return false;
             }
             else{ 
                 node.setValue(permutation[i]);
-                rows.get(node.getCoordinates()[0]).put(permutation[i],permutation[i]);
-                cols.get(node.getCoordinates()[1]).put(permutation[i], permutation[i]);
+                rows.get(node.getCoordinates()[0]).add(permutation[i]);
+                cols.get(node.getCoordinates()[1]).add(permutation[i]);
             }
             node = node.getNext();
             i++;
@@ -168,11 +171,11 @@ public class Solution {
         matrix = pMatrix;
         rows = new HashMap<>();
         for(int row = 0; row < matrix.length; row++){
-            rows.put(row, new HashMap<>());
+            rows.put(row, new ArrayList<>());
         }
         cols = new HashMap<>();
         for(int col = 0; col < matrix[0].length; col++){
-            cols.put(col, new HashMap<>());
+            cols.put(col, new ArrayList<>());
         }
     }
      
@@ -202,11 +205,11 @@ public class Solution {
         return matrix;
     }
     
-    public HashMap<Integer, HashMap<Integer, Integer>> getRows(){
+    public HashMap<Integer, ArrayList<Integer>> getRows(){
         return rows;
     }
     
-    public HashMap<Integer, HashMap<Integer, Integer>> getCols(){
+    public HashMap<Integer, ArrayList<Integer>> getCols(){
         return cols;
     }
 }
