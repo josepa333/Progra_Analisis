@@ -83,13 +83,14 @@ public class KenKen {
      
     private Solution backTracking(Solution solution, int sectionId, int shapeType){
         if(shapeType == shapes.size()){
+            System.out.println("Listo");
             return solution;
         }
         
         if(sectionId == shapes.get(shapeType).size()){
             shapeType += 1;
             sectionId = 0;
-        }//
+        }
         
         System.out.println("shape type = " + Integer.toString(shapeType)+ " section id = "+Integer.toString(sectionId));
         ArrayList<int[]> prueba = shapes.get(shapeType);
@@ -250,13 +251,27 @@ public class KenKen {
                  }
              }
          }
-         shapes.add(oneNode);
-         shapes.add(twoNodes);
-         shapes.add(square);
-         shapes.add(shapesL);
-         shapes.add(shapesS);
-         shapes.add(shapesT);
-         shapes.add(shapesStick);
+         if(oneNode.size() > 0){
+             shapes.add(oneNode);
+         }
+         if(twoNodes.size() > 0){
+             shapes.add(twoNodes);
+         }
+         if(square.size() > 0){
+             shapes.add(square);
+         }
+         if(shapesL.size() > 0){
+             shapes.add(shapesL);
+         }
+         if(shapesS.size() > 0){
+             shapes.add(shapesS);
+         }
+         if(shapesT.size() > 0){
+             shapes.add(shapesT);
+         }
+         if(shapesStick.size() > 0){
+             shapes.add(shapesStick);
+         }
      }
      
      //Shapes
