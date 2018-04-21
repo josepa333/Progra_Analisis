@@ -181,8 +181,10 @@ public class Solution {
      
     public Solution(Solution solution, int pShapeType, int[] pBeginOfSection, int[] pPermutation){
         matrix = solution.getMatrix().clone();
-        rows = solution.getRows();
-        cols = solution.getCols();
+        rows = new HashMap<>();
+        cols = new HashMap<>();
+        rows.putAll(solution.getRows());
+        cols.putAll(solution.getCols());
         shapeType = pShapeType;
         beginOfSection = pBeginOfSection;
         permutation = pPermutation;
