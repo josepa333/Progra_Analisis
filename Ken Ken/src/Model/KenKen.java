@@ -38,6 +38,8 @@ public class KenKen {
      private boolean doneValues;
       private int[] rangeOfValues;
     
+     
+      
      public  KenKen(int pSize){
          size = pSize;
          counter = 0;
@@ -60,7 +62,16 @@ public class KenKen {
          createNodes();
      }
      
-     
+      public void printShape(){
+          for (int i = 0; i < shapes.size(); i++) {
+              System.out.println("Shape: " + Integer.toString(i));
+              for (int j = 0; j < shapes.get(i).size(); j++) {
+                  System.out.println( Integer.toString( shapes.get(i).get(j)[0]) + " " + Integer.toString( shapes.get(i).get(j)[1]) +" " +  Integer.toString( matrix[shapes.get(i).get(j)[0]][shapes.get(i).get(j)[1]].getCounter() )) ;
+              }
+          }
+      }
+      
+      
      public void iterarPermutaciones(){
          Iterator iterator = allPermutations.entrySet().iterator();
          while (iterator.hasNext()) {
@@ -338,7 +349,7 @@ public class KenKen {
          if(matrix[row][col+1].isCheck() == true && matrix[row+1][col].isCheck() == true &&
                  matrix[row+1][col+1].isCheck() ==true){
              
-             int operation = (int) (Math.random() * 4);//+-*/  
+             int operation = (int) (Math.random() * 3);//+-*/  
              
              if( (matrixOfValues[row][col] == 0|| matrixOfValues[row][col+1] == 0|| 
                      matrixOfValues[row+1][col] == 0 ||matrixOfValues[row+1][col+1] == 0)
@@ -397,7 +408,7 @@ public class KenKen {
          if(matrix[row][col+1].isCheck() == true && matrix[row+1][col].isCheck() == true
                   && matrix[row+1][col-1].isCheck() ==true){
              
-             int operation = (int) (Math.random() * 4);//+-*/ 
+             int operation = (int) (Math.random() * 3);//+-*/ 
              //Non 0 * 
              if( (matrixOfValues[row][col]  == 0|| matrixOfValues[row][col+1] == 0 || matrixOfValues[row+1][col ]== 0
                      || matrixOfValues[row+1][col-1] == 0 ) && (operation== 3 || operation== 2 )){
@@ -440,7 +451,7 @@ public class KenKen {
          if(matrix[row+1][col+1].isCheck() == true && matrix[row+1][col].isCheck() == true
                   && matrix[row+1][col-1].isCheck() ==true){
              
-             int operation = (int) (Math.random() * 4);//+-*/ 
+             int operation = (int) (Math.random() * 3);//+-*/ 
              
              if( (matrixOfValues[row][col] == 0|| matrixOfValues[row+1][col-1] == 0|| 
                      matrixOfValues[row+1][col] == 0|| matrixOfValues[row+1][col+1]== 0  )
@@ -485,7 +496,7 @@ public class KenKen {
          if( matrix[row+1][col].isCheck() == true &&  matrix[row+2][col].isCheck() == true  &&
                  matrix[row+3][col].isCheck() == true ){
              
-              int operation = (int) (Math.random() * 4);//+-*/ 
+              int operation = (int) (Math.random() * 3);//+-*/ 
               
               if( (matrixOfValues[row][col] == 0|| matrixOfValues[row+1][col] == 0|| 
                      matrixOfValues[row+2][col] == 0|| matrixOfValues[row+3][col]== 0  )
@@ -530,7 +541,7 @@ public class KenKen {
          if( matrix[row][col+1].isCheck() == true &&  matrix[row][col+2].isCheck() == true  &&
                  matrix[row][col+3].isCheck() == true ){
              
-             int operation = (int) (Math.random() * 4);//+-*/ 
+             int operation = (int) (Math.random() * 3);//+-*/ 
              
              if( (matrixOfValues[row][col] == 0|| matrixOfValues[row][col+1] == 0|| 
                      matrixOfValues[row][col+2] == 0|| matrixOfValues[row][col+3]== 0  )
@@ -574,7 +585,7 @@ public class KenKen {
          if( matrix[row+1][col].isCheck() == true &&  matrix[row+2][col].isCheck() == true  &&
                  matrix[row+2][col+1].isCheck() == true ){
              
-             int operation = (int) (Math.random() * 4);//+-*/ 
+             int operation = (int) (Math.random() * 3);//+-*/ 
              
              if( (matrixOfValues[row][col] == 0|| matrixOfValues[row+1][col] == 0|| 
                      matrixOfValues[row+2][col] == 0|| matrixOfValues[row+2][col+1]== 0  )
@@ -618,7 +629,7 @@ public class KenKen {
          if( matrix[row][col+1].isCheck() == true &&  matrix[row][col+2].isCheck() == true  &&
                  matrix[row+1][col+2].isCheck() == true ){
              
-             int operation = (int) (Math.random() * 4);//+-*/ 
+             int operation = (int) (Math.random() * 3);//+-*/ 
              
              if( (matrixOfValues[row][col] == 0|| matrixOfValues[row][col+1] == 0|| 
                      matrixOfValues[row][col+2] == 0|| matrixOfValues[row+1][col+2]== 0  )
@@ -697,7 +708,7 @@ public class KenKen {
                  allPermutations.put(idShape, permutationsAddSub(4,result,1));
                  break;
              case 1:
-                 result = value1 - value2 - value3 - value4;
+                 result = -value1 - value2 - value3 - value4;
                  allPermutations.put(idShape, permutationsAddSub(4,result,2));
                  break;
              case 2:
@@ -706,7 +717,7 @@ public class KenKen {
                  break;
              case 3: 
                  result = value1 / value2 / value3 / value4;
-                  allPermutations.put(idShape, multiplication4 (result));
+                 allPermutations.put(idShape, multiplication4 (result));
                  break;
              default:
                  break;
@@ -753,7 +764,7 @@ public class KenKen {
       
       private ArrayList<int[]> power(int result){
           ArrayList<int[]> uniqueValue = new ArrayList<>();
-          int finalValue = (int) (Math.pow(result, (1.0/3.0)));
+          int finalValue = (int) (Math.pow(result+1, (1.0/3.0)));
           uniqueValue.add(new int[]{finalValue});
           return uniqueValue;
       }
@@ -779,10 +790,10 @@ public class KenKen {
     
     public ArrayList<int[]>  multiplication4(int result){
         ArrayList<int[]> pairs = new ArrayList<>();
-        for (int i = getMinRangeValue(); i < getMaxRangeValue(); i++) {
-            for (int j = getMinRangeValue(); j < getMaxRangeValue(); j++) {
-                for (int k = getMinRangeValue(); k < getMaxRangeValue(); k++) {
-                    for (int l = getMinRangeValue(); l < getMaxRangeValue(); l++) {
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                for (int k = 0; k < size; k++) {
+                    for (int l = 0; l <size; l++) {
                         if( i * j * k * l > result)
                             break;
                         if(j == 0 || i == 0 || k == 0 || l == 0)
@@ -802,8 +813,8 @@ public class KenKen {
     
     public ArrayList<int[]>  multiplication2(int result){
         ArrayList<int[]> pairs = new ArrayList<>();
-        for (int i = getMinRangeValue(); i < getMaxRangeValue(); i++) {
-            for (int j = getMinRangeValue(); j < getMaxRangeValue(); j++) {
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
                 if(j == 0 || i == 0 || i == j)
                     continue;
                 if( i * j == result){
@@ -818,8 +829,8 @@ public class KenKen {
     
     public ArrayList<int[]>  divition2(int result){
         ArrayList<int[]> pairs = new ArrayList<>();
-        for (int i = getMinRangeValue(); i < getMaxRangeValue(); i++) {
-            for (int j = getMinRangeValue(); j < getMaxRangeValue(); j++) {
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
                 if(j == 0)
                     continue;
                 if( i / j == result && i != j){
@@ -832,7 +843,7 @@ public class KenKen {
     }
       
       private int getMaxRangeValue(){
-          return size - 1;
+          return size-1;
       }
       
       private int getMinRangeValue(){

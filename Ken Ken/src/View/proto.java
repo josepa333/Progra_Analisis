@@ -7,17 +7,14 @@ package View;
 
 import Model.KenKen;
 import Model.Solution;
-import Model.TableUpdater;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
-import java.awt.Font;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 
@@ -216,14 +213,17 @@ public class proto extends javax.swing.JFrame {
 
     private void solveBTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_solveBTActionPerformed
         Solution solved = kenkenMatrix.solveKenKen();
+        
         if(solved.isFailure() == false){
-            kenkenMatrix.setMatrix(solved.getMatrix()); 
+            kenkenMatrix.setMatrix(solved.getMatrix());
             tablaBase.ver_tabla( kenkentable, size,  kenkenMatrix.getMatrix());
         }
         else{
             System.out.println("no hay");
         }
-        //kenkenMatrix.iterarPermutaciones();
+        
+        kenkenMatrix.printShape();
+        kenkenMatrix.iterarPermutaciones();
        
         //Thread thread = new TableUpdater("Proccess1",tablaBase,kenkentable, size,  kenkenMatrix.getMatrix());
         //thread.start();

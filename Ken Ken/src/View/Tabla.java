@@ -29,7 +29,8 @@ public class Tabla {
                 fila[0] ="";
                 for(int j = 0 ; j<size; j++){
                     JButton botonPeso;
-                    if(matriz[i][j].getOperator() == ' '){
+                    NodekenKen x = matriz[i][j];
+                    if(x.getOperator() == ' '){
                         botonPeso = new JButton(Integer.toString(matriz[i][j].getValue()));
                     }
                     else{
