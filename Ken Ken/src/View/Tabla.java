@@ -33,7 +33,7 @@ public class Tabla {
                         botonPeso = new JButton(Integer.toString(matriz[i][j].getValue()));
                     }
                     else{
-                        botonPeso = new JButton(Integer.toString(matriz[i][j].getResult()) + " " +matriz[i][j].getOperator() + 
+                        botonPeso = new JButton( matriz[i][j].getOperator() +Integer.toString(matriz[i][j].getResult())+ 
                                 " " +Integer.toString(matriz[i][j].getValue()));
                     }
                     Color c = new Color(matriz[i][j].getRGB()[0],matriz[i][j].getRGB()[1],matriz[i][j].getRGB()[2]);

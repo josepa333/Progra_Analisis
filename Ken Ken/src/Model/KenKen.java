@@ -82,7 +82,7 @@ public class KenKen {
                 Solution result = backTracking(child, ++sectionId, shapeType);
                 if(result.isFailure() == false){
                     return result;
-                }
+                } 
             }
         }
         return new Solution();
@@ -623,11 +623,11 @@ public class KenKen {
          switch (operation) {
              case 0:
                  result =value1 + value2;
-                 //Suma de Richi 
+                 allPermutations.put(idShape, permutationsAddSub(2,result,1));
                  break;
              case 1:
                  result =value1 - value2;
-                 //Resta de Richi 
+                 allPermutations.put(idShape, permutationsAddSub(2,result,2));
                  break;
              case 2:
                  result =value1 * value2;
@@ -655,11 +655,11 @@ public class KenKen {
          switch (operation) {
              case 0:
                  result = value1 + value2 + value3 + value4;
-                 allPermutations.put(idShape, multiplication4 (result));
+                 allPermutations.put(idShape, permutationsAddSub(4,result,1));
                  break;
              case 1:
                  result = value1 - value2 - value3 - value4;
-                 allPermutations.put(idShape, multiplication4 (result));
+                 allPermutations.put(idShape, permutationsAddSub(4,result,2));
                  break;
              case 2:
                  result = value1 * value2 * value3 * value4;
