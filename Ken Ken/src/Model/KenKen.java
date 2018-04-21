@@ -898,7 +898,6 @@ public class KenKen {
             while(permutation[2] >= minValue){
                 while(permutation[1] >= minValue){
                     while(permutation[0] >= minValue){
-<<<<<<< HEAD
                         int[] newPermutation = new int[] {permutation[0], permutation[1], permutation[2], permutation[3]};
                         if(elementsRepeat(newPermutation) == false){
                             switch (operation) {
@@ -916,20 +915,6 @@ public class KenKen {
                                     }   break;
                                 default:
                                     break;
-=======
-                        if(elementsRepeat(permutation) == false){
-                            if(operation == 1){
-                                if((permutation[0] + permutation[1] + permutation[2] + permutation[3]) == value){
-                                    int[] newPermutation = new int[] {permutation[0], permutation[1], permutation[2], permutation[3]};
-                                    permutations.add(newPermutation);
-                                }
-                            }
-                            if(operation == 2){
-                                if((-permutation[0] - permutation[1] - permutation[2] - permutation[3]) == value){
-                                    int[] newPermutation = new int[] {permutation[0], permutation[1], permutation[2], permutation[3]};
-                                    permutations.add(newPermutation);
-                                }
->>>>>>> 797c3cd940e682efd95f21ed8ea44d01cb5bfb43
                             }
                         }
                         permutation[0]--;
