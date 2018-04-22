@@ -20,6 +20,7 @@ public class Solution {
     private int[] permutation;
     private int[] beginOfSection;
     
+    
     private boolean podeBySquare(){
         if(permutation[0] == permutation[1]){
             return false;
@@ -159,7 +160,6 @@ public class Solution {
             int y = node.getCoordinates()[1];
             int value = permutation[i];
             if (checkRow(x,value) || checkColumn(y,value)) {
-                    System.out.println("Se repite numero en fila o columna");
                     return false;
             }
             node = node.getNext();
@@ -224,17 +224,10 @@ public class Solution {
         shapes = pShapes;
     }
      
-    public Solution(Solution solution, int pShapeType, int[] pBeginOfSection, int[] pPermutation){
+    public Solution(Solution solution, int[] sectionInfo, int[] pPermutation){
         cloneMatrix(solution.getMatrix());
-        System.out.println("MatrixSolution");
-        for(int i = 0; i < matrix.length; i++){
-            for(int j = 0; j < matrix[i].length; j++){
-                System.out.print(matrix[i][j].getValue() + "\t");
-            }
-            System.out.println();
-        }
-        shapeType = pShapeType;
-        beginOfSection = pBeginOfSection;
+        shapeType = sectionInfo[2];
+        beginOfSection = sectionInfo;
         permutation = pPermutation;
     }
     

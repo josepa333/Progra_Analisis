@@ -230,8 +230,8 @@ public class proto extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "No hay.");
         }
         
-        kenkenMatrix.printShape();
-        kenkenMatrix.iterarPermutaciones();
+//        kenkenMatrix.printShape();
+//        kenkenMatrix.iterarPermutaciones();
        
         //Thread thread = new TableUpdater("Proccess1",tablaBase,kenkentable, size,  kenkenMatrix.getMatrix());
         //thread.start();

@@ -70,7 +70,6 @@ public class KenKen {
     } 
      
     private Solution backTracking(Solution solution, int sectionId){
-        System.out.println("Section: " + sectionId);
         if(sectionId == sections.size()){
             return solution;
         }
@@ -79,7 +78,7 @@ public class KenKen {
         NodekenKen node = matrix[sectionInfo[0]][sectionInfo[1]];
         ArrayList<int[]> permutations = allPermutations.get(node.getCounter());
         for(int k = 0; k < permutations.size(); k++){
-            Solution child = new Solution(solution, sectionInfo[2], sectionInfo, permutations.get(k));
+            Solution child = new Solution(solution, sectionInfo, permutations.get(k));
             if(child.isPromising()){
                 int copySectionId = sectionId;
                 copySectionId += 1;
@@ -104,11 +103,8 @@ public class KenKen {
          size = pSize;
          template = new NodekenKen[size][size];
          fillMatrixValues();
-         System.out.println("Fill done");
          setValues();
-         System.out.println("values done");
          fillMatrix();
-         System.out.println("fill Big done");
          
      }
      
@@ -256,8 +252,8 @@ public class KenKen {
          }
          for(int i = 0; i < shapes.size(); i++){
             for(int j = 0; j < shapes.get(i).size(); j++){
-                int[] beginOfSection = shapes.get(i).get(j);
-                sections.add(new int[]{beginOfSection[0], beginOfSection[1], i});
+                int[] sectionInfo = shapes.get(i).get(j);
+                sections.add(new int[]{sectionInfo[0], sectionInfo[1], sectionInfo[2]});
             }
         }
      }
@@ -963,30 +959,30 @@ public class KenKen {
         }
     }
         //Information
-        public void printShape(){  
-              for (int i = 0; i < shapes.size(); i++) {
-                  System.out.println("Shape: " + Integer.toString(i));
-                  for (int j = 0; j < shapes.get(i).size(); j++) {
-                      System.out.println( Integer.toString( shapes.get(i).get(j)[0]) + " " + Integer.toString( shapes.get(i).get(j)[1]) +" " +  Integer.toString( matrix[shapes.get(i).get(j)[0]][shapes.get(i).get(j)[1]].getCounter() )) ;
-                  }
-              }
-          } 
-        
-        public void iterarPermutaciones(){  
-             Iterator iterator = allPermutations.entrySet().iterator();
-             while (iterator.hasNext()) {
-                 Map.Entry me2 = (Map.Entry) iterator.next();
-                  ArrayList<int[]> element = (ArrayList<int[]>) me2.getValue();
-                  System.out.println("Key: "+me2.getKey());
-                 for (int i = 0; i < element.size(); i++) {
-                     System.out.print("Elementos permutacion: ");
-                     for (int j = 0; j < element.get(i).length; j++) {
-                         System.out.print(Integer.toString(  element.get(i)[j]  )+ "\t");
-                     }
-                     System.out.println("");
-                 }
-            } 
-         }
+//        public void printShape(){  
+//              for (int i = 0; i < shapes.size(); i++) {
+//                  System.out.println("Shape: " + Integer.toString(i));
+//                  for (int j = 0; j < shapes.get(i).size(); j++) {
+//                      System.out.println( Integer.toString( shapes.get(i).get(j)[0]) + " " + Integer.toString( shapes.get(i).get(j)[1]) +" " +  Integer.toString( matrix[shapes.get(i).get(j)[0]][shapes.get(i).get(j)[1]].getCounter() )) ;
+//                  }
+//              }
+//          } 
+//        
+//        public void iterarPermutaciones(){  
+//             Iterator iterator = allPermutations.entrySet().iterator();
+//             while (iterator.hasNext()) {
+//                 Map.Entry me2 = (Map.Entry) iterator.next();
+//                  ArrayList<int[]> element = (ArrayList<int[]>) me2.getValue();
+//                  System.out.println("Key: "+me2.getKey());
+//                 for (int i = 0; i < element.size(); i++) {
+//                     System.out.print("Elementos permutacion: ");
+//                     for (int j = 0; j < element.get(i).length; j++) {
+//                         System.out.print(Integer.toString(  element.get(i)[j]  )+ "\t");
+//                     }
+//                     System.out.println("");
+//                 }
+//            } 
+//         }
     
       //sets and gets 
         
