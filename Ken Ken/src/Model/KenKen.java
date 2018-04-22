@@ -291,7 +291,7 @@ public class KenKen {
              
              //Next and add to array shapes 
              matrix[row][col].setNext(matrix[row][col+1]);
-             twoNodes.add(new int[]{row,col});
+             twoNodes.add(new int[]{row,col,1});
              counter++;
              return true;
          }
@@ -316,7 +316,7 @@ public class KenKen {
 
              
              matrix[row][col].setNext(matrix[row+1][col]);
-             twoNodes.add(new int[]{row,col});
+             twoNodes.add(new int[]{row,col,1});
              counter++;
              return true;
          }
@@ -365,7 +365,7 @@ public class KenKen {
              matrix[row][col+1].setNext(matrix[row+1][col]);
              matrix[row+1][col].setNext(matrix[row+1][col+1]);
              
-             square.add(new int[]{row,col});
+             square.add(new int[]{row,col,2});
              counter++;
              return true;//Shape created
          }
@@ -381,7 +381,7 @@ public class KenKen {
          int b =  (int) (Math.random() * 255) + 1;
 
         matrix[row][col].setValues(counter, operations[5], result, new int[] {r,g,b});
-        oneNode.add(new int[]{row,col});
+        oneNode.add(new int[]{row,col,0});
         counter++;
         return true;
       }
@@ -422,7 +422,7 @@ public class KenKen {
              matrix[row][col+1].setNext(matrix[row+1][col]);
              matrix[row+1][col].setNext(matrix[row+1][col-1]);
              
-             shapesS.add(new int[]{row,col});
+             shapesS.add(new int[]{row,col,4});
              counter++;
              return true;//Shape created
          }
@@ -466,7 +466,7 @@ public class KenKen {
              matrix[row+1][col+1].setNext(matrix[row+1][col]);
              matrix[row+1][col].setNext(matrix[row+1][col-1]);
              
-             shapesT.add(new int[]{row,col});
+             shapesT.add(new int[]{row,col,5});
              counter++;
              return true;//Shape created
              
@@ -510,7 +510,7 @@ public class KenKen {
              matrix[row+1][col].setNext(matrix[row+2][col]);
              matrix[row+2][col].setNext(matrix[row+3][col]);
              
-             shapesStick.add(new int[]{row,col});
+             shapesStick.add(new int[]{row,col,6});
              counter++;
              return true;//Shape created
          }
@@ -555,7 +555,7 @@ public class KenKen {
              matrix[row][col+1].setNext(matrix[row][col+2]);
              matrix[row][col+2].setNext(matrix[row][col+3]);
              
-             shapesStick.add(new int[]{row,col});
+             shapesStick.add(new int[]{row,col,6});
              counter++;
              return true;//Shape created
          }
@@ -598,7 +598,7 @@ public class KenKen {
              matrix[row+1][col].setNext(matrix[row+2][col]);           
              matrix[row+2][col].setNext(matrix[row+2][col+1]);       
              
-             shapesL.add(new int[]{row,col});
+             shapesL.add(new int[]{row,col,3});
              counter++;
              return true;//Shape created
          }
@@ -641,7 +641,7 @@ public class KenKen {
              matrix[row][col+1].setNext(matrix[row][col+2]);
              matrix[row][col+2].setNext(matrix[row+1][col+2]);
              
-             shapesL.add(new int[]{row,col});
+             shapesL.add(new int[]{row,col,3});
              counter++;
              return true;//Shape created
          }
