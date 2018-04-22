@@ -153,7 +153,7 @@ public class Solution {
             System.out.println(Integer.toString( permutation[i] ));
         }*/
         
-        while(i < permutation.length){
+        while(node != null){
 
             int x = node.getCoordinates()[0];
             int y = node.getCoordinates()[1];
@@ -187,6 +187,7 @@ public class Solution {
             for(int section = 0; section < shapes.get(shape).size(); section++){
                 int[] start = shapes.get(shape).get(section);
                 node1 = pMatrix[start[0]][start[1]];
+
                 node2 = new NodekenKen(node1.getValue(), node1.getCounter(), node1.getCoordinates()); 
                 matrix[node1.getCoordinates()[0]][node1.getCoordinates()[1]] = node2;
                 node1 = node1.getNext();
@@ -204,7 +205,7 @@ public class Solution {
                         node1 = node1.getNext();   
                         if(node1 != null){
                             temp =  new NodekenKen(node1.getValue(), node1.getCounter(), node1.getCoordinates());
-                            node2.setNext( node1 );
+                            node2.setNext( temp );
                             node2 = temp;
                             matrix[node1.getCoordinates()[0]][node1.getCoordinates()[1]] = node2;
                         }

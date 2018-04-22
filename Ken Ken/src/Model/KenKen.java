@@ -594,9 +594,9 @@ public class KenKen {
              matrix[row+2][col+1].setValues(counter, ' ', 0, new int[] {r,g,b});
 
              //Next and shapes
-             matrix[row][col].setNext(matrix[row+1][col]);
-             matrix[row+1][col].setNext(matrix[row+2][col]);
-             matrix[row+2][col].setNext(matrix[row+2][col+1]);
+             matrix[row][col].setNext(matrix[row+1][col]);             
+             matrix[row+1][col].setNext(matrix[row+2][col]);           
+             matrix[row+2][col].setNext(matrix[row+2][col+1]);       
              
              shapesL.add(new int[]{row,col});
              counter++;
@@ -745,8 +745,11 @@ public class KenKen {
       }
       
       private ArrayList<int[]> power(int result){
+          int finalValue = 0;
           ArrayList<int[]> uniqueValue = new ArrayList<>();
-          int finalValue = (int) (Math.pow(result+1, (1.0/3.0)));
+          if(result != 0){
+               finalValue = (int) (Math.pow(result+1, (1.0/3.0)));
+          }
           uniqueValue.add(new int[]{finalValue});
           return uniqueValue;
       }
