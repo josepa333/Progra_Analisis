@@ -6,6 +6,7 @@
 package View;
 
 import Model.KenKen;
+import Model.NodekenKen;
 import Model.Solution;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
@@ -38,7 +39,6 @@ public class proto extends javax.swing.JFrame {
         kenkenMatrix = new KenKen(5);
         xstream = new XStream(new DomDriver());
         kenkentable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        
     }
     
     
@@ -51,6 +51,9 @@ public class proto extends javax.swing.JFrame {
         }
         ArrayList<String> data = (ArrayList<String>) (xstream.fromXML(readerKenKen));
         kenkenMatrix = (KenKen) (xstream.fromXML(data.get(0)));
+        
+        kenkenMatrix.setMatrix( kenkenMatrix.getTemplate() );
+        
         size =  (Integer) (xstream.fromXML(data.get(1)));
         tablaBase.ver_tabla( kenkentable, size,  kenkenMatrix.getMatrix() );
     }
@@ -213,11 +216,15 @@ public class proto extends javax.swing.JFrame {
     }//GEN-LAST:event_generateBTActionPerformed
 
     private void solveBTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_solveBTActionPerformed
-        Solution solved = kenkenMatrix.solveKenKen();
+         String copy = xstream.toXML(kenkenMatrix.getMatrix());
+        kenkenMatrix.setTemplate( (NodekenKen[][]) (xstream.fromXML(copy)));
+        kenkenMatrix.setIlustrator((NodekenKen[][]) (xstream.fromXML(copy)));
         
+        Solution solved = kenkenMatrix.solveKenKen();
         if(solved.isFailure() == false){
             kenkenMatrix.setMatrix(solved.getMatrix());
-            tablaBase.ver_tabla( kenkentable, size,  kenkenMatrix.getMatrix());
+            kenkenMatrix.setDesing();
+            tablaBase.ver_tabla( kenkentable, size,  kenkenMatrix.getIlustrator());
         }
         else{
             JOptionPane.showMessageDialog(null, "No hay.");
