@@ -26,6 +26,14 @@ public class NodekenKen {
         coordinatates= pCoordinatates;
     }
     
+    public NodekenKen(int pValue, int pCounter, int[] pCoordinates){
+        next = null;
+        value = pValue;
+        check = true;
+        counter = pCounter;
+        coordinatates = pCoordinates;
+    }
+    
     public void setValues(int pCounter, char pOperator,int pResult, int pRGB[]){
         next=null;
         counter = pCounter;

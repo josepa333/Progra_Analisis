@@ -15,6 +15,7 @@ import java.util.Hashtable;
  * @author jose pablo
  */
 public class Solution {
+    private ArrayList<ArrayList<int[]>> shapes;
     private NodekenKen matrix[][];
     private boolean failure = false;
     private int shapeType;
@@ -179,12 +180,36 @@ public class Solution {
         }
     }
     
+    private void cloneMatrix(NodekenKen[][] pMatrix){
+        matrix = new NodekenKen[pMatrix.length][pMatrix.length];
+        
+        for(int shape = 0; shape < shapes.size(); shape++){
+            for(int section = 0; section < shapes.get(shape).size(); section++){
+                int[] start = shapes.get(shape).get(section);
+                NodekenKen node1 = pMatrix[start[0]][start[1]];
+                if(node1.isCheck()){
+                    while(node1 != null){
+                        NodekenKen node2 = new NodekenKen(node1.getValue(), node1.getCounter(), node1.getCoordinates());
+                        NodekenKen temp = node1.getNext();
+                        if(temp != null){
+                            NodekenKen node3 = new NodekenKen(temp.getValue(), temp.getCounter(), temp.getCoordinates());
+                            node2.setNext(node3);
+                        }
+                        matrix[node1.getCoordinates()[0]][node1.getCoordinates()[1]] = node2;
+                        node1 = node1.getNext();
+                    }
+                }
+            }
+        }
+    }
+    
     public Solution(){
         failure = true;
     }
     
-    public Solution(NodekenKen pMatrix[][]){
+    public Solution(NodekenKen pMatrix[][], ArrayList<ArrayList<int[]>> pShapes){
         matrix = pMatrix;
+        shapes = pShapes;
     }
      
     public Solution(Solution solution, int pShapeType, int[] pBeginOfSection, int[] pPermutation){

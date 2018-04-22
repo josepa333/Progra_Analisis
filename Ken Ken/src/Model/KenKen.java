@@ -66,6 +66,7 @@ public class KenKen {
     } 
      
     private Solution backTracking(Solution solution, int sectionId){
+        System.out.println("Section: " + sectionId);
         if(sectionId == sections.size()){
             return solution;
         }
@@ -73,9 +74,6 @@ public class KenKen {
         int[] sectionInfo = sections.get(sectionId);
         NodekenKen node = matrix[sectionInfo[0]][sectionInfo[1]];
         ArrayList<int[]> permutations = allPermutations.get(node.getCounter());
-        if(permutations.isEmpty()){
-            System.out.println("VACIO");
-        }
         for(int k = 0; k < permutations.size(); k++){
             Solution child = new Solution(solution, sectionInfo[2], sectionInfo, permutations.get(k));
             if(child.isPromising()){
@@ -87,7 +85,7 @@ public class KenKen {
                 } 
             }
         }
-        return solution;
+        return new Solution();
     }
  
      private void createNodes(){
