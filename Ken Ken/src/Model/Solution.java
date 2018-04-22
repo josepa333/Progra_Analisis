@@ -6,8 +6,6 @@
 package Model;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Hashtable;
 
 
 /**
@@ -15,7 +13,7 @@ import java.util.Hashtable;
  * @author jose pablo
  */
 public class Solution {
-    private ArrayList<ArrayList<int[]>> shapes;
+    private static ArrayList<ArrayList<int[]>> shapes;
     private NodekenKen matrix[][];
     private boolean failure = false;
     private int shapeType;
@@ -182,30 +180,33 @@ public class Solution {
     
     private void cloneMatrix(NodekenKen[][] pMatrix){
         matrix = new NodekenKen[pMatrix.length][pMatrix.length];
-
+        NodekenKen node1;
+        NodekenKen node2;
+        NodekenKen temp;
         for(int shape = 0; shape < shapes.size(); shape++){
             for(int section = 0; section < shapes.get(shape).size(); section++){
                 int[] start = shapes.get(shape).get(section);
-                NodekenKen node1 = pMatrix[start[0]][start[1]];
-                NodekenKen tmp2 = node1.getNext();
-                
-                NodekenKen tmp = new NodekenKen(node1.getValue(), node1.getCounter(), node1.getCoordinates()); 
-                matrix[node1.getCoordinates()[0]][node1.getCoordinates()[1]] = tmp;
-                
-                if(tmp2 != null){
-                    node1 =  new NodekenKen(tmp2.getValue(), tmp2.getCounter(), tmp2.getCoordinates());
-                    tmp.setNext( node1 );
-                    matrix[tmp2.getCoordinates()[0]][tmp2.getCoordinates()[1]] = node1;
-                    tmp2 = tmp2.getNext();           
-                    if(tmp2 != null){
-                        node1 =  new NodekenKen(tmp2.getValue(), tmp2.getCounter(), tmp2.getCoordinates());
-                        tmp.setNext( node1 );
-                        matrix[tmp2.getCoordinates()[0]][tmp2.getCoordinates()[1]] = node1;
-                        tmp2 = tmp2.getNext();   
-                        if(tmp2 != null){
-                            node1 =  new NodekenKen(tmp2.getValue(), tmp2.getCounter(), tmp2.getCoordinates());
-                            tmp.setNext( node1 );
-                            matrix[tmp2.getCoordinates()[0]][tmp2.getCoordinates()[1]] = node1;
+                node1 = pMatrix[start[0]][start[1]];
+                node2 = new NodekenKen(node1.getValue(), node1.getCounter(), node1.getCoordinates()); 
+                matrix[node1.getCoordinates()[0]][node1.getCoordinates()[1]] = node2;
+                node1 = node1.getNext();
+                if(node1 != null){
+                    temp =  new NodekenKen(node1.getValue(), node1.getCounter(), node1.getCoordinates());
+                    node2.setNext( temp );
+                    node2 = temp;
+                    matrix[node1.getCoordinates()[0]][node1.getCoordinates()[1]] = node2;
+                    node1 = node1.getNext();           
+                    if(node1 != null){
+                        temp =  new NodekenKen(node1.getValue(), node1.getCounter(), node1.getCoordinates());
+                        node2.setNext( temp );
+                        node2 = temp;
+                        matrix[node1.getCoordinates()[0]][node1.getCoordinates()[1]] = node2;
+                        node1 = node1.getNext();   
+                        if(node1 != null){
+                            temp =  new NodekenKen(node1.getValue(), node1.getCounter(), node1.getCoordinates());
+                            node2.setNext( node1 );
+                            node2 = temp;
+                            matrix[node1.getCoordinates()[0]][node1.getCoordinates()[1]] = node2;
                         }
                     }
                 }
@@ -223,7 +224,7 @@ public class Solution {
     }
      
     public Solution(Solution solution, int pShapeType, int[] pBeginOfSection, int[] pPermutation){
-        matrix = solution.getMatrix().clone();
+        cloneMatrix(solution.getMatrix());
         System.out.println("MatrixSolution");
         for(int i = 0; i < matrix.length; i++){
             for(int j = 0; j < matrix[i].length; j++){
