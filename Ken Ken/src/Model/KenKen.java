@@ -26,7 +26,11 @@ public class KenKen {
      private ArrayList<int[]> shapesT;
      private ArrayList<int[]> shapesStick;
      private HashMap<Integer,ArrayList<int[]>> allPermutations;
+     
+     //matrix  
      private NodekenKen matrix[][];
+     private NodekenKen template[][];
+     private NodekenKen ilustrator[][];
      
      private int counter;
      private char[] operations;
@@ -98,12 +102,14 @@ public class KenKen {
       
      public void changeMatrix(int pSize){
          size = pSize;
+         template = new NodekenKen[size][size];
          fillMatrixValues();
          System.out.println("Fill done");
          setValues();
          System.out.println("values done");
          fillMatrix();
          System.out.println("fill Big done");
+         
      }
      
     public void setValues(){
@@ -281,9 +287,7 @@ public class KenKen {
              
              matrix[row][col].setValues(counter, operations[operation], result, new int[] {r,g,b} );//create the four nodes
              matrix[row][col+1].setValues(counter, ' ', 0, new int[] {r,g,b});
-             
-             matrix[row][col].setCheck(false);
-             matrix[row][col+1].setCheck(false);  //The will have a operation asigned
+
              
              //Next and add to array shapes 
              matrix[row][col].setNext(matrix[row][col+1]);
@@ -309,9 +313,7 @@ public class KenKen {
             
              matrix[row][col].setValues(counter, operations[operation], result, new int[] {r,g,b});//create the four nodes
              matrix[row+1][col].setValues(counter, ' ', 0, new int[] {r,g,b});
-             
-             matrix[row][col].setCheck(false);
-             matrix[row+1][col].setCheck(false);
+
              
              matrix[row][col].setNext(matrix[row+1][col]);
              twoNodes.add(new int[]{row,col});
@@ -379,7 +381,6 @@ public class KenKen {
          int b =  (int) (Math.random() * 255) + 1;
 
         matrix[row][col].setValues(counter, operations[5], result, new int[] {r,g,b});
-        matrix[row][col].setCheck(false);
         oneNode.add(new int[]{row,col});
         counter++;
         return true;
@@ -415,11 +416,6 @@ public class KenKen {
              matrix[row][col+1].setValues(counter, ' ', 0, new int[] {r,g,b});
              matrix[row+1][col].setValues(counter,  ' ', 0, new int[] {r,g,b});
              matrix[row+1][col-1].setValues(counter, ' ', 0, new int[] {r,g,b});
-             
-             matrix[row][col].setCheck(false);
-             matrix[row][col+1].setCheck(false);
-             matrix[row+1][col].setCheck(false);
-             matrix[row+1][col-1].setCheck(false); //The will have a operation asigned
              
              //Next and shapes
              matrix[row][col].setNext(matrix[row][col+1]);
@@ -465,11 +461,6 @@ public class KenKen {
              matrix[row+1][col].setValues(counter,  ' ', 0, new int[] {r,g,b});
              matrix[row+1][col-1].setValues(counter, ' ', 0, new int[] {r,g,b});
              
-             matrix[row][col].setCheck(false);
-             matrix[row+1][col+1].setCheck(false);
-             matrix[row+1][col].setCheck(false);
-             matrix[row+1][col-1].setCheck(false); //The will have a operation asigned
-             
              //nex and shapes
              matrix[row][col].setNext(matrix[row+1][col+1]);
              matrix[row+1][col+1].setNext(matrix[row+1][col]);
@@ -513,11 +504,6 @@ public class KenKen {
              matrix[row+1][col].setValues(counter, ' ', 0, new int[] {r,g,b});
              matrix[row+2][col].setValues(counter,  ' ', 0, new int[] {r,g,b});
              matrix[row+3][col].setValues(counter, ' ', 0, new int[] {r,g,b});
-             
-             matrix[row][col].setCheck(false);
-             matrix[row+1][col].setCheck(false);
-             matrix[row+2][col].setCheck(false);
-             matrix[row+3][col].setCheck(false); //The will have a operation asigned
              
              //Next and shaps
              matrix[row][col].setNext(matrix[row+1][col]);
@@ -564,11 +550,6 @@ public class KenKen {
              matrix[row][col+2].setValues(counter,  ' ', 0, new int[] {r,g,b});
              matrix[row][col+3].setValues(counter, ' ', 0, new int[] {r,g,b});
              
-             matrix[row][col].setCheck(false);
-             matrix[row][col+1].setCheck(false);
-             matrix[row][col+2].setCheck(false);
-             matrix[row][col+3].setCheck(false); //The will have a operation asigned
-             
              //Next and hsapes
              matrix[row][col].setNext(matrix[row][col+1]);
              matrix[row][col+1].setNext(matrix[row][col+2]);
@@ -611,12 +592,7 @@ public class KenKen {
              matrix[row+1][col].setValues(counter, ' ', 0, new int[] {r,g,b});
              matrix[row+2][col].setValues(counter,  ' ', 0, new int[] {r,g,b});
              matrix[row+2][col+1].setValues(counter, ' ', 0, new int[] {r,g,b});
-             
-             matrix[row][col].setCheck(false);
-             matrix[row+1][col].setCheck(false);
-             matrix[row+2][col].setCheck(false);
-             matrix[row+2][col+1].setCheck(false); //The will have a operation asigned
-             
+
              //Next and shapes
              matrix[row][col].setNext(matrix[row+1][col]);
              matrix[row+1][col].setNext(matrix[row+2][col]);
@@ -659,12 +635,7 @@ public class KenKen {
              matrix[row][col+1].setValues(counter, ' ', 0, new int[] {r,g,b});
              matrix[row][col+2].setValues(counter,  ' ', 0, new int[] {r,g,b});
              matrix[row+1][col+2].setValues(counter, ' ', 0, new int[] {r,g,b});
-             
-             matrix[row][col].setCheck(false);
-             matrix[row][col+1].setCheck(false);
-             matrix[row][col+2].setCheck(false);
-             matrix[row+1][col+2].setCheck(false); //The will have a operation asigned
-             
+
              //Next and shapes
              matrix[row][col].setNext(matrix[row][col+1]);
              matrix[row][col+1].setNext(matrix[row][col+2]);
@@ -1015,6 +986,15 @@ public class KenKen {
          }
     
       //sets and gets 
+        
+        public void setDesing(){
+            for (int i = 0; i < size; i++) {
+                for (int j = 0; j < size; j++) {
+                    ilustrator[i][j].setValue( matrix[i][j].getValue() );
+                }
+            }
+        }         
+                
       public NodekenKen[][] getMatrix() {
           return matrix;
       }
@@ -1046,4 +1026,22 @@ public class KenKen {
         public void setSize(int size) {
             this.size = size;
         }
+
+        public NodekenKen[][] getTemplate() {
+            return template;
+        }
+
+        public void setTemplate(NodekenKen[][] template) {
+            this.template = template;
+        }
+
+        public NodekenKen[][] getIlustrator() {
+            return ilustrator;
+        }
+
+        public void setIlustrator(NodekenKen[][] ilustrator) {
+            this.ilustrator = ilustrator;
+        }
+        
+        
 }
