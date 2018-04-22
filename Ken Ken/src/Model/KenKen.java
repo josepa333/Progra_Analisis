@@ -65,7 +65,7 @@ public class KenKen {
      }
      
     public Solution solveKenKen(){
-        Solution solution = new Solution(matrix);
+        Solution solution = new Solution(matrix,shapes);
         return backTracking(solution, 0);
     } 
      

@@ -182,21 +182,31 @@ public class Solution {
     
     private void cloneMatrix(NodekenKen[][] pMatrix){
         matrix = new NodekenKen[pMatrix.length][pMatrix.length];
-        
+
         for(int shape = 0; shape < shapes.size(); shape++){
             for(int section = 0; section < shapes.get(shape).size(); section++){
                 int[] start = shapes.get(shape).get(section);
                 NodekenKen node1 = pMatrix[start[0]][start[1]];
-                if(node1.isCheck()){
-                    while(node1 != null){
-                        NodekenKen node2 = new NodekenKen(node1.getValue(), node1.getCounter(), node1.getCoordinates());
-                        NodekenKen temp = node1.getNext();
-                        if(temp != null){
-                            NodekenKen node3 = new NodekenKen(temp.getValue(), temp.getCounter(), temp.getCoordinates());
-                            node2.setNext(node3);
+                NodekenKen tmp2 = node1.getNext();
+                
+                NodekenKen tmp = new NodekenKen(node1.getValue(), node1.getCounter(), node1.getCoordinates()); 
+                matrix[node1.getCoordinates()[0]][node1.getCoordinates()[1]] = tmp;
+                
+                if(tmp2 != null){
+                    node1 =  new NodekenKen(tmp2.getValue(), tmp2.getCounter(), tmp2.getCoordinates());
+                    tmp.setNext( node1 );
+                    matrix[tmp2.getCoordinates()[0]][tmp2.getCoordinates()[1]] = node1;
+                    tmp2 = tmp2.getNext();           
+                    if(tmp2 != null){
+                        node1 =  new NodekenKen(tmp2.getValue(), tmp2.getCounter(), tmp2.getCoordinates());
+                        tmp.setNext( node1 );
+                        matrix[tmp2.getCoordinates()[0]][tmp2.getCoordinates()[1]] = node1;
+                        tmp2 = tmp2.getNext();   
+                        if(tmp2 != null){
+                            node1 =  new NodekenKen(tmp2.getValue(), tmp2.getCounter(), tmp2.getCoordinates());
+                            tmp.setNext( node1 );
+                            matrix[tmp2.getCoordinates()[0]][tmp2.getCoordinates()[1]] = node1;
                         }
-                        matrix[node1.getCoordinates()[0]][node1.getCoordinates()[1]] = node2;
-                        node1 = node1.getNext();
                     }
                 }
             }
