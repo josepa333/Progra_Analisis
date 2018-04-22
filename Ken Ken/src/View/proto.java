@@ -202,10 +202,12 @@ public class proto extends javax.swing.JFrame {
 
     private void saveBTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBTActionPerformed
         saveXML();
+        JOptionPane.showMessageDialog(null, "Saved.");
     }//GEN-LAST:event_saveBTActionPerformed
 
     private void loadBTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadBTActionPerformed
         loadXML();
+        JOptionPane.showMessageDialog(null, "Loaded");
     }//GEN-LAST:event_loadBTActionPerformed
 
     private void generateBTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generateBTActionPerformed

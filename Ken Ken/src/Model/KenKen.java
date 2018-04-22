@@ -277,9 +277,9 @@ public class KenKen {
              int result= determineResultForTwoNodes(counter,operation,matrixOfValues[row][col] , matrixOfValues[row][col+1] );
              //Permutations
              
-             int r =  (int) (Math.random() * 255) + 1;
-             int g =  (int) (Math.random() * 255) + 1;
-             int b =  (int) (Math.random() * 255) + 1;
+             int r =  (int) (Math.random() * 235) +20;
+             int g =  (int) (Math.random() * 235) + 20;
+             int b =  (int) (Math.random() * 235) + 20;
              
              matrix[row][col].setValues(counter, operations[operation], result, new int[] {r,g,b} );//create the four nodes
              matrix[row][col+1].setValues(counter, ' ', 0, new int[] {r,g,b});
@@ -303,9 +303,9 @@ public class KenKen {
              }
              
              int result = determineResultForTwoNodes(counter,operation,matrixOfValues[row][col] , matrixOfValues[row+1][col] );
-             int r =  (int) (Math.random() * 255) + 1;
-             int g =  (int) (Math.random() * 255) + 1;
-             int b =  (int) (Math.random() * 255) + 1;
+             int r =  (int) (Math.random() * 235) +20;
+             int g =  (int) (Math.random() * 235) +20;
+             int b =  (int) (Math.random() * 235) +20;
             
              matrix[row][col].setValues(counter, operations[operation], result, new int[] {r,g,b});//create the four nodes
              matrix[row+1][col].setValues(counter, ' ', 0, new int[] {r,g,b});
@@ -342,9 +342,9 @@ public class KenKen {
              int result = determineResultForValuesSquare(counter,operation, matrixOfValues[row][col],
                      matrixOfValues[row][col+1],matrixOfValues[row+1][col],matrixOfValues[row+1][col+1]);
              
-             int r =  (int) (Math.random() * 255) + 1;
-             int g =  (int) (Math.random() * 255) + 1;
-             int b =  (int) (Math.random() * 255) + 1;
+             int r =  (int) (Math.random() * 235) +20;
+             int g =  (int) (Math.random() * 235) +20;
+             int b =  (int) (Math.random() * 235) +20;
  
              matrix[row][col].setValues(counter, operations[operation], result, new int[] {r,g,b});//create the four nodes
              matrix[row][col+1].setValues(counter, ' ', 0, new int[] {r,g,b});
@@ -372,9 +372,9 @@ public class KenKen {
           
          int result = (int) Math.pow(matrixOfValues[row][col],3);
          allPermutations.put(counter, power(result));
-         int r =  (int) (Math.random() * 255) + 1;
-         int g =  (int) (Math.random() * 255) + 1;
-         int b =  (int) (Math.random() * 255) + 1;
+         int r =  (int) (Math.random() *235) +20;
+         int g =  (int) (Math.random() *235) +20;
+         int b =  (int) (Math.random() * 235) +20;
 
         matrix[row][col].setValues(counter, operations[5], result, new int[] {r,g,b});
         oneNode.add(new int[]{row,col,0});
@@ -404,9 +404,9 @@ public class KenKen {
              int result = determineResultForValuesSquare(counter,operation,matrixOfValues[row][col],
                      matrixOfValues[row][col+1],matrixOfValues[row+1][col],matrixOfValues[row+1][col-1]);
              
-             int r =  (int) (Math.random() * 255) + 1;
-             int g =  (int) (Math.random() * 255) + 1;
-             int b =  (int) (Math.random() * 255) + 1;
+             int r =  (int) (Math.random() * 235) +20;
+             int g =  (int) (Math.random() *235) +20;
+             int b =  (int) (Math.random() *235) +20;
  
              matrix[row][col].setValues(counter, operations[operation], result, new int[] {r,g,b});//create the four nodes
              matrix[row][col+1].setValues(counter, ' ', 0, new int[] {r,g,b});
@@ -448,9 +448,9 @@ public class KenKen {
              int result = determineResultForValuesSquare(counter, operation, matrixOfValues[row][col],
                     matrixOfValues[row+1][col-1],matrixOfValues[row+1][col],matrixOfValues[row+1][col+1]);
              
-             int r =  (int) (Math.random() * 255) + 1;
-             int g =  (int) (Math.random() * 255) + 1;
-             int b =  (int) (Math.random() * 255) + 1;
+             int r =  (int) (Math.random() * 235) +20;
+             int g =  (int) (Math.random() * 235) +20;
+             int b =  (int) (Math.random() * 235) +20;
  
              matrix[row][col].setValues(counter, operations[operation], result, new int[] {r,g,b});//create the four nodes
              matrix[row+1][col+1].setValues(counter, ' ', 0, new int[] {r,g,b});
@@ -492,9 +492,9 @@ public class KenKen {
              int result = determineResultForValuesSquare(counter,operation,matrixOfValues[row][col],
                      matrixOfValues[row+1][col],matrixOfValues[row+2][col],matrixOfValues[row+3][col]);
              
-             int r =  (int) (Math.random() * 255) + 1;
-             int g =  (int) (Math.random() * 255) + 1;
-             int b =  (int) (Math.random() * 255) + 1;
+             int r =  (int) (Math.random() * 235) +20;
+             int g =  (int) (Math.random() * 235) +20;
+             int b =  (int) (Math.random() * 235) +20;
  
              matrix[row][col].setValues(counter, operations[operation], result, new int[] {r,g,b});//create the four nodes
              matrix[row+1][col].setValues(counter, ' ', 0, new int[] {r,g,b});
@@ -537,9 +537,9 @@ public class KenKen {
              int result = determineResultForValuesSquare(counter,operation,matrixOfValues[row][col],
                      matrixOfValues[row][col+1],matrixOfValues[row][col+2],matrixOfValues[row][col+3]);
              
-             int r =  (int) (Math.random() * 255) + 1;
-             int g =  (int) (Math.random() * 255) + 1;
-             int b =  (int) (Math.random() * 255) + 1;
+             int r =  (int) (Math.random() * 235) +20;
+             int g =  (int) (Math.random() *235) +20;
+             int b =  (int) (Math.random() *235) +20;
  
              matrix[row][col].setValues(counter, operations[operation], result, new int[] {r,g,b});//create the four nodes
              matrix[row][col+1].setValues(counter, ' ', 0, new int[] {r,g,b});
@@ -580,9 +580,9 @@ public class KenKen {
              int result = determineResultForValuesSquare(counter,operation,matrixOfValues[row][col],
                      matrixOfValues[row+1][col],matrixOfValues[row+2][col],matrixOfValues[row+2][col+1]);
              
-             int r =  (int) (Math.random() * 255) + 1;
-             int g =  (int) (Math.random() * 255) + 1;
-             int b =  (int) (Math.random() * 255) + 1;
+             int r =  (int) (Math.random() * 235) +20;
+             int g =  (int) (Math.random() * 235) +20;
+             int b =  (int) (Math.random() * 235) +20;
  
              matrix[row][col].setValues(counter, operations[operation], result, new int[] {r,g,b});//create the four nodes
              matrix[row+1][col].setValues(counter, ' ', 0, new int[] {r,g,b});
@@ -623,9 +623,9 @@ public class KenKen {
              int result = determineResultForValuesSquare(counter,operation,matrixOfValues[row][col],
                      matrixOfValues[row][col+1],matrixOfValues[row][col+2],matrixOfValues[row+1][col+2]);
              
-             int r =  (int) (Math.random() * 255) + 1;
-             int g =  (int) (Math.random() * 255) + 1;
-             int b =  (int) (Math.random() * 255) + 1;
+             int r =  (int) (Math.random() * 235) +20;
+             int g =  (int) (Math.random() * 235) +20;
+             int b =  (int) (Math.random() * 235) +20;
  
              matrix[row][col].setValues(counter, operations[operation], result, new int[] {r,g,b});//create the four nodes
              matrix[row][col+1].setValues(counter, ' ', 0, new int[] {r,g,b});
