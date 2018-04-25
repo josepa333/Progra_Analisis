@@ -6,6 +6,7 @@
 package Model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 
 /**
@@ -14,6 +15,8 @@ import java.util.ArrayList;
  */
 public class Solution {
     private static ArrayList<ArrayList<int[]>> shapes;
+    private ArrayList<ArrayList<Integer>> rows;
+    private ArrayList<ArrayList<Integer>> cols;
     private NodekenKen matrix[][];
     private boolean failure = false;
     private int shapeType;
@@ -159,7 +162,7 @@ public class Solution {
             int x = node.getCoordinates()[0];
             int y = node.getCoordinates()[1];
             int value = permutation[i];
-            if (checkRow(x,value) || checkColumn(y,value)) {
+            if (checkRow(x, value) || checkColumn(y, value)) {
                     return false;
             }
             node = node.getNext();
@@ -173,6 +176,8 @@ public class Solution {
         int i = 0;
         while(i < permutation.length){
             node.setValue(permutation[i]);
+//            rows.get(node.getCoordinates()[0]).add((Integer)permutation[i]);
+//            cols.get(node.getCoordinates()[1]).add((Integer)permutation[i]);
             node = node.getNext();
             i++;
         }
@@ -222,6 +227,12 @@ public class Solution {
     public Solution(NodekenKen pMatrix[][], ArrayList<ArrayList<int[]>> pShapes){
         matrix = pMatrix;
         shapes = pShapes;
+//        rows = new ArrayList<>();
+//        cols = new ArrayList<>();
+//        for(int x = 0; x < matrix.length; x++){
+//            rows.add(new ArrayList<>());
+//            cols.add(new ArrayList<>());
+//        }
     }
      
     public Solution(Solution solution, int[] sectionInfo, int[] pPermutation){
@@ -229,6 +240,8 @@ public class Solution {
         shapeType = sectionInfo[2];
         beginOfSection = sectionInfo;
         permutation = pPermutation;
+//        rows = new ArrayList<>(solution.getRows());
+//        cols = new ArrayList<>(solution.getCols());
     }
     
     public boolean isPromising(){
@@ -250,5 +263,13 @@ public class Solution {
 
     public NodekenKen[][] getMatrix() {
         return matrix;
+    }
+    
+    public ArrayList<ArrayList<Integer>> getRows(){
+        return rows;
+    }
+    
+    public ArrayList<ArrayList<Integer>> getCols(){
+        return cols;
     }
 }
