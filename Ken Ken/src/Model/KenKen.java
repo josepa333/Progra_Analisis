@@ -105,7 +105,7 @@ public class KenKen {
          fillMatrixValues();
          setValues();
          fillMatrix();
-         
+         fillShapes();
      }
      
     public void setValues(){
@@ -185,14 +185,52 @@ public class KenKen {
          return true;
     }    
      
+    private void fillShapes(){
+        if(oneNode.size() > 0){
+             insertionSort(oneNode);
+             shapes.add(oneNode);
+         }
+         if(twoNodes.size() > 0){
+             insertionSort(twoNodes);
+             shapes.add(twoNodes);
+         }
+         if(square.size() > 0){
+             insertionSort(square);
+             shapes.add(square);
+         }
+         if(shapesL.size() > 0){
+             insertionSort(shapesL);
+             shapes.add(shapesL);
+         }
+         if(shapesS.size() > 0){
+             insertionSort(shapesS);
+             shapes.add(shapesS);
+         }
+         if(shapesT.size() > 0){
+             insertionSort(shapesT);
+             shapes.add(shapesT);
+         }
+         if(shapesStick.size() > 0){
+             insertionSort(shapesStick);
+             shapes.add(shapesStick);
+         }
+         for(int i = 0; i < shapes.size(); i++){
+            for(int j = 0; j < shapes.get(i).size(); j++){
+                int[] sectionInfo = shapes.get(i).get(j);
+                sections.add(new int[]{sectionInfo[0], sectionInfo[1], sectionInfo[2]});
+            }
+        }
+    }
+    
      private void fillMatrix(){
-         
+         boolean flag;
+         int rand;
          for(int i=0; i < size;i++){
              for(int j = 0 ; j < size ; j++ ){//Cambiar a que maximo haga la cantidad de formas por recursion
                  if(matrix[i][j].isCheck() ==  true){ 
-                     boolean flag = false;
+                     flag = false;
                      while(flag == false){
-                         int rand = (int) (Math.random() * 9);
+                         rand= (int) (Math.random() * 9);
                          switch (rand) {
                              case 0:
                                  flag = createSquare(i,j);
@@ -229,40 +267,6 @@ public class KenKen {
                  }
              }
          }
-         if(oneNode.size() > 0){
-             insertionSort(oneNode);
-             shapes.add(oneNode);
-         }
-         if(twoNodes.size() > 0){
-             insertionSort(twoNodes);
-             shapes.add(twoNodes);
-         }
-         if(square.size() > 0){
-             insertionSort(square);
-             shapes.add(square);
-         }
-         if(shapesL.size() > 0){
-             insertionSort(shapesL);
-             shapes.add(shapesL);
-         }
-         if(shapesS.size() > 0){
-             insertionSort(shapesS);
-             shapes.add(shapesS);
-         }
-         if(shapesT.size() > 0){
-             insertionSort(shapesT);
-             shapes.add(shapesT);
-         }
-         if(shapesStick.size() > 0){
-             insertionSort(shapesStick);
-             shapes.add(shapesStick);
-         }
-         for(int i = 0; i < shapes.size(); i++){
-            for(int j = 0; j < shapes.get(i).size(); j++){
-                int[] sectionInfo = shapes.get(i).get(j);
-                sections.add(new int[]{sectionInfo[0], sectionInfo[1], sectionInfo[2]});
-            }
-        }
      }
      
      //Shapes
@@ -764,19 +768,6 @@ public class KenKen {
                 if(j == 0 || i == 0 || i == j)
                     continue;
                 if( i * j == result){
-                    //System.out.println(Integer.toString(i) +" " +Integer.toString(j)  );
-                    pairs.add(new int[]{i,j});
-                }
-            }
-        }
-        return pairs;
-    }
-    
-    public ArrayList<int[]>  divition2(int result){
-        ArrayList<int[]> pairs = new ArrayList<>();
-        for (int i = 0; i < size; i++) {
-            for (int j = i; j > 0; j--) {
-                if( i / j == result && i != j){
                     //System.out.println(Integer.toString(i) +" " +Integer.toString(j)  );
                     pairs.add(new int[]{i,j});
                 }
