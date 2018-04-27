@@ -15,8 +15,8 @@ import java.util.HashMap;
  */
 public class Solution {
     private static ArrayList<ArrayList<int[]>> shapes;
-    private ArrayList<ArrayList<Integer>> rows;
-    private ArrayList<ArrayList<Integer>> cols;
+//    private ArrayList<ArrayList<Integer>> rows;
+//    private ArrayList<ArrayList<Integer>> cols;
     private NodekenKen matrix[][];
     private boolean failure = false;
     private int shapeType;
@@ -234,9 +234,10 @@ public class Solution {
 //            cols.add(new ArrayList<>());
 //        }
     }
-     
+    
     public Solution(Solution solution, int[] sectionInfo, int[] pPermutation){
         cloneMatrix(solution.getMatrix());
+        
         shapeType = sectionInfo[2];
         beginOfSection = sectionInfo;
         permutation = pPermutation;
@@ -265,11 +266,11 @@ public class Solution {
         return matrix;
     }
     
-    public ArrayList<ArrayList<Integer>> getRows(){
-        return rows;
-    }
-    
-    public ArrayList<ArrayList<Integer>> getCols(){
-        return cols;
-    }
+//    public ArrayList<ArrayList<Integer>> getRows(){
+//        return rows;
+//    }
+//    
+//    public ArrayList<ArrayList<Integer>> getCols(){
+//        return cols;
+//    }
 }

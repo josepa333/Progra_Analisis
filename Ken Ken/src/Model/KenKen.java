@@ -7,9 +7,12 @@ package Model;
 
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Random;
+import java.util.Set;
 
 /**
  *
@@ -66,10 +69,11 @@ public class KenKen {
      
     public Solution solveKenKen(){
         Solution solution = new Solution(matrix,shapes);
-        return backTracking(solution, 0);
+//        return backTrackingIterativePermutations(solution, 0);
+        return backTrackingRandomPermutations(solution, 0);
     } 
      
-    private Solution backTracking(Solution solution, int sectionId){
+    private Solution backTrackingIterativePermutations(Solution solution, int sectionId){
         if(sectionId == sections.size()){
             return solution;
         }
@@ -82,7 +86,33 @@ public class KenKen {
             if(child.isPromising()){
                 int copySectionId = sectionId;
                 copySectionId += 1;
-                Solution result = backTracking(child, copySectionId);
+                Solution result = backTrackingIterativePermutations(child, copySectionId);
+                if(result.isFailure() == false){
+                    return result;
+                } 
+            }
+        }
+        return new Solution();
+    }
+    
+    private Solution backTrackingRandomPermutations(Solution solution, int sectionId){
+        if(sectionId == sections.size()){
+            return solution;
+        }
+        
+        int[] sectionInfo = sections.get(sectionId);
+        NodekenKen node = matrix[sectionInfo[0]][sectionInfo[1]];
+        ArrayList<int[]> permutations = allPermutations.get(node.getCounter());
+        ArrayList<int[]> permutationsCopy = new ArrayList<>(permutations);
+        Random random = new Random();
+        for(int k = 0; k < permutations.size(); k++){
+            int permutationIndex = random.nextInt(permutationsCopy.size());
+            Solution child = new Solution(solution, sectionInfo, permutationsCopy.get(permutationIndex));
+            permutationsCopy.remove(permutationIndex);
+            if(child.isPromising()){
+                int copySectionId = sectionId;
+                copySectionId += 1;
+                Solution result = backTrackingRandomPermutations(child, copySectionId);
                 if(result.isFailure() == false){
                     return result;
                 } 
