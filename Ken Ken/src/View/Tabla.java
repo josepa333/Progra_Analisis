@@ -43,8 +43,8 @@ public class Tabla {
                     if(size > 10){
                         botonPeso.setFont(new Font("Serif",Font.BOLD,8));//12 para  5 esta bien 
                     }
-                    
                     fila[j] =botonPeso;
+                    
                 }
                 tablaPredeterminada.addRow(fila);
             }

@@ -8,6 +8,7 @@ package View;
 import Model.KenKen;
 import Model.NodekenKen;
 import Model.Solution;
+import Model.Stopwatch;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 import java.io.FileNotFoundException;
@@ -221,8 +222,10 @@ public class proto extends javax.swing.JFrame {
          String copy = xstream.toXML(kenkenMatrix.getMatrix());
         kenkenMatrix.setTemplate( (NodekenKen[][]) (xstream.fromXML(copy)));
         kenkenMatrix.setIlustrator((NodekenKen[][]) (xstream.fromXML(copy)));
-        
+        Stopwatch stp = new Stopwatch();
         Solution solved = kenkenMatrix.solveKenKen();
+        double time = stp.elapsedTime();
+        System.out.printf("Solving the kenken:  %e\n", time);
         if(solved.isFailure() == false){
             kenkenMatrix.setMatrix(solved.getMatrix());
             kenkenMatrix.setDesing();

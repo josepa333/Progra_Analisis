@@ -68,6 +68,7 @@ public class KenKen {
      }
      
     public Solution solveKenKen(){
+        
         Solution solution = new Solution(matrix,shapes);
 //        return backTrackingIterativePermutations(solution, 0);
         return backTrackingRandomPermutations(solution, 0);
@@ -130,12 +131,15 @@ public class KenKen {
      }
       
      public void changeMatrix(int pSize){
+         Stopwatch stp = new Stopwatch();
          size = pSize;
          template = new NodekenKen[size][size];
          fillMatrixValues();
          setValues();
          fillMatrix();
          fillShapes();
+         double time = stp.elapsedTime();
+         System.out.printf("Creation of the kenken:  %e\n", time);
      }
      
     public void setValues(){
