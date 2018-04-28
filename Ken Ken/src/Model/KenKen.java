@@ -71,8 +71,8 @@ public class KenKen {
     public Solution solveKenKen(){
         
         Solution solution = new Solution(matrix,shapes);
-//        return backTrackingIterativePermutations(solution, 0);
-        return backTrackingRandomPermutations(solution, 0);
+        return backTrackingIterativePermutations(solution, 0);
+//        return backTrackingRandomPermutations(solution, 0);
     } 
      
     private Solution backTrackingIterativePermutations(Solution solution, int sectionId){
