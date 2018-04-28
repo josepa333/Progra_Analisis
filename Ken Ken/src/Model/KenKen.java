@@ -8,6 +8,7 @@ package Model;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -42,7 +43,7 @@ public class KenKen {
      //Matrix values  
      private int matrixOfValues[][];
      private boolean doneValues;
-      private int[] rangeOfValues;
+      private ArrayList<Integer> rangeOfValues;
     
      
      public  KenKen(int pSize){
@@ -51,7 +52,7 @@ public class KenKen {
          matrix = new NodekenKen[size][size];
          matrixOfValues = new int[size][size];
          operations = new char[] {'+','-','*','/','%','^'};
-         rangeOfValues = new int[] {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18};
+         rangeOfValues = new ArrayList();
          shapes = new ArrayList<>();
          sections = new ArrayList<>();
          oneNode = new ArrayList<>();
@@ -131,15 +132,24 @@ public class KenKen {
      }
       
      public void changeMatrix(int pSize){
-         Stopwatch stp = new Stopwatch();
          size = pSize;
          template = new NodekenKen[size][size];
+         fillRangeOfValues();
          fillMatrixValues();
          setValues();
+         
+         Stopwatch stp = new Stopwatch();
          fillMatrix();
-         fillShapes();
          double time = stp.elapsedTime();
          System.out.printf("Creation of the kenken:  %e\n", time);
+         
+         fillShapes();
+     }
+     
+     public void fillRangeOfValues(){
+         for (int i = 0; i < size; i++) {
+             rangeOfValues.add(i);
+         }
      }
      
     public void setValues(){
@@ -161,9 +171,10 @@ public class KenKen {
             }
             int value;
             for (int k = 0; k < size; k++) {
-                value = rangeOfValues[k];
+                value = rangeOfValues.get(k);
                 if(checkRow(i,value) && checkColumn(j,value)){
                     matrixOfValues[i][j] = value;
+                    Collections.shuffle(rangeOfValues);
                     setValues();
                 }
             }
