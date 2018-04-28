@@ -236,8 +236,8 @@ public class Solution {
     }
     
     public Solution(Solution solution, int[] sectionInfo, int[] pPermutation){
-        cloneMatrix(solution.getMatrix());
         
+        matrix = solution.getMatrix();
         shapeType = sectionInfo[2];
         beginOfSection = sectionInfo;
         permutation = pPermutation;
@@ -248,6 +248,7 @@ public class Solution {
     public boolean isPromising(){
         if(podeByShape()){
             if(podeByRowColumn()){
+                cloneMatrix(matrix);
                 addPermutation();
                 return true;
             }
