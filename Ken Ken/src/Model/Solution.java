@@ -6,8 +6,6 @@
 package Model;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-
 
 /**
  *
@@ -246,15 +244,15 @@ public class Solution {
     }
     
     public boolean isPromising(){
-        if(podeByShape()){
+     if(podeByShape()){
             if(podeByRowColumn()){
                 cloneMatrix(matrix);
                 addPermutation();
                 return true;
             }
-            else{
+         else{
                 return false;
-            }
+          }
         }
         return false;
     }
