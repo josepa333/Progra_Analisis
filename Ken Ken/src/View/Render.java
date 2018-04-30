@@ -26,7 +26,6 @@ public class Render extends DefaultTableCellRenderer{
                 
             }else{
                 boton.setForeground(table.getForeground());
-                
             }
             return boton;
         }

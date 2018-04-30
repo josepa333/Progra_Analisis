@@ -5,38 +5,41 @@
  */
 package Model;
 import View.Tabla;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 /**
  *
  * @author jose pablo
  */
 public class TableUpdater extends Thread{
-   private Tabla baseTable;
-   private JTable table;
-   private int size;
-   private NodekenKen matrix[][];
+    private Tabla baseTable;
+    private JTable table;
+    private KenKen kenken;
     
-    
-    
-    public TableUpdater(String msg,Tabla pBaseTable,JTable pTable,int pSize, NodekenKen pMatrix[][]){
+    public TableUpdater(String msg,Tabla pBaseTable,JTable pTable,KenKen pKenKen){
         super(msg);
         baseTable = pBaseTable;
         table = pTable;
-        size = pSize;
-        matrix= pMatrix;
+        kenken = pKenKen; 
     }
     
     public void run(){
-        try{
-            while(true){
-                System.out.println("Update");
-                baseTable.ver_tabla(table, size, matrix);
-                Thread.sleep(1000);
-                
+        
+        try {
+            while(kenken.isFinished() == false){
+                Thread.sleep(500);
+                kenken.setDesing();
+                baseTable.ver_tabla(table, kenken.getSize(), kenken.getIlustrator());
             }
         }
-        catch(InterruptedException e){
-            System.out.println("Drop table updater");
+        catch (InterruptedException ex) {
+            Logger.getLogger(TableUpdater.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        catch (Exception ex) {
+            Logger.getLogger(TableUpdater.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Catch");
         }
     }
 }

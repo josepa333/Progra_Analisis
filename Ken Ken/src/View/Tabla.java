@@ -31,11 +31,21 @@ public class Tabla {
                     JButton botonPeso;
                     NodekenKen x = matriz[i][j];
                     if(x.getOperator() == ' '){
-                        botonPeso = new JButton(Integer.toString(matriz[i][j].getValue()));
+                        if(matriz[i][j].getValue() != -10){
+                            botonPeso = new JButton(Integer.toString(matriz[i][j].getValue()));
+                        }
+                        else{
+                            botonPeso = new JButton(" ");
+                        }   
                     }
                     else{
-                        botonPeso = new JButton( matriz[i][j].getOperator() +Integer.toString(matriz[i][j].getResult())+ 
+                        if(matriz[i][j].getValue() != -10){
+                            botonPeso = new JButton( matriz[i][j].getOperator() +Integer.toString(matriz[i][j].getResult())+ 
                                 " " +Integer.toString(matriz[i][j].getValue()));
+                        }
+                        else{
+                             botonPeso = new JButton( matriz[i][j].getOperator() +Integer.toString(matriz[i][j].getResult()) );
+                        }
                     }
                     Color c = new Color(matriz[i][j].getRGB()[0],matriz[i][j].getRGB()[1],matriz[i][j].getRGB()[2]);
                     botonPeso.setBackground(c);
@@ -44,7 +54,6 @@ public class Tabla {
                         botonPeso.setFont(new Font("Serif",Font.BOLD,8));//12 para  5 esta bien 
                     }
                     fila[j] =botonPeso;
-                    
                 }
                 tablaPredeterminada.addRow(fila);
             }

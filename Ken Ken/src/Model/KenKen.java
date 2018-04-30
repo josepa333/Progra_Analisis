@@ -7,13 +7,9 @@ package Model;
 
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
 import java.util.Random;
-import java.util.Set;
 
 /**
  *
@@ -44,7 +40,8 @@ public class KenKen {
      private int matrixOfValues[][];
      private boolean doneValues;
       private ArrayList<Integer> rangeOfValues;
-    
+      private boolean finished;
+      
      
      public  KenKen(int pSize){
          size = pSize;
@@ -65,6 +62,7 @@ public class KenKen {
          
          allPermutations = new HashMap<>();
          doneValues = false;
+         finished = false;
          createNodes();
      }
      
@@ -77,6 +75,7 @@ public class KenKen {
      
     private Solution backTrackingIterativePermutations(Solution solution, int sectionId){
         if(sectionId == sections.size()){
+            finished = true;
             return solution;
         }
         
@@ -88,6 +87,7 @@ public class KenKen {
             if(child.isPromising()){
                 int copySectionId = sectionId;
                 copySectionId += 1;
+                matrix = child.getMatrix();
                 Solution result = backTrackingIterativePermutations(child, copySectionId);
                 if(result.isFailure() == false){
                     return result;
@@ -1082,6 +1082,14 @@ public class KenKen {
 
         public void setIlustrator(NodekenKen[][] ilustrator) {
             this.ilustrator = ilustrator;
+        }
+
+        public boolean isFinished() {
+            return finished;
+        }
+
+        public void setFinished(boolean finished) {
+            this.finished = finished;
         }
         
         private void insertionSort(ArrayList<int[]> list){
