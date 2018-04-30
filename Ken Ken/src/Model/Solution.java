@@ -15,8 +15,8 @@ import java.util.HashMap;
  */
 public class Solution {
     private static ArrayList<ArrayList<int[]>> shapes;
-//    private ArrayList<ArrayList<Integer>> rows;
-//    private ArrayList<ArrayList<Integer>> cols;
+    private ArrayList<ArrayList<Integer>> rows;
+    private ArrayList<ArrayList<Integer>> cols;
     private NodekenKen matrix[][];
     private boolean failure = false;
     private int shapeType;
@@ -217,6 +217,26 @@ public class Solution {
                     }
                 }
             }
+        }
+    }
+    
+    private void fillRowsColsArrayLists(){
+        rows = new ArrayList<>();
+        cols = new ArrayList<>();
+        NodekenKen node = matrix[beginOfSection[0]][beginOfSection[1]];
+        
+        while(node != null){
+            int x = node.getCoordinates()[0];
+            int y = node.getCoordinates()[1];
+            ArrayList<Integer> row = new ArrayList<>();
+            ArrayList<Integer> col = new ArrayList<>();
+            for(int i = 0; i < matrix.length; i++){
+                row.add((Integer)matrix[x][i].getValue());
+                col.add((Integer)matrix[i][y].getValue());
+            }
+            rows.add(row);
+            cols.add(col);
+            node = node.getNext();
         }
     }
     

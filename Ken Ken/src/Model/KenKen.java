@@ -231,6 +231,8 @@ public class KenKen {
     }    
      
     private void fillShapes(){
+        ArrayList<int[]> shapes4Cells = new ArrayList<>();
+        
         if(oneNode.size() > 0){
              insertionSort(oneNode);
              shapes.add(oneNode);
@@ -240,25 +242,22 @@ public class KenKen {
              shapes.add(twoNodes);
          }
          if(square.size() > 0){
-             insertionSort(square);
-             shapes.add(square);
+             shapes4Cells.addAll(square);
          }
          if(shapesL.size() > 0){
-             insertionSort(shapesL);
-             shapes.add(shapesL);
+             shapes4Cells.addAll(shapesL);
          }
          if(shapesS.size() > 0){
-             insertionSort(shapesS);
-             shapes.add(shapesS);
+             shapes4Cells.addAll(shapesS);
          }
          if(shapesT.size() > 0){
-             insertionSort(shapesT);
-             shapes.add(shapesT);
+             shapes4Cells.addAll(shapesT);
          }
          if(shapesStick.size() > 0){
-             insertionSort(shapesStick);
-             shapes.add(shapesStick);
+             shapes4Cells.addAll(shapesStick);
          }
+         insertionSort(shapes4Cells);
+         shapes.add(shapes4Cells);
          for(int i = 0; i < shapes.size(); i++){
             for(int j = 0; j < shapes.get(i).size(); j++){
                 int[] sectionInfo = shapes.get(i).get(j);
