@@ -27,19 +27,29 @@ public class SolveKenKen  extends Thread{
     
     public void run(){
         
-        Thread ilustrator = new TableUpdater("Proccess1",baseTable,table, kenken);
-         ilustrator.start();
-        
+        if(kenken.getTotalThreads() == 0){
+            Thread ilustrator = new TableUpdater("Proccess1",baseTable,table, kenken);
+            ilustrator.start();
+        }
+
         Stopwatch stp = new Stopwatch();
         Solution solved = kenken.solveKenKen();
         double time = stp.elapsedTime();
+        
         System.out.printf("Solving the kenken:  %e\n", time);
-        if(solved.isFailure() == false){
+        if(solved.isFailure() == false && kenken.getTotalThreads() == 0){
             kenken.setMatrix(solved.getMatrix());
             kenken.setDesing();
             baseTable.ver_tabla(table, kenken.getSize(), kenken.getIlustrator());
             JOptionPane.showMessageDialog(null, "Done");
         }
+        
+        else if(kenken.getTotalThreads() > 0){
+            kenken.setDesing();
+            baseTable.ver_tabla(table, kenken.getSize(), kenken.getIlustrator());
+            JOptionPane.showMessageDialog(null, "Done");
+        }
+        
         else{
             kenken.setFinished(true);
             JOptionPane.showMessageDialog(null, "Not solved.");

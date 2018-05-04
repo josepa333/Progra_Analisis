@@ -27,7 +27,7 @@ import javax.swing.JTable;
 public class proto extends javax.swing.JFrame {
 
     public Tabla tablaBase = new Tabla();
-    int size;
+    private int size;
     private FileReader readerKenKen = null;
     private final XStream xstream;
     private PrintWriter out = null;
@@ -51,7 +51,6 @@ public class proto extends javax.swing.JFrame {
         }
         ArrayList<String> data = (ArrayList<String>) (xstream.fromXML(readerKenKen));
         kenkenMatrix = (KenKen) (xstream.fromXML(data.get(0)));
-        
         kenkenMatrix.setMatrix( kenkenMatrix.getTemplate() );
         
         size =  (Integer) (xstream.fromXML(data.get(1)));
@@ -59,20 +58,24 @@ public class proto extends javax.swing.JFrame {
     }
     
         public  void saveXML(){//Move to controller??
-        try {
-            out = new PrintWriter("kenkenTemplate.xml");
-        }
-        catch (FileNotFoundException ex){
-            Logger.getLogger(proto.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        ArrayList<String> data = new ArrayList<>();
-        xml = xstream.toXML(kenkenMatrix);
-        data.add(xml);
-        xml = xstream.toXML(size);
-        data.add(xml);
-        xml = xstream.toXML(data);
-        out.println(xml);
-        out.close();
+            kenkenMatrix.setMatrix( new  NodekenKen[size][size] );
+            kenkenMatrix.setIlustrator( new  NodekenKen[size][size] );
+            kenkenMatrix.setFinished(false);
+            kenkenMatrix.setTotalThreads(0);
+            try {
+                out = new PrintWriter("kenkenTemplate.xml");
+            }
+            catch (FileNotFoundException ex){
+                Logger.getLogger(proto.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            ArrayList<String> data = new ArrayList<>();
+            xml = xstream.toXML(kenkenMatrix);
+            data.add(xml);
+            xml = xstream.toXML(size);
+            data.add(xml);
+            xml = xstream.toXML(data);
+            out.println(xml);
+            out.close();
     }
     
     /**
@@ -218,14 +221,15 @@ public class proto extends javax.swing.JFrame {
     }//GEN-LAST:event_generateBTActionPerformed
 
     private void solveBTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_solveBTActionPerformed
-         String copy = xstream.toXML(kenkenMatrix.getMatrix());
-        kenkenMatrix.setTemplate( (NodekenKen[][]) (xstream.fromXML(copy)));
+        
+        String copy = xstream.toXML(kenkenMatrix.getMatrix());
+        int threads = (int) this.threadsSP.getValue();
+        kenkenMatrix.setTemplate((NodekenKen[][]) (xstream.fromXML(copy)));
         kenkenMatrix.setIlustrator((NodekenKen[][]) (xstream.fromXML(copy)));
+        kenkenMatrix.setTotalThreads(threads);
         
         Thread solver = new SolveKenKen("Proccess1",tablaBase, kenkentable,kenkenMatrix);
         solver.start();
-        
-        
         
 //        kenkenMatrix.printShape();
 //        kenkenMatrix.iterarPermutaciones();

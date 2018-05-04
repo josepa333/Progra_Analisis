@@ -42,7 +42,14 @@ public class KenKen {
       private ArrayList<Integer> rangeOfValues;
       private boolean finished;
       
+      private int totalThreads;
+      private int currentThreads;
+      
+      //Locks
+      private Object lock1 = new Object();
+      private Object lock2 = new Object();
      
+
      public  KenKen(int pSize){
          size = pSize;
          counter = 0;
@@ -64,17 +71,60 @@ public class KenKen {
          doneValues = false;
          finished = false;
          createNodes();
+         currentThreads = 0;
      }
      
     public Solution solveKenKen(){
-        
         Solution solution = new Solution(matrix,shapes);
-        return backTrackingIterativePermutations(solution, 0);
-//        return backTrackingRandomPermutations(solution, 0);
+        if( totalThreads == 0){
+            return backTrackingIterativePermutations(solution, 0);
+            //        return backTrackingRandomPermutations(solution, 0);
+        }
+        System.out.println("Threads on try");
+        return backTrackingThreads(solution, 0);
     } 
      
+    public Solution backTrackingThreads(Solution solution, int sectionId){
+        
+        if(finished == false){
+            if(sectionId == sections.size() ){
+                finished = true;
+                matrix= solution.getMatrix();
+                System.out.println("YOOOOO");
+                return solution;
+            }
+
+            int[] sectionInfo = sections.get(sectionId);
+            NodekenKen node = matrix[sectionInfo[0]][sectionInfo[1]];
+            ArrayList<int[]> permutations = allPermutations.get(node.getCounter());
+            for(int k = 0; k < permutations.size(); k++){
+
+                while(currentThreads < totalThreads && k < permutations.size() - 1 ){
+                    Solution child = new Solution(solution, sectionInfo, permutations.get(k));
+                    int copySectionId2 = sectionId;
+                    copySectionId2 += 1;
+                    Thread sectionSolver = new ThreadSolution("yo",this, child,copySectionId2);
+                    sectionSolver.start();
+                    currentThreads++;
+                    k++;
+                }
+                Solution child = new Solution(solution, sectionInfo, permutations.get(k));
+                if(child.isPromising()){
+                    int copySectionId = sectionId;
+                    copySectionId += 1;
+                    Solution result = backTrackingThreads(child, copySectionId);
+                    if(result.isFailure() == false){
+                        return result;
+                    } 
+                }
+            }
+            return new Solution();
+        }
+        return solution;
+    }
+    
     private Solution backTrackingIterativePermutations(Solution solution, int sectionId){
-        if(sectionId == sections.size()){
+        if(sectionId == sections.size() ){
             finished = true;
             return solution;
         }
@@ -96,6 +146,7 @@ public class KenKen {
         }
         return new Solution();
     }
+    
     
     private Solution backTrackingRandomPermutations(Solution solution, int sectionId){
         if(sectionId == sections.size()){
@@ -1041,7 +1092,9 @@ public class KenKen {
       }
 
       public void setMatrix(NodekenKen[][] matrix) {
-          this.matrix = matrix;
+          synchronized(lock2) {
+              this.matrix = matrix;
+          }
       }
 
       public int getCounter() {
@@ -1090,6 +1143,24 @@ public class KenKen {
 
         public void setFinished(boolean finished) {
             this.finished = finished;
+        }
+
+        public int getTotalThreads() {
+            return totalThreads;
+        }
+
+        public void setTotalThreads(int totalThreads) {
+            this.totalThreads = totalThreads;
+        }
+
+        public int getCurrentThreads() {
+            return currentThreads;
+        }
+
+        public void setCurrentThreads(int currentThreads) {
+            synchronized(lock1) {
+                this.currentThreads = currentThreads;
+            }
         }
         
         private void insertionSort(ArrayList<int[]> list){

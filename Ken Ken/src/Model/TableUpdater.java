@@ -7,7 +7,6 @@ package Model;
 import View.Tabla;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 import javax.swing.JTable;
 /**
  *
@@ -35,8 +34,8 @@ public class TableUpdater extends Thread{
             }
         }
         catch (InterruptedException ex) {
-            Logger.getLogger(TableUpdater.class.getName()).log(Level.SEVERE, null, ex);
-        }
+           Logger.getLogger(TableUpdater.class.getName()).log(Level.SEVERE, null, ex);
+       }
         catch (Exception ex) {
             Logger.getLogger(TableUpdater.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("Catch");
